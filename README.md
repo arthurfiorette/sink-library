@@ -21,6 +21,22 @@ Because of my poor English, the names of my commits are in PT-BR, sorry. 😢*
 ## License
 Licensed under the **GNU General Public License v3.0**. See `License` for more information.
 
+## Adding SinkAPI to your build
+
+### Maven:
+```xml
+  <repository>
+      <id>jitpack.io</id>
+      <url>https://jitpack.io</url>
+  </repository>
+
+  <dependency>
+      <groupId>com.github.Hazork</groupId>
+      <artifactId>SinkAPI</artifactId>
+      <version>master-SNAPSHOT</version>
+  </dependency>
+```
+
 ## Contact
 - Twitter: [@Hazork]([twitter-url])
 - Discord: **Hazork#1227**
