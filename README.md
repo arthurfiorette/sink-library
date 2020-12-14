@@ -1,8 +1,10 @@
 [![Forks][forks-shield]][forks-url] [![Stargazers][stars-shield]][stars-url] [![Issues][issues-shield]][issues-url] [![License][license-shield]][license-url]
 
-# SinkAPI
+# Sink - Your spigot library for 1.8
 
-This site is the SinkAPI github, a Spigot / Bukkit development api for Minecraft Java Edition, for more questions, go to Wiki.
+A Spigot / Bukkit library for developing Minecraft Java Edition plugins.
+
+For more answers, go to wiki.
 
 ## Contributing
 
@@ -22,19 +24,28 @@ Because of my poor English, the names of my commits are in PT-BR, sorry. 😢*
 Licensed under the **GNU General Public License v3.0**. See `License` for more information.
 
 ## Adding SinkAPI to your build
-
-### Maven:
+### With Maven:
 ```xml
-  <repository>
-      <id>jitpack.io</id>
-      <url>https://jitpack.io</url>
-  </repository>
+<repository>
+  <id>jitpack.io</id>
+  <url>https://jitpack.io</url>
+</repository>
 
-  <dependency>
-      <groupId>com.github.Hazork</groupId>
-      <artifactId>SinkAPI</artifactId>
-      <version>master-SNAPSHOT</version>
-  </dependency>
+<dependency>
+  <groupId>com.github.hazork</groupId>
+  <artifactId>sink-library</artifactId>
+  <version>master-SNAPSHOT</version>
+</dependency>
+```
+### With Gradle:
+```gradle
+repositories {
+    maven { url 'https://jitpack.io' }
+  }
+  
+dependencies {
+    implementation 'com.github.hazork:sink-library:master-SNAPSHOT'
+  }
 ```
 
 ## Contact
