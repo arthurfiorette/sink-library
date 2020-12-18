@@ -32,19 +32,11 @@
 			<version>1.8.8-R0.1-SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>
-		<dependency> 
+		<dependency>
 			<groupId>org.spigotmc</groupId>
 			<artifactId>spigot</artifactId>
 			<version>1.8.8-R0.1-SNAPSHOT</version>
 			<scope>provided</scope>
-		</dependency>
-
-		<!-- FastUUID -->
-		<dependency>
-			<groupId>com.eatthepath</groupId>
-			<artifactId>fast-uuid</artifactId>
-			<version>0.1</version>
-			<scope>compile</scope>
 		</dependency>
 
 		<!-- PlaceholderAPI -->
