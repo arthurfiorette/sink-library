@@ -2,24 +2,25 @@ package com.github.hazork.sinkspigot.data.storage;
 
 import java.util.concurrent.ConcurrentMap;
 
-import com.github.hazork.sinkspigot.data.StorageDatabase;
+import com.github.hazork.sinkspigot.data.Database;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.CacheStats;
 import com.google.common.cache.LoadingCache;
 import com.google.common.cache.RemovalListener;
 import com.google.common.cache.RemovalNotification;
+import com.google.gson.JsonObject;
 
 public abstract class CachedStorage<V> extends Storage<V> {
 
     private transient LoadingCache<String, V> cache;
 
-    public CachedStorage(StorageDatabase database, LoadingCache<String, V> cache) {
+    public CachedStorage(Database<JsonObject> database, LoadingCache<String, V> cache) {
 	super(database);
 	this.cache = cache;
     }
 
-    public CachedStorage(StorageDatabase database) {
+    public CachedStorage(Database<JsonObject> database) {
 	super(database);
 	cache = CacheBuilder.newBuilder().removalListener(new DataListener()).build(new DataLoader());
     }

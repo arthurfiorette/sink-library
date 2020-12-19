@@ -4,15 +4,15 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import com.github.hazork.sinkspigot.data.StorageDatabase;
+import com.github.hazork.sinkspigot.data.Database;
 import com.google.common.base.Verify;
 import com.google.gson.JsonObject;
 
 public abstract class Storage<V> {
 
-    private final StorageDatabase database;
+    private final Database<JsonObject> database;
 
-    public Storage(StorageDatabase database) {
+    public Storage(Database<JsonObject> database) {
 	Verify.verifyNotNull(database);
 	this.database = database;
     }
@@ -47,7 +47,7 @@ public abstract class Storage<V> {
 	database.close();
     }
 
-    public StorageDatabase getDatabase() {
+    public Database<JsonObject> getDatabase() {
 	return database;
     }
 }
