@@ -1,42 +1,33 @@
 package com.github.hazork.sinkspigot.scheduler;
 
-import com.github.hazork.sinkspigot.SinkObject;
 import com.github.hazork.sinkspigot.SinkPlugin;
 
-public class SinkScheduler implements SinkObject {
+public interface SinkScheduler {
 
-    private final SinkPlugin plugin;
+    SinkPlugin getPlugin();
 
-    public SinkScheduler(SinkPlugin plugin) {
-	this.plugin = plugin;
+    default void runTask(Runnable task) {
+	TaskScheduler.SYNC.runTask(getPlugin(), task);
     }
 
-    public void runTask(Runnable task) {
-	TaskScheduler.SYNC.runTask(plugin, task);
+    default void runTask(Runnable task, long delay) {
+	TaskScheduler.SYNC.runTask(getPlugin(), task, delay);
     }
 
-    public void runTask(Runnable task, long delay) {
-	TaskScheduler.SYNC.runTask(plugin, task, delay);
+    default void runTask(Runnable task, long delay, long interval) {
+	TaskScheduler.SYNC.runTask(getPlugin(), task, delay, interval);
     }
 
-    public void runTask(Runnable task, long delay, long interval) {
-	TaskScheduler.SYNC.runTask(plugin, task, delay, interval);
+    default void runAsyncTask(Runnable task) {
+	TaskScheduler.ASYNC.runTask(getPlugin(), task);
     }
 
-    public void runAsyncTask(Runnable task) {
-	TaskScheduler.ASYNC.runTask(plugin, task);
+    default void runAsyncTask(Runnable task, long delay) {
+	TaskScheduler.ASYNC.runTask(getPlugin(), task, delay);
     }
 
-    public void runAsyncTask(Runnable task, long delay) {
-	TaskScheduler.ASYNC.runTask(plugin, task, delay);
+    default void runAsyncTask(Runnable task, long delay, long interval) {
+	TaskScheduler.ASYNC.runTask(getPlugin(), task, delay, interval);
     }
 
-    public void runAsyncTask(Runnable task, long delay, long interval) {
-	TaskScheduler.ASYNC.runTask(plugin, task, delay, interval);
-    }
-
-    @Override
-    public SinkPlugin getPlugin() {
-	return plugin;
-    }
 }

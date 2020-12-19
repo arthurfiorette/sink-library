@@ -4,11 +4,11 @@ import java.io.File;
 
 import org.bukkit.configuration.file.FileConfiguration;
 
-import com.github.hazork.sinkspigot.SinkObject;
+import com.github.hazork.sinkspigot.SinkHelper;
 import com.github.hazork.sinkspigot.SinkPlugin;
 import com.github.hazork.sinkspigot.config.YMLFile;
 
-public class ConfigFile implements YMLFile, SinkObject {
+public class ConfigFile implements YMLFile, SinkHelper {
 
     private static final String NAME = "config.yml";
 

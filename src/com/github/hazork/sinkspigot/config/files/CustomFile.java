@@ -5,10 +5,11 @@ import java.io.File;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
+import com.github.hazork.sinkspigot.SinkHelper;
 import com.github.hazork.sinkspigot.SinkPlugin;
 import com.github.hazork.sinkspigot.config.YMLFile;
 
-public class CustomFile implements YMLFile {
+public class CustomFile implements YMLFile, SinkHelper {
 
     private final SinkPlugin plugin;
     private final File file;
@@ -44,5 +45,10 @@ public class CustomFile implements YMLFile {
     @Override
     public File asFile() {
 	return file;
+    }
+
+    @Override
+    public SinkPlugin getPlugin() {
+	return plugin;
     }
 }
