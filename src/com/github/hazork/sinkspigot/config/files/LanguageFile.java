@@ -1,36 +1,49 @@
 package com.github.hazork.sinkspigot.config.files;
 
 import java.io.File;
+import java.util.List;
+import java.util.function.UnaryOperator;
+import java.util.logging.Level;
+import java.util.stream.Collectors;
 
-import org.bukkit.configuration.file.FileConfiguration;
+import com.github.hazork.sinkspigot.SinkPlugin;
+import com.github.hazork.sinkspigot.services.Replacer;
 
-import com.github.hazork.sinkspigot.config.YMLFile;
+public abstract class LanguageFile<L extends Enum<L>> extends CustomFile {
 
-public class LanguageFile implements YMLFile {
-
-    @Override
-    public void load() {
-	throw new UnsupportedOperationException();
+    public LanguageFile(SinkPlugin plugin, File folder, String name) {
+	super(plugin, folder, name);
     }
 
-    @Override
-    public void setup(String defaultPath, boolean replace) {
-	throw new UnsupportedOperationException();
+    protected abstract String path(L lang);
+
+    protected String unknown() {
+	return "Unknown value";
     }
 
-    @Override
-    public FileConfiguration getConfig() {
-	throw new UnsupportedOperationException();
+    public String asText(L lang, UnaryOperator<Replacer> replacer) {
+	return Replacer.replace(asText(lang), replacer);
     }
 
-    @Override
-    public String getName() {
-	throw new UnsupportedOperationException();
+    public String asText(L lang) {
+	String text = getConfig().getString(path(lang));
+	logIf(text == null, "%s: %s is returning null.", getName(), path(lang));
+	return text;
     }
 
-    @Override
-    public File asFile() {
-	throw new UnsupportedOperationException();
+    public List<String> asList(L lang, UnaryOperator<Replacer> replacer) {
+	return asList(lang).stream().map(str -> Replacer.replace(str, replacer)).collect(Collectors.toList());
     }
 
+    public List<String> asList(L lang) {
+	List<String> list = getConfig().getStringList(path(lang));
+	logIf(list == null || list.isEmpty(), "%s: %s is empty or null.", getName(), path(lang));
+	return list;
+    }
+
+    private void logIf(boolean cond, String message, Object... args) {
+	if (cond) {
+	    log(Level.INFO, message, args);
+	}
+    }
 }
