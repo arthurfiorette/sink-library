@@ -74,7 +74,7 @@ public final class CommandBase implements TabExecutor, Registrable {
     }
 
     public void addArguments(Argument... args) {
-	for (Argument arg : args) {
+	for(Argument arg: args) {
 	    commandMap.put(arg.getName(), arg);
 	    if (defaultArgument == null) {
 		defaultArgument = arg;

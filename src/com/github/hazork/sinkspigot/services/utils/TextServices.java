@@ -23,10 +23,10 @@ public final class TextServices {
 	}
 	StringBuilder sb = new StringBuilder();
 	double i = 0;
-	for (; i < (percent * width); i++) {
+	for(; i < (percent * width); i++) {
 	    sb.append(complete);
 	}
-	for (; i < width; i++) {
+	for(; i < width; i++) {
 	    sb.append(incomplete);
 	}
 	return sb.toString();
@@ -44,7 +44,7 @@ public final class TextServices {
 
     public static String forceColor(String text) {
 	List<String> texts = new ArrayList<>();
-	for (String str : text.split("§")) {
+	for(String str: text.split("§")) {
 	    if (str.isEmpty()) {
 		continue;
 	    }
@@ -57,7 +57,7 @@ public final class TextServices {
 	    } else {
 		String lastColor = ChatColor.getLastColors(str);
 		List<String> words = new ArrayList<>();
-		for (String word : str.split(" ")) {
+		for(String word: str.split(" ")) {
 		    if (!word.startsWith("§")) {
 			word = lastColor + word;
 		    }

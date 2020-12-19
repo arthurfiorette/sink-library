@@ -45,7 +45,7 @@ public class MemoryDatabase<T> implements Database<T> {
 
     private void checkState() {
 	if (database == null) {
-	    throw new IllegalStateException("Attempt to access the database while it was not open.");
+	    throw new IllegalStateException("Attempt to access the database while it wasn't open.");
 	}
     }
 

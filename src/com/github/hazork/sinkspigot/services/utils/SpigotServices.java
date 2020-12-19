@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
@@ -19,16 +20,16 @@ public final class SpigotServices {
 	Bukkit.getPluginManager().callEvent(event);
     }
 
-    public static void giveItens(Player player, ItemStack... itens) {
-	HashMap<Integer, ItemStack> remainders = player.getInventory().addItem(itens);
+    public static void giveItens(Player player, ItemStack... items) {
+	HashMap<Integer, ItemStack> remainders = player.getInventory().addItem(items);
 	if (!remainders.isEmpty()) {
 	    remainders.values().stream().forEach(i -> dropItens(player.getLocation(), i));
 	}
     }
 
-    public static void dropItens(Location location, ItemStack... itens) {
+    public static void dropItens(Location location, ItemStack... items) {
 	World world = location.getWorld();
-	Arrays.stream(itens).forEach(i -> world.dropItemNaturally(location, i));
+	Arrays.stream(items).forEach(i -> world.dropItemNaturally(location, i));
     }
 
     public static boolean hasPlugin(String name) {
@@ -53,6 +54,16 @@ public final class SpigotServices {
 
     public static long asTicks(long miliseconds) {
 	return miliseconds / 50;
+    }
+
+    public static String setColors(String text) {
+	return ChatColor.translateAlternateColorCodes('&', text);
+    }
+
+    public static int getChestSlot(int column, int row) {
+	row = (row <= 0) ? 1 : (row > 6) ? 6 : row;
+	column = (column <= 0) ? 1 : (column > 9) ? 9 : column;
+	return 9 * (row - 1) + column - 1;
     }
 
 }

@@ -27,26 +27,26 @@ public class Replacer {
 
     public String replace(String str) {
 	String replaced = str;
-	for (Entry<String, Supplier<String>> entry : placeholders.entrySet()) {
+	for(Entry<String, Supplier<String>> entry: placeholders.entrySet()) {
 	    replaced = replaced.replace(entry.getKey(), entry.getValue().get());
 	}
-	return replaced;
+	return SpigotServices.setColors(replaced);
     }
 
     public String replace(String str, OfflinePlayer player) {
+	String text = str;
 	if (canUsePlaceholderAPI()) {
-	    return PlaceholderAPI.setPlaceholders(player, replace(str));
-	} else {
-	    return replace(str);
+	    text = PlaceholderAPI.setPlaceholders(player, replace(str));
 	}
+	return replace(text);
     }
 
-    public static void replace(String str, UnaryOperator<Replacer> replacer) {
-	replacer.apply(new Replacer()).replace(str);
+    public static String replace(String str, UnaryOperator<Replacer> replacer) {
+	return replacer.apply(new Replacer()).replace(str);
     }
 
-    public static void replace(String str, OfflinePlayer player, UnaryOperator<Replacer> replacer) {
-	replacer.apply(new Replacer()).replace(str, player);
+    public static String replace(String str, OfflinePlayer player, UnaryOperator<Replacer> replacer) {
+	return replacer.apply(new Replacer()).replace(str, player);
     }
 
     public static boolean canUsePlaceholderAPI() {

@@ -1,10 +1,5 @@
 package com.github.hazork.sinkspigot.services.pair;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.LinkedList;
-import java.util.List;
-
 public class ImmutablePair<L, R> {
 
     protected L left;
@@ -23,12 +18,8 @@ public class ImmutablePair<L, R> {
 	return right;
     }
 
-    public Pair<L, R> mutable() {
-	return mutable(this);
-    }
-
-    public static <L, R> Pair<L, R> mutable(ImmutablePair<L, R> pair) {
-	return new Pair<>(pair.left, pair.right);
+    public static <L, R> ImmutablePair<L, R> of(L left, R right) {
+	return new ImmutablePair<>(left, right);
     }
 
     @Override
@@ -64,30 +55,6 @@ public class ImmutablePair<L, R> {
 	    return false;
 	}
 	return true;
-    }
-
-    public static <L, R> ImmutablePair<L, R> of(L left, R right) {
-	return new ImmutablePair<>(left, right);
-    }
-
-    public static <T> List<ImmutablePair<T, T>> asImmutableNode(Collection<T> coll) {
-	List<ImmutablePair<T, T>> pairList = new ArrayList<>();
-	LinkedList<T> list = new LinkedList<>(coll);
-	ImmutablePair<T, T> atual = ImmutablePair.of(null, null);
-	while (!list.isEmpty()) {
-	    if (atual.getLeft() == null) {
-		atual.left = list.pollFirst();
-	    } else if (atual.getRight() == null) {
-		atual.right = list.pollFirst();
-	    } else {
-		pairList.add(atual);
-		atual = ImmutablePair.of(atual.getRight(), null);
-	    }
-	}
-	if (atual.getLeft() != null) {
-	    pairList.add(atual);
-	}
-	return pairList;
     }
 
 }
