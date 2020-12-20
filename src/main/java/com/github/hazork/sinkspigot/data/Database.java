@@ -2,8 +2,6 @@ package com.github.hazork.sinkspigot.data;
 
 import java.util.Set;
 
-import javax.annotation.Nullable;
-
 public interface Database<T> {
 
     void open();
@@ -12,7 +10,6 @@ public interface Database<T> {
 
     void save(String key, T value);
 
-    @Nullable
     T get(String key);
 
     Set<T> getAll();
