@@ -34,7 +34,7 @@ Licensed under the **GNU General Public License v3.0**. See `License` for more i
 <dependency>
   <groupId>com.github.hazork</groupId>
   <artifactId>sink-library</artifactId>
-  <version>master-SNAPSHOT</version>
+  <version>v1.0.0</version>
 </dependency>
 ```
 ### With Gradle:
@@ -44,7 +44,7 @@ repositories {
   }
   
 dependencies {
-    implementation 'com.github.hazork:sink-library:master-SNAPSHOT'
+    implementation 'com.github.hazork:sink-library:v1.0.0'
   }
 ```
 

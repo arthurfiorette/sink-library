@@ -5,7 +5,7 @@
 
 	<groupId>com.github.hazork</groupId>
 	<artifactId>sinklibrary</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>v1.0.0</version>
 	<name>Sink API</name>
 
 	<properties>

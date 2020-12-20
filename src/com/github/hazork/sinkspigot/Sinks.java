@@ -7,6 +7,8 @@ import com.google.common.collect.Maps;
 
 public final class Sinks {
 
+    public static final String VERSION = "v1.0.0";
+
     private static final String registerError = "Attempt to register a plugin id that already exists: %s.\n Use: SinkPlugin#from to get the instance.";
     private static final String fromError = "Attempt to get a non-existent instance";
 
