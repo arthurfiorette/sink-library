@@ -48,7 +48,7 @@ repositories {
   }
   
 dependencies {
-    implementation 'com.github.hazork:sink-library:v1.0.0'
+    implementation 'com.github.hazork:sink-library:v1.0.2'
   }
 ```
 
