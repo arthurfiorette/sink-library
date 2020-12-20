@@ -5,8 +5,6 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
-import javax.annotation.Nullable;
-
 public class MemoryDatabase<T> implements Database<T> {
 
     private transient ConcurrentMap<String, T> database;
@@ -31,7 +29,6 @@ public class MemoryDatabase<T> implements Database<T> {
     }
 
     @Override
-    @Nullable
     public T get(String key) {
 	checkState();
 	return database.get(key);
