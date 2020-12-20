@@ -102,6 +102,7 @@ public class ItemBuilder {
 	}
 	ItemStack item = new ItemStack(material);
 	properties.values().stream().forEach(c -> c.accept(item));
+	modified = false;
 	return lastBuild = item;
     }
 
