@@ -7,9 +7,9 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 import com.github.hazork.sinkspigot.SinkHelper;
 import com.github.hazork.sinkspigot.SinkPlugin;
-import com.github.hazork.sinkspigot.config.YMLFile;
+import com.github.hazork.sinkspigot.config.YmlFile;
 
-public class CustomFile implements YMLFile, SinkHelper {
+public class CustomFile implements YmlFile, SinkHelper {
 
     private final SinkPlugin plugin;
     private final File file;

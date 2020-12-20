@@ -4,7 +4,7 @@ import java.io.File;
 
 import org.bukkit.configuration.file.FileConfiguration;
 
-public interface YMLFile {
+public interface YmlFile {
 
     void load();
 

@@ -6,9 +6,9 @@ import org.bukkit.configuration.file.FileConfiguration;
 
 import com.github.hazork.sinkspigot.SinkHelper;
 import com.github.hazork.sinkspigot.SinkPlugin;
-import com.github.hazork.sinkspigot.config.YMLFile;
+import com.github.hazork.sinkspigot.config.YmlFile;
 
-public class ConfigFile implements YMLFile, SinkHelper {
+public class ConfigFile implements YmlFile, SinkHelper {
 
     private static final String NAME = "config.yml";
 

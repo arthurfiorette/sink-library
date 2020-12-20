@@ -8,12 +8,13 @@ import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.github.hazork.sinkspigot.command.CommandBase;
-import com.github.hazork.sinkspigot.config.YMLContainer;
+import com.github.hazork.sinkspigot.config.YmlContainer;
+import com.github.hazork.sinkspigot.config.YmlFile;
 import com.github.hazork.sinkspigot.interfaces.Registrable;
 
 public abstract class SinkPlugin extends JavaPlugin {
 
-    final YMLContainer ymlContainer = new YMLContainer(this);
+    private final YmlContainer ymlContainer = new YmlContainer(this);
 
     public SinkPlugin() {
 	Sinks.newInstance(this);
@@ -48,6 +49,14 @@ public abstract class SinkPlugin extends JavaPlugin {
 
     public void addListeners(Listener... listeners) {
 	Arrays.stream(listeners).forEach(listener -> Bukkit.getPluginManager().registerEvents(listener, this));
+    }
+
+    protected void addFile(YmlFile... files) {
+	Arrays.stream(files).forEach(file -> ymlContainer.addFile(file));
+    }
+
+    public YmlContainer getYmlContainer() {
+	return ymlContainer;
     }
 
     public SinkPlugin getPlugin() {

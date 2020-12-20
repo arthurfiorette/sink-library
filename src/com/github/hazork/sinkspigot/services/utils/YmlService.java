@@ -1,4 +1,4 @@
-package com.github.hazork.sinkspigot.config;
+package com.github.hazork.sinkspigot.services.utils;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -9,7 +9,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 
 import com.google.common.collect.Maps;
 
-public final class YMLFiles {
+public final class YmlService {
 
     public static Map<String, Map<String, String>> getKeys(FileConfiguration fc, String section) {
 	Map<String, Map<String, String>> request = new HashMap<>();
