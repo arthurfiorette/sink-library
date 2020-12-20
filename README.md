@@ -34,7 +34,7 @@ Licensed under the **GNU General Public License v3.0**. See `License` for more i
 <dependency>
   <groupId>com.github.hazork</groupId>
   <artifactId>sink-library</artifactId>
-  <version>v1.0.1</version>
+  <version>v1.0.2</version>
   <scope>compile</scope>
 </dependency>
 ```
