@@ -2,7 +2,7 @@ package com.github.hazork.sinkspigot.services.pair;
 
 public class Pair<L, R> extends ImmutablePair<L, R> {
 
-    protected Pair(L left, R right) {
+    public Pair(L left, R right) {
 	super(left, right);
     }
 

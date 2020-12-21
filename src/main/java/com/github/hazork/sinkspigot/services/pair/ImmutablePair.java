@@ -5,7 +5,7 @@ public class ImmutablePair<L, R> {
     protected L left;
     protected R right;
 
-    protected ImmutablePair(L left, R right) {
+    public ImmutablePair(L left, R right) {
 	this.left = left;
 	this.right = right;
     }
