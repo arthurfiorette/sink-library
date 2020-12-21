@@ -1,10 +1,13 @@
 package com.github.hazork.sinkspigot.scheduler;
 
-import com.github.hazork.sinkspigot.SinkPlugin;
+import com.github.hazork.sinkspigot.SinkObject;
 
-public interface SinkScheduler {
-
-    SinkPlugin getPlugin();
+/**
+ * A interface that helps to schedule runnables.
+ * 
+ * @author https://github.com/Hazork/sink-library/
+ */
+public interface SinkScheduler extends SinkObject {
 
     default void runTask(Runnable task) {
 	TaskScheduler.SYNC.runTask(getPlugin(), task);

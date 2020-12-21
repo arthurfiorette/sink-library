@@ -1,10 +1,8 @@
 package com.github.hazork.sinkspigot.config;
 
-import com.github.hazork.sinkspigot.SinkPlugin;
+import com.github.hazork.sinkspigot.SinkObject;
 
-public interface YmlHelper {
-
-    SinkPlugin getPlugin();
+public interface YmlHelper extends SinkObject {
 
     default YmlContainer getYmlContainer() {
 	return getPlugin().getYmlContainer();
