@@ -10,14 +10,15 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-import com.google.common.collect.Iterables;
+import com.google.common.collect.ObjectArrays;
 
 public final class JavaServices {
 
     private JavaServices() {}
 
-    public static <T> T[] toArray(Class<T> clazz, List<T> list) {
-	return Iterables.toArray(list, clazz);
+    public static <T> T[] toArray(Class<T> clazz, Collection<T> coll) {
+	T[] arr = ObjectArrays.newArray(clazz, coll.size());
+	return coll.toArray(arr);
     }
 
     public static <T> T[] toArray(Class<T> clazz, Object... values) {
