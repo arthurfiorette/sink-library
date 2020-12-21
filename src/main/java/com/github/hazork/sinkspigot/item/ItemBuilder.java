@@ -16,89 +16,173 @@ import org.bukkit.material.MaterialData;
 
 import com.github.hazork.sinkspigot.services.utils.JavaServices;
 
+/**
+ * A builder class to customize in multiple ways a item stack.
+ *
+ * @author https://github.com/Hazork/sink-library/
+ * @see {@link com.github.hazork.sinkspigot.item.ItemBuilders}
+ * @see {@link org.bukkit.inventory.ItemStack}
+ */
 public class ItemBuilder {
 
     private transient ItemStack lastBuild = new ItemStack(Material.AIR);
     private transient boolean modified = true;
 
     private Material material;
-    private EnumMap<Properties, Consumer<ItemStack>> properties = new EnumMap<>(Properties.class);
+    private EnumMap<Property, Consumer<ItemStack>> properties = new EnumMap<>(Property.class);
 
+    /**
+     * Constructs a itembuilder from a specified material.
+     *
+     * @param material the material to use in the builder.
+     * @throws NullPointerException if the material is null
+     */
     public ItemBuilder(Material material) {
 	JavaServices.requireNonNull(material);
 	this.material = material;
     }
 
+    /**
+     * @param durability set item durability
+     * @return itself
+     */
     public ItemBuilder setDurability(int durability) {
-	return addProperties(Properties.DAMAGE, is -> is.setDurability((short) durability));
+	return this.addProperties(Property.DAMAGE, is -> is.setDurability((short) durability));
     }
 
+    /**
+     * @param amount set the item amount
+     * @return itself
+     */
     public ItemBuilder setAmount(int amount) {
-	return addProperties(Properties.AMOUNT, is -> is.setAmount(amount));
+	return this.addProperties(Property.AMOUNT, is -> is.setAmount(amount));
     }
 
+    /**
+     * @param data set the item data
+     * @return itself
+     */
     public ItemBuilder setData(MaterialData data) {
-	return addProperties(Properties.MATERIAL_DATA, is -> is.setData(data));
+	return this.addProperties(Property.MATERIAL_DATA, is -> is.setData(data));
     }
 
+    /**
+     * @param ench  the enchantment to add
+     * @param level the enchantment level
+     * @return itself
+     */
     public ItemBuilder addEnchantment(Enchantment ench, int level) {
-	return addProperties(Properties.ENCHANTMENT, is -> is.addUnsafeEnchantment(ench, level));
+	return this.addProperties(Property.ENCHANTMENT, is -> is.addUnsafeEnchantment(ench, level));
     }
 
+    /**
+     * @param enchantments set the item enchantments in a map of
+     *                     {@code <enchantment,
+     *                     level>}
+     * @return itself
+     */
     public ItemBuilder addEnchantments(Map<Enchantment, Integer> enchantments) {
-	return addProperties(Properties.ENCHANTMENT, is -> is.addUnsafeEnchantments(enchantments));
+	return this.addProperties(Property.ENCHANTMENT, is -> is.addUnsafeEnchantments(enchantments));
     }
 
+    /**
+     * @param set the item name
+     * @return itself
+     */
     public ItemBuilder setName(String name) {
-	return addProperties(Properties.NAME, is -> setItemMeta(is, im -> im.setDisplayName(name)));
+	return this.addProperties(Property.NAME, is -> setItemMeta(is, im -> im.setDisplayName(name)));
     }
 
+    /**
+     * Add to the item all the item flags.
+     *
+     * @return itself
+     */
     public ItemBuilder setItemFlags() {
-	return setItemFlags(ItemFlag.values());
+	return this.setItemFlags(ItemFlag.values());
     }
 
+    /**
+     * @param itemFlags set to the item all the item flags specifieds in varargs
+     * @return itself
+     */
     public ItemBuilder setItemFlags(ItemFlag... itemFlags) {
-	return addProperties(Properties.ITEM_FLAG, is -> setItemMeta(is, im -> {
+	return this.addProperties(Property.ITEM_FLAG, is -> setItemMeta(is, im -> {
 	    im.removeItemFlags(ItemFlag.values());
 	    im.addItemFlags(itemFlags);
 	}));
     }
 
+    /**
+     * @param itemFlags add to the item all the item flags specifieds in
+     *                  varargs.
+     * @return itself
+     */
     public ItemBuilder addItemFlags(ItemFlag... itemFlags) {
-	return addProperties(Properties.ITEM_FLAG, is -> setItemMeta(is, im -> im.addItemFlags(itemFlags)));
+	return this.addProperties(Property.ITEM_FLAG, is -> setItemMeta(is, im -> im.addItemFlags(itemFlags)));
     }
 
+    /**
+     * @param lorelines set the item lore
+     * @return itself
+     */
     public ItemBuilder setLores(String... lorelines) {
-	return setLore(Arrays.asList(lorelines));
+	return this.setLore(Arrays.asList(lorelines));
     }
 
+    /**
+     * @param lore set the item lore
+     * @return itself
+     */
     public ItemBuilder setLore(List<String> lore) {
-	return addProperties(Properties.LORE, is -> setItemMeta(is, im -> im.setLore(lore)));
+	return this.addProperties(Property.LORE, is -> setItemMeta(is, im -> im.setLore(lore)));
     }
 
+    /**
+     * @param lorelines add this lore to the item
+     * @return itself
+     */
     public ItemBuilder addLores(String... lorelines) {
-	return addLore(Arrays.asList(lorelines));
+	return this.addLore(Arrays.asList(lorelines));
     }
 
+    /**
+     * @param lore add this lores to the item
+     * @return itself
+     */
     public ItemBuilder addLore(List<String> lore) {
-	if (properties.containsKey(Properties.LORE)) {
-	    return addProperties(Properties.LORE, is -> setItemMeta(is, im -> im.getLore().addAll(lore)));
+	if (properties.containsKey(Property.LORE)) {
+	    return this.addProperties(Property.LORE, is -> setItemMeta(is, im -> im.getLore().addAll(lore)));
 	}
-	return setLore(lore);
+	return this.setLore(lore);
     }
 
+    /**
+     * @param unbreakable true if the items needs to be unbreakable
+     * @return itself
+     */
     public ItemBuilder setUnbreakable(boolean unbreakable) {
-	return addProperties(Properties.CUSTOM_META,
+	return this.addProperties(Property.CUSTOM_META,
 		is -> setItemMeta(is, im -> im.spigot().setUnbreakable(unbreakable)));
     }
 
+    /**
+     * @param customMeta any custom meta to be added to the item at the end
+     * @return itself
+     */
     public ItemBuilder addCustomMeta(UnaryOperator<ItemMeta> customMeta) {
-	return addProperties(Properties.CUSTOM_META, is -> is.setItemMeta(customMeta.apply(is.getItemMeta())));
+	return this.addProperties(Property.CUSTOM_META, is -> is.setItemMeta(customMeta.apply(is.getItemMeta())));
     }
 
+    /**
+     * Build a pile of items with this real configuration. if nothing has been
+     * changed, it will return the last saved construction.
+     *
+     * @return the item stack
+     */
     public ItemStack build() {
 	if (!modified) {
-	    return getLastBuild();
+	    return this.getLastBuild();
 	}
 	ItemStack item = new ItemStack(material);
 	properties.values().stream().forEach(c -> c.accept(item));
@@ -106,22 +190,34 @@ public class ItemBuilder {
 	return lastBuild = item;
     }
 
+    /**
+     * @return the last item stack build or null if there wasn't a last build
+     */
     public ItemStack getLastBuild() {
 	return lastBuild;
     }
 
+    /**
+     * @return a copy fro this builder
+     */
     public ItemBuilder copy() {
 	ItemBuilder clone = new ItemBuilder(material);
 	clone.properties = properties;
 	return clone;
     }
 
-    public ItemBuilder remove(Properties property) {
+    /**
+     * Remove any property from this builder
+     *
+     * @param property the property to remove
+     * @return
+     */
+    public ItemBuilder remove(Property property) {
 	properties.remove(property);
 	return this;
     }
 
-    private ItemBuilder addProperties(Properties type, Consumer<ItemStack> consumer) {
+    private ItemBuilder addProperties(Property type, Consumer<ItemStack> consumer) {
 	if (properties.containsKey(type) && type.isCumulative()) {
 	    properties.compute(type, (k, v) -> v.andThen(consumer));
 	} else {
@@ -137,7 +233,7 @@ public class ItemBuilder {
 	item.setItemMeta(meta);
     }
 
-    public enum Properties {
+    public enum Property {
 	NAME(false),
 	LORE(false),
 	DAMAGE(false),
@@ -149,7 +245,7 @@ public class ItemBuilder {
 
 	private boolean cumulative;
 
-	Properties(boolean cumulative) {
+	Property(boolean cumulative) {
 	    this.cumulative = cumulative;
 	}
 

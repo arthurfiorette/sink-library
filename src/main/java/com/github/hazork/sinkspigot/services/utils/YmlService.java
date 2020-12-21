@@ -9,14 +9,33 @@ import org.bukkit.configuration.file.FileConfiguration;
 
 import com.google.common.collect.Maps;
 
+/**
+ * A service class that handles with yml.
+ *
+ * @author https://github.com/Hazork/sink-library/
+ */
 public final class YmlService {
 
-    public static Map<String, Map<String, String>> getKeys(FileConfiguration fc, String section) {
+    /**
+     * A private constructor prevent callers from accidentally instantiating an
+     * instance.
+     */
+    public YmlService() {}
+
+    /**
+     * Returns a map with the key being the name of the subsections and the
+     * value is a map of the key names and with the loaded values.
+     *
+     * @param file    configuration file where values will be fetched
+     * @param section the section name to search for keys and values
+     * @return the value map
+     */
+    public static Map<String, Map<String, String>> getKeys(FileConfiguration file, String section) {
 	Map<String, Map<String, String>> request = new HashMap<>();
-	ConfigurationSection cSection = fc.getConfigurationSection(section);
+	ConfigurationSection cSection = file.getConfigurationSection(section);
 	cSection.getKeys(false).stream().forEach(key -> request.put(key, Maps.newHashMap()));
-	cSection.getKeys(true).stream()
-		.forEach(key -> request.get(getFirstKey(key)).put(getLastKeys(key), fc.getString(section + "." + key)));
+	cSection.getKeys(true).stream().forEach(
+		key -> request.get(getFirstKey(key)).put(getLastKeys(key), file.getString(section + "." + key)));
 	return request;
     }
 

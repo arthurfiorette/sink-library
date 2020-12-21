@@ -9,6 +9,13 @@ import com.github.hazork.sinkspigot.SinkHelper;
 import com.github.hazork.sinkspigot.SinkPlugin;
 import com.github.hazork.sinkspigot.config.YmlFile;
 
+/**
+ * A custom file is a default implementation for any yml file, it's a simple way
+ * to get custom files or when there's a file for every player and etc... This
+ * can be also implemented for more usages
+ *
+ * @author https://github.com/Hazork/sink-library/
+ */
 public class CustomFile implements YmlFile, SinkHelper {
 
     private final SinkPlugin plugin;
@@ -16,6 +23,13 @@ public class CustomFile implements YmlFile, SinkHelper {
     private final String name;
     private FileConfiguration config;
 
+    /**
+     * Constructs a custom file
+     *
+     * @param plugin the plugin owner;
+     * @param folder the folder location
+     * @param name   the file name
+     */
     public CustomFile(SinkPlugin plugin, File folder, String name) {
 	this.plugin = plugin;
 	this.name = name.endsWith(".yml") ? name : name + ".yml";

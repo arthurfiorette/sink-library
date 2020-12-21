@@ -2,15 +2,44 @@ package com.github.hazork.sinkspigot.menu.actions;
 
 import org.bukkit.event.inventory.InventoryAction;
 
+/**
+ * This enum is a better representation of a mouse click in a inventory.
+ *
+ * @author https://github.com/Hazork/sink-library/
+ */
 public enum MouseClick {
 
+    /**
+     * When the click is in the left mouse buton.
+     */
     LEFT,
+    /**
+     * When the click is in the left mouse buton while pressing shift.
+     */
     SHIFT_LEFT,
+    /**
+     * When the click is in the right mouse buton.
+     */
     RIGHT,
+    /**
+     * When the click is in the keyboard drop buton.
+     */
     DROP,
+    /**
+     * When the click is in the scroll mouse buton.
+     */
     SCROLL,
+    /**
+     * When the click is in other buton.
+     */
     OTHER;
 
+    /**
+     * Transforms a InventoryClick into a MouseClick
+     *
+     * @param action the inventory action
+     * @return the mouseclick from this action
+     */
     public static MouseClick from(InventoryAction action) {
 	switch (action) {
 	    case PICKUP_ALL:

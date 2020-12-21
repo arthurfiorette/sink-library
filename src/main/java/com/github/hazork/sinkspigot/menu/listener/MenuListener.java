@@ -11,12 +11,16 @@ import com.github.hazork.sinkspigot.listener.SinkListener;
 import com.github.hazork.sinkspigot.menu.SinkMenu;
 import com.github.hazork.sinkspigot.menu.item.MenuItem;
 
+/**
+ * This class is instantiated to handle all listeners for all menus in a
+ * specified plugin.
+ *
+ * @author https://github.com/Hazork/sink-library/
+ */
 public final class MenuListener extends SinkListener {
 
-    private final SinkPlugin owner;
-
-    private MenuListener(SinkPlugin owner) {
-	this.owner = owner;
+    public MenuListener(SinkPlugin owner) {
+	super(owner);
     }
 
     @Override
@@ -25,13 +29,12 @@ public final class MenuListener extends SinkListener {
 	Inventory inv = event.getInventory();
 	if (inv.getHolder() instanceof SinkMenu) {
 	    SinkMenu menu = (SinkMenu) inv.getHolder();
-	    if (menu.getPlugin().equals(getPlugin())) {
+	    if (menu.getPlugin().equals(this.getPlugin())) {
 		event.setCancelled(true);
 		InventoryAction action = event.getAction();
 		int slot = event.getRawSlot();
 		if (slot < inv.getSize() && action != InventoryAction.NOTHING) {
 		    MenuItem item = menu.getItems().get(slot);
-
 		    if (item != null) {
 			item.getClickAction().click(action);
 		    }
@@ -39,10 +42,4 @@ public final class MenuListener extends SinkListener {
 	    }
 	}
     }
-
-    @Override
-    public SinkPlugin getPlugin() {
-	return owner;
-    }
-
 }

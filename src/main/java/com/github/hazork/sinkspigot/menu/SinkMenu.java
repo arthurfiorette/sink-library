@@ -10,10 +10,18 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 
+import com.github.hazork.sinkspigot.SinkObject;
+import com.github.hazork.sinkspigot.SinkPlugin;
 import com.github.hazork.sinkspigot.menu.item.MenuItem;
 
-public abstract class SinkMenu implements InventoryHolder {
+/**
+ * An minecraft menu with better methods and a fanciest way to handle with.
+ *
+ * @author https://github.com/Hazork/sink-library/
+ */
+public abstract class SinkMenu implements InventoryHolder, SinkObject {
 
+    private final SinkPlugin plugin;
     private final Player player;
     private final String title;
     private final int rows;
@@ -21,40 +29,77 @@ public abstract class SinkMenu implements InventoryHolder {
     protected Map<Integer, MenuItem> itemMap = new HashMap<>();
     private Inventory inventory;
 
-    public SinkMenu(Player player, String title, int rows) {
+    /**
+     * Constructs a new SinkMenu
+     *
+     * @param player the player owner;
+     * @param title  the inventory title
+     * @param rows   the number of inventory rows
+     */
+    public SinkMenu(SinkPlugin plugin, Player player, String title, int rows) {
+	this.plugin = plugin;
 	this.player = player;
 	this.title = title;
 	this.rows = rows;
+	plugin.setupMenus();
     }
 
+    /**
+     * @return the MenuItem list to be displayed
+     */
     protected abstract List<MenuItem> items();
 
+    /**
+     * Redraw the inventory clearing all items and redrawing them.
+     */
     public void draw() {
-	itemMap = items().stream().collect(Collectors.toMap(MenuItem::getSlot, m -> m));
-	itemMap.forEach((slot, item) -> getInventory().setItem(slot, item.getItemStack()));
+	inventory.clear();
+	itemMap = this.items().stream().collect(Collectors.toMap(MenuItem::getSlot, m -> m));
+	itemMap.forEach((slot, item) -> this.getInventory().setItem(slot, item.getItemStack()));
     }
 
+    /**
+     * Open this menu to the player owner.
+     *
+     * @param redraw true if the inventory needs to be redrawed.
+     */
     public void show(boolean redraw) {
 	if (inventory == null) {
 	    inventory = Bukkit.createInventory(this, rows * 9, title);
 	    redraw = true;
 	}
 	if (redraw) {
-	    draw();
+	    this.draw();
 	}
-	player.openInventory(getInventory());
+	player.openInventory(this.getInventory());
     }
 
+    /**
+     * @return the player owner
+     */
     public Player getPlayer() {
 	return player;
     }
 
+    /**
+     * @return the inventory title
+     */
     public String getTitle() {
 	return title;
     }
 
+    /**
+     * @return the number of rows
+     */
     public int getRows() {
 	return rows;
+    }
+
+    /**
+     * @return all the items on this menu as a map of <slot, item>
+     */
+    public Map<Integer, MenuItem> getItems() {
+	return itemMap;
     }
 
     @Override
@@ -62,7 +107,9 @@ public abstract class SinkMenu implements InventoryHolder {
 	return inventory;
     }
 
-    public Map<Integer, MenuItem> getItems() {
-	return itemMap;
+    @Override
+    public SinkPlugin getPlugin() {
+	return plugin;
     }
+
 }

@@ -3,7 +3,7 @@ package com.github.hazork.sinkspigot;
 /**
  * A class that implement this means that his instances need a SinkPlugin to
  * work well.
- * 
+ *
  * @author https://github.com/Hazork/sink-library/
  */
 public interface SinkObject {

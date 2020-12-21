@@ -11,11 +11,23 @@ import com.github.hazork.sinkspigot.command.CommandBase;
 import com.github.hazork.sinkspigot.config.YmlContainer;
 import com.github.hazork.sinkspigot.config.YmlFile;
 import com.github.hazork.sinkspigot.interfaces.Registrable;
+import com.github.hazork.sinkspigot.listener.SinkListener;
+import com.github.hazork.sinkspigot.menu.listener.MenuListener;
 
+/**
+ * A JavaPlugin with the compatibility of several library methods
+ *
+ * @author https://github.com/Hazork/sink-library/
+ */
 public abstract class SinkPlugin extends JavaPlugin {
 
     private final YmlContainer ymlContainer = new YmlContainer(this);
+    private MenuListener listener;
 
+    /**
+     * Creates a new SinkPluign. You should be aware that only one per class can
+     * be instantiated
+     */
     public SinkPlugin() {
 	Sinks.newInstance(this);
     }
@@ -26,41 +38,94 @@ public abstract class SinkPlugin extends JavaPlugin {
     @Override
     public abstract void onDisable();
 
-    public void treatException(Class<?> author, Exception e, String message, Object... args) {
-	log(Level.SEVERE, "An exception occurred in class %s:", author.getSimpleName());
-	log(Level.SEVERE, message, args);
-	e.printStackTrace();
-	getPluginLoader().disablePlugin(this);
+    /**
+     * Handles exceptions in a better visual way
+     *
+     * @param author  the class author
+     * @param exc     the exception
+     * @param message the message
+     * @param args    the arguments to replace the message.
+     *                {@link String#format(String, Object...)}
+     */
+    public void treatException(Class<?> author, Exception exc, String message, Object... args) {
+	this.log(Level.SEVERE, "An exception occurred in class %s:", author.getSimpleName());
+	this.log(Level.SEVERE, message, args);
+	exc.printStackTrace();
+	this.getPluginLoader().disablePlugin(this);
     }
 
+    /**
+     * Log any information with the plugin tag and etc. Best replacement for
+     * System.out.println()
+     *
+     * @param level the log level.
+     * @param msg   any information that needs to be logged
+     * @param args  the arguments to replace the message.
+     *              {@link String#format(String, Object...)}
+     */
     public void log(Level level, String msg, Object... args) {
-	getLogger().log(level, String.format(msg, args));
+	this.getLogger().log(level, String.format(msg, args));
     }
 
+    /**
+     * Register any registrable.
+     *
+     * @param registries the registries
+     */
     public void addRegistrables(Registrable... registries) {
 	Arrays.stream(registries).forEach(Registrable::register);
     }
 
+    /**
+     * Same as {@link SinkPlugin#addRegistrables(Registrable...)}
+     *
+     * @param commands the commands to register
+     */
+    @Deprecated
     public void addCommandBase(CommandBase... commands) {
 	for(CommandBase cb: commands) {
 	    cb.register();
 	}
     }
 
+    /**
+     * You should use {@link SinkListener} for better visibility and for being
+     * registered with {@link SinkListener#register()}
+     *
+     * @param listeners the listeners to register
+     */
+    @Deprecated
     public void addListeners(Listener... listeners) {
 	Arrays.stream(listeners).forEach(listener -> Bukkit.getPluginManager().registerEvents(listener, this));
     }
 
+    /**
+     * Add any YmlFile with this plugin.
+     *
+     * @param files the files to be added.
+     */
     protected void addFile(YmlFile... files) {
 	Arrays.stream(files).forEach(file -> ymlContainer.addFile(file));
     }
 
+    /**
+     * Return the YmlContainer connected with this plugin
+     *
+     * @return the container
+     */
     public YmlContainer getYmlContainer() {
 	return ymlContainer;
     }
 
-    public SinkPlugin getPlugin() {
-	return this;
+    /**
+     * This is auto executed when a menu from this plugin is created so all
+     * their listeners work well
+     */
+    public void setupMenus() {
+	if (listener == null) {
+	    listener = new MenuListener(this);
+	    listener.register();
+	}
     }
 
 }

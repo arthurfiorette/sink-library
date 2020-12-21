@@ -7,7 +7,7 @@ import com.google.common.collect.Maps;
 
 /**
  * Internal library class for checking the construction of SinkPlugin instances
- * 
+ *
  * @author https://github.com/Hazork/sink-library/
  */
 public final class Sinks {
@@ -27,7 +27,7 @@ public final class Sinks {
 
     /**
      * Returns the plugin instance from the T class
-     * 
+     *
      * @param <T>   T extends {@link SinkPlugin}
      * @param clazz the class to get the instance.
      * @return the instance

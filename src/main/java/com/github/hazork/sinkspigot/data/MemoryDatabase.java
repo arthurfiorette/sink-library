@@ -5,6 +5,13 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
+/**
+ * A memory database is a database saved in a concurrent hash map and resets
+ * every time that it is reloaded or closed
+ *
+ * @param <T> the value type to be saved in this database
+ * @author https://github.com/Hazork/sink-library/
+ */
 public class MemoryDatabase<T> implements Database<T> {
 
     private transient ConcurrentMap<String, T> database;
@@ -24,19 +31,19 @@ public class MemoryDatabase<T> implements Database<T> {
 
     @Override
     public void save(String key, T value) {
-	checkState();
+	this.checkState();
 	database.put(key, value);
     }
 
     @Override
     public T get(String key) {
-	checkState();
+	this.checkState();
 	return database.get(key);
     }
 
     @Override
     public Set<T> getAll() {
-	checkState();
+	this.checkState();
 	return new HashSet<>(database.values());
     }
 

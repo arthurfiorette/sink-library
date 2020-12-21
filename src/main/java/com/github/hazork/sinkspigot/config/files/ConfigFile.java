@@ -8,12 +8,23 @@ import com.github.hazork.sinkspigot.SinkHelper;
 import com.github.hazork.sinkspigot.SinkPlugin;
 import com.github.hazork.sinkspigot.config.YmlFile;
 
+/**
+ * The config file is a specific implementation of yml file that is exactly
+ * build for handling the config.yml of an plugin.
+ *
+ * @author https://github.com/Hazork/sink-library/
+ */
 public class ConfigFile implements YmlFile, SinkHelper {
 
     private static final String NAME = "config.yml";
 
     private final SinkPlugin plugin;
 
+    /**
+     * Constructs a config file.
+     *
+     * @param plugin the plugin owner;
+     */
     public ConfigFile(SinkPlugin plugin) {
 	this.plugin = plugin;
     }
