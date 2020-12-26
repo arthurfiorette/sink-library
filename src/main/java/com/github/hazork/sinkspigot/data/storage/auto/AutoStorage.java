@@ -2,7 +2,6 @@ package com.github.hazork.sinkspigot.data.storage.auto;
 
 import com.github.hazork.sinkspigot.data.Database;
 import com.github.hazork.sinkspigot.data.storage.Storage;
-import com.github.hazork.sinkspigot.json.Gsons;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
@@ -23,15 +22,18 @@ import com.google.gson.JsonObject;
  */
 public class AutoStorage<T> extends Storage<T> {
 
+    private final Class<T> clazz;
     private Gson gson = new Gson();
 
     /**
      * Constructs a auto storage.
      * 
      * @param database the database to send and recieve information.
+     * @param clazz the type class
      */
-    public AutoStorage(Database database) {
+    public AutoStorage(Database database, Class<T> clazz) {
 	super(database);
+	this.clazz = clazz;
     }
 
     /**
@@ -45,12 +47,12 @@ public class AutoStorage<T> extends Storage<T> {
 
     @Override
     public JsonObject serialize(T object) {
-	return (JsonObject) Gsons.toJsonTree(gson, object);
+	return (JsonObject) gson.toJsonTree(object, clazz);
     }
 
     @Override
     public T deserialize(JsonObject json) {
-	return Gsons.fromJson(gson, json);
+	return gson.fromJson(json, clazz);
     }
 
 }

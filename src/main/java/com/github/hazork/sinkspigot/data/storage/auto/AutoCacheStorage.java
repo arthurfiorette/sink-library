@@ -4,7 +4,6 @@ import java.util.function.UnaryOperator;
 
 import com.github.hazork.sinkspigot.data.Database;
 import com.github.hazork.sinkspigot.data.storage.CacheStorage;
-import com.github.hazork.sinkspigot.json.Gsons;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.LoadingCache;
 import com.google.gson.Gson;
@@ -34,22 +33,30 @@ import com.google.gson.JsonObject;
  * @author https://github.com/Hazork/sink-library/
  */
 public class AutoCacheStorage<T> extends CacheStorage<T> {
-
+    private final Class<T> clazz;
     private Gson gson = new Gson();
 
+    /**
+     * {@inheritDoc}
+     * 
+     * @param clazz the type class
+     */
     @Deprecated
-    public AutoCacheStorage(Database database) {
+    public AutoCacheStorage(Database database, Class<T> clazz) {
 	super(database);
+	this.clazz = clazz;
     }
 
     /**
      * Constructs a storage with a specified loading cache
      * 
      * @param database the database to send and recieve information
+     * @param clazz the type class
      * @param cache the custom loading cache
      */
-    public AutoCacheStorage(Database database, LoadingCache<String, T> cache) {
+    public AutoCacheStorage(Database database, Class<T> clazz, LoadingCache<String, T> cache) {
 	super(database, cache);
+	this.clazz = clazz;
     }
 
     /**
@@ -57,11 +64,13 @@ public class AutoCacheStorage<T> extends CacheStorage<T> {
      * highly recommended to define the invalidation conditions here.
      * 
      * @param database the database to send and recieve information
+     * @param clazz the type class
      * @param options a unary operator that will be applied when building the
      * cache
      */
-    public AutoCacheStorage(Database database, UnaryOperator<CacheBuilder<Object, Object>> options) {
+    public AutoCacheStorage(Database database, Class<T> clazz, UnaryOperator<CacheBuilder<Object, Object>> options) {
 	super(database, options);
+	this.clazz = clazz;
     }
 
     /**
@@ -75,12 +84,11 @@ public class AutoCacheStorage<T> extends CacheStorage<T> {
 
     @Override
     public JsonObject serialize(T object) {
-	return (JsonObject) Gsons.toJsonTree(gson, object);
+	return (JsonObject) gson.toJsonTree(object, clazz);
     }
 
     @Override
     public T deserialize(JsonObject json) {
-	return Gsons.fromJson(gson, json);
+	return gson.fromJson(json, clazz);
     }
-
 }
