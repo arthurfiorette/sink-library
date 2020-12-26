@@ -7,6 +7,7 @@ import java.util.concurrent.TimeUnit;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.Sound;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
@@ -152,5 +153,17 @@ public final class SpigotServices {
 	row = (row <= 0) ? 1 : (row > 6) ? 6 : row;
 	column = (column <= 0) ? 1 : (column > 9) ? 9 : column;
 	return 9 * (row - 1) + column - 1;
+    }
+
+    /**
+     * Play the sound for the players
+     * 
+     * @param sound the sound to play
+     * @param players the players to play the sound
+     */
+    public static void playSound(Sound sound, Player... players) {
+	for(Player p: players) {
+	    p.playSound(p.getLocation(), sound, 3.0F, 0.5F);
+	}
     }
 }
