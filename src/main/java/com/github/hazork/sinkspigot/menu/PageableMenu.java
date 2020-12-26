@@ -16,6 +16,7 @@ import com.google.common.collect.Lists;
  * with pages, that can be paginated with previousPage() and nextPage()
  *
  * @param <T> the item type to be pageable
+ * 
  * @author https://github.com/Hazork/sink-library/
  */
 public abstract class PageableMenu<T> extends SinkMenu {
@@ -30,8 +31,8 @@ public abstract class PageableMenu<T> extends SinkMenu {
      * Constructs a new PageableMenu.
      *
      * @param player the player owner;
-     * @param title  the inventory title
-     * @param rows   the number of inventory rows
+     * @param title the inventory title
+     * @param rows the number of inventory rows
      */
     public PageableMenu(SinkPlugin plugin, Player player, String title, int rows) {
 	super(plugin, player, title, rows);
@@ -51,6 +52,7 @@ public abstract class PageableMenu<T> extends SinkMenu {
      * Transform the object to a MenuItem to be displayed.
      *
      * @param object the object to be transformed
+     * 
      * @return the MenuItem from this object
      */
     protected abstract MenuItem toItem(T object);

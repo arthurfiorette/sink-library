@@ -18,6 +18,7 @@ import com.google.common.collect.Lists;
  * the path with this enum and search it in your yml file.
  *
  * @param <L> the enum that contains the keys and path for all the texts
+ * 
  * @author https://github.com/Hazork/sink-library/
  */
 public abstract class LanguageFile<L extends Enum<L>> extends CustomFile {
@@ -30,6 +31,7 @@ public abstract class LanguageFile<L extends Enum<L>> extends CustomFile {
      * Return the path associated with this enum.
      *
      * @param lang the enum
+     * 
      * @return the path
      */
     protected abstract String path(L lang);
@@ -44,10 +46,11 @@ public abstract class LanguageFile<L extends Enum<L>> extends CustomFile {
     /**
      * Returns the translation found and apply a replacer in it
      *
-     * @param lang     the lang enum
+     * @param lang the lang enum
      * @param replacer the text replacer to apply in the text.
+     * 
      * @return the text found or {@link LanguageFile#unknown()} if occour an
-     *         error.
+     * error.
      */
     public String asText(L lang, UnaryOperator<Replacer> replacer) {
 	return Replacer.replace(this.asText(lang), replacer);
@@ -57,8 +60,9 @@ public abstract class LanguageFile<L extends Enum<L>> extends CustomFile {
      * Returns the translation found
      *
      * @param lang the lang enum
+     * 
      * @return the text found or {@link LanguageFile#unknown()} if occour an
-     *         error.
+     * error.
      */
     public String asText(L lang) {
 	String text = this.getConfig().getString(this.path(lang));
@@ -69,10 +73,11 @@ public abstract class LanguageFile<L extends Enum<L>> extends CustomFile {
     /**
      * Returns the translation list found and apply a replacer in it.
      *
-     * @param lang     the lang enum
+     * @param lang the lang enum
      * @param replacer the text replacer to apply in the text.
+     * 
      * @return the text list found or {@link LanguageFile#unknown()} if occour
-     *         an error.
+     * an error.
      */
     public List<String> asList(L lang, UnaryOperator<Replacer> replacer) {
 	return this.asList(lang).stream().map(str -> Replacer.replace(str, replacer)).collect(Collectors.toList());
@@ -82,8 +87,9 @@ public abstract class LanguageFile<L extends Enum<L>> extends CustomFile {
      * Returns the translation list found.
      *
      * @param lang the lang enum
+     * 
      * @return the text list found or {@link LanguageFile#unknown()} if occour
-     *         an error.
+     * an error.
      */
     public List<String> asList(L lang) {
 	List<String> list = this.getConfig().getStringList(this.path(lang));

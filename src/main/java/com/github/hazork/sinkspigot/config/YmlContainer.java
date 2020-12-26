@@ -46,6 +46,7 @@ public class YmlContainer implements SinkHelper {
      * Returns the yml file associated with this name
      *
      * @param name the file name
+     * 
      * @return the yml file or null if not found.
      */
     public YmlFile getFile(String name) {

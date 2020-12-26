@@ -29,7 +29,7 @@ public class MenuItem {
     /**
      * Constructs a new MenuItem with a clickAction
      *
-     * @param item   the itemstack copy
+     * @param item the itemstack copy
      * @param action the action when clicked
      */
     public MenuItem(ItemStack item, ClickAction action) {
@@ -53,7 +53,7 @@ public class MenuItem {
 
     /**
      * @return the column where the item is located in or -1 if it was not
-     *         explicitly defined
+     * explicitly defined
      */
     public int getColumn() {
 	return column;
@@ -61,7 +61,7 @@ public class MenuItem {
 
     /**
      * @return the row where the item is located in or -1 if it was not
-     *         explicitly defined
+     * explicitly defined
      */
     public int getRow() {
 	return row;
@@ -69,7 +69,7 @@ public class MenuItem {
 
     /**
      * @return the slot where the item is located in or -1 if it was not
-     *         explicitly defined
+     * explicitly defined
      */
     public int getSlot() {
 	return row == -1 || column == -1 ? -1 : SpigotServices.getChestSlot(column, row);
@@ -79,6 +79,7 @@ public class MenuItem {
      * Changes the location information for this column
      *
      * @param column the new column
+     * 
      * @return itself
      */
     public MenuItem setColumn(int column) {
@@ -90,6 +91,7 @@ public class MenuItem {
      * Changes the location information for this row
      *
      * @param row the new row
+     * 
      * @return itself
      */
     public MenuItem setRow(int row) {

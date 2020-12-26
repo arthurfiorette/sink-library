@@ -15,6 +15,7 @@ import com.mojang.authlib.properties.Property;
  * A static class to help with item builder templates.
  *
  * @author https://github.com/Hazork/sink-library/
+ * 
  * @see {@link com.github.hazork.sinkspigot.item.ItemBuilder}
  */
 public class ItemBuilders {
@@ -23,6 +24,7 @@ public class ItemBuilders {
      * Create a itemBuilder from a OfflinePlayer head
      *
      * @param player the player
+     * 
      * @return a itembuilder instance from this player head
      */
     public static ItemBuilder ofHead(OfflinePlayer player) {
@@ -33,6 +35,7 @@ public class ItemBuilders {
      * Create a itemBuilder from a player head
      *
      * @param playername the playername
+     * 
      * @return a itembuilder instance from this player head
      */
     public static ItemBuilder ofHead(String playername) {
@@ -48,6 +51,7 @@ public class ItemBuilders {
      * Create a itemBuilder from a url texture head
      *
      * @param url the url where the texture is
+     * 
      * @return a itembuilder instance from this head
      */
     public static ItemBuilder ofHeadUrl(String url) {
@@ -61,6 +65,7 @@ public class ItemBuilders {
      * Create a itemBuilder from a game profile head
      *
      * @param gameProfile the mojang gameprofile to search for the head
+     * 
      * @return a itembuilder instance from this head
      */
     public static ItemBuilder ofSkullGameProfile(GameProfile gameProfile) {

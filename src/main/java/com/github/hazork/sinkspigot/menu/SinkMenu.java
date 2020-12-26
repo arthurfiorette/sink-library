@@ -33,8 +33,8 @@ public abstract class SinkMenu implements InventoryHolder, SinkObject {
      * Constructs a new SinkMenu
      *
      * @param player the player owner;
-     * @param title  the inventory title
-     * @param rows   the number of inventory rows
+     * @param title the inventory title
+     * @param rows the number of inventory rows
      */
     public SinkMenu(SinkPlugin plugin, Player player, String title, int rows) {
 	this.plugin = plugin;

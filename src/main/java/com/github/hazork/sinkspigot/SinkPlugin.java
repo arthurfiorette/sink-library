@@ -41,11 +41,11 @@ public abstract class SinkPlugin extends JavaPlugin {
     /**
      * Handles exceptions in a better visual way
      *
-     * @param author  the class author
-     * @param exc     the exception
+     * @param author the class author
+     * @param exc the exception
      * @param message the message
-     * @param args    the arguments to replace the message.
-     *                {@link String#format(String, Object...)}
+     * @param args the arguments to replace the message.
+     * {@link String#format(String, Object...)}
      */
     public void treatException(Class<?> author, Exception exc, String message, Object... args) {
 	this.log(Level.SEVERE, "An exception occurred in class %s:", author.getSimpleName());
@@ -59,9 +59,9 @@ public abstract class SinkPlugin extends JavaPlugin {
      * System.out.println()
      *
      * @param level the log level.
-     * @param msg   any information that needs to be logged
-     * @param args  the arguments to replace the message.
-     *              {@link String#format(String, Object...)}
+     * @param msg any information that needs to be logged
+     * @param args the arguments to replace the message.
+     * {@link String#format(String, Object...)}
      */
     public void log(Level level, String msg, Object... args) {
 	this.getLogger().log(level, String.format(msg, args));

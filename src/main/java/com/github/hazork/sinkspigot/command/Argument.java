@@ -18,8 +18,8 @@ public interface Argument extends Predicate<CommandSender> {
      * Handle a argument executed from a command sender.
      *
      * @param sender the command sender that executed this argument
-     * @param alias  the next aliases
-     * @param args   the next arguments
+     * @param alias the next aliases
+     * @param args the next arguments
      */
     void onArgument(CommandSender sender, String alias, List<String> args);
 
@@ -46,8 +46,9 @@ public interface Argument extends Predicate<CommandSender> {
      * Handle a tab complete request from a command sender
      *
      * @param sender the command sender
-     * @param alias  the next aliases
+     * @param alias the next aliases
      * @param args
+     * 
      * @return the next arguments or {@code null} to be none.
      */
     default List<String> onTabComplete(CommandSender sender, String alias, List<String> args) {

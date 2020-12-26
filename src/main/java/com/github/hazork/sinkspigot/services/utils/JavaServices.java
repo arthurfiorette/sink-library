@@ -28,9 +28,10 @@ public final class JavaServices {
     /**
      * Returns an array with the collection elements.
      *
-     * @param <T>   the array type
+     * @param <T> the array type
      * @param clazz the clazz to identify the array type
-     * @param coll  the collection to fill in the array
+     * @param coll the collection to fill in the array
+     * 
      * @return the array with the elements
      */
     public static <T> T[] toArray(Class<T> clazz, Collection<T> coll) {
@@ -41,9 +42,10 @@ public final class JavaServices {
     /**
      * Returns an array with the varargs elements
      *
-     * @param <T>    the array type
-     * @param clazz  the class to identify the array type
+     * @param <T> the array type
+     * @param clazz the class to identify the array type
      * @param values the varargs values to fill in the array.
+     * 
      * @return the array with the elements
      */
     public static <T> T[] toArray(Class<T> clazz, Object... values) {
@@ -53,9 +55,10 @@ public final class JavaServices {
     /**
      * Convery any vargarg to a list of the same type
      *
-     * @param <T>    the list type
-     * @param clazz  the class to identify the list type
+     * @param <T> the list type
+     * @param clazz the class to identify the list type
      * @param values the varargs values to fill in the list.
+     * 
      * @return the list with the elements
      */
     public static <T> List<T> toList(Class<T> clazz, Object... values) {
@@ -67,6 +70,7 @@ public final class JavaServices {
      *
      * @param <T> the array type
      * @param arr the filled array
+     * 
      * @return the array without the first element
      */
     public static <T> T[] removeFirst(T[] arr) {
@@ -77,6 +81,7 @@ public final class JavaServices {
      * Checks if all the varargs aren't nulls.
      *
      * @param objects any objects that can be null
+     * 
      * @return true if all the objects aren't null
      */
     public static boolean nonNull(Object... objects) {
@@ -88,6 +93,7 @@ public final class JavaServices {
      * throws a NPE.
      *
      * @param objects any objects that can be null
+     * 
      * @throws NullPointerException if this varargs have at least 1 null
      */
     public static void requireNonNull(Object... objects) {
@@ -102,6 +108,7 @@ public final class JavaServices {
      *
      * @param message the message shown if an NPE is thrown
      * @param objects any objects that can be null
+     * 
      * @throws NullPointerException if this varargs have at least 1 null
      */
     public static void requireNonNull(String message, Object... objects) {
@@ -117,10 +124,11 @@ public final class JavaServices {
     /**
      * Converts any list in other list with different type. Like a "cast".
      *
-     * @param <T>    the initial list type
-     * @param <R>    the returned list type
-     * @param list   the list to be mapped
+     * @param <T> the initial list type
+     * @param <R> the returned list type
+     * @param list the list to be mapped
      * @param mapper the mapper function
+     * 
      * @return the mapped list
      */
     public static <T, R> List<R> listMapper(List<T> list, Function<T, R> mapper) {
@@ -130,8 +138,9 @@ public final class JavaServices {
     /**
      * Returns a random element from any collection.
      *
-     * @param <T>  the collection type
+     * @param <T> the collection type
      * @param coll the collection with the elements
+     * 
      * @return the random element
      */
     public static <T> T getRandomElement(Collection<T> coll) {
@@ -142,6 +151,7 @@ public final class JavaServices {
      * Return a random integer with given range
      *
      * @param range the range, 0 to range.
+     * 
      * @return
      */
     public static int getRandomInt(int range) {

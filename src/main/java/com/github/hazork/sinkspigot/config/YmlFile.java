@@ -21,7 +21,7 @@ public interface YmlFile {
      * the local with the interfal if replace if {@code true}.
      *
      * @param defaultPath the internal templace path
-     * @param replace     true if you want to force replace.
+     * @param replace true if you want to force replace.
      */
     void setup(String defaultPath, boolean replace);
 
@@ -44,6 +44,7 @@ public interface YmlFile {
      * Return get file configuration and reload before return if it's needed.
      *
      * @param reload true if needs to reload.
+     * 
      * @return the file configuration from this yml instance
      */
     default FileConfiguration getConfig(boolean reload) {

@@ -28,7 +28,7 @@ public class CustomFile implements YmlFile, SinkHelper {
      *
      * @param plugin the plugin owner;
      * @param folder the folder location
-     * @param name   the file name
+     * @param name the file name
      */
     public CustomFile(SinkPlugin plugin, File folder, String name) {
 	this.plugin = plugin;

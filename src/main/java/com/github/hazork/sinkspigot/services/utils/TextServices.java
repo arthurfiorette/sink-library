@@ -29,14 +29,16 @@ public final class TextServices {
      * Same as
      * {@link TextServices#buildProgressBar(int, String, String, double)}.
      *
-     * @param width        the width of the progress bar
-     * @param incomplete   the text placed when your representative percentage
-     *                     is incompleted
-     * @param complete     the text placed when your representative percentage
-     *                     is completed
+     * @param width the width of the progress bar
+     * @param incomplete the text placed when your representative percentage is
+     * incompleted
+     * @param complete the text placed when your representative percentage is
+     * completed
      * @param currentValue the progress value
-     * @param maxValue     the highest possible value
+     * @param maxValue the highest possible value
+     * 
      * @return the progress bar string
+     * 
      * @see TextServices#buildProgressBar(int, String, String, double)
      */
     public static String buildProgressBar(int width, String incomplete, String complete, long currentValue,
@@ -49,12 +51,13 @@ public final class TextServices {
      * <p>
      * {@code buildProgressBar(10, #, *, 0.6)} will return {@code######****}.
      *
-     * @param width      the width of the progress bar
+     * @param width the width of the progress bar
      * @param incomplete the text placed when your representative percentage is
-     *                   incompleted
-     * @param complete   the text placed when your representative percentage is
-     *                   completed
-     * @param percent    the percentage value to build the bar
+     * incompleted
+     * @param complete the text placed when your representative percentage is
+     * completed
+     * @param percent the percentage value to build the bar
+     * 
      * @return the progress bar string
      */
     public static String buildProgressBar(int width, String incomplete, String complete, double percent) {
@@ -78,8 +81,9 @@ public final class TextServices {
      * Split any minecraft colored text into sized lines without losing the
      * color.
      *
-     * @param text  the raw text
+     * @param text the raw text
      * @param width the width to split the lines
+     * 
      * @return the list with splitted lines
      */
     public static List<String> splitTextColored(String text, int width) {
@@ -89,9 +93,10 @@ public final class TextServices {
     /**
      * Split any text into sized lines.
      *
-     * @param text    the raw text
-     * @param width   the width to split the lines
+     * @param text the raw text
+     * @param width the width to split the lines
      * @param newLine the text to be placed on every new line
+     * 
      * @return the list with splitted lines
      */
     public static List<String> splitText(String text, int width, String newLine) {
@@ -104,6 +109,7 @@ public final class TextServices {
      * Ex: {@code '§6Hello World§f!'} will return {@code '§6Hello §6World§f!'}.
      *
      * @param text the raw text
+     * 
      * @return the forced text
      */
     public static String forceColor(String text) {

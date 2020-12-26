@@ -9,6 +9,7 @@ import com.google.common.reflect.TypeToken;
  * in json.
  *
  * @author https://github.com/Hazork/sink-library/
+ * 
  * @see {@link java.lang.reflect.Type}
  * @see {@link com.github.hazork.sinkspigot.json.Gsons}
  */

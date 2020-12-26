@@ -48,8 +48,9 @@ public enum TaskScheduler {
     /**
      * Run a anything with BukkitScheduler.
      *
-     * @param plugin   the reference to the plugin scheduling task
+     * @param plugin the reference to the plugin scheduling task
      * @param runnable the task to be run
+     * 
      * @return the BukkitTask associated with this run.
      */
     public abstract BukkitTask run(Plugin plugin, Runnable runnable);
@@ -57,9 +58,10 @@ public enum TaskScheduler {
     /**
      * Run a anything with BukkitScheduler and a delay to execute.
      *
-     * @param plugin   the reference to the plugin scheduling task
+     * @param plugin the reference to the plugin scheduling task
      * @param runnable the task to be run
-     * @param delay    the delay in ticks
+     * @param delay the delay in ticks
+     * 
      * @return the BukkitTask associated with this run.
      */
     public abstract BukkitTask run(Plugin plugin, Runnable runnable, long delay);
@@ -68,10 +70,11 @@ public enum TaskScheduler {
      * Run a anything with BukkitScheduler and a delay to execute and a interval
      * between runs.
      *
-     * @param plugin   the reference to the plugin scheduling task
+     * @param plugin the reference to the plugin scheduling task
      * @param runnable the task to be run
-     * @param delay    the delay in ticks
+     * @param delay the delay in ticks
      * @param interval the ticks to wait between runs
+     * 
      * @return the BukkitTask associated with this run.
      */
     public abstract BukkitTask run(Plugin plugin, Runnable runnable, long delay, long interval);

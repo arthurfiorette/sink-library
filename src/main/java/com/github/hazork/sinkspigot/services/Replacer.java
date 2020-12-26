@@ -25,7 +25,8 @@ public class Replacer {
      * Add a placeholder to replace when called.
      *
      * @param placeholder the placeholder to be replaced
-     * @param value       the value to replace
+     * @param value the value to replace
+     * 
      * @return the instance
      */
     public Replacer add(String placeholder, String value) {
@@ -36,7 +37,8 @@ public class Replacer {
      * Add a placeholder to replace when called.
      *
      * @param placeholder the placeholder to be replaced
-     * @param value       the value to replace and only generated when called
+     * @param value the value to replace and only generated when called
+     * 
      * @return the instance
      */
     public Replacer add(String placeholder, Supplier<String> supplier) {
@@ -48,6 +50,7 @@ public class Replacer {
      * Replace the text with this atual set of placeholders.
      *
      * @param str the raw text
+     * 
      * @return the replaced text
      */
     public String replace(String str) {
@@ -62,8 +65,9 @@ public class Replacer {
      * Replace the text with this atual set of placeholders. And use
      * PlaceholderApi if loaded
      *
-     * @param str    the raw text
+     * @param str the raw text
      * @param player the player
+     * 
      * @return
      */
     public String replace(String str, OfflinePlayer player) {
@@ -77,8 +81,9 @@ public class Replacer {
     /**
      * A static and compacted method that add the placeholder and replace.
      *
-     * @param str      the raw text
+     * @param str the raw text
      * @param replacer a function to be added the placeholders in a other way
+     * 
      * @return the replaced text
      */
     public static String replace(String str, UnaryOperator<Replacer> replacer) {
@@ -89,9 +94,10 @@ public class Replacer {
      * A static and compacted method that add the placeholder and replace. And
      * use PlaceholderApi if loaded
      *
-     * @param str      the raw text
-     * @param player   the player
+     * @param str the raw text
+     * @param player the player
      * @param replacer a function to be added the placeholders in a other way
+     * 
      * @return the replaced text
      */
     public static String replace(String str, OfflinePlayer player, UnaryOperator<Replacer> replacer) {

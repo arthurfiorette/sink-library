@@ -28,8 +28,9 @@ public final class Sinks {
     /**
      * Returns the plugin instance from the T class
      *
-     * @param <T>   T extends {@link SinkPlugin}
+     * @param <T> T extends {@link SinkPlugin}
      * @param clazz the class to get the instance.
+     * 
      * @return the instance
      */
     public static <T extends SinkPlugin> T from(Class<T> clazz) {

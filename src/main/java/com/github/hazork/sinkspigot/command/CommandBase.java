@@ -47,7 +47,7 @@ public final class CommandBase implements TabExecutor, Registrable {
      * {@inheritDoc}
      *
      * @throws VerifyException if the command isn't found. (ensure that it is
-     *                         registered in plugin.yml}
+     * registered in plugin.yml}
      */
     @Override
     public void register() {
@@ -91,6 +91,7 @@ public final class CommandBase implements TabExecutor, Registrable {
      * Set an argument as a default command, (when no args are specified)
      *
      * @param arg the argument to be set or null to be none.
+     * 
      * @return the default argument.
      */
     public Argument setDefault(Argument arg) {

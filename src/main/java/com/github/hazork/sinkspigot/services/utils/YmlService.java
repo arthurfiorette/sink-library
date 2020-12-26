@@ -26,8 +26,9 @@ public final class YmlService {
      * Returns a map with the key being the name of the subsections and the
      * value is a map of the key names and with the loaded values.
      *
-     * @param file    configuration file where values will be fetched
+     * @param file configuration file where values will be fetched
      * @param section the section name to search for keys and values
+     * 
      * @return the value map
      */
     public static Map<String, Map<String, String>> getKeys(FileConfiguration file, String section) {

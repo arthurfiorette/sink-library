@@ -20,6 +20,7 @@ import com.github.hazork.sinkspigot.services.utils.JavaServices;
  * A builder class to customize in multiple ways a item stack.
  *
  * @author https://github.com/Hazork/sink-library/
+ * 
  * @see {@link com.github.hazork.sinkspigot.item.ItemBuilders}
  * @see {@link org.bukkit.inventory.ItemStack}
  */
@@ -35,6 +36,7 @@ public class ItemBuilder {
      * Constructs a itembuilder from a specified material.
      *
      * @param material the material to use in the builder.
+     * 
      * @throws NullPointerException if the material is null
      */
     public ItemBuilder(Material material) {
@@ -44,6 +46,7 @@ public class ItemBuilder {
 
     /**
      * @param durability set item durability
+     * 
      * @return itself
      */
     public ItemBuilder setDurability(int durability) {
@@ -52,6 +55,7 @@ public class ItemBuilder {
 
     /**
      * @param amount set the item amount
+     * 
      * @return itself
      */
     public ItemBuilder setAmount(int amount) {
@@ -60,6 +64,7 @@ public class ItemBuilder {
 
     /**
      * @param data set the item data
+     * 
      * @return itself
      */
     public ItemBuilder setData(MaterialData data) {
@@ -67,8 +72,9 @@ public class ItemBuilder {
     }
 
     /**
-     * @param ench  the enchantment to add
+     * @param ench the enchantment to add
      * @param level the enchantment level
+     * 
      * @return itself
      */
     public ItemBuilder addEnchantment(Enchantment ench, int level) {
@@ -77,8 +83,9 @@ public class ItemBuilder {
 
     /**
      * @param enchantments set the item enchantments in a map of
-     *                     {@code <enchantment,
+     * {@code <enchantment,
      *                     level>}
+     * 
      * @return itself
      */
     public ItemBuilder addEnchantments(Map<Enchantment, Integer> enchantments) {
@@ -87,6 +94,7 @@ public class ItemBuilder {
 
     /**
      * @param set the item name
+     * 
      * @return itself
      */
     public ItemBuilder setName(String name) {
@@ -104,6 +112,7 @@ public class ItemBuilder {
 
     /**
      * @param itemFlags set to the item all the item flags specifieds in varargs
+     * 
      * @return itself
      */
     public ItemBuilder setItemFlags(ItemFlag... itemFlags) {
@@ -115,7 +124,8 @@ public class ItemBuilder {
 
     /**
      * @param itemFlags add to the item all the item flags specifieds in
-     *                  varargs.
+     * varargs.
+     * 
      * @return itself
      */
     public ItemBuilder addItemFlags(ItemFlag... itemFlags) {
@@ -124,6 +134,7 @@ public class ItemBuilder {
 
     /**
      * @param lorelines set the item lore
+     * 
      * @return itself
      */
     public ItemBuilder setLores(String... lorelines) {
@@ -132,6 +143,7 @@ public class ItemBuilder {
 
     /**
      * @param lore set the item lore
+     * 
      * @return itself
      */
     public ItemBuilder setLore(List<String> lore) {
@@ -140,6 +152,7 @@ public class ItemBuilder {
 
     /**
      * @param lorelines add this lore to the item
+     * 
      * @return itself
      */
     public ItemBuilder addLores(String... lorelines) {
@@ -148,6 +161,7 @@ public class ItemBuilder {
 
     /**
      * @param lore add this lores to the item
+     * 
      * @return itself
      */
     public ItemBuilder addLore(List<String> lore) {
@@ -159,6 +173,7 @@ public class ItemBuilder {
 
     /**
      * @param unbreakable true if the items needs to be unbreakable
+     * 
      * @return itself
      */
     public ItemBuilder setUnbreakable(boolean unbreakable) {
@@ -168,6 +183,7 @@ public class ItemBuilder {
 
     /**
      * @param customMeta any custom meta to be added to the item at the end
+     * 
      * @return itself
      */
     public ItemBuilder addCustomMeta(UnaryOperator<ItemMeta> customMeta) {
@@ -210,6 +226,7 @@ public class ItemBuilder {
      * Remove any property from this builder
      *
      * @param property the property to remove
+     * 
      * @return
      */
     public ItemBuilder remove(Property property) {

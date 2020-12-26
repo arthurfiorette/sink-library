@@ -38,6 +38,7 @@ public enum MouseClick {
      * Transforms a InventoryClick into a MouseClick
      *
      * @param action the inventory action
+     * 
      * @return the mouseclick from this action
      */
     public static MouseClick from(InventoryAction action) {

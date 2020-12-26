@@ -39,7 +39,7 @@ public final class SpigotServices {
      * items, what is left will be dropped on the floor.
      *
      * @param player the player to receive the items
-     * @param items  the items to give
+     * @param items the items to give
      */
     public static void giveItens(Player player, ItemStack... items) {
 	HashMap<Integer, ItemStack> remainders = player.getInventory().addItem(items);
@@ -52,7 +52,7 @@ public final class SpigotServices {
      * Drop any ItemStack in a specific location.
      *
      * @param location the location to drop
-     * @param items    the items to give
+     * @param items the items to give
      */
     public static void dropItens(Location location, ItemStack... items) {
 	World world = location.getWorld();
@@ -64,6 +64,7 @@ public final class SpigotServices {
      * check if can use the plugin api.
      *
      * @param name the plugin name
+     * 
      * @return true if this plugin is enabled
      */
     public static boolean hasPlugin(String name) {
@@ -74,6 +75,7 @@ public final class SpigotServices {
      * Checks if the player has at least 1 empty slot in his inventory.
      *
      * @param player the player to check
+     * 
      * @return true if the player inventory has empty slots
      */
     public static boolean hasEmptySlot(Player player) {
@@ -84,6 +86,7 @@ public final class SpigotServices {
      * Check if the amount isn't lower than 0 and greather than 64.
      *
      * @param amount the amount.
+     * 
      * @return true if it fits between 0 and 64
      */
     public static boolean isMinecraftPack(long amount) {
@@ -94,6 +97,7 @@ public final class SpigotServices {
      * Checks if the object is a player.
      *
      * @param obj any object that can be a player
+     * 
      * @return true if it's an instance of player
      */
     public static boolean isPlayer(Object obj) {
@@ -103,8 +107,9 @@ public final class SpigotServices {
     /**
      * Convert any time to minecraft ticks time.
      *
-     * @param unit  the {@link TimeUnit}
+     * @param unit the {@link TimeUnit}
      * @param value the time value
+     * 
      * @return the amount of ticks into this time
      */
     public static long asTicks(TimeUnit unit, long value) {
@@ -117,6 +122,7 @@ public final class SpigotServices {
      * {@code miliseconds / 50 = ticks}
      *
      * @param miliseconds the time in miliseconds
+     * 
      * @return the amount of ticks into this time
      */
     public static long asTicks(long miliseconds) {
@@ -127,6 +133,7 @@ public final class SpigotServices {
      * Convert any text using '&' as color code to minecraft colored text '§'.
      *
      * @param text the raw text
+     * 
      * @return the colored text
      */
     public static String setColors(String text) {
@@ -137,7 +144,8 @@ public final class SpigotServices {
      * Convert any coordinate to minecraft chest slot value.
      *
      * @param column the column
-     * @param row    the row.
+     * @param row the row.
+     * 
      * @return the slot value based on the column and row
      */
     public static int getChestSlot(int column, int row) {
