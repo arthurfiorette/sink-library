@@ -1,20 +1,23 @@
 package com.github.hazork.sinkspigot.data;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
+
+import com.google.gson.JsonObject;
 
 /**
  * A memory database is a database saved in a concurrent hash map and resets
  * every time that it is reloaded or closed
  *
  * @param <T> the value type to be saved in this database
+ * 
  * @author https://github.com/Hazork/sink-library/
  */
-public class MemoryDatabase<T> implements Database<T> {
+public class MemoryDatabase implements Database {
 
-    private transient ConcurrentMap<String, T> database;
+    private transient ConcurrentMap<String, JsonObject> database;
 
     @Override
     public void open() {
@@ -30,21 +33,21 @@ public class MemoryDatabase<T> implements Database<T> {
     }
 
     @Override
-    public void save(String key, T value) {
+    public void save(String key, JsonObject value) {
 	this.checkState();
 	database.put(key, value);
     }
 
     @Override
-    public T get(String key) {
+    public JsonObject get(String key) {
 	this.checkState();
 	return database.get(key);
     }
 
     @Override
-    public Set<T> getAll() {
+    public List<JsonObject> getAll() {
 	this.checkState();
-	return new HashSet<>(database.values());
+	return new ArrayList<>(database.values());
     }
 
     private void checkState() {

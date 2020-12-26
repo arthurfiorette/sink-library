@@ -1,14 +1,17 @@
 package com.github.hazork.sinkspigot.data;
 
-import java.util.Set;
+import java.util.List;
+
+import com.google.gson.JsonObject;
 
 /**
- * Represents a simple database to work with Storage classes
+ * Represents a simple database model.
  *
  * @param <T> the value type to be persisted in this database
+ * 
  * @author https://github.com/Hazork/sink-library/
  */
-public interface Database<T> {
+public interface Database {
 
     /**
      * Open this database connection
@@ -23,22 +26,23 @@ public interface Database<T> {
     /**
      * Save a raw value in this database
      *
-     * @param key   the value key
+     * @param key the value key
      * @param value the value
      */
-    void save(String key, T value);
+    void save(String key, JsonObject value);
 
     /**
      * Returns a raw value in this database
      *
      * @param key the value key to search
+     * 
      * @return the object or null if not found
      */
-    T get(String key);
+    JsonObject get(String key);
 
     /**
      * @return all entries in this database
      */
-    Set<T> getAll();
+    List<JsonObject> getAll();
 
 }

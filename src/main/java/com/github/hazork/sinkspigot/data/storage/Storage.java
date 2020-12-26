@@ -1,11 +1,13 @@
 package com.github.hazork.sinkspigot.data.storage;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Objects;
-import java.util.Set;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import com.github.hazork.sinkspigot.data.Database;
-import com.google.common.base.Verify;
+import com.github.hazork.sinkspigot.data.serializer.Serializable;
 import com.google.gson.JsonObject;
 
 /**
@@ -13,92 +15,73 @@ import com.google.gson.JsonObject;
  * Database<{@link JsonObject}> and the external classes. this can be used in
  * many ways, like cached storage and etc...
  *
- * @param <V> the storage object type
+ * @param <T> the storage object type
+ * 
  * @author https://github.com/Hazork/sink-library/
  */
-public abstract class Storage<V> {
+public abstract class Storage<T> implements Serializable<T, JsonObject> {
 
-    private final Database<JsonObject> database;
+    protected final Database database;
 
     /**
-     * Constructs a Storage
-     *
-     * @param database the JsonObject database to save any value.
+     * Constructs a storage.
+     * 
+     * @param database the database to send and recieve information.
      */
-    public Storage(Database<JsonObject> database) {
-	Verify.verifyNotNull(database);
+    protected Storage(Database database) {
 	this.database = database;
     }
 
     /**
-     * Serializes any V object into a JsonObject
-     *
-     * @param json  the empty JsonObject
-     * @param value the object to serialize
-     * @return the json object with its defined properties
+     * Returns the deserialized object for this key
+     * 
+     * @param key the object key
+     * 
+     * @return the deserialized object
      */
-    public abstract JsonObject serialize(JsonObject json, V value);
-
-    /**
-     * Deserializes any JsonObject into a V object
-     *
-     * @param json the json object with their properties
-     * @return the V object
-     */
-    public abstract V deserialize(JsonObject json);
-
-    /**
-     * Returns a V object deserialized from the database
-     *
-     * @param key the key name
-     * @return the V object
-     */
-    public V get(String key) {
-	JsonObject json = database.get(key);
-	if (json != null) {
-	    return this.deserialize(json);
-	} else {
-	    throw new NullPointerException("JsonDatabase#get(String) retuned null for key: " + key);
-	}
+    public T get(String key) {
+	JsonObject jsonObject = database.get(key);
+	return jsonObject == null ? null : this.deserialize(jsonObject);
     }
 
     /**
-     * Saves a value serializing it in the database
-     *
-     * @param key   the key value
-     * @param value the value
-     * @return the value saved
+     * Saves the object serializing it in the database.
+     * 
+     * @param key the object key
+     * @param object the object to save
+     * 
+     * @return the saved object
      */
-    public V save(String key, V value) {
-	database.save(key, this.serialize(new JsonObject(), value));
-	return value;
+    public JsonObject save(String key, T object) {
+	JsonObject jsonObject = this.serialize(object);
+	database.save(key, jsonObject);
+	return jsonObject;
     }
 
     /**
-     * @return all entries in the database
+     * Returns a list with all values in the database.
+     * 
+     * @param filter the filter to return a more specific and correct collection
+     * 
+     * @return the filtered collection
      */
-    public Set<V> getAll() {
-	return database.getAll().stream().filter(Objects::nonNull).map(this::deserialize).collect(Collectors.toSet());
+    public Collection<T> getAll(Predicate<T> filter) {
+	return database.getAll().stream().filter(Objects::nonNull).map(this::deserialize).filter(filter)
+		.collect(Collectors.toCollection(ArrayList::new));
     }
 
     /**
-     * Opens the database from the storage class
+     * Opens the database connection using {@link Database#open()}
      */
-    public void openDatabase() {
+    public void open() {
 	database.open();
     }
 
     /**
-     * Closes the database from the storage class
+     * Closes the database connectiong using {@link Database#close()}
      */
-    public void closeDatabase() {
+    public void close() {
 	database.close();
     }
 
-    /**
-     * @return the database associated with this object
-     */
-    public Database<JsonObject> getDatabase() {
-	return database;
-    }
 }
