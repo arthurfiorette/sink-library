@@ -1,6 +1,7 @@
 package com.github.hazork.sinkspigot.listener;
 
 import org.bukkit.Bukkit;
+import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockBurnEvent;
@@ -158,6 +159,10 @@ public abstract class SinkListener implements Listener, Registrable, SinkHelper 
     @Override
     public void register() {
 	Bukkit.getPluginManager().registerEvents(this, this.getPlugin());
+    }
+
+    public void unregister() {
+	HandlerList.unregisterAll(this);
     }
 
     @Override
