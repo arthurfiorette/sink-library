@@ -1,6 +1,8 @@
 package com.github.hazork.sinkspigot.data;
 
 import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import com.google.gson.JsonObject;
 
@@ -44,5 +46,18 @@ public interface Database {
      * @return all entries in this database
      */
     List<JsonObject> getAll();
+
+    /**
+     * Returns all entries in this database with specified properties.
+     * <p>
+     * {@code getAll(obj -> obj.has("memberName");}
+     * 
+     * @param filter any Predicate to filter the result list.
+     * 
+     * @return the filtered list
+     */
+    default List<JsonObject> getAll(Predicate<JsonObject> filter) {
+	return getAll().stream().filter(filter).collect(Collectors.toList());
+    }
 
 }
