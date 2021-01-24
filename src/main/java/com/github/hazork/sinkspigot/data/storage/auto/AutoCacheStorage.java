@@ -17,8 +17,8 @@ import com.google.gson.JsonObject;
  * deserialize the objects. This must only be used when the object CAN be auto
  * serializated.
  * <p>
- * You can define the expiration with the AutoCacheStorage(Database,
- * UnaryOperator<CacheBuilder<Object, Object>>) constructor because the
+ * You can define the expiration with the {@Code AutoCacheStorage(Database,
+ * UnaryOperator<CacheBuilder<Object, Object>>)} constructor because the
  * constructor with only an database doesnt remove the entry.
  * <p>
  * Is completely recommended to you don't save any T in an variable, as the

@@ -30,6 +30,7 @@ public abstract class PageableMenu<T> extends SinkMenu {
     /**
      * Constructs a new PageableMenu.
      *
+     * @param plugin the sink plugin instance
      * @param player the player owner;
      * @param title the inventory title
      * @param rows the number of inventory rows

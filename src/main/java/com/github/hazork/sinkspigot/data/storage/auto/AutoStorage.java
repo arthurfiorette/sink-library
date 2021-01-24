@@ -7,14 +7,12 @@ import com.google.gson.JsonObject;
 
 /**
  * Storage is an abstract class to better communicate with an
- * Database<{@link JsonObject}> and the external classes. this can be used in
- * many ways, like cached storage and etc...
+ * {@code Database<{@link JsonObject}>} and the external classes. this can be
+ * used in many ways, like cached storage and etc...
  * <p>
- * This is an automatic serializer that uses the
- * {@link Gsons#toJsonTree(Gson, Object)} and
- * {@link Gsons#fromJson(Gson, com.google.gson.JsonElement)} to serialize and
+ * This is an automatic serializer that uses the {@link Gson} to serialize and
  * deserialize the objects. This must only be used when the object CAN be auto
- * serializated.
+ * serializated
  *
  * @param <T> the storage object type
  * 

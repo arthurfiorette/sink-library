@@ -15,8 +15,6 @@ import com.mojang.authlib.properties.Property;
  * A static class to help with item builder templates.
  *
  * @author https://github.com/Hazork/sink-library/
- * 
- * @see {@link com.github.hazork.sinkspigot.item.ItemBuilder}
  */
 public class ItemBuilders {
 

@@ -37,7 +37,7 @@ public class Replacer {
      * Add a placeholder to replace when called.
      *
      * @param placeholder the placeholder to be replaced
-     * @param value the value to replace and only generated when called
+     * @param supplier the value to replace and only generated when called
      * 
      * @return the instance
      */
@@ -68,7 +68,7 @@ public class Replacer {
      * @param str the raw text
      * @param player the player
      * 
-     * @return
+     * @return the replaced text
      */
     public String replace(String str, OfflinePlayer player) {
 	String text = str;
