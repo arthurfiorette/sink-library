@@ -26,11 +26,10 @@ public abstract class SinkPlugin extends JavaPlugin {
 
     /**
      * Creates a new SinkPluign. You should be aware that only one per class can
-     * be instantiated
+     * be instantiated and only with
+     * {@link org.bukkit.plugin.java.JavaPluginLoader}.
      */
-    public SinkPlugin() {
-	Sinks.newInstance(this);
-    }
+    public SinkPlugin() {}
 
     @Override
     public abstract void onEnable();
