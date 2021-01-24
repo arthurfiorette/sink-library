@@ -21,7 +21,7 @@ import com.google.gson.JsonObject;
 public class AutoStorage<T> extends Storage<T> {
 
     private final Class<T> clazz;
-    private Gson gson = new Gson();
+    private Gson gson;
 
     /**
      * Constructs a auto storage.
@@ -29,18 +29,10 @@ public class AutoStorage<T> extends Storage<T> {
      * @param database the database to send and recieve information.
      * @param clazz the type class
      */
-    public AutoStorage(Database database, Class<T> clazz) {
+    public AutoStorage(Database<JsonObject> database, Gson gson, Class<T> clazz) {
 	super(database);
 	this.clazz = clazz;
-    }
-
-    /**
-     * Changes the gson isntance to auto serialize
-     * 
-     * @param gson the new gson
-     */
-    protected void changeGson(Gson gson) {
-	this.gson = (gson == null) ? this.gson : gson;
+	this.gson = gson;
     }
 
     @Override

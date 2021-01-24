@@ -6,8 +6,8 @@ import java.util.Objects;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+import com.github.hazork.sinkspigot.data.Serializable;
 import com.github.hazork.sinkspigot.data.database.Database;
-import com.github.hazork.sinkspigot.data.serializer.Serializable;
 import com.google.gson.JsonObject;
 
 /**
@@ -21,14 +21,14 @@ import com.google.gson.JsonObject;
  */
 public abstract class Storage<T> implements Serializable<T, JsonObject> {
 
-    protected final Database database;
+    protected final Database<JsonObject> database;
 
     /**
      * Constructs a storage.
      * 
      * @param database the database to send and recieve information.
      */
-    protected Storage(Database database) {
+    protected Storage(Database<JsonObject> database) {
 	this.database = database;
     }
 

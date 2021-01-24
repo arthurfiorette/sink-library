@@ -42,7 +42,7 @@ public abstract class CacheStorage<T> extends Storage<T> {
      * @param database the database to send and recieve information
      */
     @Deprecated
-    protected CacheStorage(Database database) {
+    protected CacheStorage(Database<JsonObject> database) {
 	this(database, UnaryOperator.identity());
     }
 
@@ -52,7 +52,7 @@ public abstract class CacheStorage<T> extends Storage<T> {
      * @param database the database to send and recieve information
      * @param cache the custom loading cache
      */
-    protected CacheStorage(Database database, LoadingCache<String, T> cache) {
+    protected CacheStorage(Database<JsonObject> database, LoadingCache<String, T> cache) {
 	super(database);
 	this.cache = cache;
     }
@@ -65,7 +65,7 @@ public abstract class CacheStorage<T> extends Storage<T> {
      * @param options a unary operator that will be applied when building the
      * cache
      */
-    protected CacheStorage(Database database, UnaryOperator<CacheBuilder<Object, Object>> options) {
+    protected CacheStorage(Database<JsonObject> database, UnaryOperator<CacheBuilder<Object, Object>> options) {
 	super(database);
 	cache = options.apply(CacheBuilder.newBuilder()).removalListener(new DataListener()).build(new DataLoader());
     }
@@ -138,7 +138,7 @@ public abstract class CacheStorage<T> extends Storage<T> {
      *
      * @author https://github.com/Hazork/sink-library/
      */
-    public final class DataListener implements RemovalListener<String, T> {
+    public class DataListener implements RemovalListener<String, T> {
 
 	@Override
 	public void onRemoval(RemovalNotification<String, T> notification) {
@@ -151,7 +151,7 @@ public abstract class CacheStorage<T> extends Storage<T> {
      *
      * @author https://github.com/Hazork/sink-library/
      */
-    public final class DataLoader extends CacheLoader<String, T> {
+    public class DataLoader extends CacheLoader<String, T> {
 
 	@Override
 	public T load(String key) {

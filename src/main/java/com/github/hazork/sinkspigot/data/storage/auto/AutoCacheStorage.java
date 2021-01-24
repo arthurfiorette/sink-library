@@ -31,6 +31,7 @@ import com.google.gson.JsonObject;
  * @author https://github.com/Hazork/sink-library/
  */
 public class AutoCacheStorage<T> extends CacheStorage<T> {
+
     private final Class<T> clazz;
     private Gson gson = new Gson();
 
@@ -40,9 +41,10 @@ public class AutoCacheStorage<T> extends CacheStorage<T> {
      * @param clazz the type class
      */
     @Deprecated
-    public AutoCacheStorage(Database database, Class<T> clazz) {
+    public AutoCacheStorage(Database<JsonObject> database, Gson gson, Class<T> clazz) {
 	super(database);
 	this.clazz = clazz;
+	this.gson = gson;
     }
 
     /**
@@ -52,9 +54,10 @@ public class AutoCacheStorage<T> extends CacheStorage<T> {
      * @param clazz the type class
      * @param cache the custom loading cache
      */
-    public AutoCacheStorage(Database database, Class<T> clazz, LoadingCache<String, T> cache) {
+    public AutoCacheStorage(Database<JsonObject> database, Gson gson, Class<T> clazz, LoadingCache<String, T> cache) {
 	super(database, cache);
 	this.clazz = clazz;
+	this.gson = gson;
     }
 
     /**
@@ -66,18 +69,11 @@ public class AutoCacheStorage<T> extends CacheStorage<T> {
      * @param options a unary operator that will be applied when building the
      * cache
      */
-    public AutoCacheStorage(Database database, Class<T> clazz, UnaryOperator<CacheBuilder<Object, Object>> options) {
+    public AutoCacheStorage(Database<JsonObject> database, Gson gson, Class<T> clazz,
+	    UnaryOperator<CacheBuilder<Object, Object>> options) {
 	super(database, options);
 	this.clazz = clazz;
-    }
-
-    /**
-     * Changes the gson isntance to auto serialize
-     * 
-     * @param gson the new gson
-     */
-    protected void changeGson(Gson gson) {
-	this.gson = (gson == null) ? this.gson : gson;
+	this.gson = gson;
     }
 
     @Override

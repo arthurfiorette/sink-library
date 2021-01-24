@@ -1,17 +1,15 @@
 package com.github.hazork.sinkspigot.data.database;
 
-import java.util.List;
+import java.util.Collection;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
-
-import com.google.gson.JsonObject;
 
 /**
  * Represents a simple database model.
  *
  * @author https://github.com/Hazork/sink-library/
  */
-public interface Database {
+public interface Database<T> {
 
     /**
      * Open this database connection
@@ -24,37 +22,35 @@ public interface Database {
     void close();
 
     /**
-     * Save a raw value in this database
+     * Save a value in this database
      *
      * @param key the value key
      * @param value the value
      */
-    void save(String key, JsonObject value);
+    void save(String key, T value);
 
     /**
-     * Returns a raw value in this database
+     * Returns a value in this database
      *
      * @param key the value key to search
      * 
      * @return the object or null if not found
      */
-    JsonObject get(String key);
+    T get(String key);
 
     /**
      * @return all entries in this database
      */
-    List<JsonObject> getAll();
+    Collection<T> getAll();
 
     /**
      * Returns all entries in this database with specified properties.
-     * <p>
-     * {@code getAll(obj -> obj.has("memberName");}
      * 
      * @param filter any Predicate to filter the result list.
      * 
      * @return the filtered list
      */
-    default List<JsonObject> getAll(Predicate<JsonObject> filter) {
+    default Collection<T> getAll(Predicate<T> filter) {
 	return getAll().stream().filter(filter).collect(Collectors.toList());
     }
 
