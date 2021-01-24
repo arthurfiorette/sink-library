@@ -1,4 +1,4 @@
-package com.github.hazork.sinkspigot.data;
+package com.github.hazork.sinkspigot.data.database;
 
 import java.util.ArrayList;
 import java.util.List;

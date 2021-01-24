@@ -2,7 +2,7 @@ package com.github.hazork.sinkspigot.data.storage.auto;
 
 import java.util.function.UnaryOperator;
 
-import com.github.hazork.sinkspigot.data.Database;
+import com.github.hazork.sinkspigot.data.database.Database;
 import com.github.hazork.sinkspigot.data.storage.CacheStorage;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.LoadingCache;

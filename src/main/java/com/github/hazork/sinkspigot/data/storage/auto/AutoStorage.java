@@ -1,6 +1,6 @@
 package com.github.hazork.sinkspigot.data.storage.auto;
 
-import com.github.hazork.sinkspigot.data.Database;
+import com.github.hazork.sinkspigot.data.database.Database;
 import com.github.hazork.sinkspigot.data.storage.Storage;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;

@@ -6,7 +6,7 @@ import java.util.Objects;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-import com.github.hazork.sinkspigot.data.Database;
+import com.github.hazork.sinkspigot.data.database.Database;
 import com.github.hazork.sinkspigot.data.serializer.Serializable;
 import com.google.gson.JsonObject;
 
