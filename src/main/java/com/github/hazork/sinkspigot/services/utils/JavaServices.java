@@ -152,7 +152,7 @@ public final class JavaServices {
      *
      * @param range the range, 0 to range.
      * 
-     * @return
+     * @return the random generated int
      */
     public static int getRandomInt(int range) {
 	return new Random().nextInt(range);

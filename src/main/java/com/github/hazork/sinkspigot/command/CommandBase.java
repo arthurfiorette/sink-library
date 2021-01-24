@@ -35,8 +35,8 @@ public final class CommandBase implements TabExecutor, Registrable {
     /**
      * Constructs a command base
      *
-     * @param plugin
-     * @param name
+     * @param plugin the sink plugin instance
+     * @param name the command name
      */
     public CommandBase(SinkPlugin plugin, String name) {
 	this.plugin = plugin;

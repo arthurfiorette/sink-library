@@ -13,9 +13,7 @@ import com.google.gson.JsonObject;
  * A cached storage is a storage type to reduce the communication with the
  * database, and only find the object for a key one time per expiration.
  * <p>
- * This is an automatic serializer that uses the
- * {@link Gsons#toJsonTree(Gson, Object)} and
- * {@link Gsons#fromJson(Gson, com.google.gson.JsonElement)} to serialize and
+ * This is an automatic serializer that uses the {@link Gson} to serialize and
  * deserialize the objects. This must only be used when the object CAN be auto
  * serializated.
  * <p>

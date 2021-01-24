@@ -20,9 +20,6 @@ import com.github.hazork.sinkspigot.services.utils.JavaServices;
  * A builder class to customize in multiple ways a item stack.
  *
  * @author https://github.com/Hazork/sink-library/
- * 
- * @see {@link com.github.hazork.sinkspigot.item.ItemBuilders}
- * @see {@link org.bukkit.inventory.ItemStack}
  */
 public class ItemBuilder {
 
@@ -93,7 +90,7 @@ public class ItemBuilder {
     }
 
     /**
-     * @param set the item name
+     * @param name set the item name
      * 
      * @return itself
      */
@@ -227,7 +224,7 @@ public class ItemBuilder {
      *
      * @param property the property to remove
      * 
-     * @return
+     * @return itself
      */
     public ItemBuilder remove(Property property) {
 	properties.remove(property);

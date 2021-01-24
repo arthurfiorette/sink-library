@@ -47,7 +47,7 @@ public interface Argument extends Predicate<CommandSender> {
      *
      * @param sender the command sender
      * @param alias the next aliases
-     * @param args
+     * @param args any argument that the sender should provide
      * 
      * @return the next arguments or {@code null} to be none.
      */

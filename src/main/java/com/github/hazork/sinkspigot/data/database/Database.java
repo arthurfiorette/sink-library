@@ -9,8 +9,6 @@ import com.google.gson.JsonObject;
 /**
  * Represents a simple database model.
  *
- * @param <T> the value type to be persisted in this database
- * 
  * @author https://github.com/Hazork/sink-library/
  */
 public interface Database {

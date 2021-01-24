@@ -32,6 +32,7 @@ public abstract class SinkMenu implements InventoryHolder, SinkObject {
     /**
      * Constructs a new SinkMenu
      *
+     * @param plugin the sink plugin instance
      * @param player the player owner;
      * @param title the inventory title
      * @param rows the number of inventory rows
@@ -96,7 +97,7 @@ public abstract class SinkMenu implements InventoryHolder, SinkObject {
     }
 
     /**
-     * @return all the items on this menu as a map of <slot, item>
+     * @return all the items on this menu as a slot map
      */
     public Map<Integer, MenuItem> getItems() {
 	return itemMap;

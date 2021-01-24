@@ -16,8 +16,8 @@ import com.google.gson.JsonObject;
  * A cached storage is a storage type to reduce the communication with the
  * database, and only find the object for a key one time per expiration.
  * <p>
- * You can define the expiration with the CacheStorage(Database,
- * UnaryOperator<CacheBuilder<Object, Object>>) constructor because the
+ * You can define the expiration with the {@code CacheStorage(Database,
+ * UnaryOperator<CacheBuilder<Object, Object>>)} constructor because the
  * constructor with only an database doesnt remove the entry.
  * <p>
  * Is completely recommended to you don't save any T in an variable, as the
@@ -60,18 +60,6 @@ public abstract class CacheStorage<T> extends Storage<T> {
     /**
      * Constructs a storage with specified loading cache options options. It's
      * highly recommended to define the invalidation conditions here.
-     * 
-     * <pre>
-     * class MyStorage extends CacheStorage<Player> {
-     * 
-     *     public MyStorage(Database database) {
-     * 		super(database, builder -> builder.expireAfterAccess(7, TimeUnit.MINUTES));
-     *     }
-     * 
-     * ...
-     * 
-     * }
-     * </pre>
      * 
      * @param database the database to send and recieve information
      * @param options a unary operator that will be applied when building the

@@ -11,8 +11,6 @@ import com.google.gson.JsonObject;
  * A memory database is a database saved in a concurrent hash map and resets
  * every time that it is reloaded or closed
  *
- * @param <T> the value type to be saved in this database
- * 
  * @author https://github.com/Hazork/sink-library/
  */
 public class MemoryDatabase implements Database {

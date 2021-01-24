@@ -12,8 +12,8 @@ import com.google.gson.JsonObject;
 
 /**
  * Storage is an abstract class to better communicate with an
- * Database<{@link JsonObject}> and the external classes. this can be used in
- * many ways, like cached storage and etc...
+ * {@code Database<{@link JsonObject}>} and the external classes. this can be
+ * used in many ways, like cached storage and etc...
  *
  * @param <T> the storage object type
  * 

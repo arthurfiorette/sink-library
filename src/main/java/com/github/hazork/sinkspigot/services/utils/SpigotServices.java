@@ -131,7 +131,8 @@ public final class SpigotServices {
     }
 
     /**
-     * Convert any text using '&' as color code to minecraft colored text '§'.
+     * Convert any text using {@literal &} as color code to minecraft colored
+     * text {@literal §}.
      *
      * @param text the raw text
      * 
