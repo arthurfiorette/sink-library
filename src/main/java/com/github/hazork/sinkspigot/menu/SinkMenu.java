@@ -1,7 +1,7 @@
 package com.github.hazork.sinkspigot.menu;
 
+import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -46,9 +46,9 @@ public abstract class SinkMenu implements InventoryHolder, SinkObject {
     }
 
     /**
-     * @return the MenuItem list to be displayed
+     * @return the MenuItem collection to be displayed
      */
-    protected abstract List<MenuItem> items();
+    protected abstract Collection<MenuItem> items();
 
     /**
      * Redraw the inventory clearing all items and redrawing them.

@@ -1,6 +1,7 @@
 package com.github.hazork.sinkspigot.menu;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.stream.Collectors;
@@ -47,7 +48,7 @@ public abstract class PageableMenu<T> extends SinkMenu {
     /**
      * @return all the objects to be paginated
      */
-    protected abstract List<T> requestValues();
+    protected abstract Collection<T> requestValues();
 
     /**
      * Transform the object to a MenuItem to be displayed.
