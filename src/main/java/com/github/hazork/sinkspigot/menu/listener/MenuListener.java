@@ -36,7 +36,7 @@ public final class MenuListener extends SinkListener {
 		if (slot < inv.getSize() && action != InventoryAction.NOTHING) {
 		    MenuItem item = menu.getItems().get(slot);
 		    if (item != null) {
-			item.getClickAction().click(action);
+			item.getClickAction().click(event.getCurrentItem(), action);
 		    }
 		}
 	    }

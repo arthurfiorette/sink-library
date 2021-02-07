@@ -1,6 +1,7 @@
 package com.github.hazork.sinkspigot.menu.actions;
 
 import org.bukkit.event.inventory.InventoryAction;
+import org.bukkit.inventory.ItemStack;
 
 /**
  * This interface represents a inventory click action.
@@ -14,16 +15,17 @@ public interface ClickAction {
      * Handles a inventory click.
      *
      * @param type the mouse click type
+     * @param item the clicked item
      */
-    void click(MouseClick type);
+    void click(ItemStack item, MouseClick type);
 
     /**
      * Handles a inventory click.
      *
      * @param action the inventory action type
      */
-    default void click(InventoryAction action) {
-	this.click(MouseClick.from(action));
+    default void click(ItemStack item, InventoryAction action) {
+	this.click(item, MouseClick.from(action));
     }
 
     /**
@@ -32,7 +34,7 @@ public interface ClickAction {
      * @return the clickaction
      */
     static ClickAction ignore() {
-	return ignore -> {};
+	return (item, type) -> {};
     }
 
 }
