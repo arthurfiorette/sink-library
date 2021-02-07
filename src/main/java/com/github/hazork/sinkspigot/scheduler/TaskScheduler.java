@@ -2,6 +2,7 @@ package com.github.hazork.sinkspigot.scheduler;
 
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.scheduler.BukkitScheduler;
 import org.bukkit.scheduler.BukkitTask;
 
 /**
@@ -14,34 +15,34 @@ public enum TaskScheduler {
     SYNC {
 	@Override
 	public BukkitTask run(Plugin plugin, Runnable runnable) {
-	    return Bukkit.getScheduler().runTask(plugin, runnable);
+	    return scheduler().runTask(plugin, runnable);
 	}
 
 	@Override
 	public BukkitTask run(Plugin plugin, Runnable runnable, long delay) {
-	    return Bukkit.getScheduler().runTaskLater(plugin, runnable, delay);
+	    return scheduler().runTaskLater(plugin, runnable, delay);
 	}
 
 	@Override
 	public BukkitTask run(Plugin plugin, Runnable runnable, long delay, long interval) {
-	    return Bukkit.getScheduler().runTaskTimer(plugin, runnable, delay, interval);
+	    return scheduler().runTaskTimer(plugin, runnable, delay, interval);
 	}
     },
     ASYNC {
 
 	@Override
 	public BukkitTask run(Plugin plugin, Runnable runnable) {
-	    return Bukkit.getScheduler().runTaskAsynchronously(plugin, runnable);
+	    return scheduler().runTaskAsynchronously(plugin, runnable);
 	}
 
 	@Override
 	public BukkitTask run(Plugin plugin, Runnable runnable, long delay) {
-	    return Bukkit.getScheduler().runTaskLaterAsynchronously(plugin, runnable, delay);
+	    return scheduler().runTaskLaterAsynchronously(plugin, runnable, delay);
 	}
 
 	@Override
 	public BukkitTask run(Plugin plugin, Runnable runnable, long delay, long interval) {
-	    return Bukkit.getScheduler().runTaskTimerAsynchronously(plugin, runnable, delay, interval);
+	    return scheduler().runTaskTimerAsynchronously(plugin, runnable, delay, interval);
 	}
     };
 
@@ -78,4 +79,8 @@ public enum TaskScheduler {
      * @return the BukkitTask associated with this run.
      */
     public abstract BukkitTask run(Plugin plugin, Runnable runnable, long delay, long interval);
+
+    private static BukkitScheduler scheduler() {
+	return Bukkit.getScheduler();
+    }
 }
