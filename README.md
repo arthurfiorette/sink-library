@@ -53,9 +53,10 @@ dependencies {
 ```
 
 ## Contact
-- Twitter: [@Hazork]([twitter-url])
-- Discord: **Hazork#1227**
-- Steam: [/id/HazorkBR]([steam-url])
+- Twitter: [ArthurFiorette](https://twitter.com/ArthurFiorette)
+- LinkedIn: [ArthurFiorette](https://www.linkedin.com/in/ArthurFiorette/)
+- Steam: [HazorkBR](https://steamcommunity.com/profiles/76561198850668121)
+- Discord: **Hazork#0293**
 
 <!-- Links -->
 <!-- Shields -->
@@ -68,8 +69,3 @@ dependencies {
 [issues-url]: https://github.com/Hazork/MySouls/issues
 [license-shield]: https://img.shields.io/github/license/Hazork/MySouls?style=flat-square
 [license-url]: https://github.com/Hazork/MySouls/blob/main/LICENSE
-
-<!-- Urls -->
-
-[twitter-url]: https://twitter.com/Hazork_
-[steam-url]: https://steamcommunity.com/profiles/76561198850668121
