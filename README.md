@@ -53,10 +53,7 @@ dependencies {
 ```
 
 ## Contact
-- Twitter: [ArthurFiorette](https://twitter.com/ArthurFiorette)
-- LinkedIn: [ArthurFiorette](https://www.linkedin.com/in/ArthurFiorette/)
-- Steam: [HazorkBR](https://steamcommunity.com/profiles/76561198850668121)
-- Discord: **Hazork#0293**
+See my contact information on my [GitHub Profile Page](https://github.com/ArthurFiorette).
 
 <!-- Links -->
 <!-- Shields -->
