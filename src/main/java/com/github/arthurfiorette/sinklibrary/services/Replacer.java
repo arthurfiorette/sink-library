@@ -1,5 +1,6 @@
 package com.github.arthurfiorette.sinklibrary.services;
 
+import com.github.arthurfiorette.sinklibrary.services.utils.SpigotServices;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -7,8 +8,6 @@ import java.util.function.Supplier;
 import java.util.function.UnaryOperator;
 import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.OfflinePlayer;
-
-import com.github.arthurfiorette.sinklibrary.services.utils.SpigotServices;
 
 /**
  * A better text replacer that supports PlaceholderAPI (if enabled)

@@ -1,11 +1,10 @@
 package com.github.arthurfiorette.sinklibrary.config.files;
 
-import java.io.File;
-import org.bukkit.configuration.file.FileConfiguration;
-
 import com.github.arthurfiorette.sinklibrary.SinkHelper;
 import com.github.arthurfiorette.sinklibrary.SinkPlugin;
 import com.github.arthurfiorette.sinklibrary.config.YmlFile;
+import java.io.File;
+import org.bukkit.configuration.file.FileConfiguration;
 
 /**
  * The config file is a specific implementation of yml file that is exactly

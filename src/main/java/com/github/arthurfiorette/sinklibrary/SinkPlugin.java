@@ -1,17 +1,16 @@
 package com.github.arthurfiorette.sinklibrary;
 
-import java.util.Arrays;
-import java.util.logging.Level;
-import org.bukkit.Bukkit;
-import org.bukkit.event.Listener;
-import org.bukkit.plugin.java.JavaPlugin;
-
 import com.github.arthurfiorette.sinklibrary.command.CommandBase;
 import com.github.arthurfiorette.sinklibrary.config.YmlContainer;
 import com.github.arthurfiorette.sinklibrary.config.YmlFile;
 import com.github.arthurfiorette.sinklibrary.interfaces.Registrable;
 import com.github.arthurfiorette.sinklibrary.listener.SinkListener;
 import com.github.arthurfiorette.sinklibrary.menu.listener.MenuListener;
+import java.util.Arrays;
+import java.util.logging.Level;
+import org.bukkit.Bukkit;
+import org.bukkit.event.Listener;
+import org.bukkit.plugin.java.JavaPlugin;
 
 /**
  * A JavaPlugin with the compatibility of several library methods

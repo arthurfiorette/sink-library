@@ -1,5 +1,6 @@
 package com.github.arthurfiorette.sinklibrary.item;
 
+import com.github.arthurfiorette.sinklibrary.services.utils.JavaServices;
 import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.List;
@@ -12,8 +13,6 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.material.MaterialData;
-
-import com.github.arthurfiorette.sinklibrary.services.utils.JavaServices;
 
 /**
  * A builder class to customize in multiple ways a item stack.

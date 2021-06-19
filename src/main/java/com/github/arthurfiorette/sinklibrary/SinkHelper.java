@@ -1,9 +1,8 @@
 package com.github.arthurfiorette.sinklibrary;
 
-import java.util.logging.Level;
-
 import com.github.arthurfiorette.sinklibrary.config.YmlHelper;
 import com.github.arthurfiorette.sinklibrary.scheduler.SinkScheduler;
+import java.util.logging.Level;
 
 /**
  * An interface to deliver many methods from this library

@@ -1,5 +1,8 @@
 package com.github.arthurfiorette.sinklibrary.menu;
 
+import com.github.arthurfiorette.sinklibrary.SinkComponent;
+import com.github.arthurfiorette.sinklibrary.SinkPlugin;
+import com.github.arthurfiorette.sinklibrary.menu.item.MenuItem;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -8,10 +11,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
-
-import com.github.arthurfiorette.sinklibrary.SinkComponent;
-import com.github.arthurfiorette.sinklibrary.SinkPlugin;
-import com.github.arthurfiorette.sinklibrary.menu.item.MenuItem;
 
 /**
  * An minecraft menu with better methods and a fanciest way to handle with.

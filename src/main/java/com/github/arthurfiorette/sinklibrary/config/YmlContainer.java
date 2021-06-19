@@ -1,11 +1,10 @@
 package com.github.arthurfiorette.sinklibrary.config;
 
+import com.github.arthurfiorette.sinklibrary.SinkHelper;
+import com.github.arthurfiorette.sinklibrary.SinkPlugin;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-
-import com.github.arthurfiorette.sinklibrary.SinkHelper;
-import com.github.arthurfiorette.sinklibrary.SinkPlugin;
 
 /**
  * This class is a container for handle all the yml files from a single plugin
