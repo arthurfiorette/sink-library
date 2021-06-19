@@ -2,7 +2,6 @@ package br.com.arthurfiorette.sinklibrary.command;
 
 import java.util.List;
 import java.util.function.Predicate;
-
 import org.bukkit.command.CommandSender;
 
 /**
@@ -13,7 +12,6 @@ import org.bukkit.command.CommandSender;
  * @author https://github.com/Hazork/sink-library/
  */
 public interface Argument extends Predicate<CommandSender> {
-
   /**
    * Handle a argument executed from a command sender.
    *
@@ -48,7 +46,7 @@ public interface Argument extends Predicate<CommandSender> {
    * @param sender the command sender
    * @param alias the next aliases
    * @param args any argument that the sender should provide
-   * 
+   *
    * @return the next arguments or {@code null} to be none.
    */
   default List<String> onTabComplete(CommandSender sender, String alias, List<String> args) {

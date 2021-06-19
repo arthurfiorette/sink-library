@@ -10,7 +10,6 @@ import org.bukkit.inventory.ItemStack;
  */
 @FunctionalInterface
 public interface ClickAction {
-
   /**
    * Handles a inventory click.
    *
@@ -36,5 +35,4 @@ public interface ClickAction {
   static ClickAction ignore() {
     return (item, type) -> {};
   }
-
 }

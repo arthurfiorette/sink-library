@@ -1,9 +1,8 @@
 package br.com.arthurfiorette.sinklibrary.menu.item;
 
-import org.bukkit.inventory.ItemStack;
-
 import br.com.arthurfiorette.sinklibrary.menu.actions.ClickAction;
 import br.com.arthurfiorette.sinklibrary.services.utils.SpigotServices;
+import org.bukkit.inventory.ItemStack;
 
 /**
  * Represents a stack of items to be in a SinkMenu
@@ -79,7 +78,7 @@ public class MenuItem {
    * Changes the location information for this column
    *
    * @param column the new column
-   * 
+   *
    * @return itself
    */
   public MenuItem setColumn(int column) {
@@ -91,7 +90,7 @@ public class MenuItem {
    * Changes the location information for this row
    *
    * @param row the new row
-   * 
+   *
    * @return itself
    */
   public MenuItem setRow(int row) {

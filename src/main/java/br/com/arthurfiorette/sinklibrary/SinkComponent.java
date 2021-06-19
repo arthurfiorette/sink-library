@@ -7,10 +7,8 @@ package br.com.arthurfiorette.sinklibrary;
  * @author https://github.com/Hazork/sink-library/
  */
 public interface SinkComponent {
-
   /**
    * @return the {@link SinkPlugin} instance involved with this instance.
    */
   SinkPlugin getPlugin();
-
 }

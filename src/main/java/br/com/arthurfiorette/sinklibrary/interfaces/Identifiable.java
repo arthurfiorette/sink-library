@@ -2,7 +2,6 @@ package br.com.arthurfiorette.sinklibrary.interfaces;
 
 import java.util.Optional;
 import java.util.UUID;
-
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
@@ -11,11 +10,10 @@ import org.bukkit.entity.Player;
  * This class is used to help any objects that are relationated with
  * {@link org.bukkit.entity.Player}, as Storing them with the Player object
  * isn't safety, a {@link java.util.UUID} should be used istead.
- * 
+ *
  * @author https://github.com/Hazork/sink-library/
  */
 public interface Identifiable {
-
   /**
    * @return this instance {@link java.util.UUID}
    */

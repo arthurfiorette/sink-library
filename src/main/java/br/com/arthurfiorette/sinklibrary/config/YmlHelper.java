@@ -8,7 +8,6 @@ import br.com.arthurfiorette.sinklibrary.SinkComponent;
  * @author https://github.com/Hazork/sink-library/
  */
 public interface YmlHelper extends SinkComponent {
-
   /**
    * @return the yml container from this plugin.
    */
@@ -18,11 +17,10 @@ public interface YmlHelper extends SinkComponent {
 
   /**
    * @param name the yml file
-   * 
+   *
    * @return the yml file associated with this name or null if not found.
    */
   default YmlFile getYmlFile(String name) {
     return this.getYmlContainer().getFile(name);
   }
-
 }

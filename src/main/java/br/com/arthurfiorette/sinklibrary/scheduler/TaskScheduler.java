@@ -11,7 +11,6 @@ import org.bukkit.scheduler.BukkitTask;
  * @author https://github.com/Hazork/sink-library/
  */
 public enum TaskScheduler {
-
   SYNC {
     @Override
     public BukkitTask run(Plugin plugin, Runnable runnable) {
@@ -29,7 +28,6 @@ public enum TaskScheduler {
     }
   },
   ASYNC {
-
     @Override
     public BukkitTask run(Plugin plugin, Runnable runnable) {
       return scheduler().runTaskAsynchronously(plugin, runnable);
@@ -51,7 +49,7 @@ public enum TaskScheduler {
    *
    * @param plugin the reference to the plugin scheduling task
    * @param runnable the task to be run
-   * 
+   *
    * @return the BukkitTask associated with this run.
    */
   public abstract BukkitTask run(Plugin plugin, Runnable runnable);
@@ -62,7 +60,7 @@ public enum TaskScheduler {
    * @param plugin the reference to the plugin scheduling task
    * @param runnable the task to be run
    * @param delay the delay in ticks
-   * 
+   *
    * @return the BukkitTask associated with this run.
    */
   public abstract BukkitTask run(Plugin plugin, Runnable runnable, long delay);
@@ -75,7 +73,7 @@ public enum TaskScheduler {
    * @param runnable the task to be run
    * @param delay the delay in ticks
    * @param interval the ticks to wait between runs
-   * 
+   *
    * @return the BukkitTask associated with this run.
    */
   public abstract BukkitTask run(Plugin plugin, Runnable runnable, long delay, long interval);

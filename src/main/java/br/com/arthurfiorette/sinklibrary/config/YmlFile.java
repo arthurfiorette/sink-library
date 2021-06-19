@@ -1,7 +1,6 @@
 package br.com.arthurfiorette.sinklibrary.config;
 
 import java.io.File;
-
 import org.bukkit.configuration.file.FileConfiguration;
 
 /**
@@ -10,7 +9,6 @@ import org.bukkit.configuration.file.FileConfiguration;
  * @author https://github.com/Hazork/sink-library/
  */
 public interface YmlFile {
-
   /**
    * Reloads the configuration from the located file.
    */
@@ -44,7 +42,7 @@ public interface YmlFile {
    * Return get file configuration and reload before return if it's needed.
    *
    * @param reload true if needs to reload.
-   * 
+   *
    * @return the file configuration from this yml instance
    */
   default FileConfiguration getConfig(boolean reload) {
@@ -53,5 +51,4 @@ public interface YmlFile {
     }
     return this.getConfig();
   }
-
 }

@@ -1,15 +1,13 @@
 package br.com.arthurfiorette.sinklibrary.services;
 
+import br.com.arthurfiorette.sinklibrary.services.utils.SpigotServices;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.function.Supplier;
 import java.util.function.UnaryOperator;
-
-import org.bukkit.OfflinePlayer;
-
-import br.com.arthurfiorette.sinklibrary.services.utils.SpigotServices;
 import me.clip.placeholderapi.PlaceholderAPI;
+import org.bukkit.OfflinePlayer;
 
 /**
  * A better text replacer that supports PlaceholderAPI (if enabled)
@@ -25,7 +23,7 @@ public class Replacer {
    *
    * @param placeholder the placeholder to be replaced
    * @param value the value to replace
-   * 
+   *
    * @return the instance
    */
   public Replacer add(String placeholder, String value) {
@@ -37,7 +35,7 @@ public class Replacer {
    *
    * @param placeholder the placeholder to be replaced
    * @param supplier the value to replace and only generated when called
-   * 
+   *
    * @return the instance
    */
   public Replacer add(String placeholder, Supplier<String> supplier) {
@@ -49,12 +47,12 @@ public class Replacer {
    * Replace the text with this atual set of placeholders.
    *
    * @param str the raw text
-   * 
+   *
    * @return the replaced text
    */
   public String replace(String str) {
     String replaced = str;
-    for(Entry<String, Supplier<String>> entry: placeholders.entrySet()) {
+    for (Entry<String, Supplier<String>> entry : placeholders.entrySet()) {
       replaced = replaced.replace(entry.getKey(), entry.getValue().get());
     }
     return SpigotServices.setColors(replaced);
@@ -66,7 +64,7 @@ public class Replacer {
    *
    * @param str the raw text
    * @param player the player
-   * 
+   *
    * @return the replaced text
    */
   public String replace(String str, OfflinePlayer player) {
@@ -82,7 +80,7 @@ public class Replacer {
    *
    * @param str the raw text
    * @param replacer a function to be added the placeholders in a other way
-   * 
+   *
    * @return the replaced text
    */
   public static String replace(String str, UnaryOperator<Replacer> replacer) {
@@ -96,7 +94,7 @@ public class Replacer {
    * @param str the raw text
    * @param player the player
    * @param replacer a function to be added the placeholders in a other way
-   * 
+   *
    * @return the replaced text
    */
   public static String replace(String str, OfflinePlayer player, UnaryOperator<Replacer> replacer) {
@@ -112,5 +110,4 @@ public class Replacer {
   public static boolean canUsePlaceholderAPI() {
     return SpigotServices.hasPlugin("PlaceholderAPI");
   }
-
 }

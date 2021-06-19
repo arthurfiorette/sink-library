@@ -1,9 +1,8 @@
 package br.com.arthurfiorette.sinklibrary;
 
-import java.util.logging.Level;
-
 import br.com.arthurfiorette.sinklibrary.config.YmlHelper;
 import br.com.arthurfiorette.sinklibrary.scheduler.SinkScheduler;
+import java.util.logging.Level;
 
 /**
  * An interface to deliver many methods from this library
@@ -11,7 +10,6 @@ import br.com.arthurfiorette.sinklibrary.scheduler.SinkScheduler;
  * @author https://github.com/Hazork/sink-library/
  */
 public interface SinkHelper extends SinkScheduler, YmlHelper {
-
   /**
    * Log any information with the plugin tag and etc. Best replacement for
    * System.out.println()
@@ -37,5 +35,4 @@ public interface SinkHelper extends SinkScheduler, YmlHelper {
   default void treatException(Class<?> author, Exception exc, String message, Object... args) {
     this.getPlugin().treatException(author, exc, message, args);
   }
-
 }

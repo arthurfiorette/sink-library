@@ -1,13 +1,11 @@
 package br.com.arthurfiorette.sinklibrary.config.files;
 
-import java.io.File;
-
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
-
 import br.com.arthurfiorette.sinklibrary.SinkHelper;
 import br.com.arthurfiorette.sinklibrary.SinkPlugin;
 import br.com.arthurfiorette.sinklibrary.config.YmlFile;
+import java.io.File;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 
 /**
  * A custom file is a default implementation for any yml file, it's a simple way

@@ -1,11 +1,10 @@
 package br.com.arthurfiorette.sinklibrary.config;
 
+import br.com.arthurfiorette.sinklibrary.SinkHelper;
+import br.com.arthurfiorette.sinklibrary.SinkPlugin;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-
-import br.com.arthurfiorette.sinklibrary.SinkHelper;
-import br.com.arthurfiorette.sinklibrary.SinkPlugin;
 
 /**
  * This class is a container for handle all the yml files from a single plugin
@@ -46,7 +45,7 @@ public class YmlContainer implements SinkHelper {
    * Returns the yml file associated with this name
    *
    * @param name the file name
-   * 
+   *
    * @return the yml file or null if not found.
    */
   public YmlFile getFile(String name) {
@@ -64,5 +63,4 @@ public class YmlContainer implements SinkHelper {
   public SinkPlugin getPlugin() {
     return plugin;
   }
-
 }

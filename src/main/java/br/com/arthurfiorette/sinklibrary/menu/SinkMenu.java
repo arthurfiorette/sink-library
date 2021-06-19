@@ -1,18 +1,16 @@
 package br.com.arthurfiorette.sinklibrary.menu;
 
+import br.com.arthurfiorette.sinklibrary.SinkComponent;
+import br.com.arthurfiorette.sinklibrary.SinkPlugin;
+import br.com.arthurfiorette.sinklibrary.menu.item.MenuItem;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
-
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
-
-import br.com.arthurfiorette.sinklibrary.SinkComponent;
-import br.com.arthurfiorette.sinklibrary.SinkPlugin;
-import br.com.arthurfiorette.sinklibrary.menu.item.MenuItem;
 
 /**
  * An minecraft menu with better methods and a fanciest way to handle with.
@@ -112,5 +110,4 @@ public abstract class SinkMenu implements InventoryHolder, SinkComponent {
   public SinkPlugin getPlugin() {
     return plugin;
   }
-
 }

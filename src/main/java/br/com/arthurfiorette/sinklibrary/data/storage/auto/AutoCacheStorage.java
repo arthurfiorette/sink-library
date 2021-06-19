@@ -1,14 +1,12 @@
 package br.com.arthurfiorette.sinklibrary.data.storage.auto;
 
-import java.util.function.UnaryOperator;
-
+import br.com.arthurfiorette.sinklibrary.data.database.Database;
+import br.com.arthurfiorette.sinklibrary.data.storage.CacheStorage;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.LoadingCache;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-
-import br.com.arthurfiorette.sinklibrary.data.database.Database;
-import br.com.arthurfiorette.sinklibrary.data.storage.CacheStorage;
+import java.util.function.UnaryOperator;
 
 /**
  * A cached storage is a storage type to reduce the communication with the
@@ -26,9 +24,9 @@ import br.com.arthurfiorette.sinklibrary.data.storage.CacheStorage;
  * value can get outdated. it is more advisable to save the key in an variable,
  * as it never changes, and create a method that returns T simplifying the
  * access to {@link AutoCacheStorage#get(String)}
- * 
+ *
  * @param <T> the object type to be saved
- * 
+ *
  * @author https://github.com/Hazork/sink-library/
  */
 public class AutoCacheStorage<T> extends CacheStorage<T> {
@@ -38,7 +36,7 @@ public class AutoCacheStorage<T> extends CacheStorage<T> {
 
   /**
    * {@inheritDoc}
-   * 
+   *
    * @param clazz the type class
    */
   @Deprecated
@@ -50,12 +48,17 @@ public class AutoCacheStorage<T> extends CacheStorage<T> {
 
   /**
    * Constructs a storage with a specified loading cache
-   * 
+   *
    * @param database the database to send and recieve information
    * @param clazz the type class
    * @param cache the custom loading cache
    */
-  public AutoCacheStorage(Database<JsonObject> database, Gson gson, Class<T> clazz, LoadingCache<String, T> cache) {
+  public AutoCacheStorage(
+    Database<JsonObject> database,
+    Gson gson,
+    Class<T> clazz,
+    LoadingCache<String, T> cache
+  ) {
     super(database, cache);
     this.clazz = clazz;
     this.gson = gson;
@@ -64,14 +67,18 @@ public class AutoCacheStorage<T> extends CacheStorage<T> {
   /**
    * Constructs a storage with specified loading cache options options. It's
    * highly recommended to define the invalidation conditions here.
-   * 
+   *
    * @param database the database to send and recieve information
    * @param clazz the type class
    * @param options a unary operator that will be applied when building the
    * cache
    */
-  public AutoCacheStorage(Database<JsonObject> database, Gson gson, Class<T> clazz,
-      UnaryOperator<CacheBuilder<Object, Object>> options) {
+  public AutoCacheStorage(
+    Database<JsonObject> database,
+    Gson gson,
+    Class<T> clazz,
+    UnaryOperator<CacheBuilder<Object, Object>> options
+  ) {
     super(database, options);
     this.clazz = clazz;
     this.gson = gson;

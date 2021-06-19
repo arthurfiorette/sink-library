@@ -1,20 +1,18 @@
 package br.com.arthurfiorette.sinklibrary.item;
 
+import br.com.arthurfiorette.sinklibrary.services.utils.JavaServices;
 import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 import java.util.function.UnaryOperator;
-
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.material.MaterialData;
-
-import br.com.arthurfiorette.sinklibrary.services.utils.JavaServices;
 
 /**
  * A builder class to customize in multiple ways a item stack.
@@ -33,7 +31,7 @@ public class ItemBuilder {
    * Constructs a itembuilder from a specified material.
    *
    * @param material the material to use in the builder.
-   * 
+   *
    * @throws NullPointerException if the material is null
    */
   public ItemBuilder(Material material) {
@@ -43,7 +41,7 @@ public class ItemBuilder {
 
   /**
    * @param durability set item durability
-   * 
+   *
    * @return itself
    */
   public ItemBuilder setDurability(int durability) {
@@ -52,7 +50,7 @@ public class ItemBuilder {
 
   /**
    * @param amount set the item amount
-   * 
+   *
    * @return itself
    */
   public ItemBuilder setAmount(int amount) {
@@ -61,7 +59,7 @@ public class ItemBuilder {
 
   /**
    * @param data set the item data
-   * 
+   *
    * @return itself
    */
   public ItemBuilder setData(MaterialData data) {
@@ -71,7 +69,7 @@ public class ItemBuilder {
   /**
    * @param ench the enchantment to add
    * @param level the enchantment level
-   * 
+   *
    * @return itself
    */
   public ItemBuilder addEnchantment(Enchantment ench, int level) {
@@ -82,7 +80,7 @@ public class ItemBuilder {
    * @param enchantments set the item enchantments in a map of
    * {@code <enchantment,
    *                     level>}
-   * 
+   *
    * @return itself
    */
   public ItemBuilder addEnchantments(Map<Enchantment, Integer> enchantments) {
@@ -91,7 +89,7 @@ public class ItemBuilder {
 
   /**
    * @param name set the item name
-   * 
+   *
    * @return itself
    */
   public ItemBuilder setName(String name) {
@@ -109,28 +107,38 @@ public class ItemBuilder {
 
   /**
    * @param itemFlags set to the item all the item flags specifieds in varargs
-   * 
+   *
    * @return itself
    */
   public ItemBuilder setItemFlags(ItemFlag... itemFlags) {
-    return this.addProperties(Property.ITEM_FLAG, is -> setItemMeta(is, im -> {
-      im.removeItemFlags(ItemFlag.values());
-      im.addItemFlags(itemFlags);
-    }));
+    return this.addProperties(
+        Property.ITEM_FLAG,
+        is ->
+          setItemMeta(
+            is,
+            im -> {
+              im.removeItemFlags(ItemFlag.values());
+              im.addItemFlags(itemFlags);
+            }
+          )
+      );
   }
 
   /**
    * @param itemFlags add to the item all the item flags specifieds in varargs.
-   * 
+   *
    * @return itself
    */
   public ItemBuilder addItemFlags(ItemFlag... itemFlags) {
-    return this.addProperties(Property.ITEM_FLAG, is -> setItemMeta(is, im -> im.addItemFlags(itemFlags)));
+    return this.addProperties(
+        Property.ITEM_FLAG,
+        is -> setItemMeta(is, im -> im.addItemFlags(itemFlags))
+      );
   }
 
   /**
    * @param lorelines set the item lore
-   * 
+   *
    * @return itself
    */
   public ItemBuilder setLores(String... lorelines) {
@@ -139,7 +147,7 @@ public class ItemBuilder {
 
   /**
    * @param lore set the item lore
-   * 
+   *
    * @return itself
    */
   public ItemBuilder setLore(List<String> lore) {
@@ -148,7 +156,7 @@ public class ItemBuilder {
 
   /**
    * @param lorelines add this lore to the item
-   * 
+   *
    * @return itself
    */
   public ItemBuilder addLores(String... lorelines) {
@@ -157,33 +165,41 @@ public class ItemBuilder {
 
   /**
    * @param lore add this lores to the item
-   * 
+   *
    * @return itself
    */
   public ItemBuilder addLore(List<String> lore) {
     if (properties.containsKey(Property.LORE)) {
-      return this.addProperties(Property.LORE, is -> setItemMeta(is, im -> im.getLore().addAll(lore)));
+      return this.addProperties(
+          Property.LORE,
+          is -> setItemMeta(is, im -> im.getLore().addAll(lore))
+        );
     }
     return this.setLore(lore);
   }
 
   /**
    * @param unbreakable true if the items needs to be unbreakable
-   * 
+   *
    * @return itself
    */
   public ItemBuilder setUnbreakable(boolean unbreakable) {
-    return this.addProperties(Property.CUSTOM_META,
-        is -> setItemMeta(is, im -> im.spigot().setUnbreakable(unbreakable)));
+    return this.addProperties(
+        Property.CUSTOM_META,
+        is -> setItemMeta(is, im -> im.spigot().setUnbreakable(unbreakable))
+      );
   }
 
   /**
    * @param customMeta any custom meta to be added to the item at the end
-   * 
+   *
    * @return itself
    */
   public ItemBuilder addCustomMeta(UnaryOperator<ItemMeta> customMeta) {
-    return this.addProperties(Property.CUSTOM_META, is -> is.setItemMeta(customMeta.apply(is.getItemMeta())));
+    return this.addProperties(
+        Property.CUSTOM_META,
+        is -> is.setItemMeta(customMeta.apply(is.getItemMeta()))
+      );
   }
 
   /**
@@ -222,7 +238,7 @@ public class ItemBuilder {
    * Remove any property from this builder
    *
    * @param property the property to remove
-   * 
+   *
    * @return itself
    */
   public ItemBuilder remove(Property property) {

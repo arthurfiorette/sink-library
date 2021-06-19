@@ -10,7 +10,6 @@ import java.util.stream.Collectors;
  * @author https://github.com/Hazork/sink-library/
  */
 public interface Database<T> {
-
   /**
    * Open this database connection
    */
@@ -33,7 +32,7 @@ public interface Database<T> {
    * Returns a value in this database
    *
    * @param key the value key to search
-   * 
+   *
    * @return the object or null if not found
    */
   T get(String key);
@@ -45,13 +44,12 @@ public interface Database<T> {
 
   /**
    * Returns all entries in this database with specified properties.
-   * 
+   *
    * @param filter any Predicate to filter the result list.
-   * 
+   *
    * @return the filtered list
    */
   default Collection<T> getAll(Predicate<T> filter) {
     return this.getAll().stream().filter(filter).collect(Collectors.toList());
   }
-
 }

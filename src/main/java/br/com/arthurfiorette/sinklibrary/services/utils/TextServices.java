@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
-
 import org.apache.commons.lang.WordUtils;
 import org.bukkit.ChatColor;
 
@@ -35,13 +34,18 @@ public final class TextServices {
    * completed
    * @param currentValue the progress value
    * @param maxValue the highest possible value
-   * 
+   *
    * @return the progress bar string
-   * 
+   *
    * @see TextServices#buildProgressBar(int, String, String, double)
    */
-  public static String buildProgressBar(int width, String incomplete, String complete, long currentValue,
-      long maxValue) {
+  public static String buildProgressBar(
+    int width,
+    String incomplete,
+    String complete,
+    long currentValue,
+    long maxValue
+  ) {
     return buildProgressBar(width, incomplete, complete, (((double) currentValue) / maxValue));
   }
 
@@ -56,19 +60,24 @@ public final class TextServices {
    * @param complete the text placed when your representative percentage is
    * completed
    * @param percent the percentage value to build the bar
-   * 
+   *
    * @return the progress bar string
    */
-  public static String buildProgressBar(int width, String incomplete, String complete, double percent) {
+  public static String buildProgressBar(
+    int width,
+    String incomplete,
+    String complete,
+    double percent
+  ) {
     if (percent > 1 || percent < 0) {
       throw new IllegalArgumentException("Percent should be between 1 and 0");
     }
     StringBuilder sb = new StringBuilder();
     double i = 0;
-    for(; i < (percent * width); i++) {
+    for (; i < (percent * width); i++) {
       sb.append(complete);
     }
-    for(; i < width; i++) {
+    for (; i < width; i++) {
       sb.append(incomplete);
     }
     return sb.toString();
@@ -81,7 +90,7 @@ public final class TextServices {
    *
    * @param text the raw text
    * @param width the width to split the lines
-   * 
+   *
    * @return the list with splitted lines
    */
   public static List<String> splitTextColored(String text, int width) {
@@ -94,11 +103,13 @@ public final class TextServices {
    * @param text the raw text
    * @param width the width to split the lines
    * @param newLine the text to be placed on every new line
-   * 
+   *
    * @return the list with splitted lines
    */
   public static List<String> splitText(String text, int width, String newLine) {
-    return Arrays.asList(WordUtils.wrap(text, width, lineSeparator + newLine, false).split(lineSeparator));
+    return Arrays.asList(
+      WordUtils.wrap(text, width, lineSeparator + newLine, false).split(lineSeparator)
+    );
   }
 
   /**
@@ -107,12 +118,12 @@ public final class TextServices {
    * Ex: {@code '§6Hello World§f!'} will return {@code '§6Hello §6World§f!'}.
    *
    * @param text the raw text
-   * 
+   *
    * @return the forced text
    */
   public static String forceColor(String text) {
     List<String> texts = new ArrayList<>();
-    for(String str: text.split("§")) {
+    for (String str : text.split("§")) {
       if (str.isEmpty()) {
         continue;
       }
@@ -125,7 +136,7 @@ public final class TextServices {
       } else {
         String lastColor = ChatColor.getLastColors(str);
         List<String> words = new ArrayList<>();
-        for(String word: str.split(" ")) {
+        for (String word : str.split(" ")) {
           if (!word.startsWith("§")) {
             word = lastColor + word;
           }
@@ -136,5 +147,4 @@ public final class TextServices {
     }
     return String.join("", texts);
   }
-
 }

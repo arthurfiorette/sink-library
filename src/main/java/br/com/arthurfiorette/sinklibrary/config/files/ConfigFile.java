@@ -1,12 +1,10 @@
 package br.com.arthurfiorette.sinklibrary.config.files;
 
-import java.io.File;
-
-import org.bukkit.configuration.file.FileConfiguration;
-
 import br.com.arthurfiorette.sinklibrary.SinkHelper;
 import br.com.arthurfiorette.sinklibrary.SinkPlugin;
 import br.com.arthurfiorette.sinklibrary.config.YmlFile;
+import java.io.File;
+import org.bukkit.configuration.file.FileConfiguration;
 
 /**
  * The config file is a specific implementation of yml file that is exactly
@@ -52,12 +50,12 @@ public class ConfigFile implements YmlFile, SinkHelper {
   @Override
   public File asFile() {
     throw new UnsupportedOperationException(
-        "For safety reasons, you do not want to modify the file used as config.yml");
+      "For safety reasons, you do not want to modify the file used as config.yml"
+    );
   }
 
   @Override
   public SinkPlugin getPlugin() {
     return plugin;
   }
-
 }

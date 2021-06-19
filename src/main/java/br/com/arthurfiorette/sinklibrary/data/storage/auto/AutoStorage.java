@@ -1,10 +1,9 @@
 package br.com.arthurfiorette.sinklibrary.data.storage.auto;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-
 import br.com.arthurfiorette.sinklibrary.data.database.Database;
 import br.com.arthurfiorette.sinklibrary.data.storage.Storage;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 /**
  * Storage is an abstract class to better communicate with an
@@ -16,7 +15,7 @@ import br.com.arthurfiorette.sinklibrary.data.storage.Storage;
  * serializated
  *
  * @param <T> the storage object type
- * 
+ *
  * @author https://github.com/Hazork/sink-library/
  */
 public class AutoStorage<T> extends Storage<T> {
@@ -26,7 +25,7 @@ public class AutoStorage<T> extends Storage<T> {
 
   /**
    * Constructs a auto storage.
-   * 
+   *
    * @param database the database to send and recieve information.
    * @param clazz the type class
    */
@@ -45,5 +44,4 @@ public class AutoStorage<T> extends Storage<T> {
   public T deserialize(JsonObject json) {
     return gson.fromJson(json, clazz);
   }
-
 }

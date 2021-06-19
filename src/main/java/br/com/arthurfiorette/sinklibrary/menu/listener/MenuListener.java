@@ -1,15 +1,14 @@
 package br.com.arthurfiorette.sinklibrary.menu.listener;
 
+import br.com.arthurfiorette.sinklibrary.SinkPlugin;
+import br.com.arthurfiorette.sinklibrary.listener.SinkListener;
+import br.com.arthurfiorette.sinklibrary.menu.SinkMenu;
+import br.com.arthurfiorette.sinklibrary.menu.item.MenuItem;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
-
-import br.com.arthurfiorette.sinklibrary.SinkPlugin;
-import br.com.arthurfiorette.sinklibrary.listener.SinkListener;
-import br.com.arthurfiorette.sinklibrary.menu.SinkMenu;
-import br.com.arthurfiorette.sinklibrary.menu.item.MenuItem;
 
 /**
  * This class is instantiated to handle all listeners for all menus in a

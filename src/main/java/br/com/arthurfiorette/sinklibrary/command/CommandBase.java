@@ -1,22 +1,19 @@
 package br.com.arthurfiorette.sinklibrary.command;
 
+import br.com.arthurfiorette.sinklibrary.SinkPlugin;
+import br.com.arthurfiorette.sinklibrary.interfaces.Registrable;
+import com.google.common.base.Verify;
+import com.google.common.base.VerifyException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.command.TabExecutor;
-
-import com.google.common.base.Verify;
-import com.google.common.base.VerifyException;
-
-import br.com.arthurfiorette.sinklibrary.SinkPlugin;
-import br.com.arthurfiorette.sinklibrary.interfaces.Registrable;
 
 /**
  * This class is a way to create commands
@@ -78,7 +75,12 @@ public final class CommandBase implements TabExecutor, Registrable {
   }
 
   @Override
-  public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
+  public List<String> onTabComplete(
+    CommandSender sender,
+    Command command,
+    String alias,
+    String[] args
+  ) {
     if (args.length == 0) {
       return new ArrayList<>(commandMap.keySet());
     } else if (commandMap.containsKey(args[0])) {
@@ -92,7 +94,7 @@ public final class CommandBase implements TabExecutor, Registrable {
    * Set an argument as a default command, (when no args are specified)
    *
    * @param arg the argument to be set or null to be none.
-   * 
+   *
    * @return the default argument.
    */
   public Argument setDefault(Argument arg) {
@@ -103,7 +105,7 @@ public final class CommandBase implements TabExecutor, Registrable {
    * @param args all the new arguments to be added to this command
    */
   public void addArguments(Argument... args) {
-    for(Argument arg: args) {
+    for (Argument arg : args) {
       commandMap.put(arg.getName(), arg);
       if (defaultArgument == null) {
         defaultArgument = arg;
@@ -121,5 +123,4 @@ public final class CommandBase implements TabExecutor, Registrable {
   private static List<String> removeFirst(String[] str) {
     return Arrays.asList(Arrays.copyOfRange(str, 1, str.length));
   }
-
 }

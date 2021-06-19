@@ -17,7 +17,9 @@ public class MemoryDatabase<T> implements Database<T> {
   @Override
   public void open() {
     if (database != null) {
-      throw new IllegalStateException("Attempt to open the connection to the database but it was already open.");
+      throw new IllegalStateException(
+        "Attempt to open the connection to the database but it was already open."
+      );
     }
     database = new ConcurrentHashMap<>();
   }
@@ -50,5 +52,4 @@ public class MemoryDatabase<T> implements Database<T> {
       throw new IllegalStateException("Attempt to access the database while it wasn't open.");
     }
   }
-
 }

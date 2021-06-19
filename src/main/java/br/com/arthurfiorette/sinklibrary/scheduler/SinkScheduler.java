@@ -8,7 +8,6 @@ import br.com.arthurfiorette.sinklibrary.SinkComponent;
  * @author https://github.com/Hazork/sink-library/
  */
 public interface SinkScheduler extends SinkComponent {
-
   default void runTask(Runnable task) {
     TaskScheduler.SYNC.run(this.getPlugin(), task);
   }
@@ -32,5 +31,4 @@ public interface SinkScheduler extends SinkComponent {
   default void runAsyncTask(Runnable task, long delay, long interval) {
     TaskScheduler.ASYNC.run(this.getPlugin(), task, delay, interval);
   }
-
 }

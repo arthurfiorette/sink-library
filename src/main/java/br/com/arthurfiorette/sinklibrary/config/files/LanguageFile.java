@@ -1,15 +1,13 @@
 package br.com.arthurfiorette.sinklibrary.config.files;
 
+import br.com.arthurfiorette.sinklibrary.SinkPlugin;
+import br.com.arthurfiorette.sinklibrary.services.Replacer;
+import com.google.common.collect.Lists;
 import java.io.File;
 import java.util.List;
 import java.util.function.UnaryOperator;
 import java.util.logging.Level;
 import java.util.stream.Collectors;
-
-import com.google.common.collect.Lists;
-
-import br.com.arthurfiorette.sinklibrary.SinkPlugin;
-import br.com.arthurfiorette.sinklibrary.services.Replacer;
 
 /**
  * A language file is a yml file specified to handle translations. A good enum
@@ -19,7 +17,7 @@ import br.com.arthurfiorette.sinklibrary.services.Replacer;
  * the path with this enum and search it in your yml file.
  *
  * @param <L> the enum that contains the keys and path for all the texts
- * 
+ *
  * @author https://github.com/Hazork/sink-library/
  */
 public abstract class LanguageFile<L extends Enum<L>> extends CustomFile {
@@ -32,7 +30,7 @@ public abstract class LanguageFile<L extends Enum<L>> extends CustomFile {
    * Return the path associated with this enum.
    *
    * @param lang the enum
-   * 
+   *
    * @return the path
    */
   protected abstract String path(L lang);
@@ -49,7 +47,7 @@ public abstract class LanguageFile<L extends Enum<L>> extends CustomFile {
    *
    * @param lang the lang enum
    * @param replacer the text replacer to apply in the text.
-   * 
+   *
    * @return the text found or {@link LanguageFile#unknown()} if occour an
    * error.
    */
@@ -61,7 +59,7 @@ public abstract class LanguageFile<L extends Enum<L>> extends CustomFile {
    * Returns the translation found
    *
    * @param lang the lang enum
-   * 
+   *
    * @return the text found or {@link LanguageFile#unknown()} if occour an
    * error.
    */
@@ -76,19 +74,22 @@ public abstract class LanguageFile<L extends Enum<L>> extends CustomFile {
    *
    * @param lang the lang enum
    * @param replacer the text replacer to apply in the text.
-   * 
+   *
    * @return the text list found or {@link LanguageFile#unknown()} if occour an
    * error.
    */
   public List<String> asList(L lang, UnaryOperator<Replacer> replacer) {
-    return this.asList(lang).stream().map(str -> Replacer.replace(str, replacer)).collect(Collectors.toList());
+    return this.asList(lang)
+      .stream()
+      .map(str -> Replacer.replace(str, replacer))
+      .collect(Collectors.toList());
   }
 
   /**
    * Returns the translation list found.
    *
    * @param lang the lang enum
-   * 
+   *
    * @return the text list found or {@link LanguageFile#unknown()} if occour an
    * error.
    */

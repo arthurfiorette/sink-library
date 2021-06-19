@@ -8,7 +8,6 @@ import org.bukkit.event.inventory.InventoryAction;
  * @author https://github.com/Hazork/sink-library/
  */
 public enum MouseClick {
-
   /**
    * When the click is in the left mouse buton.
    */
@@ -38,7 +37,7 @@ public enum MouseClick {
    * Transforms a InventoryClick into a MouseClick
    *
    * @param action the inventory action
-   * 
+   *
    * @return the mouseclick from this action
    */
   public static MouseClick from(InventoryAction action) {
@@ -48,26 +47,20 @@ public enum MouseClick {
       case PLACE_SOME:
       case SWAP_WITH_CURSOR:
         return MouseClick.LEFT;
-
       case PICKUP_HALF:
       case PLACE_ONE:
         return MouseClick.RIGHT;
-
       case MOVE_TO_OTHER_INVENTORY:
         return MouseClick.SHIFT_LEFT;
-
       case DROP_ALL_CURSOR:
       case DROP_ALL_SLOT:
       case DROP_ONE_CURSOR:
       case DROP_ONE_SLOT:
         return MouseClick.DROP;
-
       case CLONE_STACK:
         return MouseClick.SCROLL;
-
       default:
         return MouseClick.OTHER;
     }
   }
-
 }

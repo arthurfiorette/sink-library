@@ -1,5 +1,8 @@
 package br.com.arthurfiorette.sinklibrary.listener;
 
+import br.com.arthurfiorette.sinklibrary.SinkHelper;
+import br.com.arthurfiorette.sinklibrary.SinkPlugin;
+import br.com.arthurfiorette.sinklibrary.interfaces.Registrable;
 import org.bukkit.Bukkit;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
@@ -128,10 +131,6 @@ import org.bukkit.event.world.WorldInitEvent;
 import org.bukkit.event.world.WorldLoadEvent;
 import org.bukkit.event.world.WorldSaveEvent;
 import org.bukkit.event.world.WorldUnloadEvent;
-
-import br.com.arthurfiorette.sinklibrary.SinkHelper;
-import br.com.arthurfiorette.sinklibrary.SinkPlugin;
-import br.com.arthurfiorette.sinklibrary.interfaces.Registrable;
 
 /**
  * A abstract Spigot listener implementation with the most methods implements.
@@ -421,5 +420,4 @@ public abstract class SinkListener implements Listener, Registrable, SinkHelper 
   public void onWorldSave(WorldSaveEvent event) {}
 
   public void onWorldUnload(WorldUnloadEvent event) {}
-
 }

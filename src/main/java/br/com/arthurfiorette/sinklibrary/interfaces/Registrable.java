@@ -7,10 +7,8 @@ package br.com.arthurfiorette.sinklibrary.interfaces;
  */
 @FunctionalInterface
 public interface Registrable {
-
   /**
    * Register whatever it's needed.
    */
   void register();
-
 }
