@@ -1,0 +1,28 @@
+name: Prettify Code
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  prettier:
+    runs-on: ubuntu-latest
+    name: Prettify code
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.head_ref }}
+          fetch-depth: 0
+      - name: Prettify code
+        # Why i'm not using creyD version: https://github.com/creyD/prettier_action/pull/44
+        uses: suda/prettier_action@v3.4-rc.1
+        with:
+          prettier_options: --write "**/*.{json,xml,java}"
+          same_commit: false
+          only_changed: false
+          prettier_plugins: 'prettier-plugin-java @prettier/plugin-xml'
+          commit_message: 'style: prettified code'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
