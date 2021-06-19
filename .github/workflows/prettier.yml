@@ -19,7 +19,7 @@ jobs:
         # Why i'm not using creyD version: https://github.com/creyD/prettier_action/pull/44
         uses: suda/prettier_action@v3.4-rc.1
         with:
-          prettier_options: --write "**/*.{json,xml,java}"
+          prettier_options: --write '**/*.{json,xml,java}'
           same_commit: false
           only_changed: false
           prettier_plugins: 'prettier-plugin-java @prettier/plugin-xml'
