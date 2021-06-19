@@ -1,9 +1,8 @@
 package br.com.arthurfiorette.sinklibrary;
 
+import br.com.arthurfiorette.sinklibrary.listener.SinkListener;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerJoinEvent;
-
-import br.com.arthurfiorette.sinklibrary.listener.SinkListener;
 
 public class MyPlugin extends SinkPlugin {
 
