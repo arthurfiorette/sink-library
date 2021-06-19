@@ -101,11 +101,13 @@ This library is hosted by **[JitPack](https://jitpack.io/#ArthurFiorette/sink-li
   </repository>
 </repositories>
 
-<dependency>
-  <groupId>com.github.ArthurFiorette</groupId>
-  <artifactId>sink-library</artifactId>
-  <version>VERSION</version>
-</dependency>
+<dependencies>
+  <dependency>
+    <groupId>com.github.ArthurFiorette</groupId>
+    <artifactId>sink-library</artifactId>
+    <version>VERSION</version>
+  </dependency>
+</dependencies>
 ```
 
 ```gradle
