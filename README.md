@@ -10,28 +10,28 @@
   <code
     ><a href="https://github.com/ArthurFiorette/sink-library/network/members"
       ><img
-        src="https://img.shields.io/github/forks/ArthurFiorette/sink-library?logo=github&style=flat-square&label=Forks"
+        src="https://img.shields.io/github/forks/ArthurFiorette/sink-library?logo=github&label=Forks"
         target="_blank"
         alt="Forks" /></a
   ></code>
   <code
     ><a href="https://github.com/ArthurFiorette/sink-library/issues"
       ><img
-        src="https://img.shields.io/github/issues/ArthurFiorette/sink-library?logo=github&style=flat-square&label=Issues"
+        src="https://img.shields.io/github/issues/ArthurFiorette/sink-library?logo=github&label=Issues"
         target="_blank"
         alt="Issues" /></a
   ></code>
   <code
     ><a href="https://github.com/ArthurFiorette/sink-library/stargazers"
       ><img
-        src="https://img.shields.io/github/stars/ArthurFiorette/sink-library?logo=github&style=flat-square&label=Stars"
+        src="https://img.shields.io/github/stars/ArthurFiorette/sink-library?logo=github&label=Stars"
         target="_blank"
         alt="Stars" /></a
   ></code>
   <code
     ><a href="https://github.com/ArthurFiorette/sink-library/blob/main/LICENSE"
       ><img
-        src="https://img.shields.io/github/license/ArthurFiorette/sink-library?logo=github&style=flat-square&label=License"
+        src="https://img.shields.io/github/license/ArthurFiorette/sink-library?logo=githu&label=License"
         target="_blank"
         alt="License" /></a
   ></code>
