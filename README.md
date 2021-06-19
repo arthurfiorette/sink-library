@@ -1,68 +1,81 @@
-[![Forks][forks-shield]][forks-url] [![Stargazers][stars-shield]][stars-url] [![Issues][issues-shield]][issues-url] [![License][license-shield]][license-url]
+<div align="center">
+  <pre>
+  <br />
+  <h1>💧⚡🌊
+  Sink Library</h1>
+  <br />
+  </pre>
+  <br />
+  <br />
+  <code
+    ><a href="https://github.com/ArthurFiorette/sink-library/network/members"
+      ><img
+        src="https://img.shields.io/github/forks/ArthurFiorette/sink-library?logo=github&style=flat-square&label=Forks"
+        target="_blank"
+        alt="Forks" /></a
+  ></code>
+  <code
+    ><a href="https://github.com/ArthurFiorette/sink-library/issues"
+      ><img
+        src="https://img.shields.io/github/issues/ArthurFiorette/sink-library?logo=github&style=flat-square&label=Issues"
+        target="_blank"
+        alt="Issues" /></a
+  ></code>
+  <code
+    ><a href="https://github.com/ArthurFiorette/sink-library/stargazers"
+      ><img
+        src="https://img.shields.io/github/stars/ArthurFiorette/sink-library?logo=github&style=flat-square&label=Stars"
+        target="_blank"
+        alt="Stars" /></a
+  ></code>
+  <code
+    ><a href="https://github.com/ArthurFiorette/sink-library/blob/main/LICENSE"
+      ><img
+        src="https://img.shields.io/github/license/ArthurFiorette/sink-library?logo=github&style=flat-square&label=License"
+        target="_blank"
+        alt="License" /></a
+  ></code>
+</div>
 
-# Sink - Your spigot library for 1.8
+#
 
-A Spigot / Bukkit library for developing Minecraft Java Edition plugins.
+<br />
+<br />
 
-For more answers, go to wiki.
+#### `Sink-library` is a powerful and hight-performance tool for building spigot plugins.
 
-## Contributing
+<br />
+<br />
 
-Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+```java
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.player.PlayerJoinEvent;
 
-1. Fork the Project.
-2. Create your Feature Branch.
-3. Commit your Changes.
-4. Push to the Branch.
-5. Open a Pull Request.
+import br.com.arthurfiorette.sinklibrary.listener.SinkListener;
 
-**Edit:**
-*You can see and add things to TODO.md <br>
-Because of my poor English, the names of my commits are in PT-BR, sorry. 😢*
+public class MyPlugin extends SinkPlugin {
 
-## License
-Licensed under the **GNU General Public License v3.0**. See `License` for more information.
+  private MyListener listener = new MyListener(this);
 
-## Adding SinkAPI to your build
-### With Maven:
-```xml
-<repository>
-  <id>jitpack.io</id>
-  <url>https://jitpack.io</url>
-</repository>
-
-<dependency>
-  <groupId>com.github.hazork</groupId>
-  <artifactId>sink-library</artifactId>
-  <version>v1.1.0</version>
-  <scope>compile</scope>
-</dependency>
-```
-### With Gradle:
-```gradle
-repositories {
-    maven { 
-      name 'jitpack-repo'
-      url 'https://jitpack.io' 
-    }
+  @Override
+  public void onEnable() {
+    listener.register();
   }
-  
-dependencies {
-    implementation 'com.github.hazork:sink-library:v1.1.0'
+
+  @Override
+  public void onDisable() {}
+}
+
+class MyListener extends SinkListener {
+
+  public MyListener(SinkPlugin owner) {
+    super(owner);
   }
+
+  @Override
+  @EventHandler
+  public void onPlayerJoin(PlayerJoinEvent event) {
+    event.getPlayer().sendMessage("Hello World!");
+  }
+}
 ```
-
-## Contact
-See my contact information on my [GitHub Profile Page](https://github.com/ArthurFiorette).
-
-<!-- Links -->
-<!-- Shields -->
-
-[forks-shield]: https://img.shields.io/github/forks/Hazork/MySouls?style=flat-square
-[forks-url]: hhttps://github.com/Hazork/MySouls/network/members
-[stars-shield]: https://img.shields.io/github/stars/Hazork/MySouls?style=flat-square
-[stars-url]: https://github.com/Hazork/MySouls/stargazers
-[issues-shield]: https://img.shields.io/github/issues/Hazork/MySouls?style=flat-square
-[issues-url]: https://github.com/Hazork/MySouls/issues
-[license-shield]: https://img.shields.io/github/license/Hazork/MySouls?style=flat-square
-[license-url]: https://github.com/Hazork/MySouls/blob/main/LICENSE
