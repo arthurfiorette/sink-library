@@ -1,8 +1,4 @@
-<project
-  xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd"
->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.github.arthurfiorette</groupId>
@@ -11,13 +7,22 @@
 	<version>v1.1.0</version>
 
 	<name>sink-library</name>
-	<description>Your spigot library for 1.8</description>
-	<url>https://github.com/Hazork/sink-library</url>
+	<description>A powerful and hight-performance tool for building spigot plugins.</description>
+	<url>https://github.com/arthurfiorette/sink-library</url>
 
 	<properties>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 	</properties>
+
+	<!-- Github Packages Registry -->
+	<distributionManagement>
+		<repository>
+			<id>github</id>
+			<name>GitHub Packages</name>
+			<url>https://maven.pkg.github.com/arthurfiorette/sink-library</url>
+		</repository>
+	</distributionManagement>
 
 	<repositories>
 		<repository>
