@@ -4,27 +4,27 @@ package com.github.arthurfiorette.sinklibrary.data;
  * Simple interface to mark any object O that can be serialized to R and
  * deserialized back to O.
  *
- * @param <O> the object type
- * @param <R> the serialized type
+ * @param <OBJ> the object type
+ * @param <RAW> the serialized type
  *
- * @author https://github.com/Hazork/sink-library/
+ * @author https://github.com/ArthurFiorette/sink-library/
  */
-public interface Serializable<O, R> {
+public interface Serializable<OBJ, RAW> {
   /**
-   * Serialize any object.
+   * Serialize an object.
    *
    * @param object the object to serialize
    *
    * @return the serialized object
    */
-  R serialize(O object);
+  RAW serialize(OBJ object);
 
   /**
-   * Deserialize any object
+   * Deserialize an object
    *
    * @param raw the serialized object
    *
    * @return the deserialized object
    */
-  O deserialize(R raw);
+  OBJ deserialize(RAW raw);
 }

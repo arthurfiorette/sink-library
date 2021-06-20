@@ -1,15 +1,14 @@
 package com.github.arthurfiorette.sinklibrary.data.database;
 
 import java.util.Collection;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 /**
- * Represents a simple database model.
+ * Represents a simple database model. <b>All of these methods are meant to be
+ * executed in a synchronous way</b>
  *
- * @author https://github.com/Hazork/sink-library/
+ * @author https://github.com/ArthurFiorette/sink-library/
  */
-public interface Database<T> {
+public interface Database<K, V> {
   /**
    * Open this database connection
    */
@@ -21,12 +20,17 @@ public interface Database<T> {
   void close();
 
   /**
+   * @return true if this database connection is open
+   */
+  boolean isOpen();
+
+  /**
    * Save a value in this database
    *
    * @param key the value key
    * @param value the value
    */
-  void save(String key, T value);
+  void save(K key, V value);
 
   /**
    * Returns a value in this database
@@ -35,21 +39,15 @@ public interface Database<T> {
    *
    * @return the object or null if not found
    */
-  T get(String key);
+  V get(K key);
 
   /**
-   * @return all entries in this database
+   * Return all values in this database for these keys
+   * 
+   * @param keys any string key collection
+   * 
+   * @return the collected list
    */
-  Collection<T> getAll();
+  Collection<V> getMany(Collection<K> keys);
 
-  /**
-   * Returns all entries in this database with specified properties.
-   *
-   * @param filter any Predicate to filter the result list.
-   *
-   * @return the filtered list
-   */
-  default Collection<T> getAll(Predicate<T> filter) {
-    return this.getAll().stream().filter(filter).collect(Collectors.toList());
-  }
 }

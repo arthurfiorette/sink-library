@@ -1,6 +1,8 @@
 package com.github.arthurfiorette.sinklibrary.data.database;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -8,20 +10,29 @@ import java.util.concurrent.ConcurrentMap;
  * A memory database is a database saved in a concurrent hash map and resets
  * every time that it is reloaded or closed
  *
- * @author https://github.com/Hazork/sink-library/
+ * @author https://github.com/ArthurFiorette/sink-library/
  */
-public class MemoryDatabase<T> implements Database<T> {
+public class MemoryDatabase<K, T> implements Database<K, T> {
 
-  private ConcurrentMap<String, T> database;
+  private ConcurrentMap<K, T> database;
+
+  /**
+   * Erase all data.
+   */
+  public void clear() {
+    this.checkState();
+    database = new ConcurrentHashMap<>();
+  }
 
   @Override
   public void open() {
-    if (database != null) {
-      throw new IllegalStateException(
-        "Attempt to open the connection to the database but it was already open."
-      );
-    }
+    this.checkState();
     database = new ConcurrentHashMap<>();
+  }
+
+  @Override
+  public boolean isOpen() {
+    return database != null;
   }
 
   @Override
@@ -30,25 +41,32 @@ public class MemoryDatabase<T> implements Database<T> {
   }
 
   @Override
-  public void save(String key, T value) {
+  public void save(K key, T value) {
     this.checkState();
     database.put(key, value);
   }
 
   @Override
-  public T get(String key) {
+  public T get(K key) {
     this.checkState();
     return database.get(key);
   }
 
   @Override
-  public Collection<T> getAll() {
+  public Collection<T> getMany(Collection<K> keys) {
     this.checkState();
-    return database.values();
+    List<T> list = new ArrayList<>();
+    for(K key: keys) {
+      T t = this.get(key);
+      if (t != null) {
+        list.add(t);
+      }
+    }
+    return list;
   }
 
   private void checkState() {
-    if (database == null) {
+    if (!this.isOpen()) {
       throw new IllegalStateException("Attempt to access the database while it wasn't open.");
     }
   }

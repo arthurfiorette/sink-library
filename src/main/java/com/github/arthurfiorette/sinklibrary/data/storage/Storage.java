@@ -1,90 +1,49 @@
 package com.github.arthurfiorette.sinklibrary.data.storage;
 
+import java.util.Collection;
+import java.util.Set;
+import java.util.concurrent.CompletableFuture;
+import java.util.function.Function;
+
 import com.github.arthurfiorette.sinklibrary.data.Serializable;
 import com.github.arthurfiorette.sinklibrary.data.database.Database;
-import com.google.gson.JsonObject;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Objects;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 /**
- * Storage is an abstract class to better communicate with an
- * {@code Database<{@link JsonObject}>} and the external classes. this can be
- * used in many ways, like cached storage and etc...
- *
- * @param <T> the storage object type
- *
- * @author https://github.com/Hazork/sink-library/
+ * @param <K> Storage key type
+ * @param <V> Storage value type
+ * @param <R> Database raw type
+ * 
+ * @author https://github.com/arthurfiorette/sink-library/
  */
-public abstract class Storage<T> implements Serializable<T, JsonObject> {
+public interface Storage<K, V, R> extends Serializable<V, R> {
 
-  protected final Database<JsonObject> database;
+  CompletableFuture<Void> save(K key, V value);
 
-  /**
-   * Constructs a storage.
-   *
-   * @param database the database to send and recieve information.
-   */
-  protected Storage(Database<JsonObject> database) {
-    this.database = database;
+  default Void saveSync(K key, V value) {
+    return this.save(key, value).join();
   }
 
-  /**
-   * Returns the deserialized object for this key
-   *
-   * @param key the object key
-   *
-   * @return the deserialized object
-   */
-  public T get(String key) {
-    JsonObject jsonObject = database.get(key);
-    return jsonObject == null ? null : this.deserialize(jsonObject);
+  CompletableFuture<V> get(K key);
+
+  default V getSync(K key) {
+    return this.get(key).join();
   }
 
-  /**
-   * Saves the object serializing it in the database.
-   *
-   * @param key the object key
-   * @param object the object to save
-   *
-   * @return the saved object
-   */
-  public JsonObject save(String key, T object) {
-    JsonObject jsonObject = this.serialize(object);
-    database.save(key, jsonObject);
-    return jsonObject;
+  CompletableFuture<Collection<V>> getMany(Set<K> keys);
+
+  default Collection<V> getManySync(Set<K> keys) {
+    return this.getMany(keys).join();
   }
 
-  /**
-   * Returns a list with all values in the database.
-   *
-   * @param filter the filter to return a more specific and correct collection
-   *
-   * @return the filtered collection
-   */
-  public Collection<T> getAll(Predicate<T> filter) {
-    return database
-      .getAll()
-      .stream()
-      .filter(Objects::nonNull)
-      .map(this::deserialize)
-      .filter(filter)
-      .collect(Collectors.toCollection(ArrayList::new));
+  CompletableFuture<Collection<V>> operation(Function<Database<K, R>, Collection<R>> func);
+
+  default Collection<V> operationSync(Function<Database<K, R>, Collection<R>> func) {
+    return this.operation(func).join();
   }
 
-  /**
-   * Opens the database connection using {@link Database#open()}
-   */
-  public void open() {
-    database.open();
-  }
+  CompletableFuture<V> operate(Function<Database<K, R>, R> func);
 
-  /**
-   * Closes the database connectiong using {@link Database#close()}
-   */
-  public void close() {
-    database.close();
+  default V operateSync(Function<Database<K, R>, R> func) {
+    return this.operate(func).join();
   }
 }
