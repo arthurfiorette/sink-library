@@ -1,8 +1,5 @@
 package com.github.arthurfiorette.sinklibrary.listener;
 
-import com.github.arthurfiorette.sinklibrary.SinkHelper;
-import com.github.arthurfiorette.sinklibrary.SinkPlugin;
-import com.github.arthurfiorette.sinklibrary.interfaces.Registrable;
 import org.bukkit.Bukkit;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
@@ -132,44 +129,43 @@ import org.bukkit.event.world.WorldLoadEvent;
 import org.bukkit.event.world.WorldSaveEvent;
 import org.bukkit.event.world.WorldUnloadEvent;
 
+import com.github.arthurfiorette.sinklibrary.interfaces.BaseService;
+import com.github.arthurfiorette.sinklibrary.plugin.BasePlugin;
+
 /**
  * A abstract Spigot listener implementation with the most methods implements.
  * Override and use {@link org.bukkit.event.EventHandler} to make the method be
  * a listener. This listener will work when register is called.
  *
- * @author https://github.com/Hazork/sink-library/
+ * @author https://github.com/ArthurFiorette/sink-library/
  */
-public abstract class SinkListener implements Listener, Registrable, SinkHelper {
+public abstract class SinkListener implements Listener, BaseService {
 
-  private final SinkPlugin owner;
+  private final BasePlugin owner;
 
   /**
    * Constructs a new SinkListener
    *
    * @param owner the plugin owner;
    */
-  public SinkListener(SinkPlugin owner) {
+  public SinkListener(BasePlugin owner) {
     this.owner = owner;
   }
 
-  /**
-   * Register this listener in a easiest way
-   */
   @Override
-  public void register() {
+  public void enable() {
     Bukkit.getPluginManager().registerEvents(this, this.getPlugin());
   }
 
-  public void unregister() {
+  @Override
+  public void disable() {
     HandlerList.unregisterAll(this);
   }
 
   @Override
-  public SinkPlugin getPlugin() {
+  public BasePlugin getPlugin() {
     return owner;
   }
-
-  // Listeners:
 
   public void onAsyncPlayerChat(AsyncPlayerChatEvent event) {}
 
