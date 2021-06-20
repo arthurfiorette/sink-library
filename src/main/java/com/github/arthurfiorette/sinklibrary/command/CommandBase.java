@@ -1,26 +1,28 @@
 package com.github.arthurfiorette.sinklibrary.command;
 
-import com.github.arthurfiorette.sinklibrary.SinkPlugin;
-import com.github.arthurfiorette.sinklibrary.interfaces.Registrable;
-import com.google.common.base.Verify;
-import com.google.common.base.VerifyException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
+
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.command.TabExecutor;
 
+import com.github.arthurfiorette.sinklibrary.interfaces.BaseService;
+import com.github.arthurfiorette.sinklibrary.plugin.BasePlugin;
+import com.github.arthurfiorette.sinklibrary.plugin.SinkPlugin;
+import com.google.common.base.Verify;
+import com.google.common.base.VerifyException;
+
 /**
  * This class is a way to create commands
  *
- * @author https://github.com/Hazork/sink-library/
+ * @author https://github.com/ArthurFiorette/sink-library/
  */
-public final class CommandBase implements TabExecutor, Registrable {
+public final class CommandBase implements TabExecutor, BaseService {
 
   private final String name;
   private final SinkPlugin plugin;
@@ -48,7 +50,7 @@ public final class CommandBase implements TabExecutor, Registrable {
    * registered in plugin.yml}
    */
   @Override
-  public void register() {
+  public void enable() {
     PluginCommand command = plugin.getCommand(name);
     Verify.verifyNotNull(command, "The command %s wasn't found", name);
     command.setExecutor(this);
@@ -56,15 +58,22 @@ public final class CommandBase implements TabExecutor, Registrable {
   }
 
   @Override
+  public void disable() {
+    PluginCommand command = plugin.getCommand(name);
+    command.setExecutor(null);
+    command.setTabCompleter(null);
+  }
+
+  @Override
   public boolean onCommand(CommandSender sender, Command command, String alias, String[] args) {
     if (args.length == 0) {
-      defaultArgument.onArgument(sender, alias, Arrays.asList(args));
+      defaultArgument.handle(sender, alias, Arrays.asList(args));
       return true;
     }
     Argument cmd = commandMap.get(args[0]);
     if (cmd != null && cmd.test(sender)) {
       if (cmd.getPermission() != null && sender.hasPermission(cmd.getPermission())) {
-        cmd.onArgument(sender, alias, removeFirst(args));
+        cmd.handle(sender, alias, removeFirst(args));
       } else {
         sender.sendMessage(cmd.getPermissionMessage());
       }
@@ -75,12 +84,7 @@ public final class CommandBase implements TabExecutor, Registrable {
   }
 
   @Override
-  public List<String> onTabComplete(
-    CommandSender sender,
-    Command command,
-    String alias,
-    String[] args
-  ) {
+  public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
     if (args.length == 0) {
       return new ArrayList<>(commandMap.keySet());
     } else if (commandMap.containsKey(args[0])) {
@@ -98,14 +102,14 @@ public final class CommandBase implements TabExecutor, Registrable {
    * @return the default argument.
    */
   public Argument setDefault(Argument arg) {
-    return defaultArgument = Objects.isNull(arg) ? defaultArgument : arg;
+    return defaultArgument = arg == null ? defaultArgument : arg;
   }
 
   /**
    * @param args all the new arguments to be added to this command
    */
   public void addArguments(Argument... args) {
-    for (Argument arg : args) {
+    for(Argument arg: args) {
       commandMap.put(arg.getName(), arg);
       if (defaultArgument == null) {
         defaultArgument = arg;
@@ -123,4 +127,10 @@ public final class CommandBase implements TabExecutor, Registrable {
   private static List<String> removeFirst(String[] str) {
     return Arrays.asList(Arrays.copyOfRange(str, 1, str.length));
   }
+
+  @Override
+  public BasePlugin getPlugin() {
+    return plugin;
+  }
+
 }

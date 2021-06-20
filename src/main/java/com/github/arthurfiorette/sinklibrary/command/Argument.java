@@ -2,6 +2,7 @@ package com.github.arthurfiorette.sinklibrary.command;
 
 import java.util.List;
 import java.util.function.Predicate;
+
 import org.bukkit.command.CommandSender;
 
 /**
@@ -9,17 +10,17 @@ import org.bukkit.command.CommandSender;
  * command. Create a command in a commandBase and add any arguments that you
  * need. {@link CommandBase}.
  *
- * @author https://github.com/Hazork/sink-library/
+ * @author https://github.com/ArthurFiorette/sink-library/
  */
 public interface Argument extends Predicate<CommandSender> {
   /**
    * Handle a argument executed from a command sender.
    *
    * @param sender the command sender that executed this argument
-   * @param alias the next aliases
+   * @param alias the alias used
    * @param args the next arguments
    */
-  void onArgument(CommandSender sender, String alias, List<String> args);
+  void handle(CommandSender sender, String alias, List<String> args);
 
   /**
    * @return this argument name
