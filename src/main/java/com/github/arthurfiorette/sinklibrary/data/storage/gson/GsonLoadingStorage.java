@@ -5,6 +5,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.UnaryOperator;
 
 import com.github.arthurfiorette.sinklibrary.data.database.Database;
+import com.github.arthurfiorette.sinklibrary.data.database.JsonDatabase;
 import com.github.arthurfiorette.sinklibrary.data.storage.LoadingStorage;
 import com.github.arthurfiorette.sinklibrary.executor.BukkitExecutor;
 import com.github.arthurfiorette.sinklibrary.plugin.BasePlugin;
@@ -18,7 +19,7 @@ public class GsonLoadingStorage<K, V> extends LoadingStorage<K, V, JsonObject> {
   private final Class<V> clazz;
   private Gson gson = new Gson();
 
-  public GsonLoadingStorage(Database<K, JsonObject> database, Class<V> clazz, Executor executor,
+  public GsonLoadingStorage(JsonDatabase<K> database, Class<V> clazz, Executor executor,
       UnaryOperator<CacheBuilder<Object, Object>> builder) {
     super(database, executor, builder);
     this.clazz = clazz;
@@ -35,9 +36,9 @@ public class GsonLoadingStorage<K, V> extends LoadingStorage<K, V, JsonObject> {
    * @param clazz the entity class
    * @param plugin the plugin owner
    */
-  public GsonLoadingStorage(Database<K, JsonObject> database, Class<V> clazz, BasePlugin plugin) {
+  public GsonLoadingStorage(JsonDatabase<K> database, Class<V> clazz, BasePlugin plugin) {
     this(database, clazz, BukkitExecutor.newAsyncSingleThreadExecutor(plugin),
-        (b) -> b.expireAfterAccess(5, TimeUnit.MINUTES).maximumSize(256));
+        b -> b.expireAfterAccess(5, TimeUnit.MINUTES).maximumSize(256));
   }
 
   @Override
