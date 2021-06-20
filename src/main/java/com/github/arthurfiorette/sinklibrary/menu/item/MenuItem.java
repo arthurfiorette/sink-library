@@ -1,9 +1,8 @@
 package com.github.arthurfiorette.sinklibrary.menu.item;
 
-import org.bukkit.inventory.ItemStack;
-
 import com.github.arthurfiorette.sinklibrary.menu.actions.ClickAction;
 import com.github.arthurfiorette.sinklibrary.services.SpigotService;
+import org.bukkit.inventory.ItemStack;
 
 /**
  * Represents a stack of items to be in a SinkMenu

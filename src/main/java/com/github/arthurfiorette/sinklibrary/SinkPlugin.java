@@ -1,14 +1,12 @@
 package com.github.arthurfiorette.sinklibrary;
 
-import java.util.concurrent.CompletableFuture;
-import java.util.function.Supplier;
-import java.util.logging.Level;
-
-import org.bukkit.plugin.java.JavaPlugin;
-
 import com.github.arthurfiorette.sinklibrary.config.YmlContainer;
 import com.github.arthurfiorette.sinklibrary.executor.TaskContext;
 import com.github.arthurfiorette.sinklibrary.interfaces.BaseService;
+import java.util.concurrent.CompletableFuture;
+import java.util.function.Supplier;
+import java.util.logging.Level;
+import org.bukkit.plugin.java.JavaPlugin;
 
 public abstract class SinkPlugin extends JavaPlugin implements BasePlugin {
 
@@ -96,5 +94,4 @@ public abstract class SinkPlugin extends JavaPlugin implements BasePlugin {
   public <T> CompletableFuture<T> syncCallback(Supplier<T> supplier) {
     return CompletableFuture.supplyAsync(supplier, this::runSync);
   }
-
 }

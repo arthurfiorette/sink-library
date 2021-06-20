@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
-
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -165,14 +164,14 @@ public final class SpigotService {
    * @param players the players to play the sound
    */
   public static void playSound(Sound sound, Player... players) {
-    for(Player p: players) {
+    for (Player p : players) {
       p.playSound(p.getLocation(), sound, 3.0F, 0.5F);
     }
   }
 
   /**
    * Update this item stack meta.
-   * 
+   *
    * @param item the item stack to update
    * @param callback the callback to edit the meta
    */

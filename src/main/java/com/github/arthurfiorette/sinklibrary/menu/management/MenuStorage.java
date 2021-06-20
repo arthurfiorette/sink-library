@@ -1,15 +1,13 @@
 package com.github.arthurfiorette.sinklibrary.menu.management;
 
+import com.github.arthurfiorette.sinklibrary.BasePlugin;
+import com.github.arthurfiorette.sinklibrary.interfaces.BaseService;
+import com.github.arthurfiorette.sinklibrary.menu.SinkMenu;
 import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
-
 import org.bukkit.entity.Player;
-
-import com.github.arthurfiorette.sinklibrary.BasePlugin;
-import com.github.arthurfiorette.sinklibrary.interfaces.BaseService;
-import com.github.arthurfiorette.sinklibrary.menu.SinkMenu;
 
 public abstract class MenuStorage<M extends Enum<M> & MenuFactory> implements BaseService {
 
@@ -57,5 +55,4 @@ public abstract class MenuStorage<M extends Enum<M> & MenuFactory> implements Ba
 
     return (I) sinkMenu;
   }
-
 }

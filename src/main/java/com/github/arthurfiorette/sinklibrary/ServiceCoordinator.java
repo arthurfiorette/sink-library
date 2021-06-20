@@ -1,12 +1,11 @@
 package com.github.arthurfiorette.sinklibrary;
 
-import java.util.LinkedList;
-import java.util.concurrent.CompletableFuture;
-import java.util.logging.Level;
-
 import com.github.arthurfiorette.sinklibrary.executor.BukkitExecutor;
 import com.github.arthurfiorette.sinklibrary.interfaces.BaseComponent;
 import com.github.arthurfiorette.sinklibrary.interfaces.BaseService;
+import java.util.LinkedList;
+import java.util.concurrent.CompletableFuture;
+import java.util.logging.Level;
 
 public class ServiceCoordinator implements BaseComponent {
 
@@ -36,12 +35,19 @@ public class ServiceCoordinator implements BaseComponent {
 
   public void add(BaseService[] services) {
     if (enabled) {
-      plugin.log(Level.INFO, "%s services added to this coordinator while we are already enabled", services.length);
+      plugin.log(
+        Level.INFO,
+        "%s services added to this coordinator while we are already enabled",
+        services.length
+      );
     }
-    for(BaseService service: services) {
+    for (BaseService service : services) {
       if (this.services.contains(service)) {
-        plugin.treatThrowable(service.getClass(), new IllegalArgumentException(),
-            "We only support one service per class, and for a clean code, you should too.");
+        plugin.treatThrowable(
+          service.getClass(),
+          new IllegalArgumentException(),
+          "We only support one service per class, and for a clean code, you should too."
+        );
         return;
       }
 
@@ -50,7 +56,7 @@ public class ServiceCoordinator implements BaseComponent {
   }
 
   public <T extends BaseService> T getService(Class<T> clazz) {
-    for(BaseService service: services) {
+    for (BaseService service : services) {
       if (service.getClass().equals(clazz)) {
         return clazz.cast(service);
       }
@@ -60,10 +66,14 @@ public class ServiceCoordinator implements BaseComponent {
 
   public <T extends BaseService> boolean remove(Class<T> clazz, boolean disable) {
     if (enabled) {
-      plugin.log(Level.INFO, "The $s service tried to be removed while we are enabled", clazz.getSimpleName());
+      plugin.log(
+        Level.INFO,
+        "The $s service tried to be removed while we are enabled",
+        clazz.getSimpleName()
+      );
     }
     int index = 0;
-    for(BaseService service: services) {
+    for (BaseService service : services) {
       if (service.getClass().equals(clazz)) {
         services.remove(index);
         if (disable) {
@@ -81,9 +91,12 @@ public class ServiceCoordinator implements BaseComponent {
       plugin.log(Level.SEVERE, "Requested an enable operation while we are enabled");
       return CompletableFuture.completedFuture(null);
     }
-    return CompletableFuture.runAsync(() -> {
-      services.forEach(this::enableService);
-    }, BukkitExecutor.newSyncSingleThreadExecutor(plugin));
+    return CompletableFuture.runAsync(
+      () -> {
+        services.forEach(this::enableService);
+      },
+      BukkitExecutor.newSyncSingleThreadExecutor(plugin)
+    );
   }
 
   public CompletableFuture<Void> requestDisable() {
@@ -91,17 +104,19 @@ public class ServiceCoordinator implements BaseComponent {
       plugin.log(Level.SEVERE, "Requested an disable operation while we are disabled");
       return CompletableFuture.completedFuture(null);
     }
-    return CompletableFuture.runAsync(() -> {
-      while (services.size() != 0) {
-        BaseService s = services.pollLast();
-        this.disableService(s);
-      }
-    }, BukkitExecutor.newSyncSingleThreadExecutor(plugin));
+    return CompletableFuture.runAsync(
+      () -> {
+        while (services.size() != 0) {
+          BaseService s = services.pollLast();
+          this.disableService(s);
+        }
+      },
+      BukkitExecutor.newSyncSingleThreadExecutor(plugin)
+    );
   }
 
   @Override
   public BasePlugin getPlugin() {
     return plugin;
   }
-
 }

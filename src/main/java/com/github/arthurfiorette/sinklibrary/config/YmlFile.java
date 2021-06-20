@@ -1,7 +1,6 @@
 package com.github.arthurfiorette.sinklibrary.config;
 
 import java.io.File;
-
 import org.bukkit.configuration.file.FileConfiguration;
 
 /**

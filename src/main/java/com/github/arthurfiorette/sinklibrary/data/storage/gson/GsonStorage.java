@@ -1,7 +1,5 @@
 package com.github.arthurfiorette.sinklibrary.data.storage.gson;
 
-import java.util.concurrent.Executor;
-
 import com.github.arthurfiorette.sinklibrary.BasePlugin;
 import com.github.arthurfiorette.sinklibrary.data.database.JsonDatabase;
 import com.github.arthurfiorette.sinklibrary.data.storage.AbstractStorage;
@@ -9,6 +7,7 @@ import com.github.arthurfiorette.sinklibrary.executor.BukkitExecutor;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
+import java.util.concurrent.Executor;
 
 public class GsonStorage<K, V> extends AbstractStorage<K, V, JsonObject> {
 
@@ -23,7 +22,7 @@ public class GsonStorage<K, V> extends AbstractStorage<K, V, JsonObject> {
   /**
    * Create and simple Gson storage, that serialize and deserialize
    * automatically with {@link Gson}.
-   * 
+   *
    * @param database the database to load and save values
    * @param clazz the entity class
    * @param plugin the plugin owner
@@ -45,5 +44,4 @@ public class GsonStorage<K, V> extends AbstractStorage<K, V, JsonObject> {
   public void setGson(Gson gson) {
     this.gson = gson;
   }
-
 }

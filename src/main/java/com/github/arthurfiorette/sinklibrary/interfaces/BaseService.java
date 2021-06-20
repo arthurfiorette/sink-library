@@ -1,7 +1,6 @@
 package com.github.arthurfiorette.sinklibrary.interfaces;
 
 public interface BaseService extends BaseComponent {
-
   /**
    * Called when enabling this service
    */
@@ -11,5 +10,4 @@ public interface BaseService extends BaseComponent {
    * Called when disabling this service
    */
   void disable();
-
 }

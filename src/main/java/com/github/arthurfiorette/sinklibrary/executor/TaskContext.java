@@ -15,7 +15,6 @@ public enum TaskContext {
    * This context means that his execution is the Bukkit main thread.
    */
   SYNC {
-
     @Override
     public BukkitTask run(Plugin plugin, Runnable runnable) {
       return Bukkit.getScheduler().runTask(plugin, runnable);
@@ -35,7 +34,6 @@ public enum TaskContext {
    * This context means that his execution is outsite the Bukkit main thread.
    */
   ASYNC {
-
     /**
      * <b>Asynchronous tasks should never access any API in Bukkit. Great care
      * should be taken to assure the thread-safety of asynchronous tasks.</b>
@@ -77,7 +75,7 @@ public enum TaskContext {
    * @param runnable the task to be run
    *
    * @return the BukkitTask associated with this run.
-   * 
+   *
    * @throws IllegalArgumentException if plugin is null
    * @throws IllegalArgumentException if task is null
    */
@@ -91,7 +89,7 @@ public enum TaskContext {
    * @param delay the delay in ticks
    *
    * @return the BukkitTask associated with this run.
-   * 
+   *
    * @throws IllegalArgumentException if plugin is null
    * @throws IllegalArgumentException if task is null
    */
@@ -107,10 +105,9 @@ public enum TaskContext {
    * @param interval the ticks to wait between runs
    *
    * @return the BukkitTask associated with this run.
-   * 
+   *
    * @throws IllegalArgumentException if plugin is null
    * @throws IllegalArgumentException if task is null
    */
   public abstract BukkitTask runTimer(Plugin plugin, Runnable runnable, long delay, long interval);
-
 }

@@ -3,18 +3,16 @@ package com.github.arthurfiorette.sinklibrary.executor;
 import static com.github.arthurfiorette.sinklibrary.executor.BukkitThreadFactory.ofAsync;
 import static com.github.arthurfiorette.sinklibrary.executor.BukkitThreadFactory.ofSync;
 
+import com.github.arthurfiorette.sinklibrary.BasePlugin;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
-
 import org.bukkit.scheduler.BukkitScheduler;
-
-import com.github.arthurfiorette.sinklibrary.BasePlugin;
 
 /**
  * Simple interface to target all executors that runs with a
  * {@link BukkitScheduler}.
- * 
+ *
  * @author https://github.com/Hazork/sink-library/
  */
 public final class BukkitExecutor {
@@ -22,11 +20,11 @@ public final class BukkitExecutor {
   /**
    * Creates a sync thread pool that creates new threads as needed, but will
    * reuse previously constructed threads when they are available.
-   * 
+   *
    * @see {@link BukkitThreadFactory}
-   * 
+   *
    * @param plugin The basic plugin to assign to the created thread factory
-   * 
+   *
    * @return the newly created thread pool
    */
   public static ExecutorService newSyncCachedThreadPool(BasePlugin plugin) {
@@ -36,11 +34,11 @@ public final class BukkitExecutor {
   /**
    * Creates a async thread pool that creates new threads as needed, but will
    * reuse previously constructed threads when they are available.
-   * 
+   *
    * @see {@link BukkitThreadFactory}
-   * 
+   *
    * @param plugin The basic plugin to assign to the created thread factory
-   * 
+   *
    * @return the newly created thread pool
    */
   public static ExecutorService newAsyncCachedThreadPool(BasePlugin plugin) {
@@ -60,9 +58,9 @@ public final class BukkitExecutor {
    *
    * @param nThreads the number of threads in the pool
    * @param plugin The basic plugin to assign to the created thread factory
-   * 
+   *
    * @return the newly created thread pool
-   * 
+   *
    * @throws IllegalArgumentException if {@code nThreads <= 0}
    */
   public static ExecutorService newSyncFixedThreadPool(BasePlugin plugin, int nThreads) {
@@ -82,9 +80,9 @@ public final class BukkitExecutor {
    *
    * @param nThreads the number of threads in the pool
    * @param plugin The basic plugin to assign to the created thread factory
-   * 
+   *
    * @return the newly created thread pool
-   * 
+   *
    * @throws IllegalArgumentException if {@code nThreads <= 0}
    */
   public static ExecutorService newAsyncFixedThreadPool(BasePlugin plugin, int nThreads) {
@@ -94,32 +92,38 @@ public final class BukkitExecutor {
   /**
    * Creates a sync thread pool that can schedule commands to run after a given
    * delay, or to execute periodically.
-   * 
+   *
    * @param plugin The basic plugin to assign to the created thread factory
    * @param corePoolSize the number of threads to keep in the pool, even if they
    * are idle
-   * 
+   *
    * @return a newly created scheduled thread pool
-   * 
+   *
    * @throws IllegalArgumentException if {@code corePoolSize < 0}
    */
-  public static ScheduledExecutorService newSyncScheduledThreadPool(BasePlugin plugin, int corePoolSize) {
+  public static ScheduledExecutorService newSyncScheduledThreadPool(
+    BasePlugin plugin,
+    int corePoolSize
+  ) {
     return Executors.newScheduledThreadPool(corePoolSize, ofSync(plugin));
   }
 
   /**
    * Creates a async thread pool that can schedule commands to run after a given
    * delay, or to execute periodically.
-   * 
+   *
    * @param plugin The basic plugin to assign to the created thread factory
    * @param corePoolSize the number of threads to keep in the pool, even if they
    * are idle
-   * 
+   *
    * @return a newly created scheduled thread pool
-   * 
+   *
    * @throws IllegalArgumentException if {@code corePoolSize < 0}
    */
-  public static ScheduledExecutorService newAsyncScheduledThreadPool(BasePlugin plugin, int corePoolSize) {
+  public static ScheduledExecutorService newAsyncScheduledThreadPool(
+    BasePlugin plugin,
+    int corePoolSize
+  ) {
     return Executors.newScheduledThreadPool(corePoolSize, ofAsync(plugin));
   }
 
@@ -165,9 +169,9 @@ public final class BukkitExecutor {
    * {@link BukkitExecutor#newSyncScheduledThreadPool(BasePlugin, int)} the
    * returned executor is guaranteed not to be reconfigurable to use additional
    * threads.
-   * 
+   *
    * @param plugin The basic plugin to assign to the created thread factory
-   * 
+   *
    * @return a newly created scheduled executor
    */
   public static ScheduledExecutorService newSyncSingleThreadScheduledExecutor(BasePlugin plugin) {
@@ -186,13 +190,12 @@ public final class BukkitExecutor {
    * {@link BukkitExecutor#newAsyncScheduledThreadPool(BasePlugin, int)} the
    * returned executor is guaranteed not to be reconfigurable to use additional
    * threads.
-   * 
+   *
    * @param plugin The basic plugin to assign to the created thread factory
-   * 
+   *
    * @return a newly created scheduled executor
    */
   public static ScheduledExecutorService newAsyncSingleThreadScheduledExecutor(BasePlugin plugin) {
     return Executors.newSingleThreadScheduledExecutor(ofAsync(plugin));
   }
-
 }

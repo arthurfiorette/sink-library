@@ -1,12 +1,10 @@
 package com.github.arthurfiorette.sinklibrary.executor;
 
-import java.util.concurrent.ThreadFactory;
-
-import org.bukkit.plugin.Plugin;
-import org.bukkit.scheduler.BukkitScheduler;
-
 import com.github.arthurfiorette.sinklibrary.BasePlugin;
 import com.github.arthurfiorette.sinklibrary.interfaces.BaseComponent;
+import java.util.concurrent.ThreadFactory;
+import org.bukkit.plugin.Plugin;
+import org.bukkit.scheduler.BukkitScheduler;
 
 /**
  * Every created thread from this object runs with the specified
@@ -20,7 +18,7 @@ import com.github.arthurfiorette.sinklibrary.interfaces.BaseComponent;
  * {@link BukkitExecutor#syncThreadFactory(BasePlugin)} method provides a more
  * useful simple implementation, that sets the created thread context to known
  * values before returning it.
- * 
+ *
  * @author https://github.com/ArthurFiorette/sink-library/
  */
 public class BukkitThreadFactory implements ThreadFactory, BaseComponent {
@@ -36,9 +34,9 @@ public class BukkitThreadFactory implements ThreadFactory, BaseComponent {
   /**
    * Create a async thread factory that every thread runs in asynchronously with
    * {@link BukkitScheduler#runTaskAsynchronously(Plugin, Runnable)}.
-   * 
+   *
    * @param plugin The basic plugin to assign to the created thread factory
-   * 
+   *
    * @return the newly creted ThreadFactory
    */
   public static ThreadFactory ofAsync(BasePlugin plugin) {
@@ -48,9 +46,9 @@ public class BukkitThreadFactory implements ThreadFactory, BaseComponent {
   /**
    * Create a sync thread factory that every thread runs in synchronously with
    * {@link BukkitScheduler#runTask(Plugin, Runnable)}.
-   * 
+   *
    * @param plugin The basic plugin to assign to the created thread factory
-   * 
+   *
    * @return the newly creted ThreadFactory
    */
   public static ThreadFactory ofSync(BasePlugin plugin) {
@@ -59,13 +57,15 @@ public class BukkitThreadFactory implements ThreadFactory, BaseComponent {
 
   @Override
   public Thread newThread(Runnable runnable) {
-    Thread thread = new Thread(() -> {
-      try {
-        context.run(plugin, runnable);
-      } catch (Throwable t) {
-        plugin.treatThrowable(this.getClass(), t, "Catched exception while runnin this thread.");
+    Thread thread = new Thread(
+      () -> {
+        try {
+          context.run(plugin, runnable);
+        } catch (Throwable t) {
+          plugin.treatThrowable(this.getClass(), t, "Catched exception while runnin this thread.");
+        }
       }
-    });
+    );
     thread.setDaemon(false);
     thread.setName(this.getClass().getSimpleName() + "> " + runnable.getClass().getSimpleName());
     return thread;
@@ -79,5 +79,4 @@ public class BukkitThreadFactory implements ThreadFactory, BaseComponent {
   public TaskContext getContext() {
     return context;
   }
-
 }

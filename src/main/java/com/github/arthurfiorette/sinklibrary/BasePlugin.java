@@ -1,15 +1,12 @@
 package com.github.arthurfiorette.sinklibrary;
 
+import com.github.arthurfiorette.sinklibrary.interfaces.BaseService;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Supplier;
 import java.util.logging.Level;
-
 import org.bukkit.plugin.Plugin;
 
-import com.github.arthurfiorette.sinklibrary.interfaces.BaseService;
-
 public interface BasePlugin extends Plugin {
-
   @Override
   void onEnable();
 
@@ -25,9 +22,9 @@ public interface BasePlugin extends Plugin {
   /**
    * Register a service to this plugin. <b>Every service must have a different
    * class from each other.</b>
-   * 
+   *
    * @param services
-   * 
+   *
    * @return himself for method chaining
    */
   BasePlugin register(BaseService... services);

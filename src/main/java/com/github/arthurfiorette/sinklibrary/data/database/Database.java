@@ -43,11 +43,10 @@ public interface Database<K, V> {
 
   /**
    * Return all values in this database for these keys
-   * 
+   *
    * @param keys any string key collection
-   * 
+   *
    * @return the collected list
    */
   Collection<V> getMany(Collection<K> keys);
-
 }

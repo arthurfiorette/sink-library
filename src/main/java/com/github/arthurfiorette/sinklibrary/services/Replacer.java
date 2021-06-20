@@ -5,10 +5,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.function.Supplier;
 import java.util.function.UnaryOperator;
-
-import org.bukkit.OfflinePlayer;
-
 import me.clip.placeholderapi.PlaceholderAPI;
+import org.bukkit.OfflinePlayer;
 
 /**
  * A better text replacer that supports PlaceholderAPI (if enabled)
@@ -53,7 +51,7 @@ public class Replacer {
    */
   public String replace(String str) {
     String replaced = str;
-    for(Entry<String, Supplier<String>> entry: placeholders.entrySet()) {
+    for (Entry<String, Supplier<String>> entry : placeholders.entrySet()) {
       replaced = replaced.replace(entry.getKey(), entry.getValue().get());
     }
     return SpigotService.setColors(replaced);
