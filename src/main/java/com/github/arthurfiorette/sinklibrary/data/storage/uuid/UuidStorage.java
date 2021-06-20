@@ -1,11 +1,12 @@
 package com.github.arthurfiorette.sinklibrary.data.storage.uuid;
 
-import com.github.arthurfiorette.sinklibrary.data.database.JsonDatabase;
-import com.github.arthurfiorette.sinklibrary.data.storage.gson.GsonStorage;
-import com.github.arthurfiorette.sinklibrary.interfaces.Identifiable;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
+
+import com.github.arthurfiorette.sinklibrary.data.database.JsonDatabase;
+import com.github.arthurfiorette.sinklibrary.data.storage.gson.GsonStorage;
+import com.github.arthurfiorette.sinklibrary.interfaces.Identifiable;
 
 public class UuidStorage<V extends Identifiable> extends GsonStorage<UUID, V> {
 

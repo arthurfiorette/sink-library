@@ -1,19 +1,21 @@
 package com.github.arthurfiorette.sinklibrary.item;
 
-import com.github.arthurfiorette.sinklibrary.services.JavaService;
-import com.github.arthurfiorette.sinklibrary.services.SpigotService;
 import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 import java.util.function.UnaryOperator;
+
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.material.MaterialData;
+
+import com.github.arthurfiorette.sinklibrary.services.JavaService;
+import com.github.arthurfiorette.sinklibrary.services.SpigotService;
 
 /**
  * A builder class to customize in multiple ways a item stack.
@@ -25,7 +27,7 @@ public class ItemBuilder {
   private transient ItemStack lastBuild = new ItemStack(Material.AIR);
   private transient boolean modified = true;
 
-  private Material material;
+  private final Material material;
   private EnumMap<ItemProperty, Consumer<ItemStack>> properties = new EnumMap<>(ItemProperty.class);
 
   /**
@@ -85,10 +87,7 @@ public class ItemBuilder {
    * @return itself
    */
   public ItemBuilder addEnchantments(Map<Enchantment, Integer> enchantments) {
-    return this.addProperties(
-        ItemProperty.ENCHANTMENT,
-        is -> is.addUnsafeEnchantments(enchantments)
-      );
+    return this.addProperties(ItemProperty.ENCHANTMENT, is -> is.addUnsafeEnchantments(enchantments));
   }
 
   /**
@@ -97,10 +96,7 @@ public class ItemBuilder {
    * @return itself
    */
   public ItemBuilder setName(String name) {
-    return this.addProperties(
-        ItemProperty.NAME,
-        is -> SpigotService.updateItemMeta(is, im -> im.setDisplayName(name))
-      );
+    return this.addProperties(ItemProperty.NAME, is -> SpigotService.updateItemMeta(is, im -> im.setDisplayName(name)));
   }
 
   /**
@@ -118,17 +114,10 @@ public class ItemBuilder {
    * @return itself
    */
   public ItemBuilder setItemFlags(ItemFlag... itemFlags) {
-    return this.addProperties(
-        ItemProperty.ITEM_FLAG,
-        is ->
-          SpigotService.updateItemMeta(
-            is,
-            im -> {
-              im.removeItemFlags(ItemFlag.values());
-              im.addItemFlags(itemFlags);
-            }
-          )
-      );
+    return this.addProperties(ItemProperty.ITEM_FLAG, is -> SpigotService.updateItemMeta(is, im -> {
+      im.removeItemFlags(ItemFlag.values());
+      im.addItemFlags(itemFlags);
+    }));
   }
 
   /**
@@ -137,10 +126,8 @@ public class ItemBuilder {
    * @return itself
    */
   public ItemBuilder addItemFlags(ItemFlag... itemFlags) {
-    return this.addProperties(
-        ItemProperty.ITEM_FLAG,
-        is -> SpigotService.updateItemMeta(is, im -> im.addItemFlags(itemFlags))
-      );
+    return this.addProperties(ItemProperty.ITEM_FLAG,
+        is -> SpigotService.updateItemMeta(is, im -> im.addItemFlags(itemFlags)));
   }
 
   /**
@@ -158,10 +145,7 @@ public class ItemBuilder {
    * @return itself
    */
   public ItemBuilder setLore(List<String> lore) {
-    return this.addProperties(
-        ItemProperty.LORE,
-        is -> SpigotService.updateItemMeta(is, im -> im.setLore(lore))
-      );
+    return this.addProperties(ItemProperty.LORE, is -> SpigotService.updateItemMeta(is, im -> im.setLore(lore)));
   }
 
   /**
@@ -179,11 +163,9 @@ public class ItemBuilder {
    * @return itself
    */
   public ItemBuilder addLore(List<String> lore) {
-    if (properties.containsKey(ItemProperty.LORE)) {
-      return this.addProperties(
-          ItemProperty.LORE,
-          is -> SpigotService.updateItemMeta(is, im -> im.getLore().addAll(lore))
-        );
+    if (this.properties.containsKey(ItemProperty.LORE)) {
+      return this.addProperties(ItemProperty.LORE,
+          is -> SpigotService.updateItemMeta(is, im -> im.getLore().addAll(lore)));
     }
     return this.setLore(lore);
   }
@@ -194,10 +176,8 @@ public class ItemBuilder {
    * @return itself
    */
   public ItemBuilder setUnbreakable(boolean unbreakable) {
-    return this.addProperties(
-        ItemProperty.CUSTOM_META,
-        is -> SpigotService.updateItemMeta(is, im -> im.spigot().setUnbreakable(unbreakable))
-      );
+    return this.addProperties(ItemProperty.CUSTOM_META,
+        is -> SpigotService.updateItemMeta(is, im -> im.spigot().setUnbreakable(unbreakable)));
   }
 
   /**
@@ -206,10 +186,7 @@ public class ItemBuilder {
    * @return itself
    */
   public ItemBuilder addCustomMeta(UnaryOperator<ItemMeta> customMeta) {
-    return this.addProperties(
-        ItemProperty.CUSTOM_META,
-        is -> is.setItemMeta(customMeta.apply(is.getItemMeta()))
-      );
+    return this.addProperties(ItemProperty.CUSTOM_META, is -> is.setItemMeta(customMeta.apply(is.getItemMeta())));
   }
 
   /**
@@ -219,28 +196,28 @@ public class ItemBuilder {
    * @return the item stack
    */
   public ItemStack build() {
-    if (!modified) {
+    if (!this.modified) {
       return this.getLastBuild();
     }
-    ItemStack item = new ItemStack(material);
-    properties.values().stream().forEach(c -> c.accept(item));
-    modified = false;
-    return lastBuild = item;
+    ItemStack item = new ItemStack(this.material);
+    this.properties.values().stream().forEach(c -> c.accept(item));
+    this.modified = false;
+    return this.lastBuild = item;
   }
 
   /**
    * @return the last item stack build or null if there wasn't a last build
    */
   public ItemStack getLastBuild() {
-    return lastBuild;
+    return this.lastBuild;
   }
 
   /**
    * @return a copy fro this builder
    */
   public ItemBuilder copy() {
-    ItemBuilder clone = new ItemBuilder(material);
-    clone.properties = properties;
+    ItemBuilder clone = new ItemBuilder(this.material);
+    clone.properties = this.properties;
     return clone;
   }
 
@@ -252,17 +229,17 @@ public class ItemBuilder {
    * @return itself
    */
   public ItemBuilder remove(ItemProperty property) {
-    properties.remove(property);
+    this.properties.remove(property);
     return this;
   }
 
   private ItemBuilder addProperties(ItemProperty type, Consumer<ItemStack> consumer) {
-    if (properties.containsKey(type) && type.isCumulative()) {
-      properties.compute(type, (k, v) -> v.andThen(consumer));
+    if (this.properties.containsKey(type) && type.isCumulative()) {
+      this.properties.compute(type, (k, v) -> v.andThen(consumer));
     } else {
-      properties.put(type, consumer);
+      this.properties.put(type, consumer);
     }
-    modified = true;
+    this.modified = true;
     return this;
   }
 }

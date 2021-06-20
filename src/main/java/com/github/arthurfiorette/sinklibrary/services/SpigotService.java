@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -92,7 +93,7 @@ public final class SpigotService {
    * @return true if it fits between 0 and 64
    */
   public static boolean isMinecraftPack(long amount) {
-    return (amount > 0 && amount <= 64);
+    return amount > 0 && amount <= 64;
   }
 
   /**
@@ -152,8 +153,8 @@ public final class SpigotService {
    * @return the slot value based on the column and row
    */
   public static int getChestSlot(int column, int row) {
-    row = (row <= 0) ? 1 : (row > 6) ? 6 : row;
-    column = (column <= 0) ? 1 : (column > 9) ? 9 : column;
+    row = row <= 0 ? 1 : row > 6 ? 6 : row;
+    column = column <= 0 ? 1 : column > 9 ? 9 : column;
     return 9 * (row - 1) + column - 1;
   }
 
@@ -164,7 +165,7 @@ public final class SpigotService {
    * @param players the players to play the sound
    */
   public static void playSound(Sound sound, Player... players) {
-    for (Player p : players) {
+    for(Player p: players) {
       p.playSound(p.getLocation(), sound, 3.0F, 0.5F);
     }
   }

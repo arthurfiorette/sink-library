@@ -1,10 +1,12 @@
 package com.github.arthurfiorette.sinklibrary.config.files;
 
+import java.io.File;
+
+import org.bukkit.configuration.file.FileConfiguration;
+
 import com.github.arthurfiorette.sinklibrary.BasePlugin;
 import com.github.arthurfiorette.sinklibrary.config.YmlFile;
 import com.github.arthurfiorette.sinklibrary.interfaces.BaseComponent;
-import java.io.File;
-import org.bukkit.configuration.file.FileConfiguration;
 
 /**
  * The config file is a specific implementation of yml file that is exactly
@@ -29,17 +31,17 @@ public class ConfigFile implements YmlFile, BaseComponent {
 
   @Override
   public void load() {
-    plugin.reloadConfig();
+    this.plugin.reloadConfig();
   }
 
   @Override
   public void setup(String defaultPath, boolean replace) {
-    plugin.saveResource(defaultPath, replace);
+    this.plugin.saveResource(defaultPath, replace);
   }
 
   @Override
   public FileConfiguration getConfig() {
-    return plugin.getConfig();
+    return this.plugin.getConfig();
   }
 
   @Override
@@ -50,12 +52,11 @@ public class ConfigFile implements YmlFile, BaseComponent {
   @Override
   public File asFile() {
     throw new UnsupportedOperationException(
-      "For safety reasons, you do not want to modify the file used as config.yml"
-    );
+        "For safety reasons, you do not want to modify the file used as config.yml");
   }
 
   @Override
   public BasePlugin getPlugin() {
-    return plugin;
+    return this.plugin;
   }
 }

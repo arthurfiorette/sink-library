@@ -21,42 +21,42 @@ public class MemoryDatabase<K, T> implements Database<K, T> {
    */
   public void clear() {
     this.checkState();
-    database = new ConcurrentHashMap<>();
+    this.database = new ConcurrentHashMap<>();
   }
 
   @Override
   public void open() {
     this.checkState();
-    database = new ConcurrentHashMap<>();
+    this.database = new ConcurrentHashMap<>();
   }
 
   @Override
   public boolean isOpen() {
-    return database != null;
+    return this.database != null;
   }
 
   @Override
   public void close() {
-    database = null;
+    this.database = null;
   }
 
   @Override
   public void save(K key, T value) {
     this.checkState();
-    database.put(key, value);
+    this.database.put(key, value);
   }
 
   @Override
   public T get(K key) {
     this.checkState();
-    return database.get(key);
+    return this.database.get(key);
   }
 
   @Override
   public Collection<T> getMany(Collection<K> keys) {
     this.checkState();
     List<T> list = new ArrayList<>();
-    for (K key : keys) {
+    for(K key: keys) {
       T t = this.get(key);
       if (t != null) {
         list.add(t);

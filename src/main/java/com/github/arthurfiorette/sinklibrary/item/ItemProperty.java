@@ -17,6 +17,6 @@ public enum ItemProperty {
   }
 
   public boolean isCumulative() {
-    return cumulative;
+    return this.cumulative;
   }
 }

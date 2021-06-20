@@ -1,13 +1,15 @@
 package com.github.arthurfiorette.sinklibrary.menu.management;
 
-import com.github.arthurfiorette.sinklibrary.BasePlugin;
-import com.github.arthurfiorette.sinklibrary.interfaces.BaseService;
-import com.github.arthurfiorette.sinklibrary.menu.SinkMenu;
 import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+
 import org.bukkit.entity.Player;
+
+import com.github.arthurfiorette.sinklibrary.BasePlugin;
+import com.github.arthurfiorette.sinklibrary.interfaces.BaseService;
+import com.github.arthurfiorette.sinklibrary.menu.SinkMenu;
 
 public abstract class MenuStorage<M extends Enum<M> & MenuFactory> implements BaseService {
 
@@ -24,7 +26,7 @@ public abstract class MenuStorage<M extends Enum<M> & MenuFactory> implements Ba
 
   @Override
   public BasePlugin getPlugin() {
-    return plugin;
+    return this.plugin;
   }
 
   @Override
@@ -39,17 +41,17 @@ public abstract class MenuStorage<M extends Enum<M> & MenuFactory> implements Ba
 
   @SuppressWarnings("unchecked")
   public <I extends SinkMenu> I get(Player player, M menu) {
-    EnumMap<M, SinkMenu> invs = inventories.get(player.getUniqueId());
+    EnumMap<M, SinkMenu> invs = this.inventories.get(player.getUniqueId());
 
     if (invs == null) {
-      invs = new EnumMap<>(clazz);
-      inventories.put(player.getUniqueId(), invs);
+      invs = new EnumMap<>(this.clazz);
+      this.inventories.put(player.getUniqueId(), invs);
     }
 
     SinkMenu sinkMenu = invs.get(menu);
 
     if (sinkMenu == null) {
-      sinkMenu = menu.create(plugin, player);
+      sinkMenu = menu.create(this.plugin, player);
       invs.put(menu, sinkMenu);
     }
 

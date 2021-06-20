@@ -1,8 +1,9 @@
 package com.github.arthurfiorette.sinklibrary.menu.management;
 
+import org.bukkit.entity.Player;
+
 import com.github.arthurfiorette.sinklibrary.BasePlugin;
 import com.github.arthurfiorette.sinklibrary.menu.SinkMenu;
-import org.bukkit.entity.Player;
 
 /**
  * Simple interface to target all classes that can create an SinkMenu.

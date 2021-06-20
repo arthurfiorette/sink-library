@@ -1,16 +1,18 @@
 package com.github.arthurfiorette.sinklibrary.menu;
 
-import com.github.arthurfiorette.sinklibrary.BasePlugin;
-import com.github.arthurfiorette.sinklibrary.interfaces.BaseComponent;
-import com.github.arthurfiorette.sinklibrary.menu.item.MenuItem;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
+
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
+
+import com.github.arthurfiorette.sinklibrary.BasePlugin;
+import com.github.arthurfiorette.sinklibrary.interfaces.BaseComponent;
+import com.github.arthurfiorette.sinklibrary.menu.item.MenuItem;
 
 /**
  * An minecraft menu with better methods and a fanciest way to handle with.
@@ -51,9 +53,9 @@ public abstract class SinkMenu implements InventoryHolder, BaseComponent {
    * Redraw the inventory clearing all items and redrawing them.
    */
   public void draw() {
-    inventory.clear();
-    itemMap = this.items().stream().collect(Collectors.toMap(MenuItem::getSlot, m -> m));
-    itemMap.forEach((slot, item) -> this.getInventory().setItem(slot, item.getItemStack()));
+    this.inventory.clear();
+    this.itemMap = this.items().stream().collect(Collectors.toMap(MenuItem::getSlot, m -> m));
+    this.itemMap.forEach((slot, item) -> this.getInventory().setItem(slot, item.getItemStack()));
   }
 
   /**
@@ -62,51 +64,51 @@ public abstract class SinkMenu implements InventoryHolder, BaseComponent {
    * @param redraw true if the inventory needs to be redrawed.
    */
   public void show(boolean redraw) {
-    if (inventory == null) {
-      inventory = Bukkit.createInventory(this, rows * 9, title);
+    if (this.inventory == null) {
+      this.inventory = Bukkit.createInventory(this, this.rows * 9, this.title);
       redraw = true;
     }
     if (redraw) {
       this.draw();
     }
-    player.openInventory(this.getInventory());
+    this.player.openInventory(this.getInventory());
   }
 
   /**
    * @return the player owner
    */
   public Player getPlayer() {
-    return player;
+    return this.player;
   }
 
   /**
    * @return the inventory title
    */
   public String getTitle() {
-    return title;
+    return this.title;
   }
 
   /**
    * @return the number of rows
    */
   public int getRows() {
-    return rows;
+    return this.rows;
   }
 
   /**
    * @return all the items on this menu as a slot map
    */
   public Map<Integer, MenuItem> getItems() {
-    return itemMap;
+    return this.itemMap;
   }
 
   @Override
   public Inventory getInventory() {
-    return inventory;
+    return this.inventory;
   }
 
   @Override
   public BasePlugin getPlugin() {
-    return plugin;
+    return this.plugin;
   }
 }

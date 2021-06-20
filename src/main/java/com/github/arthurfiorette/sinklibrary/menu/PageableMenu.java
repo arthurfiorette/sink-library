@@ -1,14 +1,16 @@
 package com.github.arthurfiorette.sinklibrary.menu;
 
-import com.github.arthurfiorette.sinklibrary.BasePlugin;
-import com.github.arthurfiorette.sinklibrary.menu.item.MenuItem;
-import com.google.common.collect.Lists;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.stream.Collectors;
+
 import org.bukkit.entity.Player;
+
+import com.github.arthurfiorette.sinklibrary.BasePlugin;
+import com.github.arthurfiorette.sinklibrary.menu.item.MenuItem;
+import com.google.common.collect.Lists;
 
 /**
  * An minecraft menu with better methods and a fanciest way to handle with. But
@@ -60,15 +62,12 @@ public abstract class PageableMenu<T> extends SinkMenu {
   @Override
   public void draw() {
     super.draw();
-    pageList =
-      Lists.partition(
-        this.requestValues().stream().map(this::toItem).collect(Collectors.toList()),
-        this.pageableSlots().length
-      );
-    List<MenuItem> items = pageList.get(page);
-    items.forEach(i -> itemMap.put(i.getSlot(), i));
+    this.pageList = Lists.partition(this.requestValues().stream().map(this::toItem).collect(Collectors.toList()),
+        this.pageableSlots().length);
+    List<MenuItem> items = this.pageList.get(this.page);
+    items.forEach(i -> this.itemMap.put(i.getSlot(), i));
     ListIterator<MenuItem> iterator = items.listIterator();
-    for (int i : this.pageableSlots()) {
+    for(int i: this.pageableSlots()) {
       if (!iterator.hasNext()) {
         break;
       }
@@ -83,7 +82,7 @@ public abstract class PageableMenu<T> extends SinkMenu {
    */
   public void nextPage() {
     if (this.hasNextPage()) {
-      page++;
+      this.page++;
       this.draw();
     }
   }
@@ -92,7 +91,7 @@ public abstract class PageableMenu<T> extends SinkMenu {
    * @return true if has a next page to be displayed
    */
   protected boolean hasNextPage() {
-    return (page + 1) < this.getPageList().size();
+    return this.page + 1 < this.getPageList().size();
   }
 
   /**
@@ -101,7 +100,7 @@ public abstract class PageableMenu<T> extends SinkMenu {
    */
   public void previousPage() {
     if (this.hasPreviousPage()) {
-      page--;
+      this.page--;
       this.draw();
     }
   }
@@ -110,13 +109,13 @@ public abstract class PageableMenu<T> extends SinkMenu {
    * @return true has a previous page to be displayed
    */
   protected boolean hasPreviousPage() {
-    return page > 0;
+    return this.page > 0;
   }
 
   /**
    * @return a list with a list of menu items. each list is a page.
    */
   protected List<List<MenuItem>> getPageList() {
-    return pageList;
+    return this.pageList;
   }
 }

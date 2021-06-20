@@ -1,8 +1,11 @@
 package com.github.arthurfiorette.sinklibrary.menu.item;
 
+import java.util.Objects;
+
+import org.bukkit.inventory.ItemStack;
+
 import com.github.arthurfiorette.sinklibrary.menu.actions.ClickAction;
 import com.github.arthurfiorette.sinklibrary.services.SpigotService;
-import org.bukkit.inventory.ItemStack;
 
 /**
  * Represents a stack of items to be in a SinkMenu
@@ -32,22 +35,22 @@ public class MenuItem {
    * @param action the action when clicked
    */
   public MenuItem(ItemStack item, ClickAction action) {
-    itemStack = item;
-    clickAction = action;
+    this.itemStack = item;
+    this.clickAction = action;
   }
 
   /**
    * @return the item stack
    */
   public ItemStack getItemStack() {
-    return itemStack;
+    return this.itemStack;
   }
 
   /**
    * @return the click action
    */
   public ClickAction getClickAction() {
-    return clickAction;
+    return this.clickAction;
   }
 
   /**
@@ -55,7 +58,7 @@ public class MenuItem {
    * explicitly defined
    */
   public int getColumn() {
-    return column;
+    return this.column;
   }
 
   /**
@@ -63,7 +66,7 @@ public class MenuItem {
    * defined
    */
   public int getRow() {
-    return row;
+    return this.row;
   }
 
   /**
@@ -71,7 +74,7 @@ public class MenuItem {
    * explicitly defined
    */
   public int getSlot() {
-    return row == -1 || column == -1 ? -1 : SpigotService.getChestSlot(column, row);
+    return this.row == -1 || this.column == -1 ? -1 : SpigotService.getChestSlot(this.column, this.row);
   }
 
   /**
@@ -100,13 +103,7 @@ public class MenuItem {
 
   @Override
   public int hashCode() {
-    final int prime = 31;
-    int result = 1;
-    result = prime * result + ((clickAction == null) ? 0 : clickAction.hashCode());
-    result = prime * result + column;
-    result = prime * result + ((itemStack == null) ? 0 : itemStack.hashCode());
-    result = prime * result + row;
-    return result;
+    return Objects.hash(clickAction, column, itemStack, row);
   }
 
   @Override
@@ -118,24 +115,16 @@ public class MenuItem {
       return false;
     }
     MenuItem other = (MenuItem) obj;
-    if (clickAction == null) {
-      if (other.clickAction != null) {
-        return false;
-      }
-    } else if (!clickAction.equals(other.clickAction)) {
+    if (!Objects.equals(this.clickAction, other.clickAction)) {
       return false;
     }
-    if (column != other.column) {
+    if (this.column != other.column) {
       return false;
     }
-    if (itemStack == null) {
-      if (other.itemStack != null) {
-        return false;
-      }
-    } else if (!itemStack.equals(other.itemStack)) {
+    if (!Objects.equals(this.itemStack, other.itemStack)) {
       return false;
     }
-    if (row != other.row) {
+    if (this.row != other.row) {
       return false;
     }
     return true;

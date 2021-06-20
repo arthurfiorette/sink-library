@@ -5,8 +5,10 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.function.Supplier;
 import java.util.function.UnaryOperator;
-import me.clip.placeholderapi.PlaceholderAPI;
+
 import org.bukkit.OfflinePlayer;
+
+import me.clip.placeholderapi.PlaceholderAPI;
 
 /**
  * A better text replacer that supports PlaceholderAPI (if enabled)
@@ -15,7 +17,7 @@ import org.bukkit.OfflinePlayer;
  */
 public class Replacer {
 
-  private Map<String, Supplier<String>> placeholders = new HashMap<>();
+  private final Map<String, Supplier<String>> placeholders = new HashMap<>();
 
   /**
    * Add a placeholder to replace when called.
@@ -38,7 +40,7 @@ public class Replacer {
    * @return the instance
    */
   public Replacer add(String placeholder, Supplier<String> supplier) {
-    placeholders.put(placeholder, supplier);
+    this.placeholders.put(placeholder, supplier);
     return this;
   }
 
@@ -51,7 +53,7 @@ public class Replacer {
    */
   public String replace(String str) {
     String replaced = str;
-    for (Entry<String, Supplier<String>> entry : placeholders.entrySet()) {
+    for(Entry<String, Supplier<String>> entry: this.placeholders.entrySet()) {
       replaced = replaced.replace(entry.getKey(), entry.getValue().get());
     }
     return SpigotService.setColors(replaced);

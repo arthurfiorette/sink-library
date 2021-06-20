@@ -2,8 +2,6 @@ package com.github.arthurfiorette.sinklibrary;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.CompletableFuture;
-import java.util.function.Supplier;
 import java.util.logging.Level;
 
 import org.bukkit.plugin.java.JavaPlugin;
@@ -27,13 +25,13 @@ public abstract class SinkPlugin extends JavaPlugin implements BasePlugin {
   protected void disable() {}
 
   public SinkPlugin() {
-    serviceCoordinator.add(this.services());
-    for(BaseComponent component: components()) {
+    this.serviceCoordinator.add(this.services());
+    for(BaseComponent component: this.components()) {
       if (component instanceof BaseService) {
         throw new IllegalArgumentException(
             "You registered an service as an component: " + component.getClass().getSimpleName());
       }
-      components.put(component.getClass(), component);
+      this.components.put(component.getClass(), component);
     }
   }
 
@@ -42,8 +40,8 @@ public abstract class SinkPlugin extends JavaPlugin implements BasePlugin {
    */
   @Override
   public final void onEnable() {
-    serviceCoordinator.requestEnable();
-    enable();
+    this.serviceCoordinator.requestEnable();
+    this.enable();
   }
 
   /**
@@ -51,12 +49,12 @@ public abstract class SinkPlugin extends JavaPlugin implements BasePlugin {
    */
   @Override
   public final void onDisable() {
-    serviceCoordinator.requestDisable();
-    disable();
+    this.serviceCoordinator.requestDisable();
+    this.disable();
   }
 
   public YmlContainer getYmlContainer() {
-    return ymlContainer;
+    return this.ymlContainer;
   }
 
   @Override
@@ -73,19 +71,19 @@ public abstract class SinkPlugin extends JavaPlugin implements BasePlugin {
 
   @Override
   public void register(BaseService... services) {
-    log(Level.WARNING, "SinkSpigot services must be added with the dedicated method");
-    serviceCoordinator.add(services);
+    this.log(Level.WARNING, "SinkSpigot services must be added with the dedicated method");
+    this.serviceCoordinator.add(services);
   }
 
   @Override
   public boolean unregister(Class<? extends BaseService> clazz, boolean disable) {
-    log(Level.WARNING, "SinkSpigot services should no");
-    return serviceCoordinator.remove(clazz, disable);
+    this.log(Level.WARNING, "SinkSpigot services should no");
+    return this.serviceCoordinator.remove(clazz, disable);
   }
 
   @Override
   public <T extends BaseService> T getService(Class<T> clazz) {
-    return serviceCoordinator.getService(clazz);
+    return this.serviceCoordinator.getService(clazz);
   }
 
   @Override

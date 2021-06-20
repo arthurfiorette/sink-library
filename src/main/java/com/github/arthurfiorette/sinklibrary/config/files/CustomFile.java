@@ -1,11 +1,13 @@
 package com.github.arthurfiorette.sinklibrary.config.files;
 
+import java.io.File;
+
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
+
 import com.github.arthurfiorette.sinklibrary.BasePlugin;
 import com.github.arthurfiorette.sinklibrary.config.YmlFile;
 import com.github.arthurfiorette.sinklibrary.interfaces.BaseComponent;
-import java.io.File;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
 
 /**
  * A custom file is a default implementation for any yml file, it's a simple way
@@ -31,36 +33,36 @@ public class CustomFile implements YmlFile, BaseComponent {
   public CustomFile(BasePlugin plugin, File folder, String name) {
     this.plugin = plugin;
     this.name = name.endsWith(".yml") ? name : name + ".yml";
-    file = new File(folder, this.name);
+    this.file = new File(folder, this.name);
   }
 
   @Override
   public void load() {
-    config = YamlConfiguration.loadConfiguration(file);
+    this.config = YamlConfiguration.loadConfiguration(this.file);
   }
 
   @Override
   public void setup(String defaultPath, boolean replace) {
-    plugin.saveResource(defaultPath, replace);
+    this.plugin.saveResource(defaultPath, replace);
   }
 
   @Override
   public FileConfiguration getConfig() {
-    return config;
+    return this.config;
   }
 
   @Override
   public String getName() {
-    return name;
+    return this.name;
   }
 
   @Override
   public File asFile() {
-    return file;
+    return this.file;
   }
 
   @Override
   public BasePlugin getPlugin() {
-    return plugin;
+    return this.plugin;
   }
 }

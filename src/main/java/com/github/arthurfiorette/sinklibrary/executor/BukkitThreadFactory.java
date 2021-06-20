@@ -1,10 +1,12 @@
 package com.github.arthurfiorette.sinklibrary.executor;
 
-import com.github.arthurfiorette.sinklibrary.BasePlugin;
-import com.github.arthurfiorette.sinklibrary.interfaces.BaseComponent;
 import java.util.concurrent.ThreadFactory;
+
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitScheduler;
+
+import com.github.arthurfiorette.sinklibrary.BasePlugin;
+import com.github.arthurfiorette.sinklibrary.interfaces.BaseComponent;
 
 /**
  * Every created thread from this object runs with the specified
@@ -23,8 +25,8 @@ import org.bukkit.scheduler.BukkitScheduler;
  */
 public class BukkitThreadFactory implements ThreadFactory, BaseComponent {
 
-  private BasePlugin plugin;
-  private TaskContext context;
+  private final BasePlugin plugin;
+  private final TaskContext context;
 
   public BukkitThreadFactory(BasePlugin plugin, TaskContext context) {
     this.plugin = plugin;
@@ -57,15 +59,13 @@ public class BukkitThreadFactory implements ThreadFactory, BaseComponent {
 
   @Override
   public Thread newThread(Runnable runnable) {
-    Thread thread = new Thread(
-      () -> {
-        try {
-          context.run(plugin, runnable);
-        } catch (Throwable t) {
-          plugin.treatThrowable(this.getClass(), t, "Catched exception while runnin this thread.");
-        }
+    Thread thread = new Thread(() -> {
+      try {
+        this.context.run(this.plugin, runnable);
+      } catch (Throwable t) {
+        this.plugin.treatThrowable(this.getClass(), t, "Catched exception while runnin this thread.");
       }
-    );
+    });
     thread.setDaemon(false);
     thread.setName(this.getClass().getSimpleName() + "> " + runnable.getClass().getSimpleName());
     return thread;
@@ -73,10 +73,10 @@ public class BukkitThreadFactory implements ThreadFactory, BaseComponent {
 
   @Override
   public BasePlugin getPlugin() {
-    return plugin;
+    return this.plugin;
   }
 
   public TaskContext getContext() {
-    return context;
+    return this.context;
   }
 }
