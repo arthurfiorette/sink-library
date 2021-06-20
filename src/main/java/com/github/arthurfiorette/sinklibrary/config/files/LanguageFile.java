@@ -1,14 +1,13 @@
 package com.github.arthurfiorette.sinklibrary.config.files;
 
+import com.github.arthurfiorette.sinklibrary.BasePlugin;
+import com.github.arthurfiorette.sinklibrary.services.Replacer;
+import com.google.common.collect.Lists;
 import java.io.File;
 import java.util.List;
 import java.util.function.UnaryOperator;
 import java.util.logging.Level;
 import java.util.stream.Collectors;
-
-import com.github.arthurfiorette.sinklibrary.BasePlugin;
-import com.github.arthurfiorette.sinklibrary.services.Replacer;
-import com.google.common.collect.Lists;
 
 /**
  * A language file is a yml file specified to handle translations. A good enum
@@ -82,7 +81,10 @@ public abstract class LanguageFile<L extends Enum<L>> extends CustomFile {
    * error.
    */
   public List<String> asList(L lang, UnaryOperator<Replacer> replacer) {
-    return this.asList(lang).stream().map(str -> Replacer.replace(str, replacer)).collect(Collectors.toList());
+    return this.asList(lang)
+      .stream()
+      .map(str -> Replacer.replace(str, replacer))
+      .collect(Collectors.toList());
   }
 
   /**

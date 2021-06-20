@@ -1,11 +1,9 @@
 package com.github.arthurfiorette.sinklibrary.menu.item;
 
-import java.util.Objects;
-
-import org.bukkit.inventory.ItemStack;
-
 import com.github.arthurfiorette.sinklibrary.menu.actions.ClickAction;
 import com.github.arthurfiorette.sinklibrary.services.SpigotService;
+import java.util.Objects;
+import org.bukkit.inventory.ItemStack;
 
 /**
  * Represents a stack of items to be in a SinkMenu
@@ -74,7 +72,9 @@ public class MenuItem {
    * explicitly defined
    */
   public int getSlot() {
-    return this.row == -1 || this.column == -1 ? -1 : SpigotService.getChestSlot(this.column, this.row);
+    return this.row == -1 || this.column == -1
+      ? -1
+      : SpigotService.getChestSlot(this.column, this.row);
   }
 
   /**

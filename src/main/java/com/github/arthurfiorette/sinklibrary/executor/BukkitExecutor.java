@@ -3,13 +3,11 @@ package com.github.arthurfiorette.sinklibrary.executor;
 import static com.github.arthurfiorette.sinklibrary.executor.BukkitThreadFactory.ofAsync;
 import static com.github.arthurfiorette.sinklibrary.executor.BukkitThreadFactory.ofSync;
 
+import com.github.arthurfiorette.sinklibrary.BasePlugin;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
-
 import org.bukkit.scheduler.BukkitScheduler;
-
-import com.github.arthurfiorette.sinklibrary.BasePlugin;
 
 /**
  * Simple interface to target all executors that runs with a
@@ -103,7 +101,10 @@ public final class BukkitExecutor {
    *
    * @throws IllegalArgumentException if {@code corePoolSize < 0}
    */
-  public static ScheduledExecutorService newSyncScheduledThreadPool(BasePlugin plugin, int corePoolSize) {
+  public static ScheduledExecutorService newSyncScheduledThreadPool(
+    BasePlugin plugin,
+    int corePoolSize
+  ) {
     return Executors.newScheduledThreadPool(corePoolSize, ofSync(plugin));
   }
 
@@ -119,7 +120,10 @@ public final class BukkitExecutor {
    *
    * @throws IllegalArgumentException if {@code corePoolSize < 0}
    */
-  public static ScheduledExecutorService newAsyncScheduledThreadPool(BasePlugin plugin, int corePoolSize) {
+  public static ScheduledExecutorService newAsyncScheduledThreadPool(
+    BasePlugin plugin,
+    int corePoolSize
+  ) {
     return Executors.newScheduledThreadPool(corePoolSize, ofAsync(plugin));
   }
 

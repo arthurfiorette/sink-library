@@ -1,16 +1,14 @@
 package com.github.arthurfiorette.sinklibrary.menu;
 
+import com.github.arthurfiorette.sinklibrary.BasePlugin;
+import com.github.arthurfiorette.sinklibrary.menu.item.MenuItem;
+import com.google.common.collect.Lists;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.stream.Collectors;
-
 import org.bukkit.entity.Player;
-
-import com.github.arthurfiorette.sinklibrary.BasePlugin;
-import com.github.arthurfiorette.sinklibrary.menu.item.MenuItem;
-import com.google.common.collect.Lists;
 
 /**
  * An minecraft menu with better methods and a fanciest way to handle with. But
@@ -62,12 +60,15 @@ public abstract class PageableMenu<T> extends SinkMenu {
   @Override
   public void draw() {
     super.draw();
-    this.pageList = Lists.partition(this.requestValues().stream().map(this::toItem).collect(Collectors.toList()),
-        this.pageableSlots().length);
+    this.pageList =
+      Lists.partition(
+        this.requestValues().stream().map(this::toItem).collect(Collectors.toList()),
+        this.pageableSlots().length
+      );
     List<MenuItem> items = this.pageList.get(this.page);
     items.forEach(i -> this.itemMap.put(i.getSlot(), i));
     ListIterator<MenuItem> iterator = items.listIterator();
-    for(int i: this.pageableSlots()) {
+    for (int i : this.pageableSlots()) {
       if (!iterator.hasNext()) {
         break;
       }

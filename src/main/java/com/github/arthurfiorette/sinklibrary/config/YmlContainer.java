@@ -1,11 +1,10 @@
 package com.github.arthurfiorette.sinklibrary.config;
 
+import com.github.arthurfiorette.sinklibrary.BasePlugin;
+import com.github.arthurfiorette.sinklibrary.interfaces.BaseComponent;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-
-import com.github.arthurfiorette.sinklibrary.BasePlugin;
-import com.github.arthurfiorette.sinklibrary.interfaces.BaseComponent;
 
 /**
  * This class is a container for handle all the yml files from a single plugin

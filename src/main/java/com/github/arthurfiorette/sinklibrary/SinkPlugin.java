@@ -1,14 +1,12 @@
 package com.github.arthurfiorette.sinklibrary;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.logging.Level;
-
-import org.bukkit.plugin.java.JavaPlugin;
-
 import com.github.arthurfiorette.sinklibrary.config.YmlContainer;
 import com.github.arthurfiorette.sinklibrary.interfaces.BaseComponent;
 import com.github.arthurfiorette.sinklibrary.interfaces.BaseService;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.logging.Level;
+import org.bukkit.plugin.java.JavaPlugin;
 
 public abstract class SinkPlugin extends JavaPlugin implements BasePlugin {
 
@@ -26,10 +24,11 @@ public abstract class SinkPlugin extends JavaPlugin implements BasePlugin {
 
   public SinkPlugin() {
     this.serviceCoordinator.add(this.services());
-    for(BaseComponent component: this.components()) {
+    for (BaseComponent component : this.components()) {
       if (component instanceof BaseService) {
         throw new IllegalArgumentException(
-            "You registered an service as an component: " + component.getClass().getSimpleName());
+          "You registered an service as an component: " + component.getClass().getSimpleName()
+        );
       }
       this.components.put(component.getClass(), component);
     }

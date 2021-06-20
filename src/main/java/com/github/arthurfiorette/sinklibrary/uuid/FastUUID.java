@@ -57,8 +57,24 @@ public class FastUUID {
 
   private static final int UUID_STRING_LENGTH = 36;
 
-  private static final char[] HEX_DIGITS = new char[] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c',
-      'd', 'e', 'f', };
+  private static final char[] HEX_DIGITS = new char[] {
+    '0',
+    '1',
+    '2',
+    '3',
+    '4',
+    '5',
+    '6',
+    '7',
+    '8',
+    '9',
+    'a',
+    'b',
+    'c',
+    'd',
+    'e',
+    'f',
+  };
 
   private static final long[] HEX_VALUES = new long[128];
 
@@ -109,8 +125,13 @@ public class FastUUID {
    * {@link UUID#toString()}
    */
   public static UUID parseUUID(final CharSequence uuidSequence) {
-    if (uuidSequence.length() != UUID_STRING_LENGTH || uuidSequence.charAt(8) != '-' || uuidSequence.charAt(13) != '-'
-        || uuidSequence.charAt(18) != '-' || uuidSequence.charAt(23) != '-') {
+    if (
+      uuidSequence.length() != UUID_STRING_LENGTH ||
+      uuidSequence.charAt(8) != '-' ||
+      uuidSequence.charAt(13) != '-' ||
+      uuidSequence.charAt(18) != '-' ||
+      uuidSequence.charAt(23) != '-'
+    ) {
       throw new IllegalArgumentException("Illegal UUID string: " + uuidSequence);
     }
 

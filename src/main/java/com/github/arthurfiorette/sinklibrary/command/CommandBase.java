@@ -1,21 +1,19 @@
 package com.github.arthurfiorette.sinklibrary.command;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
-import org.bukkit.command.PluginCommand;
-import org.bukkit.command.TabExecutor;
-
 import com.github.arthurfiorette.sinklibrary.BasePlugin;
 import com.github.arthurfiorette.sinklibrary.SinkPlugin;
 import com.github.arthurfiorette.sinklibrary.interfaces.BaseService;
 import com.google.common.base.Verify;
 import com.google.common.base.VerifyException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
+import org.bukkit.command.PluginCommand;
+import org.bukkit.command.TabExecutor;
 
 /**
  * This class is a way to create commands
@@ -84,7 +82,12 @@ public final class CommandBase implements TabExecutor, BaseService {
   }
 
   @Override
-  public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
+  public List<String> onTabComplete(
+    CommandSender sender,
+    Command command,
+    String alias,
+    String[] args
+  ) {
     if (args.length == 0) {
       return new ArrayList<>(this.commandMap.keySet());
     } else if (this.commandMap.containsKey(args[0])) {
@@ -109,7 +112,7 @@ public final class CommandBase implements TabExecutor, BaseService {
    * @param args all the new arguments to be added to this command
    */
   public void addArguments(Argument... args) {
-    for(Argument arg: args) {
+    for (Argument arg : args) {
       this.commandMap.put(arg.getName(), arg);
       if (this.defaultArgument == null) {
         this.defaultArgument = arg;
