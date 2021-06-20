@@ -1,31 +1,32 @@
-package com.github.arthurfiorette.sinklibrary.services.utils;
+package com.github.arthurfiorette.sinklibrary.services;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
+
 import org.apache.commons.lang.WordUtils;
 import org.bukkit.ChatColor;
 
 /**
  * A service class that handles with texts.
  *
- * @author https://github.com/Hazork/sink-library/
+ * @author https://github.com/ArthurFiorette/sink-library/
  */
-public final class TextServices {
+public final class TextService {
 
   /**
    * A private constructor prevent callers from accidentally instantiating an
    * instance.
    */
-  private TextServices() {}
+  private TextService() {}
 
   /**
    * Returns a progress bar in String.
    * <p>
    * {@code buildProgressBar(10, #, *, 6, 10)} will return {@code######****}.
    * <p>
-   * Same as {@link TextServices#buildProgressBar(int, String, String, double)}.
+   * Same as {@link TextService#buildProgressBar(int, String, String, double)}.
    *
    * @param width the width of the progress bar
    * @param incomplete the text placed when your representative percentage is
@@ -37,15 +38,10 @@ public final class TextServices {
    *
    * @return the progress bar string
    *
-   * @see TextServices#buildProgressBar(int, String, String, double)
+   * @see TextService#buildProgressBar(int, String, String, double)
    */
-  public static String buildProgressBar(
-    int width,
-    String incomplete,
-    String complete,
-    long currentValue,
-    long maxValue
-  ) {
+  public static String buildProgressBar(int width, String incomplete, String complete, long currentValue,
+      long maxValue) {
     return buildProgressBar(width, incomplete, complete, (((double) currentValue) / maxValue));
   }
 
@@ -63,27 +59,22 @@ public final class TextServices {
    *
    * @return the progress bar string
    */
-  public static String buildProgressBar(
-    int width,
-    String incomplete,
-    String complete,
-    double percent
-  ) {
+  public static String buildProgressBar(int width, String incomplete, String complete, double percent) {
     if (percent > 1 || percent < 0) {
       throw new IllegalArgumentException("Percent should be between 1 and 0");
     }
     StringBuilder sb = new StringBuilder();
     double i = 0;
-    for (; i < (percent * width); i++) {
+    for(; i < (percent * width); i++) {
       sb.append(complete);
     }
-    for (; i < width; i++) {
+    for(; i < width; i++) {
       sb.append(incomplete);
     }
     return sb.toString();
   }
 
-  private static final String lineSeparator = "TextService:https://github.com/hazork:lineSeparator"; // S2
+  public static final String LINE_SEPARATOR = "a9f879156392911e229ffccd7618ed88213f293f472ca5eb5e79da1bb698dc45"; // S2
 
   /**
    * Split any minecraft colored text into sized lines without losing the color.
@@ -107,9 +98,7 @@ public final class TextServices {
    * @return the list with splitted lines
    */
   public static List<String> splitText(String text, int width, String newLine) {
-    return Arrays.asList(
-      WordUtils.wrap(text, width, lineSeparator + newLine, false).split(lineSeparator)
-    );
+    return Arrays.asList(WordUtils.wrap(text, width, LINE_SEPARATOR + newLine, false).split(LINE_SEPARATOR));
   }
 
   /**
@@ -123,7 +112,7 @@ public final class TextServices {
    */
   public static String forceColor(String text) {
     List<String> texts = new ArrayList<>();
-    for (String str : text.split("§")) {
+    for(String str: text.split("§")) {
       if (str.isEmpty()) {
         continue;
       }
@@ -136,7 +125,7 @@ public final class TextServices {
       } else {
         String lastColor = ChatColor.getLastColors(str);
         List<String> words = new ArrayList<>();
-        for (String word : str.split(" ")) {
+        for(String word: str.split(" ")) {
           if (!word.startsWith("§")) {
             word = lastColor + word;
           }

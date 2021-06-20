@@ -1,18 +1,19 @@
 package com.github.arthurfiorette.sinklibrary.services;
 
-import com.github.arthurfiorette.sinklibrary.services.utils.SpigotServices;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.function.Supplier;
 import java.util.function.UnaryOperator;
-import me.clip.placeholderapi.PlaceholderAPI;
+
 import org.bukkit.OfflinePlayer;
+
+import me.clip.placeholderapi.PlaceholderAPI;
 
 /**
  * A better text replacer that supports PlaceholderAPI (if enabled)
  *
- * @author https://github.com/Hazork/sink-library/
+ * @author https://github.com/ArthurFiorette/sink-library/
  */
 public class Replacer {
 
@@ -52,10 +53,10 @@ public class Replacer {
    */
   public String replace(String str) {
     String replaced = str;
-    for (Entry<String, Supplier<String>> entry : placeholders.entrySet()) {
+    for(Entry<String, Supplier<String>> entry: placeholders.entrySet()) {
       replaced = replaced.replace(entry.getKey(), entry.getValue().get());
     }
-    return SpigotServices.setColors(replaced);
+    return SpigotService.setColors(replaced);
   }
 
   /**
@@ -108,6 +109,6 @@ public class Replacer {
    * @return true if it can
    */
   public static boolean canUsePlaceholderAPI() {
-    return SpigotServices.hasPlugin("PlaceholderAPI");
+    return SpigotService.hasPlugin("PlaceholderAPI");
   }
 }

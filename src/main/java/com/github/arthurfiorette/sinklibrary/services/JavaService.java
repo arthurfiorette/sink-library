@@ -1,6 +1,5 @@
-package com.github.arthurfiorette.sinklibrary.services.utils;
+package com.github.arthurfiorette.sinklibrary.services;
 
-import com.google.common.collect.ObjectArrays;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -11,18 +10,20 @@ import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import com.google.common.collect.ObjectArrays;
+
 /**
  * A service class that handles handles anything in java.
  *
- * @author https://github.com/Hazork/sink-library/
+ * @author https://github.com/ArthurFiorette/sink-library/
  */
-public final class JavaServices {
+public final class JavaService {
 
   /**
    * A private constructor prevent callers from accidentally instantiating an
    * instance
    */
-  private JavaServices() {}
+  private JavaService() {}
 
   /**
    * Returns an array with the collection elements.

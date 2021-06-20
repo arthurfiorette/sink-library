@@ -1,8 +1,10 @@
-package com.github.arthurfiorette.sinklibrary.services.utils;
+package com.github.arthurfiorette.sinklibrary.services;
 
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Consumer;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -11,19 +13,20 @@ import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 /**
  * A service class that handles with spigot.
  *
- * @author https://github.com/Hazork/sink-library/
+ * @author https://github.com/ArthurFiorette/sink-library/
  */
-public final class SpigotServices {
+public final class SpigotService {
 
   /**
    * A private constructor prevent callers from accidentally instantiating an
    * instance.
    */
-  private SpigotServices() {}
+  private SpigotService() {}
 
   /**
    * Call a {@link Event}
@@ -162,8 +165,20 @@ public final class SpigotServices {
    * @param players the players to play the sound
    */
   public static void playSound(Sound sound, Player... players) {
-    for (Player p : players) {
+    for(Player p: players) {
       p.playSound(p.getLocation(), sound, 3.0F, 0.5F);
     }
+  }
+
+  /**
+   * Update this item stack meta.
+   * 
+   * @param item the item stack to update
+   * @param callback the callback to edit the meta
+   */
+  public static void updateItemMeta(ItemStack item, Consumer<ItemMeta> callback) {
+    ItemMeta meta = item.getItemMeta();
+    callback.accept(meta);
+    item.setItemMeta(meta);
   }
 }
