@@ -47,41 +47,40 @@
 
 <br />
 
-### Hello Example
+### Hello world example:
 
 ```java
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerJoinEvent;
 
-import br.com.arthurfiorette.sinklibrary.listener.SinkListener;
+import com.github.arthurfiorette.sinklibrary.interfaces.*;
+import com.github.arthurfiorette.sinklibrary.listener.SinkListener;
 
 public class MyPlugin extends SinkPlugin {
 
-  // Create a MyListener instance
-  private MyListener listener = new MyListener(this);
-
   @Override
-  public void onEnable() {
-    // Register the listener while enabling the plugin
-    listener.register();
+  protected BaseService[] services() {
+    // This method is were we specify all our services
+    return new BaseService[] { new MyListener(this) };
   }
 
   @Override
-  public void onDisable() {}
+  protected BaseComponent[] components() {
+    return new BaseComponent[] {};
+  }
 }
 
 // A simple class to be our listener
 class MyListener extends SinkListener {
 
-  public MyListener(SinkPlugin owner) {
+  public MyListener(BasePlugin owner) {
     super(owner);
   }
 
   @Override
   @EventHandler
   public void onPlayerJoin(PlayerJoinEvent event) {
-    // On every player join event, get the player and send
-    // the "Hello World!" message to her/him.
+    // On every player join event, get the player and send a nessage
     event.getPlayer().sendMessage("Hello World!");
   }
 }
