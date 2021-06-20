@@ -1,5 +1,7 @@
 package com.github.arthurfiorette.sinklibrary;
 
+import com.github.arthurfiorette.sinklibrary.executor.TaskContext;
+import com.github.arthurfiorette.sinklibrary.interfaces.BaseComponent;
 import com.github.arthurfiorette.sinklibrary.interfaces.BaseService;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Supplier;
@@ -7,6 +9,7 @@ import java.util.logging.Level;
 import org.bukkit.plugin.Plugin;
 
 public interface BasePlugin extends Plugin {
+
   @Override
   void onEnable();
 
@@ -15,19 +18,7 @@ public interface BasePlugin extends Plugin {
 
   void treatThrowable(Class<?> author, Throwable exc, String message, Object... args);
 
-  default void log(Level level, String msg, Object... args) {
-    this.getLogger().log(level, msg, args);
-  }
-
-  /**
-   * Register a service to this plugin. <b>Every service must have a different
-   * class from each other.</b>
-   *
-   * @param services
-   *
-   * @return himself for method chaining
-   */
-  BasePlugin register(BaseService... services);
+  void register(BaseService... services);
 
   /**
    * @return true if it could unregister the service
@@ -36,11 +27,25 @@ public interface BasePlugin extends Plugin {
 
   <T extends BaseService> T getService(Class<T> clazz);
 
-  void runAsync(Runnable runnable);
+  <T extends BaseComponent> T getComponent(Class<T> clazz);
 
-  void runSync(Runnable runnable);
+  default void log(Level level, String msg, Object... args) {
+    this.getLogger().log(level, msg, args);
+  }
 
-  <T> CompletableFuture<T> asyncCallback(Supplier<T> supplier);
+  default void runAsync(Runnable runnable) {
+    TaskContext.ASYNC.run(this, runnable);
+  }
 
-  <T> CompletableFuture<T> syncCallback(Supplier<T> supplier);
+  default void runSync(Runnable runnable) {
+    TaskContext.SYNC.run(this, runnable);
+  }
+
+  default <T> CompletableFuture<T> asyncCallback(Supplier<T> supplier) {
+    return CompletableFuture.supplyAsync(supplier, this::runAsync);
+  }
+
+  default <T> CompletableFuture<T> syncCallback(Supplier<T> supplier) {
+    return CompletableFuture.supplyAsync(supplier, this::runSync);
+  }
 }

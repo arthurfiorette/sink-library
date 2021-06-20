@@ -1,19 +1,26 @@
 package com.github.arthurfiorette.sinklibrary;
 
-import com.github.arthurfiorette.sinklibrary.config.YmlContainer;
-import com.github.arthurfiorette.sinklibrary.executor.TaskContext;
-import com.github.arthurfiorette.sinklibrary.interfaces.BaseService;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Supplier;
 import java.util.logging.Level;
+
 import org.bukkit.plugin.java.JavaPlugin;
+
+import com.github.arthurfiorette.sinklibrary.config.YmlContainer;
+import com.github.arthurfiorette.sinklibrary.interfaces.BaseComponent;
+import com.github.arthurfiorette.sinklibrary.interfaces.BaseService;
 
 public abstract class SinkPlugin extends JavaPlugin implements BasePlugin {
 
   private final YmlContainer ymlContainer = new YmlContainer(this);
   private final ServiceCoordinator serviceCoordinator = new ServiceCoordinator(this);
+  private final Map<Class<? extends BaseComponent>, BaseComponent> components = new HashMap<>();
 
   protected abstract BaseService[] services();
+
+  protected abstract BaseComponent[] components();
 
   protected void enable() {}
 
@@ -21,6 +28,13 @@ public abstract class SinkPlugin extends JavaPlugin implements BasePlugin {
 
   public SinkPlugin() {
     serviceCoordinator.add(this.services());
+    for(BaseComponent component: components()) {
+      if (component instanceof BaseService) {
+        throw new IllegalArgumentException(
+            "You registered an service as an component: " + component.getClass().getSimpleName());
+      }
+      components.put(component.getClass(), component);
+    }
   }
 
   /**
@@ -58,10 +72,9 @@ public abstract class SinkPlugin extends JavaPlugin implements BasePlugin {
   }
 
   @Override
-  public BasePlugin register(BaseService... services) {
+  public void register(BaseService... services) {
     log(Level.WARNING, "SinkSpigot services must be added with the dedicated method");
     serviceCoordinator.add(services);
-    return this;
   }
 
   @Override
@@ -76,22 +89,7 @@ public abstract class SinkPlugin extends JavaPlugin implements BasePlugin {
   }
 
   @Override
-  public void runAsync(Runnable runnable) {
-    TaskContext.ASYNC.run(this, runnable);
-  }
-
-  @Override
-  public void runSync(Runnable runnable) {
-    TaskContext.SYNC.run(this, runnable);
-  }
-
-  @Override
-  public <T> CompletableFuture<T> asyncCallback(Supplier<T> supplier) {
-    return CompletableFuture.supplyAsync(supplier, this::runAsync);
-  }
-
-  @Override
-  public <T> CompletableFuture<T> syncCallback(Supplier<T> supplier) {
-    return CompletableFuture.supplyAsync(supplier, this::runSync);
+  public <T extends BaseComponent> T getComponent(Class<T> clazz) {
+    return clazz.cast(this.components.get(clazz));
   }
 }
