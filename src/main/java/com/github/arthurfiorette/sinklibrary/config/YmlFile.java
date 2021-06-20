@@ -1,12 +1,13 @@
 package com.github.arthurfiorette.sinklibrary.config;
 
 import java.io.File;
+
 import org.bukkit.configuration.file.FileConfiguration;
 
 /**
  * A interface to represents any custom .yml file loaded from this plugin
  *
- * @author https://github.com/Hazork/sink-library/
+ * @author https://github.com/ArthurFiorette/sink-library/
  */
 public interface YmlFile {
   /**

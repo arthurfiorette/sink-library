@@ -1,29 +1,31 @@
 package com.github.arthurfiorette.sinklibrary.config.files;
 
-import com.github.arthurfiorette.sinklibrary.SinkHelper;
-import com.github.arthurfiorette.sinklibrary.SinkPlugin;
-import com.github.arthurfiorette.sinklibrary.config.YmlFile;
 import java.io.File;
+
 import org.bukkit.configuration.file.FileConfiguration;
+
+import com.github.arthurfiorette.sinklibrary.config.YmlFile;
+import com.github.arthurfiorette.sinklibrary.interfaces.BaseComponent;
+import com.github.arthurfiorette.sinklibrary.plugin.BasePlugin;
 
 /**
  * The config file is a specific implementation of yml file that is exactly
  * build for handling the config.yml of an plugin.
  *
- * @author https://github.com/Hazork/sink-library/
+ * @author https://github.com/ArthurFiorette/sink-library/
  */
-public class ConfigFile implements YmlFile, SinkHelper {
+public class ConfigFile implements YmlFile, BaseComponent {
 
   private static final String NAME = "config.yml";
 
-  private final SinkPlugin plugin;
+  private final BasePlugin plugin;
 
   /**
    * Constructs a config file.
    *
    * @param plugin the plugin owner;
    */
-  public ConfigFile(SinkPlugin plugin) {
+  public ConfigFile(BasePlugin plugin) {
     this.plugin = plugin;
   }
 
@@ -50,12 +52,11 @@ public class ConfigFile implements YmlFile, SinkHelper {
   @Override
   public File asFile() {
     throw new UnsupportedOperationException(
-      "For safety reasons, you do not want to modify the file used as config.yml"
-    );
+        "For safety reasons, you do not want to modify the file used as config.yml");
   }
 
   @Override
-  public SinkPlugin getPlugin() {
+  public BasePlugin getPlugin() {
     return plugin;
   }
 }

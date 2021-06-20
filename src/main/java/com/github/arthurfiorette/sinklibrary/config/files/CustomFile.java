@@ -1,25 +1,27 @@
 package com.github.arthurfiorette.sinklibrary.config.files;
 
-import com.github.arthurfiorette.sinklibrary.SinkHelper;
-import com.github.arthurfiorette.sinklibrary.SinkPlugin;
-import com.github.arthurfiorette.sinklibrary.config.YmlFile;
 import java.io.File;
+
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+
+import com.github.arthurfiorette.sinklibrary.config.YmlFile;
+import com.github.arthurfiorette.sinklibrary.interfaces.BaseComponent;
+import com.github.arthurfiorette.sinklibrary.plugin.BasePlugin;
 
 /**
  * A custom file is a default implementation for any yml file, it's a simple way
  * to get custom files or when there's a file for every player and etc... This
  * can be also implemented for more usages
  *
- * @author https://github.com/Hazork/sink-library/
+ * @author https://github.com/ArthurFiorette/sink-library/
  */
-public class CustomFile implements YmlFile, SinkHelper {
+public class CustomFile implements YmlFile, BaseComponent {
 
-  private final SinkPlugin plugin;
-  private final File file;
-  private final String name;
-  private FileConfiguration config;
+  protected final BasePlugin plugin;
+  protected final File file;
+  protected final String name;
+  protected FileConfiguration config;
 
   /**
    * Constructs a custom file
@@ -28,7 +30,7 @@ public class CustomFile implements YmlFile, SinkHelper {
    * @param folder the folder location
    * @param name the file name
    */
-  public CustomFile(SinkPlugin plugin, File folder, String name) {
+  public CustomFile(BasePlugin plugin, File folder, String name) {
     this.plugin = plugin;
     this.name = name.endsWith(".yml") ? name : name + ".yml";
     file = new File(folder, this.name);
@@ -60,7 +62,7 @@ public class CustomFile implements YmlFile, SinkHelper {
   }
 
   @Override
-  public SinkPlugin getPlugin() {
+  public BasePlugin getPlugin() {
     return plugin;
   }
 }

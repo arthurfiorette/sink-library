@@ -1,19 +1,20 @@
 package com.github.arthurfiorette.sinklibrary.config;
 
-import com.github.arthurfiorette.sinklibrary.SinkHelper;
-import com.github.arthurfiorette.sinklibrary.SinkPlugin;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.github.arthurfiorette.sinklibrary.interfaces.BaseComponent;
+import com.github.arthurfiorette.sinklibrary.plugin.BasePlugin;
+
 /**
  * This class is a container for handle all the yml files from a single plugin
  *
- * @author https://github.com/Hazork/sink-library/
+ * @author https://github.com/ArthurFiorette/sink-library/
  */
-public class YmlContainer implements SinkHelper {
+public class YmlContainer implements BaseComponent {
 
-  private final SinkPlugin plugin;
+  private final BasePlugin plugin;
   private Map<String, YmlFile> fileMap = new HashMap<>();
 
   /**
@@ -21,7 +22,7 @@ public class YmlContainer implements SinkHelper {
    *
    * @param plugin the plugin owner;
    */
-  public YmlContainer(SinkPlugin plugin) {
+  public YmlContainer(BasePlugin plugin) {
     this.plugin = plugin;
   }
 
@@ -60,7 +61,8 @@ public class YmlContainer implements SinkHelper {
   }
 
   @Override
-  public SinkPlugin getPlugin() {
+  public BasePlugin getPlugin() {
     return plugin;
   }
+
 }
