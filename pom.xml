@@ -11,7 +11,7 @@
 	<version>v1.1.0</version>
 
 	<name>sink-library</name>
-	<description>A powerful and hight-performance tool for building spigot plugins.</description>
+	<description>A powerful and high-performance tool for building spigot plugins.</description>
 	<url>https://github.com/arthurfiorette/sink-library</url>
 
 	<properties>

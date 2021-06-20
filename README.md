@@ -42,7 +42,7 @@
 <br />
 <br />
 
-#### `Sink-library` is a powerful and hight-performance tool for building spigot plugins.
+#### `Sink-library` is a powerful and high-performance tool for building spigot plugins.
 
 <br />
 
