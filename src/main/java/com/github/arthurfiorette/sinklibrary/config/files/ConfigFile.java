@@ -4,9 +4,9 @@ import java.io.File;
 
 import org.bukkit.configuration.file.FileConfiguration;
 
+import com.github.arthurfiorette.sinklibrary.BasePlugin;
 import com.github.arthurfiorette.sinklibrary.config.YmlFile;
 import com.github.arthurfiorette.sinklibrary.interfaces.BaseComponent;
-import com.github.arthurfiorette.sinklibrary.plugin.BasePlugin;
 
 /**
  * The config file is a specific implementation of yml file that is exactly

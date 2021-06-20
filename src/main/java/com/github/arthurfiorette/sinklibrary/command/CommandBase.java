@@ -11,9 +11,9 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.command.TabExecutor;
 
+import com.github.arthurfiorette.sinklibrary.BasePlugin;
+import com.github.arthurfiorette.sinklibrary.SinkPlugin;
 import com.github.arthurfiorette.sinklibrary.interfaces.BaseService;
-import com.github.arthurfiorette.sinklibrary.plugin.BasePlugin;
-import com.github.arthurfiorette.sinklibrary.plugin.SinkPlugin;
 import com.google.common.base.Verify;
 import com.google.common.base.VerifyException;
 

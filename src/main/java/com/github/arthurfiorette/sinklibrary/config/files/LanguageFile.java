@@ -6,7 +6,7 @@ import java.util.function.UnaryOperator;
 import java.util.logging.Level;
 import java.util.stream.Collectors;
 
-import com.github.arthurfiorette.sinklibrary.plugin.BasePlugin;
+import com.github.arthurfiorette.sinklibrary.BasePlugin;
 import com.github.arthurfiorette.sinklibrary.services.Replacer;
 import com.google.common.collect.Lists;
 
@@ -66,7 +66,9 @@ public abstract class LanguageFile<L extends Enum<L>> extends CustomFile {
    */
   public String asText(L lang) {
     String text = this.getConfig().getString(this.path(lang));
-    this.plugin.logIf(text == null, Level.WARNING, "%s: %s is returning null.", this.getName(), this.path(lang));
+    if (text == null) {
+      this.plugin.log(Level.WARNING, "%s: %s is returning null.", this.getName(), this.path(lang));
+    }
     return text;
   }
 

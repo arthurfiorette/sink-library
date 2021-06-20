@@ -11,7 +11,9 @@ import org.bukkit.scheduler.BukkitTask;
  * @author https://github.com/ArthurFiorette/sink-library/
  */
 public enum TaskContext {
-
+  /**
+   * This context means that his execution is the Bukkit main thread.
+   */
   SYNC {
 
     @Override
@@ -29,6 +31,9 @@ public enum TaskContext {
       return Bukkit.getScheduler().runTaskTimer(plugin, runnable, delay, interval);
     }
   },
+  /**
+   * This context means that his execution is outsite the Bukkit main thread.
+   */
   ASYNC {
 
     /**

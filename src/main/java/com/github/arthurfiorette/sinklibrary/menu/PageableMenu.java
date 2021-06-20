@@ -1,14 +1,16 @@
 package com.github.arthurfiorette.sinklibrary.menu;
 
-import com.github.arthurfiorette.sinklibrary.SinkPlugin;
-import com.github.arthurfiorette.sinklibrary.menu.item.MenuItem;
-import com.google.common.collect.Lists;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.stream.Collectors;
+
 import org.bukkit.entity.Player;
+
+import com.github.arthurfiorette.sinklibrary.BasePlugin;
+import com.github.arthurfiorette.sinklibrary.menu.item.MenuItem;
+import com.google.common.collect.Lists;
 
 /**
  * An minecraft menu with better methods and a fanciest way to handle with. But
@@ -16,7 +18,7 @@ import org.bukkit.entity.Player;
  *
  * @param <T> the item type to be pageable
  *
- * @author https://github.com/Hazork/sink-library/
+ * @author https://github.com/ArthurFiorette/sink-library/
  */
 public abstract class PageableMenu<T> extends SinkMenu {
 
@@ -34,7 +36,7 @@ public abstract class PageableMenu<T> extends SinkMenu {
    * @param title the inventory title
    * @param rows the number of inventory rows
    */
-  public PageableMenu(SinkPlugin plugin, Player player, String title, int rows) {
+  protected PageableMenu(BasePlugin plugin, Player player, String title, int rows) {
     super(plugin, player, title, rows);
   }
 
@@ -60,20 +62,17 @@ public abstract class PageableMenu<T> extends SinkMenu {
   @Override
   public void draw() {
     super.draw();
-    pageList =
-      Lists.partition(
-        this.requestValues().stream().map(this::toItem).collect(Collectors.toList()),
-        this.pageableSlots().length
-      );
+    pageList = Lists.partition(this.requestValues().stream().map(this::toItem).collect(Collectors.toList()),
+        this.pageableSlots().length);
     List<MenuItem> items = pageList.get(page);
     items.forEach(i -> itemMap.put(i.getSlot(), i));
     ListIterator<MenuItem> iterator = items.listIterator();
-    for (int i : this.pageableSlots()) {
-      if (iterator.hasNext()) {
-        this.getInventory().setItem(i, iterator.next().getItemStack());
-      } else {
+    for(int i: this.pageableSlots()) {
+      if (!iterator.hasNext()) {
         break;
       }
+
+      this.getInventory().setItem(i, iterator.next().getItemStack());
     }
   }
 

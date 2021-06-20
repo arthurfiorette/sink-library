@@ -9,7 +9,7 @@ import java.util.concurrent.ScheduledExecutorService;
 
 import org.bukkit.scheduler.BukkitScheduler;
 
-import com.github.arthurfiorette.sinklibrary.plugin.BasePlugin;
+import com.github.arthurfiorette.sinklibrary.BasePlugin;
 
 /**
  * Simple interface to target all executors that runs with a

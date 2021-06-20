@@ -1,13 +1,14 @@
 package com.github.arthurfiorette.sinklibrary.menu.item;
 
-import com.github.arthurfiorette.sinklibrary.menu.actions.ClickAction;
-import com.github.arthurfiorette.sinklibrary.services.utils.SpigotServices;
 import org.bukkit.inventory.ItemStack;
+
+import com.github.arthurfiorette.sinklibrary.menu.actions.ClickAction;
+import com.github.arthurfiorette.sinklibrary.services.SpigotService;
 
 /**
  * Represents a stack of items to be in a SinkMenu
  *
- * @author https://github.com/Hazork/sink-library/
+ * @author https://github.com/ArthurFiorette/sink-library/
  */
 public class MenuItem {
 
@@ -22,7 +23,7 @@ public class MenuItem {
    * @param item the itemstack copy
    */
   public MenuItem(ItemStack item) {
-    this(item, ClickAction.ignore());
+    this(item, ClickAction.ignored());
   }
 
   /**
@@ -71,7 +72,7 @@ public class MenuItem {
    * explicitly defined
    */
   public int getSlot() {
-    return row == -1 || column == -1 ? -1 : SpigotServices.getChestSlot(column, row);
+    return row == -1 || column == -1 ? -1 : SpigotService.getChestSlot(column, row);
   }
 
   /**

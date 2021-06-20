@@ -1,129 +1,100 @@
 package com.github.arthurfiorette.sinklibrary;
 
-import com.github.arthurfiorette.sinklibrary.command.CommandBase;
-import com.github.arthurfiorette.sinklibrary.config.YmlContainer;
-import com.github.arthurfiorette.sinklibrary.config.YmlFile;
-import com.github.arthurfiorette.sinklibrary.interfaces.Registrable;
-import com.github.arthurfiorette.sinklibrary.listener.SinkListener;
-import com.github.arthurfiorette.sinklibrary.menu.listener.MenuListener;
-import java.util.Arrays;
+import java.util.concurrent.CompletableFuture;
+import java.util.function.Supplier;
 import java.util.logging.Level;
-import org.bukkit.Bukkit;
-import org.bukkit.event.Listener;
+
 import org.bukkit.plugin.java.JavaPlugin;
 
-/**
- * A JavaPlugin with the compatibility of several library methods
- *
- * @author https://github.com/Hazork/sink-library/
- */
-public abstract class SinkPlugin extends JavaPlugin {
+import com.github.arthurfiorette.sinklibrary.config.YmlContainer;
+import com.github.arthurfiorette.sinklibrary.executor.TaskContext;
+import com.github.arthurfiorette.sinklibrary.interfaces.BaseService;
+
+public abstract class SinkPlugin extends JavaPlugin implements BasePlugin {
 
   private final YmlContainer ymlContainer = new YmlContainer(this);
-  private MenuListener listener;
+  private final ServiceCoordinator serviceCoordinator = new ServiceCoordinator(this);
+
+  protected abstract BaseService[] services();
+
+  protected void enable() {}
+
+  protected void disable() {}
+
+  public SinkPlugin() {
+    serviceCoordinator.add(this.services());
+  }
 
   /**
-   * Creates a new SinkPluign. You should be aware that only one per class can
-   * be instantiated and only with
-   * {@link org.bukkit.plugin.java.JavaPluginLoader}.
+   * @see {@link SinkPlugin#enable()}
    */
-  public SinkPlugin() {}
-
   @Override
-  public abstract void onEnable();
+  public final void onEnable() {
+    serviceCoordinator.requestEnable();
+    enable();
+  }
 
+  /**
+   * @see {@link SinkPlugin#disable()}
+   */
   @Override
-  public abstract void onDisable();
-
-  /**
-   * Handles exceptions in a better visual way
-   *
-   * @param author the class author
-   * @param exc the exception
-   * @param message the message
-   * @param args the arguments to replace the message.
-   * {@link String#format(String, Object...)}
-   */
-  public void treatException(Class<?> author, Exception exc, String message, Object... args) {
-    this.log(Level.SEVERE, "An exception occurred in class %s:", author.getSimpleName());
-    this.log(Level.SEVERE, message, args);
-    exc.printStackTrace();
-    this.getPluginLoader().disablePlugin(this);
+  public final void onDisable() {
+    serviceCoordinator.requestDisable();
+    disable();
   }
 
-  /**
-   * Log any information with the plugin tag and etc. Best replacement for
-   * System.out.println()
-   *
-   * @param level the log level.
-   * @param msg any information that needs to be logged
-   * @param args the arguments to replace the message.
-   * {@link String#format(String, Object...)}
-   */
-  public void log(Level level, String msg, Object... args) {
-    this.getLogger().log(level, String.format(msg, args));
-  }
-
-  /**
-   * Register any registrable.
-   *
-   * @param registries the registries
-   */
-  public void addRegistrables(Registrable... registries) {
-    Arrays.stream(registries).forEach(Registrable::register);
-  }
-
-  /**
-   * Same as {@link SinkPlugin#addRegistrables(Registrable...)}
-   *
-   * @param commands the commands to register
-   */
-  @Deprecated
-  public void addCommandBase(CommandBase... commands) {
-    for (CommandBase cb : commands) {
-      cb.register();
-    }
-  }
-
-  /**
-   * You should use {@link SinkListener} for better visibility and for being
-   * registered with {@link SinkListener#register()}
-   *
-   * @param listeners the listeners to register
-   */
-  @Deprecated
-  public void addListeners(Listener... listeners) {
-    Arrays
-      .stream(listeners)
-      .forEach(listener -> Bukkit.getPluginManager().registerEvents(listener, this));
-  }
-
-  /**
-   * Add any YmlFile with this plugin.
-   *
-   * @param files the files to be added.
-   */
-  protected void addFile(YmlFile... files) {
-    Arrays.stream(files).forEach(file -> ymlContainer.addFile(file));
-  }
-
-  /**
-   * Return the YmlContainer connected with this plugin
-   *
-   * @return the container
-   */
   public YmlContainer getYmlContainer() {
     return ymlContainer;
   }
 
-  /**
-   * This is auto executed when a menu from this plugin is created so all their
-   * listeners work well
-   */
-  public void setupMenus() {
-    if (listener == null) {
-      listener = new MenuListener(this);
-      listener.register();
+  @Override
+  public void treatThrowable(Class<?> author, Throwable exc, String message, Object... args) {
+    this.log(Level.SEVERE, "An exception occurred in class %s:", author.getSimpleName());
+    this.log(Level.SEVERE, message, args);
+    exc.printStackTrace();
+    if (!(exc instanceof RuntimeException)) {
+      // Disable this plugin if this isn't a runtime exception.
+      this.log(Level.SEVERE, "Disabling this plugin");
+      this.getPluginLoader().disablePlugin(this);
     }
   }
+
+  @Override
+  public BasePlugin register(BaseService... services) {
+    log(Level.WARNING, "SinkSpigot services must be added with the dedicated method");
+    serviceCoordinator.add(services);
+    return this;
+  }
+
+  @Override
+  public boolean unregister(Class<? extends BaseService> clazz, boolean disable) {
+    log(Level.WARNING, "SinkSpigot services should no");
+    return serviceCoordinator.remove(clazz, disable);
+  }
+
+  @Override
+  public <T extends BaseService> T getService(Class<T> clazz) {
+    return serviceCoordinator.getService(clazz);
+  }
+
+  @Override
+  public void runAsync(Runnable runnable) {
+    TaskContext.ASYNC.run(this, runnable);
+  }
+
+  @Override
+  public void runSync(Runnable runnable) {
+    TaskContext.SYNC.run(this, runnable);
+  }
+
+  @Override
+  public <T> CompletableFuture<T> asyncCallback(Supplier<T> supplier) {
+    return CompletableFuture.supplyAsync(supplier, this::runAsync);
+  }
+
+  @Override
+  public <T> CompletableFuture<T> syncCallback(Supplier<T> supplier) {
+    return CompletableFuture.supplyAsync(supplier, this::runSync);
+  }
+
 }

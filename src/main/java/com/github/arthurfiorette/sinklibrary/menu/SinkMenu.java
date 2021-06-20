@@ -1,25 +1,27 @@
 package com.github.arthurfiorette.sinklibrary.menu;
 
-import com.github.arthurfiorette.sinklibrary.SinkComponent;
-import com.github.arthurfiorette.sinklibrary.SinkPlugin;
-import com.github.arthurfiorette.sinklibrary.menu.item.MenuItem;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
+
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 
+import com.github.arthurfiorette.sinklibrary.BasePlugin;
+import com.github.arthurfiorette.sinklibrary.interfaces.BaseComponent;
+import com.github.arthurfiorette.sinklibrary.menu.item.MenuItem;
+
 /**
  * An minecraft menu with better methods and a fanciest way to handle with.
  *
- * @author https://github.com/Hazork/sink-library/
+ * @author https://github.com/ArthurFiorette/sink-library/
  */
-public abstract class SinkMenu implements InventoryHolder, SinkComponent {
+public abstract class SinkMenu implements InventoryHolder, BaseComponent {
 
-  private final SinkPlugin plugin;
+  private final BasePlugin plugin;
   private final Player player;
   private final String title;
   private final int rows;
@@ -35,12 +37,11 @@ public abstract class SinkMenu implements InventoryHolder, SinkComponent {
    * @param title the inventory title
    * @param rows the number of inventory rows
    */
-  public SinkMenu(SinkPlugin plugin, Player player, String title, int rows) {
+  protected SinkMenu(BasePlugin plugin, Player player, String title, int rows) {
     this.plugin = plugin;
     this.player = player;
     this.title = title;
     this.rows = rows;
-    plugin.setupMenus();
   }
 
   /**
@@ -107,7 +108,7 @@ public abstract class SinkMenu implements InventoryHolder, SinkComponent {
   }
 
   @Override
-  public SinkPlugin getPlugin() {
+  public BasePlugin getPlugin() {
     return plugin;
   }
 }

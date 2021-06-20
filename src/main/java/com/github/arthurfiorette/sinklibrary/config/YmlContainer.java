@@ -4,8 +4,8 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.github.arthurfiorette.sinklibrary.BasePlugin;
 import com.github.arthurfiorette.sinklibrary.interfaces.BaseComponent;
-import com.github.arthurfiorette.sinklibrary.plugin.BasePlugin;
 
 /**
  * This class is a container for handle all the yml files from a single plugin

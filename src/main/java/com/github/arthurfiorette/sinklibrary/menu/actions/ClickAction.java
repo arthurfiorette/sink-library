@@ -6,7 +6,7 @@ import org.bukkit.inventory.ItemStack;
 /**
  * This interface represents a inventory click action.
  *
- * @author https://github.com/Hazork/sink-library/
+ * @author https://github.com/ArthurFiorette/sink-library/
  */
 @FunctionalInterface
 public interface ClickAction {
@@ -32,7 +32,7 @@ public interface ClickAction {
    *
    * @return the clickaction
    */
-  static ClickAction ignore() {
+  static ClickAction ignored() {
     return (item, type) -> {};
   }
 }
