@@ -1,6 +1,6 @@
 package com.github.arthurfiorette.sinklibrary.interfaces;
 
-public interface BaseService extends BaseComponent {
+public interface BaseService {
   /**
    * Called when enabling this service
    */

@@ -2,27 +2,15 @@ package com.github.arthurfiorette.sinklibrary.data.database;
 
 import java.util.Collection;
 
+import com.github.arthurfiorette.sinklibrary.interfaces.BaseService;
+
 /**
  * Represents a simple database model. <b>All of these methods are meant to be
  * executed in a synchronous way</b>
  *
  * @author https://github.com/ArthurFiorette/sink-library/
  */
-public interface Database<K, V> {
-  /**
-   * Open this database connection
-   */
-  void open();
-
-  /**
-   * Close this database connection
-   */
-  void close();
-
-  /**
-   * @return true if this database connection is open
-   */
-  boolean isOpen();
+public interface Database<K, V> extends BaseService {
 
   /**
    * Save a value in this database

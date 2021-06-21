@@ -22,7 +22,6 @@ public abstract class MenuStorage<M extends Enum<M> & MenuFactory> implements Ba
     this.clazz = clazz;
   }
 
-  @Override
   public BasePlugin getPlugin() {
     return this.plugin;
   }

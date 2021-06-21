@@ -161,7 +161,6 @@ public abstract class SinkListener implements Listener, BaseService {
     HandlerList.unregisterAll(this);
   }
 
-  @Override
   public BasePlugin getPlugin() {
     return this.owner;
   }
