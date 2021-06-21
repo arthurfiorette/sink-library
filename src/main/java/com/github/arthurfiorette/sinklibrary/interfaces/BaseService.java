@@ -4,10 +4,10 @@ public interface BaseService {
   /**
    * Called when enabling this service
    */
-  void enable();
+  void enable() throws Exception;
 
   /**
    * Called when disabling this service
    */
-  void disable();
+  void disable() throws Exception;
 }
