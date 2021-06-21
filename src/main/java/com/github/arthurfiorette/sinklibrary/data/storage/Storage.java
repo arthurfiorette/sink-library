@@ -17,8 +17,8 @@ import java.util.function.Function;
 public interface Storage<K, V, R> extends Serializable<V, R> {
   CompletableFuture<Void> save(K key, V value);
 
-  default Void saveSync(K key, V value) {
-    return this.save(key, value).join();
+  default void saveSync(K key, V value) {
+    this.save(key, value).join();
   }
 
   CompletableFuture<V> get(K key);
