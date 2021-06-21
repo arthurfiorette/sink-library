@@ -72,7 +72,9 @@ public class MenuItem {
    * explicitly defined
    */
   public int getSlot() {
-    return this.row == -1 || this.column == -1 ? -1 : SpigotService.getChestSlot(this.column, this.row);
+    return this.row == -1 || this.column == -1
+      ? -1
+      : SpigotService.getChestSlot(this.column, this.row);
   }
 
   /**

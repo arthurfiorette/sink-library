@@ -61,12 +61,15 @@ public abstract class PageableMenu<T> extends SinkMenu {
   @Override
   public void draw() {
     super.draw();
-    this.pageList = Lists.partition(this.requestValues().stream().map(this::toItem).collect(Collectors.toList()),
-        this.pageableSlots().length);
+    this.pageList =
+      Lists.partition(
+        this.requestValues().stream().map(this::toItem).collect(Collectors.toList()),
+        this.pageableSlots().length
+      );
     List<MenuItem> items = this.pageList.get(this.page);
     items.forEach(i -> this.itemMap.put(i.getSlot(), i));
     ListIterator<MenuItem> iterator = items.listIterator();
-    for(int i: this.pageableSlots()) {
+    for (int i : this.pageableSlots()) {
       if (!iterator.hasNext()) {
         break;
       }

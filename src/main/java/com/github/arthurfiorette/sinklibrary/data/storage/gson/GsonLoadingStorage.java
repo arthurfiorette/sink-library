@@ -18,8 +18,12 @@ public class GsonLoadingStorage<K, V> extends LoadingStorage<K, V, JsonObject> {
   protected final Class<V> clazz;
   protected Gson gson = new Gson();
 
-  public GsonLoadingStorage(JsonDatabase<K> database, Class<V> clazz, Executor executor,
-      UnaryOperator<CacheBuilder<Object, Object>> builder) {
+  public GsonLoadingStorage(
+    JsonDatabase<K> database,
+    Class<V> clazz,
+    Executor executor,
+    UnaryOperator<CacheBuilder<Object, Object>> builder
+  ) {
     super(database, executor, builder);
     this.clazz = clazz;
   }
@@ -36,8 +40,12 @@ public class GsonLoadingStorage<K, V> extends LoadingStorage<K, V, JsonObject> {
    * @param plugin the plugin owner
    */
   public GsonLoadingStorage(JsonDatabase<K> database, Class<V> clazz, BasePlugin plugin) {
-    this(database, clazz, BukkitExecutor.newAsyncSingleThreadExecutor(plugin),
-        b -> b.expireAfterAccess(5, TimeUnit.MINUTES).maximumSize(256));
+    this(
+      database,
+      clazz,
+      BukkitExecutor.newAsyncSingleThreadExecutor(plugin),
+      b -> b.expireAfterAccess(5, TimeUnit.MINUTES).maximumSize(256)
+    );
   }
 
   @Override
