@@ -36,6 +36,13 @@
         target="_blank"
         alt="License" /></a
   ></code>
+  <code
+    ><a href="https://jitpack.io/#ArthurFiorette/sink-library"
+      ><img
+        src="https://jitpack.io/v/ArthurFiorette/sink-library.svg"
+        target="_blank"
+        alt="Jitpack" /></a
+  ></code>
 </div>
 
 #
