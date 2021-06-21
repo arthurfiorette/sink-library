@@ -19,13 +19,13 @@ import org.bukkit.inventory.InventoryHolder;
  */
 public abstract class SinkMenu implements InventoryHolder, BaseComponent {
 
-  private final BasePlugin plugin;
-  private final Player player;
-  private final String title;
-  private final int rows;
+  protected final BasePlugin plugin;
+  protected final Player player;
+  protected final String title;
+  protected final int rows;
 
   protected Map<Integer, MenuItem> itemMap = new HashMap<>();
-  private Inventory inventory;
+  protected Inventory inventory;
 
   /**
    * Constructs a new SinkMenu

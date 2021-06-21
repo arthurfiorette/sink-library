@@ -11,8 +11,8 @@ import java.util.concurrent.Executor;
 
 public class GsonStorage<K, V> extends AbstractStorage<K, V, JsonObject> {
 
-  private final Class<V> clazz;
-  private Gson gson = new Gson();
+  protected final Class<V> clazz;
+  protected Gson gson = new Gson();
 
   public GsonStorage(JsonDatabase<K> database, Class<V> clazz, Executor executor) {
     super(database, executor);

@@ -140,7 +140,7 @@ import org.bukkit.event.world.WorldUnloadEvent;
  */
 public abstract class SinkListener implements Listener, BaseService {
 
-  private final BasePlugin owner;
+  protected final BasePlugin plugin;
 
   /**
    * Constructs a new SinkListener
@@ -148,7 +148,7 @@ public abstract class SinkListener implements Listener, BaseService {
    * @param owner the plugin owner;
    */
   public SinkListener(BasePlugin owner) {
-    this.owner = owner;
+    this.plugin = owner;
   }
 
   @Override
@@ -162,7 +162,7 @@ public abstract class SinkListener implements Listener, BaseService {
   }
 
   public BasePlugin getPlugin() {
-    return this.owner;
+    return this.plugin;
   }
 
   public void onAsyncPlayerChat(AsyncPlayerChatEvent event) {}

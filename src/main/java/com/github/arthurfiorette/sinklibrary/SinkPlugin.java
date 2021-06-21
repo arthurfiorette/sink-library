@@ -10,7 +10,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public abstract class SinkPlugin extends JavaPlugin implements BasePlugin {
 
-  private final YmlContainer ymlContainer = new YmlContainer(this);
+  protected final YmlContainer ymlContainer = new YmlContainer(this);
   private final ServiceCoordinator serviceCoordinator = new ServiceCoordinator(this);
   private final Map<Class<? extends BaseComponent>, BaseComponent> components = new HashMap<>();
 
@@ -24,11 +24,10 @@ public abstract class SinkPlugin extends JavaPlugin implements BasePlugin {
 
   public SinkPlugin() {
     this.serviceCoordinator.add(this.services());
-    for (BaseComponent component : this.components()) {
+    for(BaseComponent component: this.components()) {
       if (component instanceof BaseService) {
         throw new IllegalArgumentException(
-          "You registered an service as an component: " + component.getClass().getSimpleName()
-        );
+            "You registered an service as an component: " + component.getClass().getSimpleName());
       }
       this.components.put(component.getClass(), component);
     }
@@ -50,10 +49,6 @@ public abstract class SinkPlugin extends JavaPlugin implements BasePlugin {
   public final void onDisable() {
     this.serviceCoordinator.requestDisable();
     this.disable();
-  }
-
-  public YmlContainer getYmlContainer() {
-    return this.ymlContainer;
   }
 
   @Override

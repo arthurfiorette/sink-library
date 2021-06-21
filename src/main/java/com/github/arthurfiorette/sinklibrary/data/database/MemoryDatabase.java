@@ -14,7 +14,7 @@ import java.util.concurrent.ConcurrentMap;
  */
 public class MemoryDatabase<K, T> implements Database<K, T> {
 
-  private ConcurrentMap<K, T> database;
+  protected ConcurrentMap<K, T> database;
 
   /**
    * Erase all data.
@@ -55,7 +55,7 @@ public class MemoryDatabase<K, T> implements Database<K, T> {
   public Collection<T> getMany(Collection<K> keys) {
     this.checkState();
     List<T> list = new ArrayList<>();
-    for (K key : keys) {
+    for(K key: keys) {
       T t = this.get(key);
       if (t != null) {
         list.add(t);
