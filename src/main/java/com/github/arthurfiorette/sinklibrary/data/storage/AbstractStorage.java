@@ -30,49 +30,71 @@ public abstract class AbstractStorage<K, V, R> implements Storage<K, V, R> {
 
   /**
    * Create a new entry if the database returns null for a key.
-   * 
+   *
    * @param key the object key
-   * 
+   *
    * @return the newly created object
    */
   protected abstract V create(K key);
 
   @Override
   public CompletableFuture<Void> save(K key, V value) {
-    return CompletableFuture.runAsync(() -> {
-      this.database.save(key, this.serialize(value));
-    }, this.executor);
+    return CompletableFuture.runAsync(
+      () -> {
+        this.database.save(key, this.serialize(value));
+      },
+      this.executor
+    );
   }
 
   @Override
   public CompletableFuture<V> get(K key) {
-    return CompletableFuture.supplyAsync(() -> {
-      R raw = this.database.get(key);
-      if (raw == null) {
-        return create(key);
-      }
-      return this.deserialize(raw);
-    }, this.executor);
+    return CompletableFuture.supplyAsync(
+      () -> {
+        R raw = this.database.get(key);
+        if (raw == null) {
+          return create(key);
+        }
+        return this.deserialize(raw);
+      },
+      this.executor
+    );
   }
 
   @Override
   public CompletableFuture<Collection<V>> getMany(Set<K> keys) {
-    return CompletableFuture.supplyAsync(() -> {
-      return this.database.getMany(keys).stream().map(this::deserialize).collect(Collectors.toList());
-    }, this.executor);
+    return CompletableFuture.supplyAsync(
+      () -> {
+        return this.database.getMany(keys)
+          .stream()
+          .map(this::deserialize)
+          .collect(Collectors.toList());
+      },
+      this.executor
+    );
   }
 
   @Override
   public CompletableFuture<Collection<V>> operation(Function<Database<K, R>, Collection<R>> func) {
-    return CompletableFuture.supplyAsync(() -> {
-      return func.apply(this.database).stream().map(this::deserialize).collect(Collectors.toList());
-    }, this.executor);
+    return CompletableFuture.supplyAsync(
+      () -> {
+        return func
+          .apply(this.database)
+          .stream()
+          .map(this::deserialize)
+          .collect(Collectors.toList());
+      },
+      this.executor
+    );
   }
 
   @Override
   public CompletableFuture<V> operate(Function<Database<K, R>, R> func) {
-    return CompletableFuture.supplyAsync(() -> {
-      return this.deserialize(func.apply(this.database));
-    }, this.executor);
+    return CompletableFuture.supplyAsync(
+      () -> {
+        return this.deserialize(func.apply(this.database));
+      },
+      this.executor
+    );
   }
 }

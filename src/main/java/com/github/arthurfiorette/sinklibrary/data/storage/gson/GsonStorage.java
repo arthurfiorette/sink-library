@@ -1,13 +1,12 @@
 package com.github.arthurfiorette.sinklibrary.data.storage.gson;
 
-import java.util.concurrent.Executor;
-import java.util.function.Function;
-
 import com.github.arthurfiorette.sinklibrary.data.database.JsonDatabase;
 import com.github.arthurfiorette.sinklibrary.data.storage.AbstractStorage;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
+import java.util.concurrent.Executor;
+import java.util.function.Function;
 
 public class GsonStorage<K, V> extends AbstractStorage<K, V, JsonObject> {
 
@@ -15,7 +14,12 @@ public class GsonStorage<K, V> extends AbstractStorage<K, V, JsonObject> {
   protected Gson gson = new Gson();
   protected Function<K, V> generator;
 
-  public GsonStorage(JsonDatabase<K> database, Class<V> clazz, Executor executor, Function<K, V> generator) {
+  public GsonStorage(
+    JsonDatabase<K> database,
+    Class<V> clazz,
+    Executor executor,
+    Function<K, V> generator
+  ) {
     super(database, executor);
     this.clazz = clazz;
     this.generator = generator;

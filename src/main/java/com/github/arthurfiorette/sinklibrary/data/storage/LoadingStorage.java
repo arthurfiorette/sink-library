@@ -43,11 +43,17 @@ public abstract class LoadingStorage<K, V, R> implements Storage<K, V, R>, BaseS
    * @param options a unary operator that will be applied when building the
    * cache.
    */
-  protected LoadingStorage(Database<K, R> database, Executor executor,
-      UnaryOperator<CacheBuilder<Object, Object>> builder) {
+  protected LoadingStorage(
+    Database<K, R> database,
+    Executor executor,
+    UnaryOperator<CacheBuilder<Object, Object>> builder
+  ) {
     this.database = database;
     this.executor = executor;
-    this.cache = builder.apply(CacheBuilder.newBuilder()).removalListener(this.removalListener())
+    this.cache =
+      builder
+        .apply(CacheBuilder.newBuilder())
+        .removalListener(this.removalListener())
         .build(this.cacheLoader());
   }
 
@@ -57,7 +63,10 @@ public abstract class LoadingStorage<K, V, R> implements Storage<K, V, R>, BaseS
   protected RemovalListener<K, V> removalListener() {
     return notification -> {
       // Save synchronously
-      LoadingStorage.this.database.save(notification.getKey(), LoadingStorage.this.serialize(notification.getValue()));
+      LoadingStorage.this.database.save(
+          notification.getKey(),
+          LoadingStorage.this.serialize(notification.getValue())
+        );
     };
   }
 
@@ -80,9 +89,9 @@ public abstract class LoadingStorage<K, V, R> implements Storage<K, V, R>, BaseS
 
   /**
    * Create a new entry if the database returns null for a key.
-   * 
+   *
    * @param key the object key
-   * 
+   *
    * @return the newly created object
    */
   protected abstract V create(K key);
@@ -106,9 +115,12 @@ public abstract class LoadingStorage<K, V, R> implements Storage<K, V, R>, BaseS
    */
   @Override
   public CompletableFuture<Void> save(K key, V value) {
-    return CompletableFuture.runAsync(() -> {
-      this.cache.put(key, value);
-    }, this.executor);
+    return CompletableFuture.runAsync(
+      () -> {
+        this.cache.put(key, value);
+      },
+      this.executor
+    );
   }
 
   @Override
@@ -118,13 +130,16 @@ public abstract class LoadingStorage<K, V, R> implements Storage<K, V, R>, BaseS
 
   @Override
   public CompletableFuture<Collection<V>> getMany(Set<K> keys) {
-    return CompletableFuture.supplyAsync(() -> {
-      try {
-        return Lists.newArrayList(this.cache.getAll(keys).values());
-      } catch (ExecutionException e) {
-        throw new CompletionException(e);
-      }
-    }, this.executor);
+    return CompletableFuture.supplyAsync(
+      () -> {
+        try {
+          return Lists.newArrayList(this.cache.getAll(keys).values());
+        } catch (ExecutionException e) {
+          throw new CompletionException(e);
+        }
+      },
+      this.executor
+    );
   }
 
   /**
@@ -135,7 +150,9 @@ public abstract class LoadingStorage<K, V, R> implements Storage<K, V, R>, BaseS
   @Override
   public CompletableFuture<Collection<V>> operation(Function<Database<K, R>, Collection<R>> func) {
     return CompletableFuture.supplyAsync(
-        () -> func.apply(this.database).stream().map(this::deserialize).collect(Collectors.toList()), this.executor);
+      () -> func.apply(this.database).stream().map(this::deserialize).collect(Collectors.toList()),
+      this.executor
+    );
   }
 
   /**
@@ -145,7 +162,10 @@ public abstract class LoadingStorage<K, V, R> implements Storage<K, V, R>, BaseS
    */
   @Override
   public CompletableFuture<V> operate(Function<Database<K, R>, R> func) {
-    return CompletableFuture.supplyAsync(() -> this.deserialize(func.apply(this.database)), this.executor);
+    return CompletableFuture.supplyAsync(
+      () -> this.deserialize(func.apply(this.database)),
+      this.executor
+    );
   }
 
   /**

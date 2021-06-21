@@ -2,7 +2,6 @@ package com.github.arthurfiorette.sinklibrary.data.database;
 
 import com.github.arthurfiorette.sinklibrary.interfaces.BaseService;
 import java.util.Collection;
-
 import javax.annotation.Nullable;
 
 /**
