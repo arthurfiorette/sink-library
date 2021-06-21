@@ -3,6 +3,8 @@ package com.github.arthurfiorette.sinklibrary.data.database;
 import com.github.arthurfiorette.sinklibrary.interfaces.BaseService;
 import java.util.Collection;
 
+import javax.annotation.Nullable;
+
 /**
  * Represents a simple database model. <b>All of these methods are meant to be
  * executed in a synchronous way</b>
@@ -25,6 +27,7 @@ public interface Database<K, V> extends BaseService {
    *
    * @return the object or null if not found
    */
+  @Nullable
   V get(K key);
 
   /**

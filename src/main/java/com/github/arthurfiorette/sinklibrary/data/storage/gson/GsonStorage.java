@@ -1,34 +1,29 @@
 package com.github.arthurfiorette.sinklibrary.data.storage.gson;
 
-import com.github.arthurfiorette.sinklibrary.BasePlugin;
+import java.util.concurrent.Executor;
+import java.util.function.Function;
+
 import com.github.arthurfiorette.sinklibrary.data.database.JsonDatabase;
 import com.github.arthurfiorette.sinklibrary.data.storage.AbstractStorage;
-import com.github.arthurfiorette.sinklibrary.executor.BukkitExecutor;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
-import java.util.concurrent.Executor;
 
 public class GsonStorage<K, V> extends AbstractStorage<K, V, JsonObject> {
 
   protected final Class<V> clazz;
   protected Gson gson = new Gson();
+  protected Function<K, V> generator;
 
-  public GsonStorage(JsonDatabase<K> database, Class<V> clazz, Executor executor) {
+  public GsonStorage(JsonDatabase<K> database, Class<V> clazz, Executor executor, Function<K, V> generator) {
     super(database, executor);
     this.clazz = clazz;
+    this.generator = generator;
   }
 
-  /**
-   * Create and simple Gson storage, that serialize and deserialize
-   * automatically with {@link Gson}.
-   *
-   * @param database the database to load and save values
-   * @param clazz the entity class
-   * @param plugin the plugin owner
-   */
-  public GsonStorage(JsonDatabase<K> database, Class<V> clazz, BasePlugin plugin) {
-    this(database, clazz, BukkitExecutor.newAsyncSingleThreadExecutor(plugin));
+  @Override
+  protected V create(K key) {
+    return generator.apply(key);
   }
 
   @Override
