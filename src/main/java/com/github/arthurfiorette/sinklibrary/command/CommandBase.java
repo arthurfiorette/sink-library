@@ -82,7 +82,12 @@ public final class CommandBase implements TabExecutor, BaseService {
   }
 
   @Override
-  public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
+  public List<String> onTabComplete(
+    CommandSender sender,
+    Command command,
+    String alias,
+    String[] args
+  ) {
     if (args.length == 0) {
       return new ArrayList<>(this.commandMap.keySet());
     } else if (this.commandMap.containsKey(args[0])) {
@@ -107,7 +112,7 @@ public final class CommandBase implements TabExecutor, BaseService {
    * @param args all the new arguments to be added to this command
    */
   public void addArguments(Argument... args) {
-    for(Argument arg: args) {
+    for (Argument arg : args) {
       this.commandMap.put(arg.getName(), arg);
       if (this.defaultArgument == null) {
         this.defaultArgument = arg;
