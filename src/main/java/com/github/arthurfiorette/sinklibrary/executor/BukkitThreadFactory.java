@@ -37,7 +37,7 @@ public class BukkitThreadFactory implements ThreadFactory, BaseComponent {
    *
    * @param plugin The basic plugin to assign to the created thread factory
    *
-   * @return the newly creted ThreadFactory
+   * @return the newly created ThreadFactory
    */
   public static ThreadFactory ofAsync(BasePlugin plugin) {
     return new BukkitThreadFactory(plugin, TaskContext.ASYNC);
@@ -49,7 +49,7 @@ public class BukkitThreadFactory implements ThreadFactory, BaseComponent {
    *
    * @param plugin The basic plugin to assign to the created thread factory
    *
-   * @return the newly creted ThreadFactory
+   * @return the newly created ThreadFactory
    */
   public static ThreadFactory ofSync(BasePlugin plugin) {
     return new BukkitThreadFactory(plugin, TaskContext.SYNC);
@@ -65,7 +65,7 @@ public class BukkitThreadFactory implements ThreadFactory, BaseComponent {
           this.plugin.treatThrowable(
               this.getClass(),
               t,
-              "Catched exception while runnin this thread."
+              "Catched exception while running this thread."
             );
         }
       }

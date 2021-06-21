@@ -6,7 +6,7 @@ import org.bukkit.scheduler.BukkitScheduler;
 import org.bukkit.scheduler.BukkitTask;
 
 /**
- * A helper enum to run scheule task with {@link BukkitScheduler}
+ * A helper enum to run schedule task with {@link BukkitScheduler}
  *
  * @author https://github.com/ArthurFiorette/sink-library/
  */
@@ -31,7 +31,7 @@ public enum TaskContext {
     }
   },
   /**
-   * This context means that his execution is outsite the Bukkit main thread.
+   * This context means that his execution is outside the Bukkit main thread.
    */
   ASYNC {
     /**

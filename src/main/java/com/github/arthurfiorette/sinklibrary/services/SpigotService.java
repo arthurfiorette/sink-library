@@ -85,7 +85,7 @@ public final class SpigotService {
   }
 
   /**
-   * Check if the amount isn't lower than 0 and greather than 64.
+   * Check if the amount isn't lower than 0 and greater than 64.
    *
    * @param amount the amount.
    *
@@ -119,16 +119,16 @@ public final class SpigotService {
   }
 
   /**
-   * Convert miliseconds to minecraft ticks.
+   * Convert milliseconds to minecraft ticks.
    * <p>
-   * {@code miliseconds / 50 = ticks}
+   * {@code milliseconds / 50 = ticks}
    *
-   * @param miliseconds the time in miliseconds
+   * @param milliseconds the time in milliseconds
    *
    * @return the amount of ticks into this time
    */
-  public static long asTicks(long miliseconds) {
-    return miliseconds / 50;
+  public static long asTicks(long milliseconds) {
+    return milliseconds / 50;
   }
 
   /**

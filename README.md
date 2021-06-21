@@ -87,7 +87,7 @@ class MyListener extends SinkListener {
   @Override
   @EventHandler
   public void onPlayerJoin(PlayerJoinEvent event) {
-    // On every player join event, get the player and send a nessage
+    // On every player join event, get the player and send a message
     event.getPlayer().sendMessage("Hello World!");
   }
 }

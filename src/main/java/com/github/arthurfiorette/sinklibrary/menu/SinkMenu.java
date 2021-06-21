@@ -59,7 +59,7 @@ public abstract class SinkMenu implements InventoryHolder, BaseComponent {
   /**
    * Open this menu to the player owner.
    *
-   * @param redraw true if the inventory needs to be redrawed.
+   * @param redraw true if the inventory needs to be redrawn.
    */
   public void show(boolean redraw) {
     if (this.inventory == null) {

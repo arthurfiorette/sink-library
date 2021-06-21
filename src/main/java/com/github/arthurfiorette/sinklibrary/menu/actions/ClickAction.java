@@ -30,7 +30,7 @@ public interface ClickAction {
   /**
    * A click action that does nothing.
    *
-   * @return the clickaction
+   * @return the ClickAction
    */
   static ClickAction ignored() {
     return (item, type) -> {};

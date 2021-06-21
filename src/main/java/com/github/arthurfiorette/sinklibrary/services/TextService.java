@@ -29,7 +29,7 @@ public final class TextService {
    *
    * @param width the width of the progress bar
    * @param incomplete the text placed when your representative percentage is
-   * incompleted
+   * incomplete
    * @param complete the text placed when your representative percentage is
    * completed
    * @param currentValue the progress value
@@ -56,7 +56,7 @@ public final class TextService {
    *
    * @param width the width of the progress bar
    * @param incomplete the text placed when your representative percentage is
-   * incompleted
+   * incomplete
    * @param complete the text placed when your representative percentage is
    * completed
    * @param percent the percentage value to build the bar
@@ -131,8 +131,8 @@ public final class TextService {
       if (!str.startsWith("§")) {
         str = "§" + str;
       }
-      Pattern isntColor = Pattern.compile("§[^0123456789AaBbCcDdEeFfKkLlMmNnOoRr]");
-      if (isntColor.matcher(str).find()) {
+      Pattern notColor = Pattern.compile("§[^0123456789AaBbCcDdEeFfKkLlMmNnOoRr]");
+      if (notColor.matcher(str).find()) {
         texts.add(str);
       } else {
         String lastColor = ChatColor.getLastColors(str);

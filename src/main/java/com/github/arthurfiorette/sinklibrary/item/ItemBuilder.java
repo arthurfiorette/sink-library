@@ -29,7 +29,7 @@ public class ItemBuilder {
   private EnumMap<ItemProperty, Consumer<ItemStack>> properties = new EnumMap<>(ItemProperty.class);
 
   /**
-   * Constructs a itembuilder from a specified material.
+   * Constructs a ItemBuilder from a specified material.
    *
    * @param material the material to use in the builder.
    *
@@ -113,7 +113,7 @@ public class ItemBuilder {
   }
 
   /**
-   * @param itemFlags set to the item all the item flags specifieds in varargs
+   * @param itemFlags set to the item all the item flags specified in varargs
    *
    * @return itself
    */
@@ -132,7 +132,7 @@ public class ItemBuilder {
   }
 
   /**
-   * @param itemFlags add to the item all the item flags specifieds in varargs.
+   * @param itemFlags add to the item all the item flags specified in varargs.
    *
    * @return itself
    */
@@ -144,12 +144,12 @@ public class ItemBuilder {
   }
 
   /**
-   * @param lorelines set the item lore
+   * @param loreLines set the item lore
    *
    * @return itself
    */
-  public ItemBuilder setLores(String... lorelines) {
-    return this.setLore(Arrays.asList(lorelines));
+  public ItemBuilder setLores(String... loreLines) {
+    return this.setLore(Arrays.asList(loreLines));
   }
 
   /**
@@ -165,12 +165,12 @@ public class ItemBuilder {
   }
 
   /**
-   * @param lorelines add this lore to the item
+   * @param loreLines add this lore to the item
    *
    * @return itself
    */
-  public ItemBuilder addLores(String... lorelines) {
-    return this.addLore(Arrays.asList(lorelines));
+  public ItemBuilder addLores(String... loreLines) {
+    return this.addLore(Arrays.asList(loreLines));
   }
 
   /**

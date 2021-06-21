@@ -21,7 +21,7 @@ public class ItemBuilders {
    *
    * @param player the player
    *
-   * @return a itembuilder instance from this player head
+   * @return a ItemBuilder instance from this player head
    */
   public static ItemBuilder ofHead(OfflinePlayer player) {
     return ofSkullGameProfile(new GameProfile(player.getUniqueId(), player.getName()));
@@ -30,16 +30,16 @@ public class ItemBuilders {
   /**
    * Create a itemBuilder from a player head
    *
-   * @param playername the playername
+   * @param playerName the player name
    *
-   * @return a itembuilder instance from this player head
+   * @return a ItemBuilder instance from this player head
    */
-  public static ItemBuilder ofHead(String playername) {
+  public static ItemBuilder ofHead(String playerName) {
     ItemBuilder builder = new ItemBuilder(Material.SKULL_ITEM).setDurability(3);
     return builder.addCustomMeta(
       im -> {
         SkullMeta sm = (SkullMeta) im;
-        sm.setOwner(playername);
+        sm.setOwner(playerName);
         return sm;
       }
     );
@@ -50,7 +50,7 @@ public class ItemBuilders {
    *
    * @param url the url where the texture is
    *
-   * @return a itembuilder instance from this head
+   * @return a ItemBuilder instance from this head
    */
   public static ItemBuilder ofHeadUrl(String url) {
     GameProfile profile = new GameProfile(UUID.randomUUID(), null);
@@ -64,9 +64,9 @@ public class ItemBuilders {
   /**
    * Create a itemBuilder from a game profile head
    *
-   * @param gameProfile the mojang gameprofile to search for the head
+   * @param gameProfile the Mojang GameProfile to search for the head
    *
-   * @return a itembuilder instance from this head
+   * @return a ItemBuilder instance from this head
    */
   public static ItemBuilder ofSkullGameProfile(GameProfile gameProfile) {
     ItemBuilder builder = new ItemBuilder(Material.SKULL_ITEM).setDurability(3);

@@ -52,7 +52,7 @@ public final class JavaService {
   }
 
   /**
-   * Convery any vargarg to a list of the same type
+   * Cast any vararg to a list of the same type
    *
    * @param <T> the list type
    * @param clazz the class to identify the list type

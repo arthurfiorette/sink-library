@@ -9,27 +9,27 @@ import org.bukkit.event.inventory.InventoryAction;
  */
 public enum MouseClick {
   /**
-   * When the click is in the left mouse buton.
+   * When the click is in the left mouse button.
    */
   LEFT,
   /**
-   * When the click is in the left mouse buton while pressing shift.
+   * When the click is in the left mouse button while pressing shift.
    */
   SHIFT_LEFT,
   /**
-   * When the click is in the right mouse buton.
+   * When the click is in the right mouse button.
    */
   RIGHT,
   /**
-   * When the click is in the keyboard drop buton.
+   * When the click is in the keyboard drop button.
    */
   DROP,
   /**
-   * When the click is in the scroll mouse buton.
+   * When the click is in the scroll mouse button.
    */
   SCROLL,
   /**
-   * When the click is in other buton.
+   * When the click is in other button.
    */
   OTHER;
 
@@ -38,7 +38,7 @@ public enum MouseClick {
    *
    * @param action the inventory action
    *
-   * @return the mouseclick from this action
+   * @return the MouseClick from this action
    */
   public static MouseClick from(InventoryAction action) {
     switch (action) {

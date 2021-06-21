@@ -68,7 +68,7 @@ public abstract class LoadingStorage<K, V, R> implements Storage<K, V, R> {
   }
 
   /**
-   * @return this instance cache loder.
+   * @return this instance cache loader.
    */
   protected CacheLoader<K, V> cacheLoader() {
     return new CacheLoader<K, V>() {

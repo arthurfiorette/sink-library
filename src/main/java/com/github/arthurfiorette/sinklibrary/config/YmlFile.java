@@ -14,13 +14,6 @@ public interface YmlFile {
    */
   void load();
 
-  /**
-   * Create if not exists the local file from the internal template or replace
-   * the local with the interfal if replace if {@code true}.
-   *
-   * @param defaultPath the internal templace path
-   * @param replace true if you want to force replace.
-   */
   void setup(String defaultPath, boolean replace);
 
   /**

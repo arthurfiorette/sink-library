@@ -20,7 +20,7 @@ public class MenuItem {
   /**
    * Constructs a new MenuItem
    *
-   * @param item the itemstack copy
+   * @param item the ItemStack copy
    */
   public MenuItem(ItemStack item) {
     this(item, ClickAction.ignored());
@@ -29,7 +29,7 @@ public class MenuItem {
   /**
    * Constructs a new MenuItem with a clickAction
    *
-   * @param item the itemstack copy
+   * @param item the ItemStack copy
    * @param action the action when clicked
    */
   public MenuItem(ItemStack item, ClickAction action) {

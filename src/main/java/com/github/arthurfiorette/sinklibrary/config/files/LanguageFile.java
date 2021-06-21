@@ -36,7 +36,7 @@ public abstract class LanguageFile<L extends Enum<L>> extends CustomFile {
   protected abstract String path(L lang);
 
   /**
-   * @return the default value when the path or text is unknwon or wrong.
+   * @return the default value when the path or text is unknown or wrong.
    */
   protected String unknown() {
     return "Unknown value";
@@ -48,8 +48,7 @@ public abstract class LanguageFile<L extends Enum<L>> extends CustomFile {
    * @param lang the lang enum
    * @param replacer the text replacer to apply in the text.
    *
-   * @return the text found or {@link LanguageFile#unknown()} if occour an
-   * error.
+   * @return the text found or {@link LanguageFile#unknown()} if an error occurs.
    */
   public String asText(L lang, UnaryOperator<Replacer> replacer) {
     return Replacer.replace(this.asText(lang), replacer);
@@ -60,8 +59,7 @@ public abstract class LanguageFile<L extends Enum<L>> extends CustomFile {
    *
    * @param lang the lang enum
    *
-   * @return the text found or {@link LanguageFile#unknown()} if occour an
-   * error.
+   * @return the text found or {@link LanguageFile#unknown()} if an error occurs.
    */
   public String asText(L lang) {
     String text = this.getConfig().getString(this.path(lang));
@@ -77,8 +75,7 @@ public abstract class LanguageFile<L extends Enum<L>> extends CustomFile {
    * @param lang the lang enum
    * @param replacer the text replacer to apply in the text.
    *
-   * @return the text list found or {@link LanguageFile#unknown()} if occour an
-   * error.
+   * @return the text list found or {@link LanguageFile#unknown()} if an error occurs.
    */
   public List<String> asList(L lang, UnaryOperator<Replacer> replacer) {
     return this.asList(lang)
@@ -92,8 +89,7 @@ public abstract class LanguageFile<L extends Enum<L>> extends CustomFile {
    *
    * @param lang the lang enum
    *
-   * @return the text list found or {@link LanguageFile#unknown()} if occour an
-   * error.
+   * @return the text list found or {@link LanguageFile#unknown()} if an error occurs.
    */
   public List<String> asList(L lang) {
     List<String> list = this.getConfig().getStringList(this.path(lang));
