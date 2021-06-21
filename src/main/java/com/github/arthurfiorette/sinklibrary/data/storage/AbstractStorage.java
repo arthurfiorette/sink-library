@@ -28,53 +28,38 @@ public abstract class AbstractStorage<K, V, R> implements Storage<K, V, R> {
     this.database = database;
   }
 
-  public Database<K, R> getDatabase() {
-    return this.database;
-  }
-
   @Override
   public CompletableFuture<Void> save(K key, V value) {
-    return CompletableFuture.runAsync(
-      () -> {
-        this.database.save(key, this.serialize(value));
-      },
-      this.executor
-    );
+    return CompletableFuture.runAsync(() -> {
+      this.database.save(key, this.serialize(value));
+    }, this.executor);
   }
 
   @Override
   public CompletableFuture<V> get(K key) {
-    return CompletableFuture.supplyAsync(
-      () -> this.deserialize(this.database.get(key)),
-      this.executor
-    );
+    return CompletableFuture.supplyAsync(() -> {
+      return this.deserialize(this.database.get(key));
+    }, this.executor);
   }
 
   @Override
   public CompletableFuture<Collection<V>> getMany(Set<K> keys) {
-    return CompletableFuture.supplyAsync(
-      () ->
-        this.database.getMany(keys).stream().map(this::deserialize).collect(Collectors.toList()),
-      this.executor
-    );
+    return CompletableFuture.supplyAsync(() -> {
+      return this.database.getMany(keys).stream().map(this::deserialize).collect(Collectors.toList());
+    }, this.executor);
   }
 
   @Override
   public CompletableFuture<Collection<V>> operation(Function<Database<K, R>, Collection<R>> func) {
-    return CompletableFuture.supplyAsync(
-      () -> func.apply(this.database).stream().map(this::deserialize).collect(Collectors.toList()),
-      this.executor
-    );
+    return CompletableFuture.supplyAsync(() -> {
+      return func.apply(this.database).stream().map(this::deserialize).collect(Collectors.toList());
+    }, this.executor);
   }
 
-  /**
-   * asd
-   */
   @Override
   public CompletableFuture<V> operate(Function<Database<K, R>, R> func) {
-    return CompletableFuture.supplyAsync(
-      () -> this.deserialize(func.apply(this.database)),
-      this.executor
-    );
+    return CompletableFuture.supplyAsync(() -> {
+      return this.deserialize(func.apply(this.database));
+    }, this.executor);
   }
 }

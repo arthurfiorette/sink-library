@@ -3,8 +3,11 @@ package com.github.arthurfiorette.sinklibrary.data.storage;
 import com.github.arthurfiorette.sinklibrary.data.database.Database;
 import com.github.arthurfiorette.sinklibrary.executor.BukkitExecutor;
 import com.github.arthurfiorette.sinklibrary.executor.TaskContext;
+import com.github.arthurfiorette.sinklibrary.interfaces.BaseService;
+import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
+import com.google.common.cache.CacheStats;
 import com.google.common.cache.LoadingCache;
 import com.google.common.cache.RemovalListener;
 import com.google.common.collect.Lists;
@@ -18,7 +21,7 @@ import java.util.function.Function;
 import java.util.function.UnaryOperator;
 import java.util.stream.Collectors;
 
-public abstract class LoadingStorage<K, V, R> implements Storage<K, V, R> {
+public abstract class LoadingStorage<K, V, R> implements Storage<K, V, R>, BaseService {
 
   protected final LoadingCache<K, V> cache;
   protected final Database<K, R> database;
@@ -80,8 +83,15 @@ public abstract class LoadingStorage<K, V, R> implements Storage<K, V, R> {
     };
   }
 
-  public Database<K, R> getDatabase() {
-    return this.database;
+  @Override
+  public void enable() throws Exception {}
+
+  /**
+   * Saves all entities in this cache to the dabatase when disabling.
+   */
+  @Override
+  public void disable() throws Exception {
+    this.cache.cleanUp();
   }
 
   /**
@@ -143,5 +153,33 @@ public abstract class LoadingStorage<K, V, R> implements Storage<K, V, R> {
       () -> this.deserialize(func.apply(this.database)),
       this.executor
     );
+  }
+
+  /**
+   * @see {@link Cache#stats()}
+   */
+  public CacheStats stats() {
+    return cache.stats();
+  }
+
+  /**
+   * @see {@link Cache#refresh()}
+   */
+  public void refresh(K key) {
+    cache.refresh(key);
+  }
+
+  /**
+   * @see {@link Cache#invalidate()}
+   */
+  public void invalidate(K key) {
+    cache.invalidate(key);
+  }
+
+  /**
+   * @see {@link Cache#size()}
+   */
+  public long size() {
+    return cache.size();
   }
 }
