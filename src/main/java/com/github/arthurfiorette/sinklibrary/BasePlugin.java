@@ -17,13 +17,6 @@ public interface BasePlugin extends Plugin {
 
   void treatThrowable(Class<?> author, Throwable exc, String message, Object... args);
 
-  void register(BaseService... services);
-
-  /**
-   * @return true if it could unregister the service
-   */
-  boolean unregister(Class<? extends BaseService> clazz, boolean disable);
-
   <T extends BaseService> T getService(Class<T> clazz);
 
   <T extends BaseComponent> T getComponent(Class<T> clazz);

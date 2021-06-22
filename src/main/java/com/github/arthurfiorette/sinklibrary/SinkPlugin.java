@@ -24,11 +24,10 @@ public abstract class SinkPlugin extends JavaPlugin implements BasePlugin {
 
   public SinkPlugin() {
     this.serviceCoordinator.add(this.services());
-    for (BaseComponent component : this.components()) {
+    for(BaseComponent component: this.components()) {
       if (component instanceof BaseService) {
         throw new IllegalArgumentException(
-          "You registered an service as an component: " + component.getClass().getSimpleName()
-        );
+            "You registered an service as an component: " + component.getClass().getSimpleName());
       }
       this.components.put(component.getClass(), component);
     }
@@ -62,18 +61,6 @@ public abstract class SinkPlugin extends JavaPlugin implements BasePlugin {
       this.log(Level.SEVERE, "Disabling this plugin");
       this.getPluginLoader().disablePlugin(this);
     }
-  }
-
-  @Override
-  public void register(BaseService... services) {
-    this.log(Level.WARNING, "SinkSpigot services must be added with the dedicated method");
-    this.serviceCoordinator.add(services);
-  }
-
-  @Override
-  public boolean unregister(Class<? extends BaseService> clazz, boolean disable) {
-    this.log(Level.WARNING, "SinkSpigot services should no");
-    return this.serviceCoordinator.remove(clazz, disable);
   }
 
   @Override
