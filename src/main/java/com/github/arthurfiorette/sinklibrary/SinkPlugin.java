@@ -24,10 +24,11 @@ public abstract class SinkPlugin extends JavaPlugin implements BasePlugin {
 
   public SinkPlugin() {
     this.serviceCoordinator.add(this.services());
-    for(BaseComponent component: this.components()) {
+    for (BaseComponent component : this.components()) {
       if (component instanceof BaseService) {
         throw new IllegalArgumentException(
-            "You registered an service as an component: " + component.getClass().getSimpleName());
+          "You registered an service as an component: " + component.getClass().getSimpleName()
+        );
       }
       this.components.put(component.getClass(), component);
     }
