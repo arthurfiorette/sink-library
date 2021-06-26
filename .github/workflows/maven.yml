@@ -28,4 +28,12 @@ jobs:
             ${{ runner.os }}-maven-
 
       - name: Build with Maven
-        run: mvn --batch-mode --update-snapshots verify
+        run: mvn --batch-mode --update-snapshots clean package
+
+      - name: Upload jar artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: sink-library jar and sources
+          if-no-files-found: error
+          path: |
+            target/sink-library-v*.jar
