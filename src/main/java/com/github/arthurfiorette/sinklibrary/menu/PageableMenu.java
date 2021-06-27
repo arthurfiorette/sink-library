@@ -63,7 +63,7 @@ public abstract class PageableMenu extends PrivateMenu {
       MenuItem item = lastPageableItems.get(i);
 
       // The MenuItem ItemStack or an empty value.
-      ItemStack is = item != null ? item.getItem() : new ItemStack(Material.AIR);
+      ItemStack is = item != null ? item.getItem() : defaultItem;
 
       inventory.setItem(slots[slotIndex++], is);
     }
