@@ -36,4 +36,8 @@ public class MenuStack<T extends BaseMenu> implements MenuItem {
   public void setItem(ItemStack item) {
     this.item = item;
   }
+
+  public void setListener(ClickListener<T> listener) {
+    this.listener = listener;
+  }
 }

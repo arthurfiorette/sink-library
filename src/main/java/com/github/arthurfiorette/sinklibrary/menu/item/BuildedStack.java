@@ -16,7 +16,7 @@ public class BuildedStack<T extends BaseMenu> implements MenuItem {
 
   public BuildedStack(ItemBuilder builder, ClickListener<T> listener) {
     this.builder = builder;
-    this.listener = listener;
+    this.setListener(listener);
   }
 
   @Override
@@ -30,6 +30,10 @@ public class BuildedStack<T extends BaseMenu> implements MenuItem {
     return listener;
   }
 
+  public void setListener(ClickListener<T> listener) {
+    this.listener = listener;
+  }
+
   public ItemBuilder getBuilder() {
     return builder;
   }
@@ -41,4 +45,5 @@ public class BuildedStack<T extends BaseMenu> implements MenuItem {
   public void setBuilder(ItemBuilder builder) {
     this.builder = builder;
   }
+
 }
