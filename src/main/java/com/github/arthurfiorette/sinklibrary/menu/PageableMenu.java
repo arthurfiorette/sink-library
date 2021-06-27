@@ -2,122 +2,123 @@ package com.github.arthurfiorette.sinklibrary.menu;
 
 import com.github.arthurfiorette.sinklibrary.BasePlugin;
 import com.github.arthurfiorette.sinklibrary.menu.item.MenuItem;
-import com.google.common.collect.Lists;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.ListIterator;
-import java.util.stream.Collectors;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
 
-/**
- * An minecraft menu with better methods and a fanciest way to handle with. But
- * with pages, that can be paginated with previousPage() and nextPage()
- *
- * @param <T> the item type to be pageable
- *
- * @author https://github.com/ArthurFiorette/sink-library/
- */
-public abstract class PageableMenu<T> extends SinkMenu {
+public abstract class PageableMenu extends PrivateMenu {
 
-  protected List<List<MenuItem>> pageList = new ArrayList<>();
+  private int page = 1;
 
-  /**
-   * the page number being displayed now.
-   */
-  private int page = 0;
+  protected List<MenuItem> lastPageableItems;
 
-  /**
-   * Constructs a new PageableMenu.
-   *
-   * @param plugin the sink plugin instance
-   * @param player the player owner;
-   * @param title the inventory title
-   * @param rows the number of inventory rows
-   */
-  protected PageableMenu(BasePlugin plugin, Player player, String title, int rows) {
-    super(plugin, player, title, rows);
+  public PageableMenu(BasePlugin plugin, Player owner, String title, int rows) {
+    super(plugin, owner, title, rows);
+  }
+
+  public PageableMenu(BasePlugin plugin, Player owner, Inventory inventory) {
+    super(plugin, owner, inventory);
   }
 
   /**
-   * @return the pageable slots
+   * This method must be static and always return the same bytes.
    */
-  protected abstract int[] pageableSlots();
+  protected abstract byte[] pageableSlots();
 
   /**
-   * @return all the objects to be paginated
+   * This method is called every update request. There's no problem on returning
+   * different values every time
    */
-  protected abstract Collection<T> requestValues();
+  protected abstract List<MenuItem> pageableItems();
 
   /**
-   * Transform the object to a MenuItem to be displayed.
-   *
-   * @param object the object to be transformed
-   *
-   * @return the MenuItem from this object
+   * {@inheritDoc}
+   * <p>
+   * Update static and pageable items
    */
-  protected abstract MenuItem toItem(T object);
-
   @Override
-  public void draw() {
-    super.draw();
-    this.pageList =
-      Lists.partition(
-        this.requestValues().stream().map(this::toItem).collect(Collectors.toList()),
-        this.pageableSlots().length
-      );
-    List<MenuItem> items = this.pageList.get(this.page);
-    items.forEach(i -> this.itemMap.put(i.getSlot(), i));
-    ListIterator<MenuItem> iterator = items.listIterator();
-    for (int i : this.pageableSlots()) {
-      if (!iterator.hasNext()) {
-        break;
-      }
+  public void update() {
+    this.updateStatic();
+    this.updatePageable();
+  }
 
-      this.getInventory().setItem(i, iterator.next().getItemStack());
+  public void updateStatic() {
+    super.update();
+  }
+
+  public void updatePageable() {
+    byte[] slots = pageableSlots();
+    this.lastPageableItems = pageableItems();
+
+    // List first index to this page
+    int initial = slots.length * (page - 1);
+
+    byte slotIndex = 0;
+    // for from initial to last element.
+    for (int i = initial; i < (initial + slots.length); i++) {
+      MenuItem item = lastPageableItems.get(i);
+
+      // The MenuItem ItemStack or an empty value.
+      ItemStack is = item != null ? item.getItem() : new ItemStack(Material.AIR);
+
+      inventory.setItem(slots[slotIndex++], is);
     }
   }
 
-  /**
-   * Try to advance to the next page. to know if it can go to the next page,
-   * use: {@link PageableMenu#hasNextPage()}.
-   */
-  public void nextPage() {
-    if (this.hasNextPage()) {
+  public void nextPage(boolean update) {
+    if (hasNextPage()) {
       this.page++;
-      this.draw();
+      if (update) update();
+    }
+  }
+
+  public void previousPage(boolean update) {
+    if (hasPreviousPage()) {
+      this.page--;
+      if (update) update();
     }
   }
 
   /**
    * @return true if has a next page to be displayed
    */
-  protected boolean hasNextPage() {
-    return this.page + 1 < this.getPageList().size();
-  }
-
-  /**
-   * Try to advance to the previous page. to know if it can go to the previous
-   * page, use: {@link PageableMenu#hasPreviousPage()}.
-   */
-  public void previousPage() {
-    if (this.hasPreviousPage()) {
-      this.page--;
-      this.draw();
-    }
+  public boolean hasNextPage() {
+    return this.page + 1 < this.lastPageableItems.size() / pageableSlots().length;
   }
 
   /**
    * @return true has a previous page to be displayed
    */
-  protected boolean hasPreviousPage() {
+  public boolean hasPreviousPage() {
     return this.page > 0;
   }
 
-  /**
-   * @return a list with a list of menu items. each list is a page.
-   */
-  protected List<List<MenuItem>> getPageList() {
-    return this.pageList;
+  @Override
+  public MenuItem getItemAt(byte slot) {
+    MenuItem item = super.getItemAt(slot);
+    byte[] slots = pageableSlots();
+
+    if (item != null) {
+      return item;
+    }
+
+    int slotIndex = -1;
+    for (int i = 0; i < slots.length; i++) {
+      if (slot == slots[i]) {
+        slotIndex = i;
+        break;
+      }
+    }
+
+    if (slotIndex == -1) {
+      return null;
+    }
+
+    // List first index to this page
+    int initial = slots.length * (page - 1);
+
+    return lastPageableItems.get(initial + slotIndex);
   }
 }

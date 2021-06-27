@@ -2,18 +2,18 @@ package com.github.arthurfiorette.sinklibrary.menu.management;
 
 import com.github.arthurfiorette.sinklibrary.BasePlugin;
 import com.github.arthurfiorette.sinklibrary.interfaces.BaseService;
-import com.github.arthurfiorette.sinklibrary.menu.SinkMenu;
+import com.github.arthurfiorette.sinklibrary.menu.BaseMenu;
 import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 import org.bukkit.entity.Player;
 
-public abstract class MenuStorage<M extends Enum<M> & MenuFactory> implements BaseService {
+public class MenuStorage<M extends Enum<M> & MenuFactory> implements BaseService {
 
-  protected final Map<UUID, EnumMap<M, SinkMenu>> inventories = new HashMap<>();
+  protected final Map<UUID, EnumMap<M, BaseMenu>> inventories = new HashMap<>();
   protected final MenuListener listener;
-  protected final BasePlugin plugin;
+  private final BasePlugin plugin;
   protected final Class<M> clazz;
 
   protected MenuStorage(BasePlugin plugin, Class<M> clazz) {
@@ -22,36 +22,36 @@ public abstract class MenuStorage<M extends Enum<M> & MenuFactory> implements Ba
     this.clazz = clazz;
   }
 
-  public BasePlugin getPlugin() {
-    return this.plugin;
-  }
-
-  @Override
-  public void enable() {
-    this.listener.enable();
-  }
-
-  @Override
-  public void disable() {
-    this.listener.disable();
-  }
-
   @SuppressWarnings("unchecked")
-  public <I extends SinkMenu> I get(Player player, M menu) {
-    EnumMap<M, SinkMenu> invs = this.inventories.get(player.getUniqueId());
+  public <I extends BaseMenu> I get(Player player, M menu) {
+    EnumMap<M, BaseMenu> invs = this.inventories.get(player.getUniqueId());
 
     if (invs == null) {
       invs = new EnumMap<>(this.clazz);
       this.inventories.put(player.getUniqueId(), invs);
     }
 
-    SinkMenu sinkMenu = invs.get(menu);
+    BaseMenu baseMenu = invs.get(menu);
 
-    if (sinkMenu == null) {
-      sinkMenu = menu.create(this.plugin, player);
-      invs.put(menu, sinkMenu);
+    if (baseMenu == null) {
+      baseMenu = menu.create(this.plugin, player);
+      invs.put(menu, baseMenu);
     }
 
-    return (I) sinkMenu;
+    return (I) baseMenu;
+  }
+
+  @Override
+  public void enable() throws Exception {
+    this.listener.enable();
+  }
+
+  @Override
+  public void disable() throws Exception {
+    this.listener.disable();
+  }
+
+  public BasePlugin getPlugin() {
+    return plugin;
   }
 }

@@ -145,10 +145,10 @@ public abstract class SinkListener implements Listener, BaseService {
   /**
    * Constructs a new SinkListener
    *
-   * @param owner the plugin owner;
+   * @param plugin the plugin owner;
    */
-  public SinkListener(BasePlugin owner) {
-    this.plugin = owner;
+  public SinkListener(BasePlugin plugin) {
+    this.plugin = plugin;
   }
 
   @Override

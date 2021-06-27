@@ -1,7 +1,7 @@
 package com.github.arthurfiorette.sinklibrary.menu.management;
 
 import com.github.arthurfiorette.sinklibrary.BasePlugin;
-import com.github.arthurfiorette.sinklibrary.menu.SinkMenu;
+import com.github.arthurfiorette.sinklibrary.menu.BaseMenu;
 import org.bukkit.entity.Player;
 
 /**
@@ -10,5 +10,5 @@ import org.bukkit.entity.Player;
  * @author https://github.com/arthurfiorette/sink-library/
  */
 public interface MenuFactory {
-  SinkMenu create(BasePlugin plugin, Player player);
+  BaseMenu create(BasePlugin plugin, Player player);
 }

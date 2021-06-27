@@ -1,4 +1,4 @@
-package com.github.arthurfiorette.sinklibrary.menu.actions;
+package com.github.arthurfiorette.sinklibrary.menu.listener;
 
 import org.bukkit.event.inventory.InventoryAction;
 
@@ -7,7 +7,7 @@ import org.bukkit.event.inventory.InventoryAction;
  *
  * @author https://github.com/ArthurFiorette/sink-library/
  */
-public enum MouseClick {
+public enum ClickAction {
   /**
    * When the click is in the left mouse button.
    */
@@ -40,27 +40,27 @@ public enum MouseClick {
    *
    * @return the MouseClick from this action
    */
-  public static MouseClick from(InventoryAction action) {
+  public static ClickAction from(InventoryAction action) {
     switch (action) {
       case PICKUP_ALL:
       case PLACE_ALL:
       case PLACE_SOME:
       case SWAP_WITH_CURSOR:
-        return MouseClick.LEFT;
+        return ClickAction.LEFT;
       case PICKUP_HALF:
       case PLACE_ONE:
-        return MouseClick.RIGHT;
+        return ClickAction.RIGHT;
       case MOVE_TO_OTHER_INVENTORY:
-        return MouseClick.SHIFT_LEFT;
+        return ClickAction.SHIFT_LEFT;
       case DROP_ALL_CURSOR:
       case DROP_ALL_SLOT:
       case DROP_ONE_CURSOR:
       case DROP_ONE_SLOT:
-        return MouseClick.DROP;
+        return ClickAction.DROP;
       case CLONE_STACK:
-        return MouseClick.SCROLL;
+        return ClickAction.SCROLL;
       default:
-        return MouseClick.OTHER;
+        return ClickAction.OTHER;
     }
   }
 }
