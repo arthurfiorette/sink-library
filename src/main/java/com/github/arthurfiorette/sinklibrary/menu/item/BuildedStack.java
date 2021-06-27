@@ -45,5 +45,4 @@ public class BuildedStack<T extends BaseMenu> implements MenuItem {
   public void setBuilder(ItemBuilder builder) {
     this.builder = builder;
   }
-
 }
