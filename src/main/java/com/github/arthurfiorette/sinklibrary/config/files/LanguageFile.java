@@ -20,20 +20,11 @@ import java.util.stream.Collectors;
  *
  * @author https://github.com/ArthurFiorette/sink-library/
  */
-public abstract class LanguageFile<L extends Enum<L>> extends CustomFile {
+public class LanguageFile<L extends Enum<L> & PathResolver> extends CustomFile {
 
   public LanguageFile(BasePlugin plugin, File folder, String name) {
     super(plugin, folder, name);
   }
-
-  /**
-   * Return the path associated with this enum.
-   *
-   * @param lang the enum
-   *
-   * @return the path
-   */
-  protected abstract String path(L lang);
 
   /**
    * @return the default value when the path or text is unknown or wrong.
@@ -48,7 +39,8 @@ public abstract class LanguageFile<L extends Enum<L>> extends CustomFile {
    * @param lang the lang enum
    * @param replacer the text replacer to apply in the text.
    *
-   * @return the text found or {@link LanguageFile#unknown()} if an error occurs.
+   * @return the text found or {@link LanguageFile#unknown()} if an error
+   * occurs.
    */
   public String asText(L lang, UnaryOperator<Replacer> replacer) {
     return Replacer.replace(this.asText(lang), replacer);
@@ -59,12 +51,13 @@ public abstract class LanguageFile<L extends Enum<L>> extends CustomFile {
    *
    * @param lang the lang enum
    *
-   * @return the text found or {@link LanguageFile#unknown()} if an error occurs.
+   * @return the text found or {@link LanguageFile#unknown()} if an error
+   * occurs.
    */
   public String asText(L lang) {
-    String text = this.getConfig().getString(this.path(lang));
+    String text = this.getConfig().getString(lang.getPath());
     if (text == null) {
-      this.plugin.log(Level.WARNING, "%s: %s is returning null.", this.getName(), this.path(lang));
+      this.plugin.log(Level.WARNING, "%s: %s is returning null.", this.getName(), lang.getPath());
     }
     return text;
   }
@@ -75,13 +68,11 @@ public abstract class LanguageFile<L extends Enum<L>> extends CustomFile {
    * @param lang the lang enum
    * @param replacer the text replacer to apply in the text.
    *
-   * @return the text list found or {@link LanguageFile#unknown()} if an error occurs.
+   * @return the text list found or {@link LanguageFile#unknown()} if an error
+   * occurs.
    */
   public List<String> asList(L lang, UnaryOperator<Replacer> replacer) {
-    return this.asList(lang)
-      .stream()
-      .map(str -> Replacer.replace(str, replacer))
-      .collect(Collectors.toList());
+    return this.asList(lang).stream().map(str -> Replacer.replace(str, replacer)).collect(Collectors.toList());
   }
 
   /**
@@ -89,12 +80,13 @@ public abstract class LanguageFile<L extends Enum<L>> extends CustomFile {
    *
    * @param lang the lang enum
    *
-   * @return the text list found or {@link LanguageFile#unknown()} if an error occurs.
+   * @return the text list found or {@link LanguageFile#unknown()} if an error
+   * occurs.
    */
   public List<String> asList(L lang) {
-    List<String> list = this.getConfig().getStringList(this.path(lang));
+    List<String> list = this.getConfig().getStringList(lang.getPath());
     if (list == null || list.isEmpty()) {
-      this.plugin.log(Level.WARNING, "%s: %s is empty or null.", this.getName(), this.path(lang));
+      this.plugin.log(Level.WARNING, "%s: %s is empty or null.", this.getName(), lang.getPath());
       return Lists.newArrayList(this.unknown());
     }
     return list;
