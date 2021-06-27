@@ -4,7 +4,7 @@ import com.github.arthurfiorette.sinklibrary.menu.BaseMenu;
 import com.github.arthurfiorette.sinklibrary.menu.listener.ClickListener;
 import org.bukkit.inventory.ItemStack;
 
-public class MenuStack<T extends BaseMenu> implements MenuItem {
+public class MenuStack implements MenuItem {
 
   private ItemStack item;
   private ClickListener listener;
