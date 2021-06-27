@@ -14,6 +14,8 @@ public abstract class PageableMenu extends PrivateMenu {
 
   protected List<MenuItem> lastPageableItems;
 
+  private ItemStack defaultItem = new ItemStack(Material.AIR);
+
   public PageableMenu(BasePlugin plugin, Player owner, String title, int rows) {
     super(plugin, owner, title, rows);
   }
@@ -120,5 +122,12 @@ public abstract class PageableMenu extends PrivateMenu {
     int initial = slots.length * (page - 1);
 
     return lastPageableItems.get(initial + slotIndex);
+  }
+
+  /**
+   * Sets the item that will be placed when a page does not have enough items.
+   */
+  public void setDefaultItem(ItemStack emptySlot) {
+    this.defaultItem = emptySlot;
   }
 }
