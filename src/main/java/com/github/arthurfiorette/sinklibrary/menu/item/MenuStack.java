@@ -7,13 +7,13 @@ import org.bukkit.inventory.ItemStack;
 public class MenuStack<T extends BaseMenu> implements MenuItem {
 
   private ItemStack item;
-  private ClickListener<T> listener;
+  private ClickListener listener;
 
   public MenuStack(ItemStack item) {
     this(item, ClickListener.ignore());
   }
 
-  public MenuStack(ItemStack item, ClickListener<T> listener) {
+  public MenuStack(ItemStack item, ClickListener listener) {
     this.item = item;
     this.listener = listener;
   }
@@ -24,8 +24,7 @@ public class MenuStack<T extends BaseMenu> implements MenuItem {
   }
 
   @Override
-  @SuppressWarnings("unchecked")
-  public ClickListener<T> getListener() {
+  public ClickListener getListener() {
     return listener;
   }
 
@@ -37,7 +36,7 @@ public class MenuStack<T extends BaseMenu> implements MenuItem {
     this.item = item;
   }
 
-  public void setListener(ClickListener<T> listener) {
+  public void setListener(ClickListener listener) {
     this.listener = listener;
   }
 }

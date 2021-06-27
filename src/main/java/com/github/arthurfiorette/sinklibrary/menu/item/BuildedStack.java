@@ -1,20 +1,21 @@
 package com.github.arthurfiorette.sinklibrary.menu.item;
 
+import org.bukkit.inventory.ItemStack;
+
 import com.github.arthurfiorette.sinklibrary.item.ItemBuilder;
 import com.github.arthurfiorette.sinklibrary.menu.BaseMenu;
 import com.github.arthurfiorette.sinklibrary.menu.listener.ClickListener;
-import org.bukkit.inventory.ItemStack;
 
 public class BuildedStack<T extends BaseMenu> implements MenuItem {
 
   private ItemBuilder builder;
-  private ClickListener<T> listener;
+  private ClickListener listener;
 
   public BuildedStack(ItemBuilder builder) {
     this(builder, ClickListener.ignore());
   }
 
-  public BuildedStack(ItemBuilder builder, ClickListener<T> listener) {
+  public BuildedStack(ItemBuilder builder, ClickListener listener) {
     this.builder = builder;
     this.setListener(listener);
   }
@@ -25,12 +26,11 @@ public class BuildedStack<T extends BaseMenu> implements MenuItem {
   }
 
   @Override
-  @SuppressWarnings("unchecked")
-  public ClickListener<T> getListener() {
+  public ClickListener getListener() {
     return listener;
   }
 
-  public void setListener(ClickListener<T> listener) {
+  public void setListener(ClickListener listener) {
     this.listener = listener;
   }
 

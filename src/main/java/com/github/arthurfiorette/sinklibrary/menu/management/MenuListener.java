@@ -1,15 +1,15 @@
 package com.github.arthurfiorette.sinklibrary.menu.management;
 
-import com.github.arthurfiorette.sinklibrary.BasePlugin;
-import com.github.arthurfiorette.sinklibrary.listener.SinkListener;
-import com.github.arthurfiorette.sinklibrary.menu.BaseMenu;
-import com.github.arthurfiorette.sinklibrary.menu.item.MenuItem;
-import com.github.arthurfiorette.sinklibrary.menu.listener.ClickAction;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
+
+import com.github.arthurfiorette.sinklibrary.BasePlugin;
+import com.github.arthurfiorette.sinklibrary.listener.SinkListener;
+import com.github.arthurfiorette.sinklibrary.menu.BaseMenu;
+import com.github.arthurfiorette.sinklibrary.menu.item.MenuItem;
 
 public class MenuListener extends SinkListener {
 
@@ -39,7 +39,7 @@ public class MenuListener extends SinkListener {
           MenuItem item = menu.getItemAt((byte) slot);
 
           if (item != null) {
-            item.getListener().onClick(menu, event.getCurrentItem(), ClickAction.from(action));
+            item.getListener().onClick(event.getCurrentItem(), action);
           }
         }
       }
