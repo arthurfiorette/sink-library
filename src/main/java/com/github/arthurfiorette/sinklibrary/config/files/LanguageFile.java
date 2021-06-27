@@ -72,7 +72,10 @@ public class LanguageFile<L extends Enum<L> & PathResolver> extends CustomFile {
    * occurs.
    */
   public List<String> asList(L lang, UnaryOperator<Replacer> replacer) {
-    return this.asList(lang).stream().map(str -> Replacer.replace(str, replacer)).collect(Collectors.toList());
+    return this.asList(lang)
+      .stream()
+      .map(str -> Replacer.replace(str, replacer))
+      .collect(Collectors.toList());
   }
 
   /**
