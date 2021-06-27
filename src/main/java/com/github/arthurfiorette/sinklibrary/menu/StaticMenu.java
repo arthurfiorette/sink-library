@@ -1,13 +1,11 @@
 package com.github.arthurfiorette.sinklibrary.menu;
 
+import com.github.arthurfiorette.sinklibrary.BasePlugin;
+import com.github.arthurfiorette.sinklibrary.menu.item.MenuItem;
 import java.util.Map;
-
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
-
-import com.github.arthurfiorette.sinklibrary.BasePlugin;
-import com.github.arthurfiorette.sinklibrary.menu.item.MenuItem;
 
 public abstract class StaticMenu implements BaseMenu {
 
@@ -47,9 +45,11 @@ public abstract class StaticMenu implements BaseMenu {
   @Override
   public void update() {
     lastStaticItems = staticItems();
-    lastStaticItems.forEach((slot, item) -> {
-      inventory.setItem(slot, item.getItem());
-    });
+    lastStaticItems.forEach(
+      (slot, item) -> {
+        inventory.setItem(slot, item.getItem());
+      }
+    );
   }
 
   @Override
