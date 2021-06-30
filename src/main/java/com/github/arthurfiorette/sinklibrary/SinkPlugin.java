@@ -1,13 +1,11 @@
 package com.github.arthurfiorette.sinklibrary;
 
-import java.util.logging.Level;
-
-import org.bukkit.plugin.java.JavaPlugin;
-
 import com.github.arthurfiorette.sinklibrary.core.ComponentManager;
 import com.github.arthurfiorette.sinklibrary.core.SimpleComponentManager;
 import com.github.arthurfiorette.sinklibrary.interfaces.BaseComponent;
 import com.github.arthurfiorette.sinklibrary.interfaces.BaseService;
+import java.util.logging.Level;
+import org.bukkit.plugin.java.JavaPlugin;
 
 public abstract class SinkPlugin extends JavaPlugin implements BasePlugin, BaseService {
 
@@ -62,5 +60,4 @@ public abstract class SinkPlugin extends JavaPlugin implements BasePlugin, BaseS
   public BasePlugin getPlugin() {
     return this;
   }
-
 }

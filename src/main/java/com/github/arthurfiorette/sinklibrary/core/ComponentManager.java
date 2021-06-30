@@ -19,5 +19,4 @@ public interface ComponentManager {
   <T extends BaseService> T getService(Class<T> clazz);
 
   ManagerState getState();
-
 }

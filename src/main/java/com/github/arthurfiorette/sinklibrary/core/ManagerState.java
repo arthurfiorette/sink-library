@@ -1,7 +1,6 @@
 package com.github.arthurfiorette.sinklibrary.core;
 
 public enum ManagerState {
-
   ENABLING(true),
   ENABLED(true),
   DISABLING(false),
@@ -16,5 +15,4 @@ public enum ManagerState {
   public boolean isEnabled() {
     return enabled;
   }
-
 }

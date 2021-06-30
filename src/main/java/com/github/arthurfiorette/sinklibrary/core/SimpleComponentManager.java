@@ -1,12 +1,11 @@
 package com.github.arthurfiorette.sinklibrary.core;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-
 import com.github.arthurfiorette.sinklibrary.SinkPlugin;
 import com.github.arthurfiorette.sinklibrary.interfaces.BaseComponent;
 import com.github.arthurfiorette.sinklibrary.interfaces.BaseService;
 import com.google.common.collect.Iterables;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  * A simple component manager class that turns its services on and off in
@@ -25,10 +24,10 @@ public final class SimpleComponentManager implements ComponentManager {
   }
 
   public void register(BaseService[] services, BaseComponent[] components) {
-    for(BaseComponent component: components) {
+    for (BaseComponent component : components) {
       this.components.put(component.getClass(), component);
     }
-    for(BaseService service: services) {
+    for (BaseService service : services) {
       this.services.put(service.getClass(), service);
     }
   }
@@ -41,11 +40,15 @@ public final class SimpleComponentManager implements ComponentManager {
 
     this.state = ManagerState.ENABLING;
 
-    for(BaseService service: services.values()) {
+    for (BaseService service : services.values()) {
       try {
         service.enable();
       } catch (Exception e) {
-        this.plugin.treatThrowable(service.getClass(), e, "Throwable catch while enabling this service");
+        this.plugin.treatThrowable(
+            service.getClass(),
+            e,
+            "Throwable catch while enabling this service"
+          );
       }
     }
 
@@ -61,12 +64,16 @@ public final class SimpleComponentManager implements ComponentManager {
     this.state = ManagerState.DISABLING;
 
     BaseService[] servicesArr = Iterables.toArray(this.services.values(), BaseService.class);
-    for(int i = servicesArr.length - 1; i >= 0; i--) {
+    for (int i = servicesArr.length - 1; i >= 0; i--) {
       BaseService service = servicesArr[i];
       try {
         service.disable();
       } catch (Exception e) {
-        this.plugin.treatThrowable(service.getClass(), e, "Throwable catch while disabling this service");
+        this.plugin.treatThrowable(
+            service.getClass(),
+            e,
+            "Throwable catch while disabling this service"
+          );
       }
     }
 
@@ -89,5 +96,4 @@ public final class SimpleComponentManager implements ComponentManager {
   public ManagerState getState() {
     return this.state;
   }
-
 }
