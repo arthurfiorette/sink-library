@@ -13,7 +13,7 @@ public class MenuStorage<M extends Enum<M> & MenuFactory> implements BaseService
 
   protected final Map<UUID, EnumMap<M, BaseMenu>> inventories = new HashMap<>();
   protected final MenuListener listener;
-  private final BasePlugin plugin;
+  protected final BasePlugin plugin;
   protected final Class<M> clazz;
 
   protected MenuStorage(BasePlugin plugin, Class<M> clazz) {
