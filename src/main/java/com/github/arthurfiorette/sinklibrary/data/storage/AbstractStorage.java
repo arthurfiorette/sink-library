@@ -1,15 +1,14 @@
 package com.github.arthurfiorette.sinklibrary.data.storage;
 
+import com.github.arthurfiorette.sinklibrary.data.database.Database;
+import com.github.arthurfiorette.sinklibrary.executor.BukkitExecutor;
+import com.github.arthurfiorette.sinklibrary.executor.TaskContext;
 import java.util.Collection;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-
-import com.github.arthurfiorette.sinklibrary.data.database.Database;
-import com.github.arthurfiorette.sinklibrary.executor.BukkitExecutor;
-import com.github.arthurfiorette.sinklibrary.executor.TaskContext;
 
 public abstract class AbstractStorage<K, V, R> implements Storage<K, V, R> {
 
@@ -65,22 +64,18 @@ public abstract class AbstractStorage<K, V, R> implements Storage<K, V, R> {
   @Override
   public CompletableFuture<Collection<V>> getMany(final Set<K> keys) {
     return CompletableFuture.supplyAsync(
-      () -> this.database.getMany(keys)
-        .stream()
-        .map(this::deserialize)
-        .collect(Collectors.toList()),
+      () ->
+        this.database.getMany(keys).stream().map(this::deserialize).collect(Collectors.toList()),
       this.executor
     );
   }
 
   @Override
-  public CompletableFuture<Collection<V>> operation(final Function<Database<K, R>, Collection<R>> func) {
+  public CompletableFuture<Collection<V>> operation(
+    final Function<Database<K, R>, Collection<R>> func
+  ) {
     return CompletableFuture.supplyAsync(
-      () -> func
-        .apply(this.database)
-        .stream()
-        .map(this::deserialize)
-        .collect(Collectors.toList()),
+      () -> func.apply(this.database).stream().map(this::deserialize).collect(Collectors.toList()),
       this.executor
     );
   }

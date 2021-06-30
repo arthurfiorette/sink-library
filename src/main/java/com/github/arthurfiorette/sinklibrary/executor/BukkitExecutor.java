@@ -1,12 +1,10 @@
 package com.github.arthurfiorette.sinklibrary.executor;
 
+import com.github.arthurfiorette.sinklibrary.BasePlugin;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
-
 import org.bukkit.scheduler.BukkitScheduler;
-
-import com.github.arthurfiorette.sinklibrary.BasePlugin;
 
 /**
  * Simple interface to target all executors that runs with a
@@ -62,7 +60,10 @@ public final class BukkitExecutor {
    *
    * @throws IllegalArgumentException if {@code nThreads <= 0}
    */
-  public static ExecutorService newSyncFixedThreadPool(final BasePlugin plugin, final int nThreads) {
+  public static ExecutorService newSyncFixedThreadPool(
+    final BasePlugin plugin,
+    final int nThreads
+  ) {
     return Executors.newFixedThreadPool(nThreads, BukkitThreadFactory.ofSync(plugin));
   }
 
@@ -84,7 +85,10 @@ public final class BukkitExecutor {
    *
    * @throws IllegalArgumentException if {@code nThreads <= 0}
    */
-  public static ExecutorService newAsyncFixedThreadPool(final BasePlugin plugin, final int nThreads) {
+  public static ExecutorService newAsyncFixedThreadPool(
+    final BasePlugin plugin,
+    final int nThreads
+  ) {
     return Executors.newFixedThreadPool(nThreads, BukkitThreadFactory.ofAsync(plugin));
   }
 
@@ -173,7 +177,9 @@ public final class BukkitExecutor {
    *
    * @return a newly created scheduled executor
    */
-  public static ScheduledExecutorService newSyncSingleThreadScheduledExecutor(final BasePlugin plugin) {
+  public static ScheduledExecutorService newSyncSingleThreadScheduledExecutor(
+    final BasePlugin plugin
+  ) {
     return Executors.newSingleThreadScheduledExecutor(BukkitThreadFactory.ofSync(plugin));
   }
 
@@ -194,7 +200,9 @@ public final class BukkitExecutor {
    *
    * @return a newly created scheduled executor
    */
-  public static ScheduledExecutorService newAsyncSingleThreadScheduledExecutor(final BasePlugin plugin) {
+  public static ScheduledExecutorService newAsyncSingleThreadScheduledExecutor(
+    final BasePlugin plugin
+  ) {
     return Executors.newSingleThreadScheduledExecutor(BukkitThreadFactory.ofAsync(plugin));
   }
 }

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
-
 import org.apache.commons.lang.WordUtils;
 import org.bukkit.ChatColor;
 
@@ -47,7 +46,12 @@ public final class TextService {
     final long currentValue,
     final long maxValue
   ) {
-    return TextService.buildProgressBar(width, incomplete, complete, (double) currentValue / maxValue);
+    return TextService.buildProgressBar(
+      width,
+      incomplete,
+      complete,
+      (double) currentValue / maxValue
+    );
   }
 
   /**
@@ -110,7 +114,9 @@ public final class TextService {
    */
   public static List<String> splitText(final String text, final int width, final String newLine) {
     return Arrays.asList(
-      WordUtils.wrap(text, width, TextService.LINE_SEPARATOR + newLine, false).split(TextService.LINE_SEPARATOR)
+      WordUtils
+        .wrap(text, width, TextService.LINE_SEPARATOR + newLine, false)
+        .split(TextService.LINE_SEPARATOR)
     );
   }
 

@@ -1,15 +1,5 @@
 package com.github.arthurfiorette.sinklibrary.data.storage;
 
-import java.util.Collection;
-import java.util.Set;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.CompletionException;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Executor;
-import java.util.function.Function;
-import java.util.function.UnaryOperator;
-import java.util.stream.Collectors;
-
 import com.github.arthurfiorette.sinklibrary.data.database.Database;
 import com.github.arthurfiorette.sinklibrary.executor.BukkitExecutor;
 import com.github.arthurfiorette.sinklibrary.executor.TaskContext;
@@ -21,6 +11,15 @@ import com.google.common.cache.CacheStats;
 import com.google.common.cache.LoadingCache;
 import com.google.common.cache.RemovalListener;
 import com.google.common.collect.Lists;
+import java.util.Collection;
+import java.util.Set;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionException;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executor;
+import java.util.function.Function;
+import java.util.function.UnaryOperator;
+import java.util.stream.Collectors;
 
 public abstract class LoadingStorage<K, V, R> implements Storage<K, V, R>, BaseService {
 
@@ -149,7 +148,9 @@ public abstract class LoadingStorage<K, V, R> implements Storage<K, V, R>, BaseS
    * <b>This method is not cached at all. Use carefully</b>
    */
   @Override
-  public CompletableFuture<Collection<V>> operation(final Function<Database<K, R>, Collection<R>> func) {
+  public CompletableFuture<Collection<V>> operation(
+    final Function<Database<K, R>, Collection<R>> func
+  ) {
     return CompletableFuture.supplyAsync(
       () -> func.apply(this.database).stream().map(this::deserialize).collect(Collectors.toList()),
       this.executor

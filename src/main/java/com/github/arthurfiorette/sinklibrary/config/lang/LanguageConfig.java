@@ -1,16 +1,14 @@
 package com.github.arthurfiorette.sinklibrary.config.lang;
 
-import java.util.List;
-import java.util.function.UnaryOperator;
-import java.util.logging.Level;
-import java.util.stream.Collectors;
-
-import org.bukkit.ChatColor;
-
 import com.github.arthurfiorette.sinklibrary.BasePlugin;
 import com.github.arthurfiorette.sinklibrary.config.CustomConfig;
 import com.github.arthurfiorette.sinklibrary.services.Replacer;
 import com.google.common.collect.Lists;
+import java.util.List;
+import java.util.function.UnaryOperator;
+import java.util.logging.Level;
+import java.util.stream.Collectors;
+import org.bukkit.ChatColor;
 
 public class LanguageConfig<E extends Enum<E> & PathResolver> extends CustomConfig {
 
@@ -19,7 +17,11 @@ public class LanguageConfig<E extends Enum<E> & PathResolver> extends CustomConf
    */
   protected String unknownValue = ChatColor.RED + "Unknown value";
 
-  public LanguageConfig(final BasePlugin plugin, final String resourcePath, final boolean replaceIfExists) {
+  public LanguageConfig(
+    final BasePlugin plugin,
+    final String resourcePath,
+    final boolean replaceIfExists
+  ) {
     super(plugin, resourcePath, replaceIfExists);
   }
 

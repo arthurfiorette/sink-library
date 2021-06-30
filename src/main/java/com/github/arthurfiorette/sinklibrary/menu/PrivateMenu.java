@@ -1,15 +1,19 @@
 package com.github.arthurfiorette.sinklibrary.menu;
 
+import com.github.arthurfiorette.sinklibrary.BasePlugin;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
-
-import com.github.arthurfiorette.sinklibrary.BasePlugin;
 
 public abstract class PrivateMenu extends StaticMenu {
 
   protected Player owner;
 
-  public PrivateMenu(final BasePlugin plugin, final Player owner, final String title, final int rows) {
+  public PrivateMenu(
+    final BasePlugin plugin,
+    final Player owner,
+    final String title,
+    final int rows
+  ) {
     super(plugin, title, rows);
     this.owner = owner;
   }

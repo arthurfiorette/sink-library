@@ -1,12 +1,11 @@
 package com.github.arthurfiorette.sinklibrary.core;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-
 import com.github.arthurfiorette.sinklibrary.SinkPlugin;
 import com.github.arthurfiorette.sinklibrary.interfaces.BaseComponent;
 import com.github.arthurfiorette.sinklibrary.interfaces.BaseService;
 import com.google.common.collect.Iterables;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  * A simple component manager class that turns its services on and off in

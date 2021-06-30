@@ -1,13 +1,11 @@
 package com.github.arthurfiorette.sinklibrary.services;
 
+import com.google.common.collect.Maps;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
-
-import com.google.common.collect.Maps;
 
 /**
  * A service class that handles with yml.
@@ -31,7 +29,10 @@ public final class YmlService {
    *
    * @return the value map
    */
-  public static Map<String, Map<String, String>> getKeys(final FileConfiguration file, final String section) {
+  public static Map<String, Map<String, String>> getKeys(
+    final FileConfiguration file,
+    final String section
+  ) {
     final Map<String, Map<String, String>> request = new HashMap<>();
     final ConfigurationSection cSection = file.getConfigurationSection(section);
     cSection.getKeys(false).stream().forEach(key -> request.put(key, Maps.newHashMap()));
@@ -40,7 +41,9 @@ public final class YmlService {
       .stream()
       .forEach(
         key ->
-          request.get(YmlService.getFirstKey(key)).put(YmlService.getLastKeys(key), file.getString(section + "." + key))
+          request
+            .get(YmlService.getFirstKey(key))
+            .put(YmlService.getLastKeys(key), file.getString(section + "." + key))
       );
     return request;
   }
