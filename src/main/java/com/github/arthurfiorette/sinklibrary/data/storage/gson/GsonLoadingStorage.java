@@ -1,5 +1,6 @@
 package com.github.arthurfiorette.sinklibrary.data.storage.gson;
 
+import com.github.arthurfiorette.sinklibrary.BasePlugin;
 import com.github.arthurfiorette.sinklibrary.data.database.JsonDatabase;
 import com.github.arthurfiorette.sinklibrary.data.storage.LoadingStorage;
 import com.google.common.cache.CacheBuilder;
@@ -14,9 +15,11 @@ public class GsonLoadingStorage<K, V> extends LoadingStorage<K, V, JsonObject> {
 
   protected final Class<V> clazz;
   protected Gson gson = new Gson();
-  private Function<K, V> generator;
+  protected final Function<K, V> generator;
+  protected final BasePlugin plugin;
 
   public GsonLoadingStorage(
+    BasePlugin plugin,
     JsonDatabase<K> database,
     Class<V> clazz,
     Executor executor,
@@ -24,6 +27,7 @@ public class GsonLoadingStorage<K, V> extends LoadingStorage<K, V, JsonObject> {
     Function<K, V> generator
   ) {
     super(database, executor, builder);
+    this.plugin = plugin;
     this.clazz = clazz;
     this.generator = generator;
   }
@@ -45,5 +49,10 @@ public class GsonLoadingStorage<K, V> extends LoadingStorage<K, V, JsonObject> {
 
   public void setGson(Gson gson) {
     this.gson = gson;
+  }
+
+  @Override
+  public BasePlugin getPlugin() {
+    return this.plugin;
   }
 }

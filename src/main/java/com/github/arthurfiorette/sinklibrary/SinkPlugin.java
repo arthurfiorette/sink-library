@@ -1,46 +1,36 @@
 package com.github.arthurfiorette.sinklibrary;
 
-import com.github.arthurfiorette.sinklibrary.config.YmlContainer;
-import com.github.arthurfiorette.sinklibrary.interfaces.BaseComponent;
-import com.github.arthurfiorette.sinklibrary.interfaces.BaseService;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.logging.Level;
+
 import org.bukkit.plugin.java.JavaPlugin;
 
-public abstract class SinkPlugin extends JavaPlugin implements BasePlugin {
+import com.github.arthurfiorette.sinklibrary.core.ComponentManager;
+import com.github.arthurfiorette.sinklibrary.core.SimpleComponentManager;
+import com.github.arthurfiorette.sinklibrary.interfaces.BaseComponent;
+import com.github.arthurfiorette.sinklibrary.interfaces.BaseService;
 
-  protected final YmlContainer ymlContainer = new YmlContainer(this);
-  private final ServiceCoordinator serviceCoordinator = new ServiceCoordinator(this);
-  private final Map<Class<? extends BaseComponent>, BaseComponent> components = new HashMap<>();
+public abstract class SinkPlugin extends JavaPlugin implements BasePlugin, BaseService {
+
+  private final ComponentManager manager;
+
+  public SinkPlugin() {
+    this.manager = new SimpleComponentManager(this);
+  }
+
+  public SinkPlugin(ComponentManager manager) {
+    this.manager = manager;
+  }
 
   protected abstract BaseService[] services();
 
   protected abstract BaseComponent[] components();
-
-  protected void enable() {}
-
-  protected void disable() {}
-
-  public SinkPlugin() {
-    this.serviceCoordinator.add(this.services());
-    for (BaseComponent component : this.components()) {
-      if (component instanceof BaseService) {
-        throw new IllegalArgumentException(
-          "You registered an service as an component: " + component.getClass().getSimpleName()
-        );
-      }
-      this.components.put(component.getClass(), component);
-    }
-  }
 
   /**
    * @see {@link SinkPlugin#enable()}
    */
   @Override
   public final void onEnable() {
-    this.serviceCoordinator.requestEnable();
-    this.enable();
+    this.manager.enableServices();
   }
 
   /**
@@ -48,8 +38,7 @@ public abstract class SinkPlugin extends JavaPlugin implements BasePlugin {
    */
   @Override
   public final void onDisable() {
-    this.serviceCoordinator.requestDisable();
-    this.disable();
+    this.manager.disableServices();
   }
 
   @Override
@@ -65,12 +54,13 @@ public abstract class SinkPlugin extends JavaPlugin implements BasePlugin {
   }
 
   @Override
-  public <T extends BaseService> T getService(Class<T> clazz) {
-    return this.serviceCoordinator.getService(clazz);
+  public ComponentManager getManager() {
+    return this.manager;
   }
 
   @Override
-  public <T extends BaseComponent> T getComponent(Class<T> clazz) {
-    return clazz.cast(this.components.get(clazz));
+  public BasePlugin getPlugin() {
+    return this;
   }
+
 }

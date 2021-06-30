@@ -13,8 +13,4 @@ public interface BaseComponent {
    * @return his plugin instance
    */
   BasePlugin getPlugin();
-
-  default <T extends BasePlugin> T getPlugin(Class<T> clazz) {
-    return clazz.cast(this.getPlugin());
-  }
 }
