@@ -1,14 +1,16 @@
 package com.github.arthurfiorette.sinklibrary.config.lang;
 
-import com.github.arthurfiorette.sinklibrary.BasePlugin;
-import com.github.arthurfiorette.sinklibrary.config.CustomConfig;
-import com.github.arthurfiorette.sinklibrary.services.Replacer;
-import com.google.common.collect.Lists;
 import java.util.List;
 import java.util.function.UnaryOperator;
 import java.util.logging.Level;
 import java.util.stream.Collectors;
+
 import org.bukkit.ChatColor;
+
+import com.github.arthurfiorette.sinklibrary.BasePlugin;
+import com.github.arthurfiorette.sinklibrary.config.CustomConfig;
+import com.github.arthurfiorette.sinklibrary.services.Replacer;
+import com.google.common.collect.Lists;
 
 public class LanguageConfig<E extends Enum<E> & PathResolver> extends CustomConfig {
 
@@ -17,7 +19,7 @@ public class LanguageConfig<E extends Enum<E> & PathResolver> extends CustomConf
    */
   protected String unknownValue = ChatColor.RED + "Unknown value";
 
-  public LanguageConfig(BasePlugin plugin, String resourcePath, boolean replaceIfExists) {
+  public LanguageConfig(final BasePlugin plugin, final String resourcePath, final boolean replaceIfExists) {
     super(plugin, resourcePath, replaceIfExists);
   }
 
@@ -30,7 +32,7 @@ public class LanguageConfig<E extends Enum<E> & PathResolver> extends CustomConf
    * @return the text found or {@link LanguageFile#unknown()} if an error
    * occurs.
    */
-  public String asText(E lang, UnaryOperator<Replacer> replacer) {
+  public String asText(final E lang, final UnaryOperator<Replacer> replacer) {
     return Replacer.replace(this.asText(lang), replacer);
   }
 
@@ -42,8 +44,8 @@ public class LanguageConfig<E extends Enum<E> & PathResolver> extends CustomConf
    * @return the text found or {@link LanguageFile#unknown()} if an error
    * occurs.
    */
-  public String asText(E lang) {
-    String text = this.getConfig().getString(lang.getPath());
+  public String asText(final E lang) {
+    final String text = this.getConfig().getString(lang.getPath());
     if (text == null) {
       this.plugin.log(
           Level.WARNING,
@@ -64,7 +66,7 @@ public class LanguageConfig<E extends Enum<E> & PathResolver> extends CustomConf
    * @return the text list found or {@link LanguageFile#unknown()} if an error
    * occurs.
    */
-  public List<String> asList(E lang, UnaryOperator<Replacer> replacer) {
+  public List<String> asList(final E lang, final UnaryOperator<Replacer> replacer) {
     return this.asList(lang)
       .stream()
       .map(str -> Replacer.replace(str, replacer))
@@ -79,10 +81,10 @@ public class LanguageConfig<E extends Enum<E> & PathResolver> extends CustomConf
    * @return the text list found or {@link LanguageFile#unknown()} if an error
    * occurs.
    */
-  public List<String> asList(E lang) {
-    List<String> list = this.getConfig().getStringList(lang.getPath());
+  public List<String> asList(final E lang) {
+    final List<String> list = this.getConfig().getStringList(lang.getPath());
 
-    if (list == null || list.isEmpty()) {
+    if ((list == null) || list.isEmpty()) {
       this.plugin.log(
           Level.WARNING,
           "%s: %s is empty or null.",

@@ -12,7 +12,7 @@ public enum ItemProperty {
 
   private boolean cumulative;
 
-  ItemProperty(boolean cumulative) {
+  ItemProperty(final boolean cumulative) {
     this.cumulative = cumulative;
   }
 

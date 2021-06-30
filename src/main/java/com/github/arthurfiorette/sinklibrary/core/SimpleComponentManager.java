@@ -1,11 +1,12 @@
 package com.github.arthurfiorette.sinklibrary.core;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 import com.github.arthurfiorette.sinklibrary.SinkPlugin;
 import com.github.arthurfiorette.sinklibrary.interfaces.BaseComponent;
 import com.github.arthurfiorette.sinklibrary.interfaces.BaseService;
 import com.google.common.collect.Iterables;
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 /**
  * A simple component manager class that turns its services on and off in
@@ -18,32 +19,32 @@ public final class SimpleComponentManager implements ComponentManager {
   private final SinkPlugin plugin;
   private ManagerState state = ManagerState.DISABLED;
 
-  public SimpleComponentManager(SinkPlugin plugin) {
+  public SimpleComponentManager(final SinkPlugin plugin) {
     this.plugin = plugin;
     this.services.put(plugin.getClass(), plugin);
   }
 
-  public void register(BaseService[] services, BaseComponent[] components) {
-    for (BaseComponent component : components) {
+  public void register(final BaseService[] services, final BaseComponent[] components) {
+    for (final BaseComponent component : components) {
       this.components.put(component.getClass(), component);
     }
-    for (BaseService service : services) {
+    for (final BaseService service : services) {
       this.services.put(service.getClass(), service);
     }
   }
 
   @Override
   public void enableServices() throws IllegalStateException {
-    if (state.isEnabled()) {
+    if (this.state.isEnabled()) {
       throw new IllegalStateException("Manager already started");
     }
 
     this.state = ManagerState.ENABLING;
 
-    for (BaseService service : services.values()) {
+    for (final BaseService service : this.services.values()) {
       try {
         service.enable();
-      } catch (Exception e) {
+      } catch (final Exception e) {
         this.plugin.treatThrowable(
             service.getClass(),
             e,
@@ -57,18 +58,18 @@ public final class SimpleComponentManager implements ComponentManager {
 
   @Override
   public void disableServices() throws IllegalStateException {
-    if (!state.isEnabled()) {
+    if (!this.state.isEnabled()) {
       throw new IllegalStateException("Manager wasn't started");
     }
 
     this.state = ManagerState.DISABLING;
 
-    BaseService[] servicesArr = Iterables.toArray(this.services.values(), BaseService.class);
+    final BaseService[] servicesArr = Iterables.toArray(this.services.values(), BaseService.class);
     for (int i = servicesArr.length - 1; i >= 0; i--) {
-      BaseService service = servicesArr[i];
+      final BaseService service = servicesArr[i];
       try {
         service.disable();
-      } catch (Exception e) {
+      } catch (final Exception e) {
         this.plugin.treatThrowable(
             service.getClass(),
             e,
@@ -82,14 +83,14 @@ public final class SimpleComponentManager implements ComponentManager {
 
   @Override
   @SuppressWarnings("unchecked")
-  public <T extends BaseComponent> T getComponent(Class<T> clazz) {
-    return (T) components.get(clazz);
+  public <T extends BaseComponent> T getComponent(final Class<T> clazz) {
+    return (T) this.components.get(clazz);
   }
 
   @Override
   @SuppressWarnings("unchecked")
-  public <T extends BaseService> T getService(Class<T> clazz) {
-    return (T) services.get(clazz);
+  public <T extends BaseService> T getService(final Class<T> clazz) {
+    return (T) this.services.get(clazz);
   }
 
   @Override

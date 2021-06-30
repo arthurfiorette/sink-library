@@ -1,11 +1,13 @@
 package com.github.arthurfiorette.sinklibrary.menu;
 
-import com.github.arthurfiorette.sinklibrary.BasePlugin;
-import com.github.arthurfiorette.sinklibrary.menu.item.MenuItem;
 import java.util.Map;
+
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
+
+import com.github.arthurfiorette.sinklibrary.BasePlugin;
+import com.github.arthurfiorette.sinklibrary.menu.item.MenuItem;
 
 public abstract class StaticMenu implements BaseMenu {
 
@@ -18,15 +20,15 @@ public abstract class StaticMenu implements BaseMenu {
 
   protected abstract Map<Byte, MenuItem> staticItems();
 
-  public StaticMenu(BasePlugin plugin, String title, int rows) {
+  public StaticMenu(final BasePlugin plugin, final String title, final int rows) {
     this.plugin = plugin;
     this.inventory = Bukkit.createInventory(this, rows * 9, title);
-    this.title = inventory.getTitle();
-    this.rows = inventory.getSize() % 9;
-    update(); // Calls the first draw
+    this.title = this.inventory.getTitle();
+    this.rows = this.inventory.getSize() % 9;
+    this.update(); // Calls the first draw
   }
 
-  public StaticMenu(BasePlugin plugin, Inventory inventory) {
+  public StaticMenu(final BasePlugin plugin, final Inventory inventory) {
     if (this != inventory.getHolder()) {
       throw new IllegalArgumentException("The inventory holder must be this instance");
     }
@@ -34,32 +36,34 @@ public abstract class StaticMenu implements BaseMenu {
     this.inventory = inventory;
     this.title = inventory.getTitle();
     this.rows = inventory.getSize() % 9;
-    update(); // Calls the first draw
+    this.update(); // Calls the first draw
   }
 
-  public void openFor(Player player, boolean update) {
-    if (update) this.update();
-    player.openInventory(getInventory());
+  public void openFor(final Player player, final boolean update) {
+    if (update) {
+      this.update();
+    }
+    player.openInventory(this.getInventory());
   }
 
   @Override
   public void update() {
-    lastStaticItems = staticItems();
-    lastStaticItems.forEach(
+    this.lastStaticItems = this.staticItems();
+    this.lastStaticItems.forEach(
       (slot, item) -> {
-        inventory.setItem(slot, item.getItem());
+        this.inventory.setItem(slot, item.getItem());
       }
     );
   }
 
   @Override
-  public MenuItem getItemAt(byte slot) {
-    return lastStaticItems.get(slot);
+  public MenuItem getItemAt(final byte slot) {
+    return this.lastStaticItems.get(slot);
   }
 
   @Override
   public BasePlugin getPlugin() {
-    return plugin;
+    return this.plugin;
   }
 
   @Override

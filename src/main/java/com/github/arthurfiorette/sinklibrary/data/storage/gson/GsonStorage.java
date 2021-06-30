@@ -1,12 +1,13 @@
 package com.github.arthurfiorette.sinklibrary.data.storage.gson;
 
+import java.util.concurrent.Executor;
+import java.util.function.Function;
+
 import com.github.arthurfiorette.sinklibrary.data.database.JsonDatabase;
 import com.github.arthurfiorette.sinklibrary.data.storage.AbstractStorage;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
-import java.util.concurrent.Executor;
-import java.util.function.Function;
 
 public class GsonStorage<K, V> extends AbstractStorage<K, V, JsonObject> {
 
@@ -15,10 +16,10 @@ public class GsonStorage<K, V> extends AbstractStorage<K, V, JsonObject> {
   protected Function<K, V> generator;
 
   public GsonStorage(
-    JsonDatabase<K> database,
-    Class<V> clazz,
-    Executor executor,
-    Function<K, V> generator
+    final JsonDatabase<K> database,
+    final Class<V> clazz,
+    final Executor executor,
+    final Function<K, V> generator
   ) {
     super(database, executor);
     this.clazz = clazz;
@@ -26,21 +27,21 @@ public class GsonStorage<K, V> extends AbstractStorage<K, V, JsonObject> {
   }
 
   @Override
-  protected V create(K key) {
-    return generator.apply(key);
+  protected V create(final K key) {
+    return this.generator.apply(key);
   }
 
   @Override
-  public JsonObject serialize(V object) {
+  public JsonObject serialize(final V object) {
     return (JsonObject) this.gson.toJsonTree(object, this.clazz);
   }
 
   @Override
-  public V deserialize(JsonObject raw) throws JsonSyntaxException {
+  public V deserialize(final JsonObject raw) throws JsonSyntaxException {
     return this.gson.fromJson(raw, this.clazz);
   }
 
-  public void setGson(Gson gson) {
+  public void setGson(final Gson gson) {
     this.gson = gson;
   }
 }

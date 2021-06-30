@@ -1,9 +1,11 @@
 package com.github.arthurfiorette.sinklibrary.config;
 
-import com.github.arthurfiorette.sinklibrary.BasePlugin;
 import java.io.File;
+
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+
+import com.github.arthurfiorette.sinklibrary.BasePlugin;
 
 public class CustomConfig implements BaseConfig {
 
@@ -15,7 +17,7 @@ public class CustomConfig implements BaseConfig {
   /**
    * @see {@link org.bukkit.plugin.Plugin#saveResource(String, boolean)}
    */
-  public CustomConfig(BasePlugin plugin, String resourcePath, boolean replaceIfExists) {
+  public CustomConfig(final BasePlugin plugin, final String resourcePath, final boolean replaceIfExists) {
     this.plugin = plugin;
     this.file = new File(plugin.getDataFolder(), resourcePath);
     plugin.saveResource(resourcePath, replaceIfExists);
@@ -24,7 +26,7 @@ public class CustomConfig implements BaseConfig {
 
   @Override
   public void reload() {
-    this.config = YamlConfiguration.loadConfiguration(file);
+    this.config = YamlConfiguration.loadConfiguration(this.file);
   }
 
   @Override

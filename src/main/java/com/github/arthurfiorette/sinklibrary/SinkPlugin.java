@@ -1,11 +1,13 @@
 package com.github.arthurfiorette.sinklibrary;
 
+import java.util.logging.Level;
+
+import org.bukkit.plugin.java.JavaPlugin;
+
 import com.github.arthurfiorette.sinklibrary.core.ComponentManager;
 import com.github.arthurfiorette.sinklibrary.core.SimpleComponentManager;
 import com.github.arthurfiorette.sinklibrary.interfaces.BaseComponent;
 import com.github.arthurfiorette.sinklibrary.interfaces.BaseService;
-import java.util.logging.Level;
-import org.bukkit.plugin.java.JavaPlugin;
 
 public abstract class SinkPlugin extends JavaPlugin implements BasePlugin, BaseService {
 
@@ -15,7 +17,7 @@ public abstract class SinkPlugin extends JavaPlugin implements BasePlugin, BaseS
     this.manager = new SimpleComponentManager(this);
   }
 
-  public SinkPlugin(ComponentManager manager) {
+  public SinkPlugin(final ComponentManager manager) {
     this.manager = manager;
   }
 
@@ -40,7 +42,7 @@ public abstract class SinkPlugin extends JavaPlugin implements BasePlugin, BaseS
   }
 
   @Override
-  public void treatThrowable(Class<?> author, Throwable exc, String message, Object... args) {
+  public void treatThrowable(final Class<?> author, final Throwable exc, final String message, final Object... args) {
     this.log(Level.SEVERE, "An exception occurred in class %s:", author.getSimpleName());
     this.log(Level.SEVERE, message, args);
     exc.printStackTrace();

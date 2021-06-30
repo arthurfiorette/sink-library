@@ -1,11 +1,13 @@
 package com.github.arthurfiorette.sinklibrary.services;
 
-import com.google.common.collect.Maps;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
+
+import com.google.common.collect.Maps;
 
 /**
  * A service class that handles with yml.
@@ -29,30 +31,30 @@ public final class YmlService {
    *
    * @return the value map
    */
-  public static Map<String, Map<String, String>> getKeys(FileConfiguration file, String section) {
-    Map<String, Map<String, String>> request = new HashMap<>();
-    ConfigurationSection cSection = file.getConfigurationSection(section);
+  public static Map<String, Map<String, String>> getKeys(final FileConfiguration file, final String section) {
+    final Map<String, Map<String, String>> request = new HashMap<>();
+    final ConfigurationSection cSection = file.getConfigurationSection(section);
     cSection.getKeys(false).stream().forEach(key -> request.put(key, Maps.newHashMap()));
     cSection
       .getKeys(true)
       .stream()
       .forEach(
         key ->
-          request.get(getFirstKey(key)).put(getLastKeys(key), file.getString(section + "." + key))
+          request.get(YmlService.getFirstKey(key)).put(YmlService.getLastKeys(key), file.getString(section + "." + key))
       );
     return request;
   }
 
-  private static String[] getKeys(String path) {
+  private static String[] getKeys(final String path) {
     return path.split("\\.");
   }
 
-  private static String getFirstKey(String path) {
-    return getKeys(path)[0];
+  private static String getFirstKey(final String path) {
+    return YmlService.getKeys(path)[0];
   }
 
-  private static String getLastKeys(String path) {
-    String[] keys = getKeys(path);
+  private static String getLastKeys(final String path) {
+    final String[] keys = YmlService.getKeys(path);
     return String.join(".", Arrays.copyOfRange(keys, 1, keys.length));
   }
 }

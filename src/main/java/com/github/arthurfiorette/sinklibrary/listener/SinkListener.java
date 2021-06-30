@@ -1,7 +1,5 @@
 package com.github.arthurfiorette.sinklibrary.listener;
 
-import com.github.arthurfiorette.sinklibrary.BasePlugin;
-import com.github.arthurfiorette.sinklibrary.interfaces.BaseService;
 import org.bukkit.Bukkit;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
@@ -131,6 +129,9 @@ import org.bukkit.event.world.WorldLoadEvent;
 import org.bukkit.event.world.WorldSaveEvent;
 import org.bukkit.event.world.WorldUnloadEvent;
 
+import com.github.arthurfiorette.sinklibrary.BasePlugin;
+import com.github.arthurfiorette.sinklibrary.interfaces.BaseService;
+
 /**
  * A abstract Spigot listener implementation with the most methods implements.
  * Override and use {@link org.bukkit.event.EventHandler} to make the method be
@@ -147,7 +148,7 @@ public abstract class SinkListener implements Listener, BaseService {
    *
    * @param plugin the plugin owner;
    */
-  public SinkListener(BasePlugin plugin) {
+  public SinkListener(final BasePlugin plugin) {
     this.plugin = plugin;
   }
 
@@ -161,257 +162,258 @@ public abstract class SinkListener implements Listener, BaseService {
     HandlerList.unregisterAll(this);
   }
 
+  @Override
   public BasePlugin getPlugin() {
     return this.plugin;
   }
 
-  public void onAsyncPlayerChat(AsyncPlayerChatEvent event) {}
+  public void onAsyncPlayerChat(final AsyncPlayerChatEvent event) {}
 
-  public void onAsyncPlayerPreLogin(AsyncPlayerPreLoginEvent event) {}
+  public void onAsyncPlayerPreLogin(final AsyncPlayerPreLoginEvent event) {}
 
-  public void onBlockBreak(BlockBreakEvent event) {}
+  public void onBlockBreak(final BlockBreakEvent event) {}
 
-  public void onBlockBurn(BlockBurnEvent event) {}
+  public void onBlockBurn(final BlockBurnEvent event) {}
 
-  public void onBlockCanBuild(BlockCanBuildEvent event) {}
+  public void onBlockCanBuild(final BlockCanBuildEvent event) {}
 
-  public void onBlockDamage(BlockDamageEvent event) {}
+  public void onBlockDamage(final BlockDamageEvent event) {}
 
-  public void onSinkListener(BlockDispenseEvent event) {}
+  public void onSinkListener(final BlockDispenseEvent event) {}
 
-  public void onBlockFade(BlockFadeEvent event) {}
+  public void onBlockFade(final BlockFadeEvent event) {}
 
-  public void onBlockForm(BlockFormEvent event) {}
+  public void onBlockForm(final BlockFormEvent event) {}
 
-  public void onBlockFromTo(BlockFromToEvent event) {}
+  public void onBlockFromTo(final BlockFromToEvent event) {}
 
-  public void onBlockGrow(BlockGrowEvent event) {}
+  public void onBlockGrow(final BlockGrowEvent event) {}
 
-  public void onBlockIgnite(BlockIgniteEvent event) {}
+  public void onBlockIgnite(final BlockIgniteEvent event) {}
 
-  public void onBlockPhysics(BlockPhysicsEvent event) {}
+  public void onBlockPhysics(final BlockPhysicsEvent event) {}
 
-  public void onBlockPistonExtend(BlockPistonExtendEvent event) {}
+  public void onBlockPistonExtend(final BlockPistonExtendEvent event) {}
 
-  public void onBlockPistonRetract(BlockPistonRetractEvent event) {}
+  public void onBlockPistonRetract(final BlockPistonRetractEvent event) {}
 
-  public void onBlockPlace(BlockPlaceEvent event) {}
+  public void onBlockPlace(final BlockPlaceEvent event) {}
 
-  public void onBlockRedstone(BlockRedstoneEvent event) {}
+  public void onBlockRedstone(final BlockRedstoneEvent event) {}
 
-  public void onBlockSpread(BlockSpreadEvent event) {}
+  public void onBlockSpread(final BlockSpreadEvent event) {}
 
-  public void onBrewEvent(BrewEvent event) {}
+  public void onBrewEvent(final BrewEvent event) {}
 
-  public void onChunkLoadEvent(ChunkLoadEvent event) {}
+  public void onChunkLoadEvent(final ChunkLoadEvent event) {}
 
-  public void onChunkPopulateEvent(ChunkPopulateEvent event) {}
+  public void onChunkPopulateEvent(final ChunkPopulateEvent event) {}
 
-  public void onChunkUnload(ChunkUnloadEvent event) {}
+  public void onChunkUnload(final ChunkUnloadEvent event) {}
 
-  public void onCraftItem(CraftItemEvent event) {}
+  public void onCraftItem(final CraftItemEvent event) {}
 
-  public void onCreatureSpawn(CreatureSpawnEvent event) {}
+  public void onCreatureSpawn(final CreatureSpawnEvent event) {}
 
-  public void onSinkListener(CreeperPowerEvent event) {}
+  public void onSinkListener(final CreeperPowerEvent event) {}
 
-  public void onEnchantItem(EnchantItemEvent event) {}
+  public void onEnchantItem(final EnchantItemEvent event) {}
 
-  public void onEntityBlockForm(EntityBlockFormEvent event) {}
+  public void onEntityBlockForm(final EntityBlockFormEvent event) {}
 
-  public void onEntityBreakDoor(EntityBreakDoorEvent event) {}
+  public void onEntityBreakDoor(final EntityBreakDoorEvent event) {}
 
-  public void onEntityChangeBlock(EntityChangeBlockEvent event) {}
+  public void onEntityChangeBlock(final EntityChangeBlockEvent event) {}
 
-  public void onEntityCombustByBlock(EntityCombustByBlockEvent event) {}
+  public void onEntityCombustByBlock(final EntityCombustByBlockEvent event) {}
 
-  public void onEntityCombustByEntity(EntityCombustByEntityEvent event) {}
+  public void onEntityCombustByEntity(final EntityCombustByEntityEvent event) {}
 
-  public void onEntityCombust(EntityCombustEvent event) {}
+  public void onEntityCombust(final EntityCombustEvent event) {}
 
-  public void onEntityCreatePortal(EntityCreatePortalEvent event) {}
+  public void onEntityCreatePortal(final EntityCreatePortalEvent event) {}
 
-  public void onEntityDamageByBlock(EntityDamageByBlockEvent event) {}
+  public void onEntityDamageByBlock(final EntityDamageByBlockEvent event) {}
 
-  public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {}
+  public void onEntityDamageByEntity(final EntityDamageByEntityEvent event) {}
 
-  public void onEntityDamage(EntityDamageEvent event) {}
+  public void onEntityDamage(final EntityDamageEvent event) {}
 
-  public void onEntityDeath(EntityDeathEvent event) {}
+  public void onEntityDeath(final EntityDeathEvent event) {}
 
-  public void onEntityExplode(EntityExplodeEvent event) {}
+  public void onEntityExplode(final EntityExplodeEvent event) {}
 
-  public void onEntityInteract(EntityInteractEvent event) {}
+  public void onEntityInteract(final EntityInteractEvent event) {}
 
-  public void onEntityPortalEnter(EntityPortalEnterEvent event) {}
+  public void onEntityPortalEnter(final EntityPortalEnterEvent event) {}
 
-  public void onEntityRegainHealth(EntityRegainHealthEvent event) {}
+  public void onEntityRegainHealth(final EntityRegainHealthEvent event) {}
 
-  public void onEntityShootBow(EntityShootBowEvent event) {}
+  public void onEntityShootBow(final EntityShootBowEvent event) {}
 
-  public void onEntityTame(EntityTameEvent event) {}
+  public void onEntityTame(final EntityTameEvent event) {}
 
-  public void onEntityTarget(EntityTargetEvent event) {}
+  public void onEntityTarget(final EntityTargetEvent event) {}
 
-  public void onEntityTargetLivingEntity(EntityTargetLivingEntityEvent event) {}
+  public void onEntityTargetLivingEntity(final EntityTargetLivingEntityEvent event) {}
 
-  public void onEntityTeleport(EntityTeleportEvent event) {}
+  public void onEntityTeleport(final EntityTeleportEvent event) {}
 
-  public void onExpBottle(ExpBottleEvent event) {}
+  public void onExpBottle(final ExpBottleEvent event) {}
 
-  public void onExplosionPrime(ExplosionPrimeEvent event) {}
+  public void onExplosionPrime(final ExplosionPrimeEvent event) {}
 
-  public void onFoodLevelChange(FoodLevelChangeEvent event) {}
+  public void onFoodLevelChange(final FoodLevelChangeEvent event) {}
 
-  public void onFurnaceBurnEvent(FurnaceBurnEvent event) {}
+  public void onFurnaceBurnEvent(final FurnaceBurnEvent event) {}
 
-  public void onFurnaceSmelt(FurnaceSmeltEvent event) {}
+  public void onFurnaceSmelt(final FurnaceSmeltEvent event) {}
 
-  public void onInventoryClick(InventoryClickEvent event) {}
+  public void onInventoryClick(final InventoryClickEvent event) {}
 
-  public void onInventoryClose(InventoryCloseEvent event) {}
+  public void onInventoryClose(final InventoryCloseEvent event) {}
 
-  public void onInventoryOpen(InventoryOpenEvent event) {}
+  public void onInventoryOpen(final InventoryOpenEvent event) {}
 
-  public void onItemDespawn(ItemDespawnEvent event) {}
+  public void onItemDespawn(final ItemDespawnEvent event) {}
 
-  public void onLeavesDecay(LeavesDecayEvent event) {}
+  public void onLeavesDecay(final LeavesDecayEvent event) {}
 
-  public void onLightningStrike(LightningStrikeEvent event) {}
+  public void onLightningStrike(final LightningStrikeEvent event) {}
 
-  public void onMapInitializeEvent(MapInitializeEvent event) {}
+  public void onMapInitializeEvent(final MapInitializeEvent event) {}
 
-  public void onNotePlay(NotePlayEvent event) {}
+  public void onNotePlay(final NotePlayEvent event) {}
 
-  public void onPigZap(PigZapEvent event) {}
+  public void onPigZap(final PigZapEvent event) {}
 
-  public void onPlayerAnimation(PlayerAnimationEvent event) {}
+  public void onPlayerAnimation(final PlayerAnimationEvent event) {}
 
-  public void onPlayerBedEnter(PlayerBedEnterEvent event) {}
+  public void onPlayerBedEnter(final PlayerBedEnterEvent event) {}
 
-  public void onPlayerBedLeave(PlayerBedLeaveEvent event) {}
+  public void onPlayerBedLeave(final PlayerBedLeaveEvent event) {}
 
-  public void onPlayerBucketEmpty(PlayerBucketEmptyEvent event) {}
+  public void onPlayerBucketEmpty(final PlayerBucketEmptyEvent event) {}
 
-  public void onPlayerBucketFill(PlayerBucketFillEvent event) {}
+  public void onPlayerBucketFill(final PlayerBucketFillEvent event) {}
 
-  public void onPlayerChatTabComplete(PlayerChatTabCompleteEvent event) {}
+  public void onPlayerChatTabComplete(final PlayerChatTabCompleteEvent event) {}
 
-  public void onPlayerCommandPreprocess(PlayerCommandPreprocessEvent event) {}
+  public void onPlayerCommandPreprocess(final PlayerCommandPreprocessEvent event) {}
 
-  public void onPlayerDeath(PlayerDeathEvent event) {}
+  public void onPlayerDeath(final PlayerDeathEvent event) {}
 
-  public void onPlayerDropItem(PlayerDropItemEvent event) {}
+  public void onPlayerDropItem(final PlayerDropItemEvent event) {}
 
-  public void onPlayerEggThrow(PlayerEggThrowEvent event) {}
+  public void onPlayerEggThrow(final PlayerEggThrowEvent event) {}
 
-  public void onPlayerExpChange(PlayerExpChangeEvent event) {}
+  public void onPlayerExpChange(final PlayerExpChangeEvent event) {}
 
-  public void onPlayerFish(PlayerFishEvent event) {}
+  public void onPlayerFish(final PlayerFishEvent event) {}
 
-  public void onPlayerGameModeChange(PlayerGameModeChangeEvent event) {}
+  public void onPlayerGameModeChange(final PlayerGameModeChangeEvent event) {}
 
-  public void onPlayerInteractEntity(PlayerInteractEntityEvent event) {}
+  public void onPlayerInteractEntity(final PlayerInteractEntityEvent event) {}
 
-  public void onPlayerInteract(PlayerInteractEvent event) {}
+  public void onPlayerInteract(final PlayerInteractEvent event) {}
 
-  public void onPlayerItemBreak(PlayerItemBreakEvent event) {}
+  public void onPlayerItemBreak(final PlayerItemBreakEvent event) {}
 
-  public void onPlayerItemHeld(PlayerItemHeldEvent event) {}
+  public void onPlayerItemHeld(final PlayerItemHeldEvent event) {}
 
-  public void onPlayerJoin(PlayerJoinEvent event) {}
+  public void onPlayerJoin(final PlayerJoinEvent event) {}
 
-  public void onPlayerKick(PlayerKickEvent event) {}
+  public void onPlayerKick(final PlayerKickEvent event) {}
 
-  public void onPlayerLevelChange(PlayerLevelChangeEvent event) {}
+  public void onPlayerLevelChange(final PlayerLevelChangeEvent event) {}
 
-  public void onPlayerLogin(PlayerLoginEvent event) {}
+  public void onPlayerLogin(final PlayerLoginEvent event) {}
 
-  public void onPlayerMove(PlayerMoveEvent event) {}
+  public void onPlayerMove(final PlayerMoveEvent event) {}
 
-  public void onPlayerPickupItem(PlayerPickupItemEvent event) {}
+  public void onPlayerPickupItem(final PlayerPickupItemEvent event) {}
 
-  public void onPlayerPortal(PlayerPortalEvent event) {}
+  public void onPlayerPortal(final PlayerPortalEvent event) {}
 
-  public void onPlayerQuit(PlayerQuitEvent event) {}
+  public void onPlayerQuit(final PlayerQuitEvent event) {}
 
-  public void onPlayerRegisterChannel(PlayerRegisterChannelEvent event) {}
+  public void onPlayerRegisterChannel(final PlayerRegisterChannelEvent event) {}
 
-  public void onPlayerRespawn(PlayerRespawnEvent event) {}
+  public void onPlayerRespawn(final PlayerRespawnEvent event) {}
 
-  public void onPlayerShearEntity(PlayerShearEntityEvent event) {}
+  public void onPlayerShearEntity(final PlayerShearEntityEvent event) {}
 
-  public void onPlayerTeleport(PlayerTeleportEvent event) {}
+  public void onPlayerTeleport(final PlayerTeleportEvent event) {}
 
-  public void onPlayerToggleFlight(PlayerToggleFlightEvent event) {}
+  public void onPlayerToggleFlight(final PlayerToggleFlightEvent event) {}
 
-  public void onPlayerToggleSneak(PlayerToggleSneakEvent event) {}
+  public void onPlayerToggleSneak(final PlayerToggleSneakEvent event) {}
 
-  public void onPlayerToggleSprint(PlayerToggleSprintEvent event) {}
+  public void onPlayerToggleSprint(final PlayerToggleSprintEvent event) {}
 
-  public void onPlayerUnregisterChannel(PlayerUnregisterChannelEvent event) {}
+  public void onPlayerUnregisterChannel(final PlayerUnregisterChannelEvent event) {}
 
-  public void onPlayerVelocity(PlayerVelocityEvent event) {}
+  public void onPlayerVelocity(final PlayerVelocityEvent event) {}
 
-  public void onPluginDisable(PluginDisableEvent event) {}
+  public void onPluginDisable(final PluginDisableEvent event) {}
 
-  public void onPluginEnable(PluginEnableEvent event) {}
+  public void onPluginEnable(final PluginEnableEvent event) {}
 
-  public void onPortalCreate(PortalCreateEvent event) {}
+  public void onPortalCreate(final PortalCreateEvent event) {}
 
-  public void onPotionSplash(PotionSplashEvent event) {}
+  public void onPotionSplash(final PotionSplashEvent event) {}
 
-  public void onPrepareItemEnchant(PrepareItemEnchantEvent event) {}
+  public void onPrepareItemEnchant(final PrepareItemEnchantEvent event) {}
 
-  public void onRemoteServerCommand(RemoteServerCommandEvent event) {}
+  public void onRemoteServerCommand(final RemoteServerCommandEvent event) {}
 
-  public void onServerCommand(ServerCommandEvent event) {}
+  public void onServerCommand(final ServerCommandEvent event) {}
 
-  public void onServerListPing(ServerListPingEvent event) {}
+  public void onServerListPing(final ServerListPingEvent event) {}
 
-  public void onServiceRegister(ServiceRegisterEvent event) {}
+  public void onServiceRegister(final ServiceRegisterEvent event) {}
 
-  public void onServiceUnregister(ServiceUnregisterEvent event) {}
+  public void onServiceUnregister(final ServiceUnregisterEvent event) {}
 
-  public void onSheepDyeWoolEvent(SheepDyeWoolEvent event) {}
+  public void onSheepDyeWoolEvent(final SheepDyeWoolEvent event) {}
 
-  public void onSheepRegrowWoolEvent(SheepRegrowWoolEvent event) {}
+  public void onSheepRegrowWoolEvent(final SheepRegrowWoolEvent event) {}
 
-  public void onSignChange(SignChangeEvent event) {}
+  public void onSignChange(final SignChangeEvent event) {}
 
-  public void onSlimeSplit(SlimeSplitEvent event) {}
+  public void onSlimeSplit(final SlimeSplitEvent event) {}
 
-  public void onSpawnChange(SpawnChangeEvent event) {}
+  public void onSpawnChange(final SpawnChangeEvent event) {}
 
-  public void onStructureGrow(StructureGrowEvent event) {}
+  public void onStructureGrow(final StructureGrowEvent event) {}
 
-  public void onThunderChange(ThunderChangeEvent event) {}
+  public void onThunderChange(final ThunderChangeEvent event) {}
 
-  public void onVehicleBlockCollision(VehicleBlockCollisionEvent event) {}
+  public void onVehicleBlockCollision(final VehicleBlockCollisionEvent event) {}
 
-  public void onVehicleCreate(VehicleCreateEvent event) {}
+  public void onVehicleCreate(final VehicleCreateEvent event) {}
 
-  public void onVehicleDamage(VehicleDamageEvent event) {}
+  public void onVehicleDamage(final VehicleDamageEvent event) {}
 
-  public void onVehicleDestroy(VehicleDestroyEvent event) {}
+  public void onVehicleDestroy(final VehicleDestroyEvent event) {}
 
-  public void onVehicleEnter(VehicleEnterEvent event) {}
+  public void onVehicleEnter(final VehicleEnterEvent event) {}
 
-  public void onVehicleEntityCollision(VehicleEntityCollisionEvent event) {}
+  public void onVehicleEntityCollision(final VehicleEntityCollisionEvent event) {}
 
-  public void onVehicleExit(VehicleExitEvent event) {}
+  public void onVehicleExit(final VehicleExitEvent event) {}
 
-  public void onVehicleMove(VehicleMoveEvent event) {}
+  public void onVehicleMove(final VehicleMoveEvent event) {}
 
-  public void onVehicleUpdate(VehicleUpdateEvent event) {}
+  public void onVehicleUpdate(final VehicleUpdateEvent event) {}
 
-  public void onWeatherChange(WeatherChangeEvent event) {}
+  public void onWeatherChange(final WeatherChangeEvent event) {}
 
-  public void onWorldInit(WorldInitEvent event) {}
+  public void onWorldInit(final WorldInitEvent event) {}
 
-  public void onWorldLoad(WorldLoadEvent event) {}
+  public void onWorldLoad(final WorldLoadEvent event) {}
 
-  public void onWorldSave(WorldSaveEvent event) {}
+  public void onWorldSave(final WorldSaveEvent event) {}
 
-  public void onWorldUnload(WorldUnloadEvent event) {}
+  public void onWorldUnload(final WorldUnloadEvent event) {}
 }

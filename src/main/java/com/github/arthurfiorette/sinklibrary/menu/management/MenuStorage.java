@@ -1,13 +1,15 @@
 package com.github.arthurfiorette.sinklibrary.menu.management;
 
-import com.github.arthurfiorette.sinklibrary.BasePlugin;
-import com.github.arthurfiorette.sinklibrary.interfaces.BaseService;
-import com.github.arthurfiorette.sinklibrary.menu.BaseMenu;
 import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+
 import org.bukkit.entity.Player;
+
+import com.github.arthurfiorette.sinklibrary.BasePlugin;
+import com.github.arthurfiorette.sinklibrary.interfaces.BaseService;
+import com.github.arthurfiorette.sinklibrary.menu.BaseMenu;
 
 public class MenuStorage<M extends Enum<M> & MenuFactory> implements BaseService {
 
@@ -16,14 +18,14 @@ public class MenuStorage<M extends Enum<M> & MenuFactory> implements BaseService
   protected final BasePlugin plugin;
   protected final Class<M> clazz;
 
-  protected MenuStorage(BasePlugin plugin, Class<M> clazz) {
+  protected MenuStorage(final BasePlugin plugin, final Class<M> clazz) {
     this.listener = new MenuListener(plugin);
     this.plugin = plugin;
     this.clazz = clazz;
   }
 
   @SuppressWarnings("unchecked")
-  public <I extends BaseMenu> I get(Player player, M menu) {
+  public <I extends BaseMenu> I get(final Player player, final M menu) {
     EnumMap<M, BaseMenu> invs = this.inventories.get(player.getUniqueId());
 
     if (invs == null) {
@@ -51,7 +53,8 @@ public class MenuStorage<M extends Enum<M> & MenuFactory> implements BaseService
     this.listener.disable();
   }
 
+  @Override
   public BasePlugin getPlugin() {
-    return plugin;
+    return this.plugin;
   }
 }

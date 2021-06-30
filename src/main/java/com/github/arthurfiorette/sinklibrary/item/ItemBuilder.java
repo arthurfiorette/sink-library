@@ -1,21 +1,23 @@
 package com.github.arthurfiorette.sinklibrary.item;
 
-import com.github.arthurfiorette.sinklibrary.menu.item.BuildedStack;
-import com.github.arthurfiorette.sinklibrary.menu.listener.ClickListener;
-import com.github.arthurfiorette.sinklibrary.services.JavaService;
-import com.github.arthurfiorette.sinklibrary.services.SpigotService;
 import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 import java.util.function.UnaryOperator;
+
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.material.MaterialData;
+
+import com.github.arthurfiorette.sinklibrary.menu.item.BuildedStack;
+import com.github.arthurfiorette.sinklibrary.menu.listener.ClickListener;
+import com.github.arthurfiorette.sinklibrary.services.JavaService;
+import com.github.arthurfiorette.sinklibrary.services.SpigotService;
 
 /**
  * A builder class to customize in multiple ways a item stack.
@@ -37,7 +39,7 @@ public class ItemBuilder {
    *
    * @throws NullPointerException if the material is null
    */
-  public ItemBuilder(Material material) {
+  public ItemBuilder(final Material material) {
     JavaService.requireNonNull(material);
     this.material = material;
   }
@@ -47,7 +49,7 @@ public class ItemBuilder {
    *
    * @return itself
    */
-  public ItemBuilder setDurability(int durability) {
+  public ItemBuilder setDurability(final int durability) {
     return this.addProperties(ItemProperty.DAMAGE, is -> is.setDurability((short) durability));
   }
 
@@ -56,7 +58,7 @@ public class ItemBuilder {
    *
    * @return itself
    */
-  public ItemBuilder setAmount(int amount) {
+  public ItemBuilder setAmount(final int amount) {
     return this.addProperties(ItemProperty.AMOUNT, is -> is.setAmount(amount));
   }
 
@@ -65,7 +67,7 @@ public class ItemBuilder {
    *
    * @return itself
    */
-  public ItemBuilder setData(MaterialData data) {
+  public ItemBuilder setData(final MaterialData data) {
     return this.addProperties(ItemProperty.MATERIAL_DATA, is -> is.setData(data));
   }
 
@@ -75,7 +77,7 @@ public class ItemBuilder {
    *
    * @return itself
    */
-  public ItemBuilder addEnchantment(Enchantment ench, int level) {
+  public ItemBuilder addEnchantment(final Enchantment ench, final int level) {
     return this.addProperties(ItemProperty.ENCHANTMENT, is -> is.addUnsafeEnchantment(ench, level));
   }
 
@@ -86,7 +88,7 @@ public class ItemBuilder {
    *
    * @return itself
    */
-  public ItemBuilder addEnchantments(Map<Enchantment, Integer> enchantments) {
+  public ItemBuilder addEnchantments(final Map<Enchantment, Integer> enchantments) {
     return this.addProperties(
         ItemProperty.ENCHANTMENT,
         is -> is.addUnsafeEnchantments(enchantments)
@@ -98,7 +100,7 @@ public class ItemBuilder {
    *
    * @return itself
    */
-  public ItemBuilder setName(String name) {
+  public ItemBuilder setName(final String name) {
     return this.addProperties(
         ItemProperty.NAME,
         is -> SpigotService.updateItemMeta(is, im -> im.setDisplayName(name))
@@ -119,7 +121,7 @@ public class ItemBuilder {
    *
    * @return itself
    */
-  public ItemBuilder setItemFlags(ItemFlag... itemFlags) {
+  public ItemBuilder setItemFlags(final ItemFlag... itemFlags) {
     return this.addProperties(
         ItemProperty.ITEM_FLAG,
         is ->
@@ -138,7 +140,7 @@ public class ItemBuilder {
    *
    * @return itself
    */
-  public ItemBuilder addItemFlags(ItemFlag... itemFlags) {
+  public ItemBuilder addItemFlags(final ItemFlag... itemFlags) {
     return this.addProperties(
         ItemProperty.ITEM_FLAG,
         is -> SpigotService.updateItemMeta(is, im -> im.addItemFlags(itemFlags))
@@ -150,7 +152,7 @@ public class ItemBuilder {
    *
    * @return itself
    */
-  public ItemBuilder setLores(String... loreLines) {
+  public ItemBuilder setLores(final String... loreLines) {
     return this.setLore(Arrays.asList(loreLines));
   }
 
@@ -159,7 +161,7 @@ public class ItemBuilder {
    *
    * @return itself
    */
-  public ItemBuilder setLore(List<String> lore) {
+  public ItemBuilder setLore(final List<String> lore) {
     return this.addProperties(
         ItemProperty.LORE,
         is -> SpigotService.updateItemMeta(is, im -> im.setLore(lore))
@@ -171,7 +173,7 @@ public class ItemBuilder {
    *
    * @return itself
    */
-  public ItemBuilder addLores(String... loreLines) {
+  public ItemBuilder addLores(final String... loreLines) {
     return this.addLore(Arrays.asList(loreLines));
   }
 
@@ -180,7 +182,7 @@ public class ItemBuilder {
    *
    * @return itself
    */
-  public ItemBuilder addLore(List<String> lore) {
+  public ItemBuilder addLore(final List<String> lore) {
     if (this.properties.containsKey(ItemProperty.LORE)) {
       return this.addProperties(
           ItemProperty.LORE,
@@ -195,7 +197,7 @@ public class ItemBuilder {
    *
    * @return itself
    */
-  public ItemBuilder setUnbreakable(boolean unbreakable) {
+  public ItemBuilder setUnbreakable(final boolean unbreakable) {
     return this.addProperties(
         ItemProperty.CUSTOM_META,
         is -> SpigotService.updateItemMeta(is, im -> im.spigot().setUnbreakable(unbreakable))
@@ -207,7 +209,7 @@ public class ItemBuilder {
    *
    * @return itself
    */
-  public ItemBuilder addCustomMeta(UnaryOperator<ItemMeta> customMeta) {
+  public ItemBuilder addCustomMeta(final UnaryOperator<ItemMeta> customMeta) {
     return this.addProperties(
         ItemProperty.CUSTOM_META,
         is -> is.setItemMeta(customMeta.apply(is.getItemMeta()))
@@ -224,7 +226,7 @@ public class ItemBuilder {
     if (!this.modified) {
       return this.getLastBuild();
     }
-    ItemStack item = new ItemStack(this.material);
+    final ItemStack item = new ItemStack(this.material);
     this.properties.values().stream().forEach(c -> c.accept(item));
     this.modified = false;
     return this.lastBuild = item;
@@ -234,7 +236,7 @@ public class ItemBuilder {
     return new BuildedStack(this);
   }
 
-  public BuildedStack asMenuItem(ClickListener listener) {
+  public BuildedStack asMenuItem(final ClickListener listener) {
     return new BuildedStack(this, listener);
   }
 
@@ -249,7 +251,7 @@ public class ItemBuilder {
    * @return a copy fro this builder
    */
   public ItemBuilder copy() {
-    ItemBuilder clone = new ItemBuilder(this.material);
+    final ItemBuilder clone = new ItemBuilder(this.material);
     clone.properties = this.properties;
     return clone;
   }
@@ -261,12 +263,12 @@ public class ItemBuilder {
    *
    * @return itself
    */
-  public ItemBuilder remove(ItemProperty property) {
+  public ItemBuilder remove(final ItemProperty property) {
     this.properties.remove(property);
     return this;
   }
 
-  private ItemBuilder addProperties(ItemProperty type, Consumer<ItemStack> consumer) {
+  private ItemBuilder addProperties(final ItemProperty type, final Consumer<ItemStack> consumer) {
     if (this.properties.containsKey(type) && type.isCumulative()) {
       this.properties.compute(type, (k, v) -> v.andThen(consumer));
     } else {

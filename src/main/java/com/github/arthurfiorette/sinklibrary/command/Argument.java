@@ -2,6 +2,7 @@ package com.github.arthurfiorette.sinklibrary.command;
 
 import java.util.List;
 import java.util.function.Predicate;
+
 import org.bukkit.command.CommandSender;
 
 /**
@@ -49,7 +50,7 @@ public interface Argument extends Predicate<CommandSender> {
    *
    * @return the next arguments or {@code null} to be none.
    */
-  default List<String> onTabComplete(CommandSender sender, String alias, List<String> args) {
+  default List<String> onTabComplete(final CommandSender sender, final String alias, final List<String> args) {
     return null;
   }
 }

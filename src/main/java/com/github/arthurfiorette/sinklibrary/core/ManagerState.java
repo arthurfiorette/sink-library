@@ -8,11 +8,11 @@ public enum ManagerState {
 
   private boolean enabled;
 
-  private ManagerState(boolean enabled) {
+  ManagerState(final boolean enabled) {
     this.enabled = enabled;
   }
 
   public boolean isEnabled() {
-    return enabled;
+    return this.enabled;
   }
 }

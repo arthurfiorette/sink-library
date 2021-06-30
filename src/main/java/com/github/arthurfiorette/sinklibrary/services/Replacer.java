@@ -5,8 +5,10 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.function.Supplier;
 import java.util.function.UnaryOperator;
-import me.clip.placeholderapi.PlaceholderAPI;
+
 import org.bukkit.OfflinePlayer;
+
+import me.clip.placeholderapi.PlaceholderAPI;
 
 /**
  * A better text replacer that supports PlaceholderAPI (if enabled)
@@ -25,7 +27,7 @@ public class Replacer {
    *
    * @return the instance
    */
-  public Replacer add(String placeholder, String value) {
+  public Replacer add(final String placeholder, final String value) {
     return this.add(placeholder, () -> value);
   }
 
@@ -37,7 +39,7 @@ public class Replacer {
    *
    * @return the instance
    */
-  public Replacer add(String placeholder, Supplier<String> supplier) {
+  public Replacer add(final String placeholder, final Supplier<String> supplier) {
     this.placeholders.put(placeholder, supplier);
     return this;
   }
@@ -49,9 +51,9 @@ public class Replacer {
    *
    * @return the replaced text
    */
-  public String replace(String str) {
+  public String replace(final String str) {
     String replaced = str;
-    for (Entry<String, Supplier<String>> entry : this.placeholders.entrySet()) {
+    for (final Entry<String, Supplier<String>> entry : this.placeholders.entrySet()) {
       replaced = replaced.replace(entry.getKey(), entry.getValue().get());
     }
     return SpigotService.setColors(replaced);
@@ -66,9 +68,9 @@ public class Replacer {
    *
    * @return the replaced text
    */
-  public String replace(String str, OfflinePlayer player) {
+  public String replace(final String str, final OfflinePlayer player) {
     String text = str;
-    if (canUsePlaceholderAPI()) {
+    if (Replacer.canUsePlaceholderAPI()) {
       text = PlaceholderAPI.setPlaceholders(player, this.replace(str));
     }
     return this.replace(text);
@@ -82,7 +84,7 @@ public class Replacer {
    *
    * @return the replaced text
    */
-  public static String replace(String str, UnaryOperator<Replacer> replacer) {
+  public static String replace(final String str, final UnaryOperator<Replacer> replacer) {
     return replacer.apply(new Replacer()).replace(str);
   }
 
@@ -96,7 +98,7 @@ public class Replacer {
    *
    * @return the replaced text
    */
-  public static String replace(String str, OfflinePlayer player, UnaryOperator<Replacer> replacer) {
+  public static String replace(final String str, final OfflinePlayer player, final UnaryOperator<Replacer> replacer) {
     return replacer.apply(new Replacer()).replace(str, player);
   }
 

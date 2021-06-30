@@ -1,6 +1,5 @@
 package com.github.arthurfiorette.sinklibrary.services;
 
-import com.google.common.collect.ObjectArrays;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -10,6 +9,8 @@ import java.util.Random;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+
+import com.google.common.collect.ObjectArrays;
 
 /**
  * A service class that handles handles anything in java.
@@ -33,8 +34,8 @@ public final class JavaService {
    *
    * @return the array with the elements
    */
-  public static <T> T[] toArray(Class<T> clazz, Collection<T> coll) {
-    T[] arr = ObjectArrays.newArray(clazz, coll.size());
+  public static <T> T[] toArray(final Class<T> clazz, final Collection<T> coll) {
+    final T[] arr = ObjectArrays.newArray(clazz, coll.size());
     return coll.toArray(arr);
   }
 
@@ -47,8 +48,8 @@ public final class JavaService {
    *
    * @return the array with the elements
    */
-  public static <T> T[] toArray(Class<T> clazz, Object... values) {
-    return toArray(clazz, toList(clazz, values));
+  public static <T> T[] toArray(final Class<T> clazz, final Object... values) {
+    return JavaService.toArray(clazz, JavaService.toList(clazz, values));
   }
 
   /**
@@ -60,7 +61,7 @@ public final class JavaService {
    *
    * @return the list with the elements
    */
-  public static <T> List<T> toList(Class<T> clazz, Object... values) {
+  public static <T> List<T> toList(final Class<T> clazz, final Object... values) {
     return Arrays.stream(values).map(clazz::cast).collect(Collectors.toList());
   }
 
@@ -72,7 +73,7 @@ public final class JavaService {
    *
    * @return the array without the first element
    */
-  public static <T> T[] removeFirst(T[] arr) {
+  public static <T> T[] removeFirst(final T[] arr) {
     return Arrays.copyOfRange(arr, 1, arr.length);
   }
 
@@ -83,7 +84,7 @@ public final class JavaService {
    *
    * @return true if all the objects aren't null
    */
-  public static boolean nonNull(Object... objects) {
+  public static boolean nonNull(final Object... objects) {
     return Arrays.stream(objects).allMatch(Objects::nonNull);
   }
 
@@ -95,8 +96,8 @@ public final class JavaService {
    *
    * @throws NullPointerException if this varargs have at least 1 null
    */
-  public static void requireNonNull(Object... objects) {
-    if (!nonNull(objects)) {
+  public static void requireNonNull(final Object... objects) {
+    if (!JavaService.nonNull(objects)) {
       throw new NullPointerException();
     }
   }
@@ -110,13 +111,13 @@ public final class JavaService {
    *
    * @throws NullPointerException if this varargs have at least 1 null
    */
-  public static void requireNonNull(String message, Object... objects) {
-    if (!nonNull(objects)) {
+  public static void requireNonNull(final String message, final Object... objects) {
+    if (!JavaService.nonNull(objects)) {
       throw new NullPointerException(message);
     }
   }
 
-  public static <T, R> Set<R> setMapper(Set<T> set, Function<T, R> mapper) {
+  public static <T, R> Set<R> setMapper(final Set<T> set, final Function<T, R> mapper) {
     return set.stream().map(mapper).collect(Collectors.toSet());
   }
 
@@ -130,7 +131,7 @@ public final class JavaService {
    *
    * @return the mapped list
    */
-  public static <T, R> List<R> listMapper(List<T> list, Function<T, R> mapper) {
+  public static <T, R> List<R> listMapper(final List<T> list, final Function<T, R> mapper) {
     return list.stream().map(mapper).collect(Collectors.toList());
   }
 
@@ -142,8 +143,8 @@ public final class JavaService {
    *
    * @return the random element
    */
-  public static <T> T getRandomElement(Collection<T> coll) {
-    return new ArrayList<>(coll).get(getRandomInt(coll.size()));
+  public static <T> T getRandomElement(final Collection<T> coll) {
+    return new ArrayList<>(coll).get(JavaService.getRandomInt(coll.size()));
   }
 
   /**
@@ -153,7 +154,7 @@ public final class JavaService {
    *
    * @return the random generated int
    */
-  public static int getRandomInt(int range) {
+  public static int getRandomInt(final int range) {
     return new Random().nextInt(range);
   }
 }

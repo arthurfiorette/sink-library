@@ -1,11 +1,12 @@
 package com.github.arthurfiorette.sinklibrary.data.database;
 
-import com.github.arthurfiorette.sinklibrary.BasePlugin;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
+
+import com.github.arthurfiorette.sinklibrary.BasePlugin;
 
 /**
  * A memory database is a database saved in a concurrent hash map and resets
@@ -18,7 +19,7 @@ public class MemoryDatabase<K, T> implements Database<K, T> {
   protected final BasePlugin plugin;
   protected ConcurrentMap<K, T> database;
 
-  public MemoryDatabase(BasePlugin plugin) {
+  public MemoryDatabase(final BasePlugin plugin) {
     this.plugin = plugin;
   }
 
@@ -46,23 +47,23 @@ public class MemoryDatabase<K, T> implements Database<K, T> {
   }
 
   @Override
-  public void save(K key, T value) {
+  public void save(final K key, final T value) {
     this.checkState();
     this.database.put(key, value);
   }
 
   @Override
-  public T get(K key) {
+  public T get(final K key) {
     this.checkState();
     return this.database.get(key);
   }
 
   @Override
-  public Collection<T> getMany(Collection<K> keys) {
+  public Collection<T> getMany(final Collection<K> keys) {
     this.checkState();
-    List<T> list = new ArrayList<>();
-    for (K key : keys) {
-      T t = this.get(key);
+    final List<T> list = new ArrayList<>();
+    for (final K key : keys) {
+      final T t = this.get(key);
       if (t != null) {
         list.add(t);
       }

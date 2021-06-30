@@ -1,14 +1,15 @@
 package com.github.arthurfiorette.sinklibrary.data.storage;
 
-import com.github.arthurfiorette.sinklibrary.data.database.Database;
-import com.github.arthurfiorette.sinklibrary.executor.BukkitExecutor;
-import com.github.arthurfiorette.sinklibrary.executor.TaskContext;
 import java.util.Collection;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+
+import com.github.arthurfiorette.sinklibrary.data.database.Database;
+import com.github.arthurfiorette.sinklibrary.executor.BukkitExecutor;
+import com.github.arthurfiorette.sinklibrary.executor.TaskContext;
 
 public abstract class AbstractStorage<K, V, R> implements Storage<K, V, R> {
 
@@ -23,7 +24,7 @@ public abstract class AbstractStorage<K, V, R> implements Storage<K, V, R> {
    *
    * @param executor this executor to be used for all asynchronous calls,
    */
-  public AbstractStorage(Database<K, R> database, Executor executor) {
+  public AbstractStorage(final Database<K, R> database, final Executor executor) {
     this.executor = executor;
     this.database = database;
   }
@@ -38,7 +39,7 @@ public abstract class AbstractStorage<K, V, R> implements Storage<K, V, R> {
   protected abstract V create(K key);
 
   @Override
-  public CompletableFuture<Void> save(K key, V value) {
+  public CompletableFuture<Void> save(final K key, final V value) {
     return CompletableFuture.runAsync(
       () -> {
         this.database.save(key, this.serialize(value));
@@ -48,12 +49,12 @@ public abstract class AbstractStorage<K, V, R> implements Storage<K, V, R> {
   }
 
   @Override
-  public CompletableFuture<V> get(K key) {
+  public CompletableFuture<V> get(final K key) {
     return CompletableFuture.supplyAsync(
       () -> {
-        R raw = this.database.get(key);
+        final R raw = this.database.get(key);
         if (raw == null) {
-          return create(key);
+          return this.create(key);
         }
         return this.deserialize(raw);
       },
@@ -62,38 +63,32 @@ public abstract class AbstractStorage<K, V, R> implements Storage<K, V, R> {
   }
 
   @Override
-  public CompletableFuture<Collection<V>> getMany(Set<K> keys) {
+  public CompletableFuture<Collection<V>> getMany(final Set<K> keys) {
     return CompletableFuture.supplyAsync(
-      () -> {
-        return this.database.getMany(keys)
-          .stream()
-          .map(this::deserialize)
-          .collect(Collectors.toList());
-      },
+      () -> this.database.getMany(keys)
+        .stream()
+        .map(this::deserialize)
+        .collect(Collectors.toList()),
       this.executor
     );
   }
 
   @Override
-  public CompletableFuture<Collection<V>> operation(Function<Database<K, R>, Collection<R>> func) {
+  public CompletableFuture<Collection<V>> operation(final Function<Database<K, R>, Collection<R>> func) {
     return CompletableFuture.supplyAsync(
-      () -> {
-        return func
-          .apply(this.database)
-          .stream()
-          .map(this::deserialize)
-          .collect(Collectors.toList());
-      },
+      () -> func
+        .apply(this.database)
+        .stream()
+        .map(this::deserialize)
+        .collect(Collectors.toList()),
       this.executor
     );
   }
 
   @Override
-  public CompletableFuture<V> operate(Function<Database<K, R>, R> func) {
+  public CompletableFuture<V> operate(final Function<Database<K, R>, R> func) {
     return CompletableFuture.supplyAsync(
-      () -> {
-        return this.deserialize(func.apply(this.database));
-      },
+      () -> this.deserialize(func.apply(this.database)),
       this.executor
     );
   }

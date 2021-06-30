@@ -1,10 +1,12 @@
 package com.github.arthurfiorette.sinklibrary.executor;
 
-import com.github.arthurfiorette.sinklibrary.BasePlugin;
-import com.github.arthurfiorette.sinklibrary.interfaces.BaseComponent;
 import java.util.concurrent.ThreadFactory;
+
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitScheduler;
+
+import com.github.arthurfiorette.sinklibrary.BasePlugin;
+import com.github.arthurfiorette.sinklibrary.interfaces.BaseComponent;
 
 /**
  * Every created thread from this object runs with the specified
@@ -26,7 +28,7 @@ public class BukkitThreadFactory implements ThreadFactory, BaseComponent {
   private final BasePlugin plugin;
   private final TaskContext context;
 
-  public BukkitThreadFactory(BasePlugin plugin, TaskContext context) {
+  public BukkitThreadFactory(final BasePlugin plugin, final TaskContext context) {
     this.plugin = plugin;
     this.context = context;
   }
@@ -39,7 +41,7 @@ public class BukkitThreadFactory implements ThreadFactory, BaseComponent {
    *
    * @return the newly created ThreadFactory
    */
-  public static ThreadFactory ofAsync(BasePlugin plugin) {
+  public static ThreadFactory ofAsync(final BasePlugin plugin) {
     return new BukkitThreadFactory(plugin, TaskContext.ASYNC);
   }
 
@@ -51,17 +53,17 @@ public class BukkitThreadFactory implements ThreadFactory, BaseComponent {
    *
    * @return the newly created ThreadFactory
    */
-  public static ThreadFactory ofSync(BasePlugin plugin) {
+  public static ThreadFactory ofSync(final BasePlugin plugin) {
     return new BukkitThreadFactory(plugin, TaskContext.SYNC);
   }
 
   @Override
-  public Thread newThread(Runnable runnable) {
-    Thread thread = new Thread(
+  public Thread newThread(final Runnable runnable) {
+    final Thread thread = new Thread(
       () -> {
         try {
           this.context.run(this.plugin, runnable);
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
           this.plugin.treatThrowable(
               this.getClass(),
               t,

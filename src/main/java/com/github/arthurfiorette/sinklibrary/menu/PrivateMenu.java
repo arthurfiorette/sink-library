@@ -1,19 +1,20 @@
 package com.github.arthurfiorette.sinklibrary.menu;
 
-import com.github.arthurfiorette.sinklibrary.BasePlugin;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
+
+import com.github.arthurfiorette.sinklibrary.BasePlugin;
 
 public abstract class PrivateMenu extends StaticMenu {
 
   protected Player owner;
 
-  public PrivateMenu(BasePlugin plugin, Player owner, String title, int rows) {
+  public PrivateMenu(final BasePlugin plugin, final Player owner, final String title, final int rows) {
     super(plugin, title, rows);
     this.owner = owner;
   }
 
-  public PrivateMenu(BasePlugin plugin, Player owner, Inventory inventory) {
+  public PrivateMenu(final BasePlugin plugin, final Player owner, final Inventory inventory) {
     super(plugin, inventory);
     this.owner = owner;
   }
@@ -24,15 +25,15 @@ public abstract class PrivateMenu extends StaticMenu {
    * This menu is intended to be a private menu, use with care
    */
   @Override
-  public void openFor(Player player, boolean update) {
+  public void openFor(final Player player, final boolean update) {
     super.openFor(player, update);
   }
 
-  public void open(boolean update) {
-    super.openFor(owner, update);
+  public void open(final boolean update) {
+    super.openFor(this.owner, update);
   }
 
   public Player getOwner() {
-    return owner;
+    return this.owner;
   }
 }

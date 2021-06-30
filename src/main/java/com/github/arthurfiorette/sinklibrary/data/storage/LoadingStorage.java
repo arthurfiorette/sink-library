@@ -1,5 +1,15 @@
 package com.github.arthurfiorette.sinklibrary.data.storage;
 
+import java.util.Collection;
+import java.util.Set;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionException;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executor;
+import java.util.function.Function;
+import java.util.function.UnaryOperator;
+import java.util.stream.Collectors;
+
 import com.github.arthurfiorette.sinklibrary.data.database.Database;
 import com.github.arthurfiorette.sinklibrary.executor.BukkitExecutor;
 import com.github.arthurfiorette.sinklibrary.executor.TaskContext;
@@ -11,15 +21,6 @@ import com.google.common.cache.CacheStats;
 import com.google.common.cache.LoadingCache;
 import com.google.common.cache.RemovalListener;
 import com.google.common.collect.Lists;
-import java.util.Collection;
-import java.util.Set;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.CompletionException;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Executor;
-import java.util.function.Function;
-import java.util.function.UnaryOperator;
-import java.util.stream.Collectors;
 
 public abstract class LoadingStorage<K, V, R> implements Storage<K, V, R>, BaseService {
 
@@ -44,9 +45,9 @@ public abstract class LoadingStorage<K, V, R> implements Storage<K, V, R>, BaseS
    * cache.
    */
   protected LoadingStorage(
-    Database<K, R> database,
-    Executor executor,
-    UnaryOperator<CacheBuilder<Object, Object>> builder
+    final Database<K, R> database,
+    final Executor executor,
+    final UnaryOperator<CacheBuilder<Object, Object>> builder
   ) {
     this.database = database;
     this.executor = executor;
@@ -76,11 +77,11 @@ public abstract class LoadingStorage<K, V, R> implements Storage<K, V, R>, BaseS
   protected CacheLoader<K, V> cacheLoader() {
     return new CacheLoader<K, V>() {
       @Override
-      public V load(K key) throws Exception {
+      public V load(final K key) throws Exception {
         // Read synchronously
-        R raw = LoadingStorage.this.database.get(key);
+        final R raw = LoadingStorage.this.database.get(key);
         if (raw == null) {
-          return create(key);
+          return LoadingStorage.this.create(key);
         }
         return LoadingStorage.this.deserialize(raw);
       }
@@ -114,7 +115,7 @@ public abstract class LoadingStorage<K, V, R> implements Storage<K, V, R>, BaseS
    * value pair.
    */
   @Override
-  public CompletableFuture<Void> save(K key, V value) {
+  public CompletableFuture<Void> save(final K key, final V value) {
     return CompletableFuture.runAsync(
       () -> {
         this.cache.put(key, value);
@@ -124,17 +125,17 @@ public abstract class LoadingStorage<K, V, R> implements Storage<K, V, R>, BaseS
   }
 
   @Override
-  public CompletableFuture<V> get(K key) {
+  public CompletableFuture<V> get(final K key) {
     return CompletableFuture.supplyAsync(() -> this.cache.getUnchecked(key), this.executor);
   }
 
   @Override
-  public CompletableFuture<Collection<V>> getMany(Set<K> keys) {
+  public CompletableFuture<Collection<V>> getMany(final Set<K> keys) {
     return CompletableFuture.supplyAsync(
       () -> {
         try {
           return Lists.newArrayList(this.cache.getAll(keys).values());
-        } catch (ExecutionException e) {
+        } catch (final ExecutionException e) {
           throw new CompletionException(e);
         }
       },
@@ -148,7 +149,7 @@ public abstract class LoadingStorage<K, V, R> implements Storage<K, V, R>, BaseS
    * <b>This method is not cached at all. Use carefully</b>
    */
   @Override
-  public CompletableFuture<Collection<V>> operation(Function<Database<K, R>, Collection<R>> func) {
+  public CompletableFuture<Collection<V>> operation(final Function<Database<K, R>, Collection<R>> func) {
     return CompletableFuture.supplyAsync(
       () -> func.apply(this.database).stream().map(this::deserialize).collect(Collectors.toList()),
       this.executor
@@ -161,7 +162,7 @@ public abstract class LoadingStorage<K, V, R> implements Storage<K, V, R>, BaseS
    * <b>This method is not cached at all. Use carefully</b>
    */
   @Override
-  public CompletableFuture<V> operate(Function<Database<K, R>, R> func) {
+  public CompletableFuture<V> operate(final Function<Database<K, R>, R> func) {
     return CompletableFuture.supplyAsync(
       () -> this.deserialize(func.apply(this.database)),
       this.executor
@@ -172,27 +173,27 @@ public abstract class LoadingStorage<K, V, R> implements Storage<K, V, R>, BaseS
    * @see {@link Cache#stats()}
    */
   public CacheStats stats() {
-    return cache.stats();
+    return this.cache.stats();
   }
 
   /**
    * @see {@link Cache#refresh()}
    */
-  public void refresh(K key) {
-    cache.refresh(key);
+  public void refresh(final K key) {
+    this.cache.refresh(key);
   }
 
   /**
    * @see {@link Cache#invalidate()}
    */
-  public void invalidate(K key) {
-    cache.invalidate(key);
+  public void invalidate(final K key) {
+    this.cache.invalidate(key);
   }
 
   /**
    * @see {@link Cache#size()}
    */
   public long size() {
-    return cache.size();
+    return this.cache.size();
   }
 }

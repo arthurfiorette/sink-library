@@ -18,7 +18,7 @@ public interface ClickListener {
    *
    * @param action the inventory action type
    */
-  default void onClick(ItemStack item, InventoryAction action) {
+  default void onClick(final ItemStack item, final InventoryAction action) {
     this.onClick(item, ClickAction.from(action));
   }
 

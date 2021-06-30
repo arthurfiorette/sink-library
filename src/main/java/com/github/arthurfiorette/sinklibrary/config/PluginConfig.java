@@ -1,8 +1,10 @@
 package com.github.arthurfiorette.sinklibrary.config;
 
-import com.github.arthurfiorette.sinklibrary.BasePlugin;
 import java.io.File;
+
 import org.bukkit.configuration.file.FileConfiguration;
+
+import com.github.arthurfiorette.sinklibrary.BasePlugin;
 
 public class PluginConfig implements BaseConfig {
 
@@ -11,9 +13,9 @@ public class PluginConfig implements BaseConfig {
   protected final File file;
   protected final BasePlugin plugin;
 
-  public PluginConfig(BasePlugin plugin) {
+  public PluginConfig(final BasePlugin plugin) {
     this.plugin = plugin;
-    this.file = new File(plugin.getDataFolder(), FILENAME);
+    this.file = new File(plugin.getDataFolder(), PluginConfig.FILENAME);
   }
 
   @Override
@@ -23,12 +25,12 @@ public class PluginConfig implements BaseConfig {
 
   @Override
   public FileConfiguration getConfig() {
-    return plugin.getConfig();
+    return this.plugin.getConfig();
   }
 
   @Override
   public File getFile() {
-    return file;
+    return this.file;
   }
 
   @Override

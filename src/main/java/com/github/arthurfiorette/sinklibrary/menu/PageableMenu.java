@@ -1,12 +1,14 @@
 package com.github.arthurfiorette.sinklibrary.menu;
 
-import com.github.arthurfiorette.sinklibrary.BasePlugin;
-import com.github.arthurfiorette.sinklibrary.menu.item.MenuItem;
 import java.util.List;
+
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+
+import com.github.arthurfiorette.sinklibrary.BasePlugin;
+import com.github.arthurfiorette.sinklibrary.menu.item.MenuItem;
 
 public abstract class PageableMenu extends PrivateMenu {
 
@@ -16,11 +18,11 @@ public abstract class PageableMenu extends PrivateMenu {
 
   private ItemStack defaultItem = new ItemStack(Material.AIR);
 
-  public PageableMenu(BasePlugin plugin, Player owner, String title, int rows) {
+  public PageableMenu(final BasePlugin plugin, final Player owner, final String title, final int rows) {
     super(plugin, owner, title, rows);
   }
 
-  public PageableMenu(BasePlugin plugin, Player owner, Inventory inventory) {
+  public PageableMenu(final BasePlugin plugin, final Player owner, final Inventory inventory) {
     super(plugin, owner, inventory);
   }
 
@@ -51,40 +53,44 @@ public abstract class PageableMenu extends PrivateMenu {
   }
 
   public void updatePageable() {
-    byte[] slots = pageableSlots();
-    this.lastPageableItems = pageableItems();
+    final byte[] slots = this.pageableSlots();
+    this.lastPageableItems = this.pageableItems();
 
     // List first index to this page
-    int initial = slots.length * (page - 1);
+    final int initial = slots.length * (this.page - 1);
 
     byte slotIndex = 0;
     // for from initial to last element.
     for (int i = initial; i < (initial + slots.length); i++) {
       MenuItem item;
       try {
-        item = lastPageableItems.get(i);
-      } catch (ArrayIndexOutOfBoundsException e) {
+        item = this.lastPageableItems.get(i);
+      } catch (final ArrayIndexOutOfBoundsException e) {
         item = null;
       }
 
       // The MenuItem ItemStack or an empty value.
-      ItemStack is = item != null ? item.getItem() : defaultItem;
+      final ItemStack is = item != null ? item.getItem() : this.defaultItem;
 
-      inventory.setItem(slots[slotIndex++], is);
+      this.inventory.setItem(slots[slotIndex++], is);
     }
   }
 
-  public void nextPage(boolean update) {
-    if (hasNextPage()) {
+  public void nextPage(final boolean update) {
+    if (this.hasNextPage()) {
       this.page++;
-      if (update) update();
+      if (update) {
+        this.update();
+      }
     }
   }
 
-  public void previousPage(boolean update) {
-    if (hasPreviousPage()) {
+  public void previousPage(final boolean update) {
+    if (this.hasPreviousPage()) {
       this.page--;
-      if (update) update();
+      if (update) {
+        this.update();
+      }
     }
   }
 
@@ -92,7 +98,7 @@ public abstract class PageableMenu extends PrivateMenu {
    * @return true if has a next page to be displayed
    */
   public boolean hasNextPage() {
-    return this.page + 1 < this.lastPageableItems.size() / pageableSlots().length;
+    return (this.page + 1) < (this.lastPageableItems.size() / this.pageableSlots().length);
   }
 
   /**
@@ -103,9 +109,9 @@ public abstract class PageableMenu extends PrivateMenu {
   }
 
   @Override
-  public MenuItem getItemAt(byte slot) {
-    MenuItem item = super.getItemAt(slot);
-    byte[] slots = pageableSlots();
+  public MenuItem getItemAt(final byte slot) {
+    final MenuItem item = super.getItemAt(slot);
+    final byte[] slots = this.pageableSlots();
 
     if (item != null) {
       return item;
@@ -124,15 +130,15 @@ public abstract class PageableMenu extends PrivateMenu {
     }
 
     // List first index to this page
-    int initial = slots.length * (page - 1);
+    final int initial = slots.length * (this.page - 1);
 
-    return lastPageableItems.get(initial + slotIndex);
+    return this.lastPageableItems.get(initial + slotIndex);
   }
 
   /**
    * Sets the item that will be placed when a page does not have enough items.
    */
-  public void setDefaultItem(ItemStack emptySlot) {
+  public void setDefaultItem(final ItemStack emptySlot) {
     this.defaultItem = emptySlot;
   }
 }

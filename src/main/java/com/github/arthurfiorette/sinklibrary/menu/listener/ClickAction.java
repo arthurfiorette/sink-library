@@ -40,7 +40,7 @@ public enum ClickAction {
    *
    * @return the MouseClick from this action
    */
-  public static ClickAction from(InventoryAction action) {
+  public static ClickAction from(final InventoryAction action) {
     switch (action) {
       case PICKUP_ALL:
       case PLACE_ALL:

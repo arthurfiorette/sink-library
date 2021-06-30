@@ -1,13 +1,12 @@
 package com.github.arthurfiorette.sinklibrary.executor;
 
-import static com.github.arthurfiorette.sinklibrary.executor.BukkitThreadFactory.ofAsync;
-import static com.github.arthurfiorette.sinklibrary.executor.BukkitThreadFactory.ofSync;
-
-import com.github.arthurfiorette.sinklibrary.BasePlugin;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
+
 import org.bukkit.scheduler.BukkitScheduler;
+
+import com.github.arthurfiorette.sinklibrary.BasePlugin;
 
 /**
  * Simple interface to target all executors that runs with a
@@ -27,8 +26,8 @@ public final class BukkitExecutor {
    *
    * @return the newly created thread pool
    */
-  public static ExecutorService newSyncCachedThreadPool(BasePlugin plugin) {
-    return Executors.newCachedThreadPool(ofSync(plugin));
+  public static ExecutorService newSyncCachedThreadPool(final BasePlugin plugin) {
+    return Executors.newCachedThreadPool(BukkitThreadFactory.ofSync(plugin));
   }
 
   /**
@@ -41,8 +40,8 @@ public final class BukkitExecutor {
    *
    * @return the newly created thread pool
    */
-  public static ExecutorService newAsyncCachedThreadPool(BasePlugin plugin) {
-    return Executors.newCachedThreadPool(ofAsync(plugin));
+  public static ExecutorService newAsyncCachedThreadPool(final BasePlugin plugin) {
+    return Executors.newCachedThreadPool(BukkitThreadFactory.ofAsync(plugin));
   }
 
   /**
@@ -63,8 +62,8 @@ public final class BukkitExecutor {
    *
    * @throws IllegalArgumentException if {@code nThreads <= 0}
    */
-  public static ExecutorService newSyncFixedThreadPool(BasePlugin plugin, int nThreads) {
-    return Executors.newFixedThreadPool(nThreads, ofSync(plugin));
+  public static ExecutorService newSyncFixedThreadPool(final BasePlugin plugin, final int nThreads) {
+    return Executors.newFixedThreadPool(nThreads, BukkitThreadFactory.ofSync(plugin));
   }
 
   /**
@@ -85,8 +84,8 @@ public final class BukkitExecutor {
    *
    * @throws IllegalArgumentException if {@code nThreads <= 0}
    */
-  public static ExecutorService newAsyncFixedThreadPool(BasePlugin plugin, int nThreads) {
-    return Executors.newFixedThreadPool(nThreads, ofAsync(plugin));
+  public static ExecutorService newAsyncFixedThreadPool(final BasePlugin plugin, final int nThreads) {
+    return Executors.newFixedThreadPool(nThreads, BukkitThreadFactory.ofAsync(plugin));
   }
 
   /**
@@ -102,10 +101,10 @@ public final class BukkitExecutor {
    * @throws IllegalArgumentException if {@code corePoolSize < 0}
    */
   public static ScheduledExecutorService newSyncScheduledThreadPool(
-    BasePlugin plugin,
-    int corePoolSize
+    final BasePlugin plugin,
+    final int corePoolSize
   ) {
-    return Executors.newScheduledThreadPool(corePoolSize, ofSync(plugin));
+    return Executors.newScheduledThreadPool(corePoolSize, BukkitThreadFactory.ofSync(plugin));
   }
 
   /**
@@ -121,10 +120,10 @@ public final class BukkitExecutor {
    * @throws IllegalArgumentException if {@code corePoolSize < 0}
    */
   public static ScheduledExecutorService newAsyncScheduledThreadPool(
-    BasePlugin plugin,
-    int corePoolSize
+    final BasePlugin plugin,
+    final int corePoolSize
   ) {
-    return Executors.newScheduledThreadPool(corePoolSize, ofAsync(plugin));
+    return Executors.newScheduledThreadPool(corePoolSize, BukkitThreadFactory.ofAsync(plugin));
   }
 
   /**
@@ -138,8 +137,8 @@ public final class BukkitExecutor {
    *
    * @return the newly created single-threaded Executor
    */
-  public static ExecutorService newSyncSingleThreadExecutor(BasePlugin plugin) {
-    return Executors.newSingleThreadExecutor(ofSync(plugin));
+  public static ExecutorService newSyncSingleThreadExecutor(final BasePlugin plugin) {
+    return Executors.newSingleThreadExecutor(BukkitThreadFactory.ofSync(plugin));
   }
 
   /**
@@ -153,8 +152,8 @@ public final class BukkitExecutor {
    *
    * @return the newly created single-threaded Executor
    */
-  public static ExecutorService newAsyncSingleThreadExecutor(BasePlugin plugin) {
-    return Executors.newSingleThreadExecutor(ofAsync(plugin));
+  public static ExecutorService newAsyncSingleThreadExecutor(final BasePlugin plugin) {
+    return Executors.newSingleThreadExecutor(BukkitThreadFactory.ofAsync(plugin));
   }
 
   /**
@@ -174,8 +173,8 @@ public final class BukkitExecutor {
    *
    * @return a newly created scheduled executor
    */
-  public static ScheduledExecutorService newSyncSingleThreadScheduledExecutor(BasePlugin plugin) {
-    return Executors.newSingleThreadScheduledExecutor(ofSync(plugin));
+  public static ScheduledExecutorService newSyncSingleThreadScheduledExecutor(final BasePlugin plugin) {
+    return Executors.newSingleThreadScheduledExecutor(BukkitThreadFactory.ofSync(plugin));
   }
 
   /**
@@ -195,7 +194,7 @@ public final class BukkitExecutor {
    *
    * @return a newly created scheduled executor
    */
-  public static ScheduledExecutorService newAsyncSingleThreadScheduledExecutor(BasePlugin plugin) {
-    return Executors.newSingleThreadScheduledExecutor(ofAsync(plugin));
+  public static ScheduledExecutorService newAsyncSingleThreadScheduledExecutor(final BasePlugin plugin) {
+    return Executors.newSingleThreadScheduledExecutor(BukkitThreadFactory.ofAsync(plugin));
   }
 }
