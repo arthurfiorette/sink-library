@@ -59,7 +59,7 @@ public abstract class PageableMenu extends PrivateMenu {
 
     byte slotIndex = 0;
     // for from initial to last element.
-    for(int i = initial; i < (initial + slots.length); i++) {
+    for (int i = initial; i < (initial + slots.length); i++) {
       MenuItem item;
       try {
         item = lastPageableItems.get(i);
@@ -112,7 +112,7 @@ public abstract class PageableMenu extends PrivateMenu {
     }
 
     int slotIndex = -1;
-    for(int i = 0; i < slots.length; i++) {
+    for (int i = 0; i < slots.length; i++) {
       if (slot == slots[i]) {
         slotIndex = i;
         break;

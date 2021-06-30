@@ -1,16 +1,14 @@
 package com.github.arthurfiorette.sinklibrary.config.lang;
 
-import java.util.List;
-import java.util.function.UnaryOperator;
-import java.util.logging.Level;
-import java.util.stream.Collectors;
-
-import org.bukkit.ChatColor;
-
 import com.github.arthurfiorette.sinklibrary.BasePlugin;
 import com.github.arthurfiorette.sinklibrary.config.CustomConfig;
 import com.github.arthurfiorette.sinklibrary.services.Replacer;
 import com.google.common.collect.Lists;
+import java.util.List;
+import java.util.function.UnaryOperator;
+import java.util.logging.Level;
+import java.util.stream.Collectors;
+import org.bukkit.ChatColor;
 
 public class LanguageConfig<E extends Enum<E> & PathResolver> extends CustomConfig {
 
@@ -47,7 +45,12 @@ public class LanguageConfig<E extends Enum<E> & PathResolver> extends CustomConf
   public String asText(E lang) {
     String text = this.getConfig().getString(lang.getPath());
     if (text == null) {
-      this.plugin.log(Level.WARNING, "%s: %s is returning null.", this.getClass().getSimpleName(), lang.getPath());
+      this.plugin.log(
+          Level.WARNING,
+          "%s: %s is returning null.",
+          this.getClass().getSimpleName(),
+          lang.getPath()
+        );
     }
     return text;
   }
@@ -62,7 +65,10 @@ public class LanguageConfig<E extends Enum<E> & PathResolver> extends CustomConf
    * occurs.
    */
   public List<String> asList(E lang, UnaryOperator<Replacer> replacer) {
-    return this.asList(lang).stream().map(str -> Replacer.replace(str, replacer)).collect(Collectors.toList());
+    return this.asList(lang)
+      .stream()
+      .map(str -> Replacer.replace(str, replacer))
+      .collect(Collectors.toList());
   }
 
   /**
@@ -77,11 +83,15 @@ public class LanguageConfig<E extends Enum<E> & PathResolver> extends CustomConf
     List<String> list = this.getConfig().getStringList(lang.getPath());
 
     if (list == null || list.isEmpty()) {
-      this.plugin.log(Level.WARNING, "%s: %s is empty or null.", this.getClass().getSimpleName(), lang.getPath());
+      this.plugin.log(
+          Level.WARNING,
+          "%s: %s is empty or null.",
+          this.getClass().getSimpleName(),
+          lang.getPath()
+        );
       return Lists.newArrayList(this.unknownValue);
     }
 
     return list;
   }
-
 }

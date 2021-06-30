@@ -1,11 +1,9 @@
 package com.github.arthurfiorette.sinklibrary.config;
 
+import com.github.arthurfiorette.sinklibrary.BasePlugin;
 import java.io.File;
-
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-
-import com.github.arthurfiorette.sinklibrary.BasePlugin;
 
 public class CustomConfig implements BaseConfig {
 
@@ -43,5 +41,4 @@ public class CustomConfig implements BaseConfig {
   public BasePlugin getPlugin() {
     return this.plugin;
   }
-
 }

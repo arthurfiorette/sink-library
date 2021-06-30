@@ -1,10 +1,9 @@
 package com.github.arthurfiorette.sinklibrary.config.management;
 
-import java.util.EnumMap;
-
 import com.github.arthurfiorette.sinklibrary.BasePlugin;
 import com.github.arthurfiorette.sinklibrary.config.BaseConfig;
 import com.github.arthurfiorette.sinklibrary.interfaces.BaseComponent;
+import java.util.EnumMap;
 
 public class ConfigStorage<L extends Enum<L> & ConfigLoader> implements BaseComponent {
 
@@ -33,5 +32,4 @@ public class ConfigStorage<L extends Enum<L> & ConfigLoader> implements BaseComp
   public BasePlugin getPlugin() {
     return plugin;
   }
-
 }
