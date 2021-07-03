@@ -138,7 +138,7 @@ public final class CommandBase implements TabExecutor, BaseService {
   }
 
   @Override
-  public BasePlugin getPlugin() {
+  public BasePlugin getBasePlugin() {
     return this.plugin;
   }
 }

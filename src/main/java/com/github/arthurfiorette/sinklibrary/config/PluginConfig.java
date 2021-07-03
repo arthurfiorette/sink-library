@@ -32,7 +32,7 @@ public class PluginConfig implements BaseConfig {
   }
 
   @Override
-  public BasePlugin getPlugin() {
+  public BasePlugin getBasePlugin() {
     return this.plugin;
   }
 }

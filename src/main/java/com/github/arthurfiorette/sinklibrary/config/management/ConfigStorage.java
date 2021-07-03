@@ -30,7 +30,7 @@ public class ConfigStorage<L extends Enum<L> & ConfigLoader> implements BaseComp
   }
 
   @Override
-  public BasePlugin getPlugin() {
+  public BasePlugin getBasePlugin() {
     return this.plugin;
   }
 }

@@ -52,7 +52,7 @@ public class MenuStorage<M extends Enum<M> & MenuFactory> implements BaseService
   }
 
   @Override
-  public BasePlugin getPlugin() {
+  public BasePlugin getBasePlugin() {
     return this.plugin;
   }
 }

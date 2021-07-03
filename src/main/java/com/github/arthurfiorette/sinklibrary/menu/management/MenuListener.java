@@ -25,7 +25,7 @@ public class MenuListener extends SinkListener {
     // It's an BaseMenu
     if ((inv != null) && (inv.getHolder() instanceof BaseMenu)) {
       final BaseMenu menu = (BaseMenu) inv.getHolder();
-      final BasePlugin menuPlugin = menu.getPlugin();
+      final BasePlugin menuPlugin = menu.getBasePlugin();
 
       // It's from the same owner
       if (menuPlugin.getClass().equals(this.plugin.getClass())) {

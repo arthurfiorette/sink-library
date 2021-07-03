@@ -71,7 +71,7 @@ public class MemoryDatabase<K, T> implements Database<K, T> {
   }
 
   @Override
-  public BasePlugin getPlugin() {
+  public BasePlugin getBasePlugin() {
     return this.plugin;
   }
 

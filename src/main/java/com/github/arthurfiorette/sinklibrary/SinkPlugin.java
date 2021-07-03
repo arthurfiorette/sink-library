@@ -62,7 +62,7 @@ public abstract class SinkPlugin extends JavaPlugin implements BasePlugin, BaseS
   }
 
   @Override
-  public BasePlugin getPlugin() {
+  public BasePlugin getBasePlugin() {
     return this;
   }
 }

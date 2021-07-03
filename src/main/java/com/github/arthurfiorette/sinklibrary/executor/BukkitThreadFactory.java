@@ -76,7 +76,7 @@ public class BukkitThreadFactory implements ThreadFactory, BaseComponent {
   }
 
   @Override
-  public BasePlugin getPlugin() {
+  public BasePlugin getBasePlugin() {
     return this.plugin;
   }
 

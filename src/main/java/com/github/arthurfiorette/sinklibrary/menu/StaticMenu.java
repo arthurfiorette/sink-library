@@ -60,7 +60,7 @@ public abstract class StaticMenu implements BaseMenu {
   }
 
   @Override
-  public BasePlugin getPlugin() {
+  public BasePlugin getBasePlugin() {
     return this.plugin;
   }
 

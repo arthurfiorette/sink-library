@@ -52,7 +52,7 @@ public class GsonLoadingStorage<K, V> extends LoadingStorage<K, V, JsonObject> {
   }
 
   @Override
-  public BasePlugin getPlugin() {
+  public BasePlugin getBasePlugin() {
     return this.plugin;
   }
 }

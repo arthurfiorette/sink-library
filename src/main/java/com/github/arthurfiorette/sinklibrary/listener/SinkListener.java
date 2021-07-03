@@ -153,7 +153,7 @@ public abstract class SinkListener implements Listener, BaseService {
 
   @Override
   public void enable() {
-    Bukkit.getPluginManager().registerEvents(this, this.getPlugin());
+    Bukkit.getPluginManager().registerEvents(this, this.getBasePlugin());
   }
 
   @Override
@@ -162,7 +162,7 @@ public abstract class SinkListener implements Listener, BaseService {
   }
 
   @Override
-  public BasePlugin getPlugin() {
+  public BasePlugin getBasePlugin() {
     return this.plugin;
   }
 
