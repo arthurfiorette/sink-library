@@ -1,8 +1,10 @@
 package com.github.arthurfiorette.sinklibrary.config;
 
-import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
 import java.io.File;
+
 import org.bukkit.configuration.file.FileConfiguration;
+
+import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
 
 public class PluginConfig implements BaseConfig {
 

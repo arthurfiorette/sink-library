@@ -1,10 +1,12 @@
 package com.github.arthurfiorette.sinklibrary.executor;
 
-import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
-import com.github.arthurfiorette.sinklibrary.interfaces.BaseComponent;
 import java.util.concurrent.ThreadFactory;
+
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitScheduler;
+
+import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
+import com.github.arthurfiorette.sinklibrary.interfaces.BaseComponent;
 
 /**
  * Every created thread from this object runs with the specified

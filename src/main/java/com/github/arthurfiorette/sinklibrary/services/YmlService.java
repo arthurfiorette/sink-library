@@ -1,11 +1,13 @@
 package com.github.arthurfiorette.sinklibrary.services;
 
-import com.google.common.collect.Maps;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
+
+import com.google.common.collect.Maps;
 
 /**
  * A service class that handles with yml.

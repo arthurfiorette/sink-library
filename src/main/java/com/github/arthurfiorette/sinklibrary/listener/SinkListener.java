@@ -1,7 +1,5 @@
 package com.github.arthurfiorette.sinklibrary.listener;
 
-import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
-import com.github.arthurfiorette.sinklibrary.interfaces.BaseService;
 import org.bukkit.Bukkit;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
@@ -130,6 +128,9 @@ import org.bukkit.event.world.WorldInitEvent;
 import org.bukkit.event.world.WorldLoadEvent;
 import org.bukkit.event.world.WorldSaveEvent;
 import org.bukkit.event.world.WorldUnloadEvent;
+
+import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
+import com.github.arthurfiorette.sinklibrary.interfaces.BaseService;
 
 /**
  * A abstract Spigot listener implementation with the most methods implements.

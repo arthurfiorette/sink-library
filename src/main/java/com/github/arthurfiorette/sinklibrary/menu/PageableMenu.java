@@ -1,12 +1,14 @@
 package com.github.arthurfiorette.sinklibrary.menu;
 
-import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
-import com.github.arthurfiorette.sinklibrary.menu.item.MenuItem;
 import java.util.List;
+
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+
+import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
+import com.github.arthurfiorette.sinklibrary.menu.item.MenuItem;
 
 public abstract class PageableMenu extends PrivateMenu {
 

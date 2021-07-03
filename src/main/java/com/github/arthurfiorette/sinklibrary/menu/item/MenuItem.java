@@ -1,7 +1,8 @@
 package com.github.arthurfiorette.sinklibrary.menu.item;
 
-import com.github.arthurfiorette.sinklibrary.menu.listener.ClickListener;
 import org.bukkit.inventory.ItemStack;
+
+import com.github.arthurfiorette.sinklibrary.menu.listener.ClickListener;
 
 public interface MenuItem {
   ItemStack getItem();
