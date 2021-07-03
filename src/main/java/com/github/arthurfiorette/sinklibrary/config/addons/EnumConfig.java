@@ -1,21 +1,18 @@
 package com.github.arthurfiorette.sinklibrary.config.addons;
 
+import com.github.arthurfiorette.sinklibrary.config.BaseConfig;
+import com.github.arthurfiorette.sinklibrary.services.Replacer;
 import java.util.List;
 import java.util.Map;
 import java.util.function.UnaryOperator;
 import java.util.stream.Collectors;
-
 import org.bukkit.Color;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
 
-import com.github.arthurfiorette.sinklibrary.config.BaseConfig;
-import com.github.arthurfiorette.sinklibrary.services.Replacer;
-
 public interface EnumConfig<E extends Enum<E> & PathResolver> extends BaseConfig {
-
   /**
    * @see {@link ConfigurationSection#contains(String)}
    */
@@ -193,7 +190,10 @@ public interface EnumConfig<E extends Enum<E> & PathResolver> extends BaseConfig
   }
 
   default List<String> getStringList(final E lang, final UnaryOperator<Replacer> replacer) {
-    return this.getStringList(lang).stream().map(str -> Replacer.replace(str, replacer)).collect(Collectors.toList());
+    return this.getStringList(lang)
+      .stream()
+      .map(str -> Replacer.replace(str, replacer))
+      .collect(Collectors.toList());
   }
 
   /**
@@ -363,5 +363,4 @@ public interface EnumConfig<E extends Enum<E> & PathResolver> extends BaseConfig
   default void addDefault(final E path, final Object value) {
     this.getConfig().addDefault(path.getPath(), value);
   }
-
 }
