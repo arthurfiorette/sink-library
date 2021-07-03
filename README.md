@@ -136,3 +136,27 @@ resolvers += "jitpack" at "https://jitpack.io"
 
 libraryDependencies += "com.github.ArthurFiorette" % "sink-library" % "VERSION"
 ```
+
+<br />
+
+### Common problems
+
+#### `IllegalComponentException`
+
+This exception is thrown when you try to register a component or service, in your class that extends SinkPlugin, which is generic. Since the ComponentManager manages its objects with the key being their classes, two classes with different generic types would be recognized as the same component.
+
+Here is an example of how to solve this problem with this simple component
+
+```java
+public class MyGenericClass<T> implements BaseComponent {
+  ...
+}
+```
+
+Create a new class that extends the designed class with the correct type
+
+```java
+public class MyStringClass extends MyGenericClass<String>  {}
+```
+
+And then you can register it normally.
