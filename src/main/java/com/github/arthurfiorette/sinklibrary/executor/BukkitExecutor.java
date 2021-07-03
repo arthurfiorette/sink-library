@@ -10,7 +10,6 @@ import org.bukkit.scheduler.BukkitScheduler;
  * Simple interface to target all executors that runs with a
  * {@link BukkitScheduler}.
  *
- * @author https://github.com/Hazork/sink-library/
  */
 public final class BukkitExecutor {
 
