@@ -4,7 +4,7 @@ public interface BaseService extends BaseComponent {
   /**
    * Called when enabling this service
    * <p>
-   * if the exception thrown ins't instaceof {@link RuntimeException}, the
+   * if the thrown exception is not an instance of {@link RuntimeException}, the
    * plugin will be disabled.
    *
    * @throws Exception
