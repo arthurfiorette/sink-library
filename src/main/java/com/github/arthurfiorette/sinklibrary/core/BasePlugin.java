@@ -1,6 +1,5 @@
-package com.github.arthurfiorette.sinklibrary;
+package com.github.arthurfiorette.sinklibrary.core;
 
-import com.github.arthurfiorette.sinklibrary.core.ComponentManager;
 import com.github.arthurfiorette.sinklibrary.executor.TaskContext;
 import com.github.arthurfiorette.sinklibrary.interfaces.BaseComponent;
 import com.github.arthurfiorette.sinklibrary.interfaces.BaseService;

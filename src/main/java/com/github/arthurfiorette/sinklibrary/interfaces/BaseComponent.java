@@ -1,6 +1,6 @@
 package com.github.arthurfiorette.sinklibrary.interfaces;
 
-import com.github.arthurfiorette.sinklibrary.BasePlugin;
+import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
 
 /**
  * A class that implement this means that his instances need a BasePlugin to

@@ -1,6 +1,6 @@
 package com.github.arthurfiorette.sinklibrary.listener;
 
-import com.github.arthurfiorette.sinklibrary.BasePlugin;
+import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
 import com.github.arthurfiorette.sinklibrary.interfaces.BaseService;
 import org.bukkit.Bukkit;
 import org.bukkit.event.HandlerList;

@@ -1,6 +1,5 @@
 package com.github.arthurfiorette.sinklibrary.core;
 
-import com.github.arthurfiorette.sinklibrary.SinkPlugin;
 import com.github.arthurfiorette.sinklibrary.exceptions.IllegalComponentException;
 import com.github.arthurfiorette.sinklibrary.interfaces.BaseComponent;
 import com.github.arthurfiorette.sinklibrary.interfaces.BaseService;
@@ -22,18 +21,17 @@ public final class SimpleComponentManager implements ComponentManager {
   public SimpleComponentManager(final SinkPlugin plugin) {
     this.plugin = plugin;
     this.services.put(plugin.getClass(), plugin);
-  }
 
-  public void register(final BaseService[] services, final BaseComponent[] components) {
-    for (final BaseComponent component : components) {
+    for (final BaseComponent component : plugin.components()) {
       final Class<? extends BaseComponent> clazz = component.getClass();
       this.checkTypeParameters(clazz);
-      this.components.put(clazz, component);
-    }
-    for (final BaseService service : services) {
-      final Class<? extends BaseService> clazz = service.getClass();
-      this.checkTypeParameters(clazz);
-      this.services.put(clazz, service);
+
+      if (component instanceof BaseService) {
+        BaseService service = (BaseService) component;
+        this.services.put(service.getClass(), service);
+      } else {
+        this.components.put(clazz, component);
+      }
     }
   }
 
@@ -82,7 +80,8 @@ public final class SimpleComponentManager implements ComponentManager {
       } catch (final Exception e) {
         this.plugin.treatThrowable(
             service.getClass(),
-            new RuntimeException(e), // Prevent infinite loop while disabling.
+            // Prevent infinite loop while disabling.
+            new RuntimeException(e),
             "Throwable catch while disabling this service"
           );
       }

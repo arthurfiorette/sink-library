@@ -1,6 +1,6 @@
 package com.github.arthurfiorette.sinklibrary.menu.management;
 
-import com.github.arthurfiorette.sinklibrary.BasePlugin;
+import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
 import com.github.arthurfiorette.sinklibrary.interfaces.BaseService;
 import com.github.arthurfiorette.sinklibrary.menu.BaseMenu;
 import java.util.EnumMap;

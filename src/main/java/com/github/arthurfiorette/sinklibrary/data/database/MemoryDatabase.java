@@ -1,11 +1,12 @@
 package com.github.arthurfiorette.sinklibrary.data.database;
 
-import com.github.arthurfiorette.sinklibrary.BasePlugin;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
+
+import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
 
 /**
  * A memory database is a database saved in a concurrent hash map and resets

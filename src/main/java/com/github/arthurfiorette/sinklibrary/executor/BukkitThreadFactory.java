@@ -1,6 +1,6 @@
 package com.github.arthurfiorette.sinklibrary.executor;
 
-import com.github.arthurfiorette.sinklibrary.BasePlugin;
+import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
 import com.github.arthurfiorette.sinklibrary.interfaces.BaseComponent;
 import java.util.concurrent.ThreadFactory;
 import org.bukkit.plugin.Plugin;

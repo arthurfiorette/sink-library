@@ -1,6 +1,6 @@
 package com.github.arthurfiorette.sinklibrary.data.storage.gson;
 
-import com.github.arthurfiorette.sinklibrary.BasePlugin;
+import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
 import com.github.arthurfiorette.sinklibrary.data.database.JsonDatabase;
 import com.github.arthurfiorette.sinklibrary.data.storage.LoadingStorage;
 import com.google.common.cache.CacheBuilder;

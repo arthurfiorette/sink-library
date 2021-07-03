@@ -1,6 +1,6 @@
 package com.github.arthurfiorette.sinklibrary.menu;
 
-import com.github.arthurfiorette.sinklibrary.BasePlugin;
+import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
 import com.github.arthurfiorette.sinklibrary.menu.item.MenuItem;
 import java.util.List;
 import org.bukkit.Material;

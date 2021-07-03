@@ -1,7 +1,5 @@
-package com.github.arthurfiorette.sinklibrary;
+package com.github.arthurfiorette.sinklibrary.core;
 
-import com.github.arthurfiorette.sinklibrary.core.ComponentManager;
-import com.github.arthurfiorette.sinklibrary.core.SimpleComponentManager;
 import com.github.arthurfiorette.sinklibrary.interfaces.BaseComponent;
 import com.github.arthurfiorette.sinklibrary.interfaces.BaseService;
 import java.util.logging.Level;
@@ -19,8 +17,9 @@ public abstract class SinkPlugin extends JavaPlugin implements BasePlugin, BaseS
     this.manager = manager;
   }
 
-  protected abstract BaseService[] services();
-
+  /**
+   * Here you register all of yours components and services
+   */
   protected abstract BaseComponent[] components();
 
   /**
@@ -40,12 +39,7 @@ public abstract class SinkPlugin extends JavaPlugin implements BasePlugin, BaseS
   }
 
   @Override
-  public void treatThrowable(
-    final Class<?> author,
-    final Throwable exc,
-    final String message,
-    final Object... args
-  ) {
+  public void treatThrowable(final Class<?> author, final Throwable exc, final String message, final Object... args) {
     this.log(Level.SEVERE, "An exception occurred in class %s:", author.getSimpleName());
     this.log(Level.SEVERE, message, args);
     exc.printStackTrace();

@@ -1,6 +1,6 @@
 package com.github.arthurfiorette.sinklibrary.menu.management;
 
-import com.github.arthurfiorette.sinklibrary.BasePlugin;
+import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
 import com.github.arthurfiorette.sinklibrary.listener.SinkListener;
 import com.github.arthurfiorette.sinklibrary.menu.BaseMenu;
 import com.github.arthurfiorette.sinklibrary.menu.item.MenuItem;

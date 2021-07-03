@@ -1,10 +1,11 @@
 package com.github.arthurfiorette.sinklibrary.executor;
 
-import com.github.arthurfiorette.sinklibrary.BasePlugin;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import org.bukkit.scheduler.BukkitScheduler;
+
+import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
 
 /**
  * Simple interface to target all executors that runs with a
