@@ -2,7 +2,6 @@ package com.github.arthurfiorette.sinklibrary.command;
 
 import java.util.List;
 import java.util.function.Predicate;
-
 import org.bukkit.command.CommandSender;
 
 /**

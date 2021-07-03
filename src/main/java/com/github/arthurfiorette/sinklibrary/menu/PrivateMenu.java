@@ -1,9 +1,8 @@
 package com.github.arthurfiorette.sinklibrary.menu;
 
+import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
-
-import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
 
 public abstract class PrivateMenu extends StaticMenu {
 
