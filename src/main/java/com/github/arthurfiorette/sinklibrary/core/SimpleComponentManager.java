@@ -26,18 +26,18 @@ public final class SimpleComponentManager implements ComponentManager {
 
   public void register(final BaseService[] services, final BaseComponent[] components) {
     for (final BaseComponent component : components) {
-      Class<? extends BaseComponent> clazz = component.getClass();
-      checkTypeParameters(clazz);
+      final Class<? extends BaseComponent> clazz = component.getClass();
+      this.checkTypeParameters(clazz);
       this.components.put(clazz, component);
     }
     for (final BaseService service : services) {
-      Class<? extends BaseService> clazz = service.getClass();
-      checkTypeParameters(clazz);
+      final Class<? extends BaseService> clazz = service.getClass();
+      this.checkTypeParameters(clazz);
       this.services.put(clazz, service);
     }
   }
 
-  public void checkTypeParameters(Class<? extends Object> clazz) {
+  public void checkTypeParameters(final Class<? extends Object> clazz) {
     if (clazz.getTypeParameters().length > 0) {
       throw new IllegalComponentException(clazz);
     }
