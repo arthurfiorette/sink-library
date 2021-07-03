@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.github.arthurfiorette.sinklibrary.exceptions;
 
@@ -10,5 +10,4 @@ public class IllegalComponentException extends SinkException {
   public IllegalComponentException(Class<?> cause) {
     super("Attemp to register a generic class");
   }
-
 }
