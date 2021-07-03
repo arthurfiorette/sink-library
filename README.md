@@ -139,7 +139,7 @@ libraryDependencies += "com.github.ArthurFiorette" % "sink-library" % "VERSION"
 
 <br />
 
-### Common problems
+### Commons problems
 
 #### `IllegalComponentException`
 

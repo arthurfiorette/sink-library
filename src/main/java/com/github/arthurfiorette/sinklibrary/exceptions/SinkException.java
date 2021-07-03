@@ -1,6 +1,6 @@
 package com.github.arthurfiorette.sinklibrary.exceptions;
 
-public class SinkException extends RuntimeException {
+public abstract class SinkException extends RuntimeException {
 
   private static final long serialVersionUID = 2945601044667455870L;
 
