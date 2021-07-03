@@ -82,7 +82,7 @@ public final class SimpleComponentManager implements ComponentManager {
       } catch (final Exception e) {
         this.plugin.treatThrowable(
             service.getClass(),
-            e,
+            new RuntimeException(e), // Prevent infinite loop while disabling.
             "Throwable catch while disabling this service"
           );
       }
