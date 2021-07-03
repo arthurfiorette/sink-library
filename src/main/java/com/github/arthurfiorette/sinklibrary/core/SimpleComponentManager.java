@@ -1,6 +1,7 @@
 package com.github.arthurfiorette.sinklibrary.core;
 
 import com.github.arthurfiorette.sinklibrary.SinkPlugin;
+import com.github.arthurfiorette.sinklibrary.exceptions.IllegalComponentException;
 import com.github.arthurfiorette.sinklibrary.interfaces.BaseComponent;
 import com.github.arthurfiorette.sinklibrary.interfaces.BaseService;
 import com.google.common.collect.Iterables;
@@ -25,10 +26,20 @@ public final class SimpleComponentManager implements ComponentManager {
 
   public void register(final BaseService[] services, final BaseComponent[] components) {
     for (final BaseComponent component : components) {
-      this.components.put(component.getClass(), component);
+      Class<? extends BaseComponent> clazz = component.getClass();
+      checkTypeParameters(clazz);
+      this.components.put(clazz, component);
     }
     for (final BaseService service : services) {
-      this.services.put(service.getClass(), service);
+      Class<? extends BaseService> clazz = service.getClass();
+      checkTypeParameters(clazz);
+      this.services.put(clazz, service);
+    }
+  }
+
+  public void checkTypeParameters(Class<? extends Object> clazz) {
+    if (clazz.getTypeParameters().length > 0) {
+      throw new IllegalComponentException(clazz);
     }
   }
 
