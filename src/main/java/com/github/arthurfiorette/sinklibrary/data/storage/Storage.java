@@ -1,6 +1,5 @@
 package com.github.arthurfiorette.sinklibrary.data.storage;
 
-import com.github.arthurfiorette.sinklibrary.data.Serializable;
 import com.github.arthurfiorette.sinklibrary.data.database.Database;
 import java.util.Collection;
 import java.util.Set;
@@ -14,7 +13,7 @@ import java.util.function.Function;
  *
  * @author https://github.com/arthurfiorette/sink-library/
  */
-public interface Storage<K, V, R> extends Serializable<V, R> {
+public interface Storage<K, V, R> {
   CompletableFuture<Void> save(K key, V value);
 
   default void saveSync(final K key, final V value) {
@@ -44,4 +43,8 @@ public interface Storage<K, V, R> extends Serializable<V, R> {
   default V operateSync(final Function<Database<K, R>, R> func) {
     return this.operate(func).join();
   }
+
+  R serialize(V object);
+
+  V deserialize(R raw);
 }
