@@ -8,359 +8,882 @@ import java.util.function.UnaryOperator;
 import java.util.stream.Collectors;
 import org.bukkit.Color;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.configuration.Configuration;
 import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.configuration.MemoryConfiguration;
+import org.bukkit.configuration.MemorySection;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
 
-public interface EnumConfig<E extends Enum<E> & PathResolver> extends BaseConfig {
+public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig {
+
   /**
-   * @see {@link ConfigurationSection#contains(String)}
+   * Checks if this {@link ConfigurationSection} contains the given path.
+   * <p>
+   * If the value for the requested path does not exist but a default value has
+   * been specified, this will return true.
+   *
+   * @param path Path to check for existence.
+   * 
+   * @return True if this section contains the requested path, either via
+   * default or being set.
+   * 
+   * @throws IllegalArgumentException Thrown when path is null.
    */
-  default boolean contains(final E path) {
+  default boolean contains(final P path) {
     return this.getConfig().contains(path.getPath());
   }
 
   /**
-   * @see {@link ConfigurationSection#get(String)}
+   * Gets the requested Object by path.
+   * <p>
+   * If the Object does not exist but a default value has been specified, this
+   * will return the default value. If the Object does not exist and no default
+   * value was specified, this will return null.
+   *
+   * @param path Path of the Object to get.
+   * 
+   * @return Requested Object.
    */
-  default Object get(final E path) {
+  default Object get(final P path) {
     return this.getConfig().get(path.getPath());
   }
 
   /**
-   * @see {@link ConfigurationSection#get(String, Object)}
+   * Gets the requested Object by path, returning a default value if not found.
+   * <p>
+   * If the Object does not exist then the specified default value will returned
+   * regardless of if a default has been identified in the root
+   * {@link Configuration}.
+   *
+   * @param path Path of the Object to get.
+   * @param def The default value to return if the path is not found.
+   * 
+   * @return Requested Object.
    */
-  default Object get(final E path, final Object def) {
+  default Object get(final P path, final Object def) {
     return this.getConfig().get(path.getPath(), def);
   }
 
   /**
-   * @see {@link ConfigurationSection#set(String, Object)}
+   * Sets the specified path to the given value.
+   * <p>
+   * If value is null, the entry will be removed. Any existing entry will be
+   * replaced, regardless of what the new value is.
+   * <p>
+   * Some implementations may have limitations on what you may store. See their
+   * individual javadocs for details. No implementations should allow you to
+   * store {@link Configuration}s or {@link ConfigurationSection}s, please use
+   * {@link EnumConfig#createSection(Enum)} for that.
+   *
+   * @param path Path of the object to set.
+   * @param value New value to set the path to.
    */
-  default void set(final E path, final Object value) {
+  default void set(final P path, final Object value) {
     this.getConfig().set(path.getPath(), value);
   }
 
   /**
-   * @see {@link ConfigurationSection#createSection(String)}
+   * Creates an empty {@link ConfigurationSection} at the specified path.
+   * <p>
+   * Any value that was previously set at this path will be overwritten. If the
+   * previous value was itself a {@link ConfigurationSection}, it will be
+   * orphaned.
+   *
+   * @param path Path to create the section at.
+   * 
+   * @return Newly created section
    */
-  default ConfigurationSection createSection(final E path) {
+  default ConfigurationSection createSection(final P path) {
     return this.getConfig().createSection(path.getPath());
   }
 
   /**
-   * @see {@link ConfigurationSection#createSection(String, Map)}
+   * Creates a {@link ConfigurationSection} at the specified path, with
+   * specified values.
+   * <p>
+   * Any value that was previously set at this path will be overwritten. If the
+   * previous value was itself a {@link ConfigurationSection}, it will be
+   * orphaned.
+   *
+   * @param path Path to create the section at.
+   * @param map The values to used.
+   * 
+   * @return Newly created section
    */
-  default ConfigurationSection createSection(final E path, final Map<?, ?> map) {
+  default ConfigurationSection createSection(final P path, final Map<?, ?> map) {
     return this.getConfig().createSection(path.getPath(), map);
   }
 
   /**
-   * @see {@link ConfigurationSection#getString(String)}
+   * Gets the requested String by path.
+   * <p>
+   * If the String does not exist but a default value has been specified, this
+   * will return the default value. If the String does not exist and no default
+   * value was specified, this will return null.
+   *
+   * @param path Path of the String to get.
+   * 
+   * @return Requested String.
    */
-  default String getString(final E path) {
+  default String getString(final P path) {
     return this.getConfig().getString(path.getPath());
   }
 
   /**
-   * @see {@link ConfigurationSection#getString(String, String)}
+   * Gets the requested String by path, returning a default value if not found.
+   * <p>
+   * If the String does not exist then the specified default value will returned
+   * regardless of if a default has been identified in the root
+   * {@link Configuration}.
+   *
+   * @param path Path of the String to get.
+   * @param def The default value to return if the path is not found or is not a
+   * String.
+   * 
+   * @return Requested String.
    */
-  default String getString(final E path, final String def) {
+  default String getString(final P path, final String def) {
     return this.getConfig().getString(path.getPath(), def);
   }
 
-  default String getString(final E lang, final UnaryOperator<Replacer> replacer) {
-    return Replacer.replace(this.getString(lang), replacer);
-  }
-
-  default String getString(final E lang, final String def, final UnaryOperator<Replacer> replacer) {
-    return Replacer.replace(this.getString(lang, def), replacer);
+  /**
+   * Gets the requested String by path.
+   * <p>
+   * If the String does not exist but a default value has been specified, this
+   * will return the default value. If the String does not exist and no default
+   * value was specified, this will return null.
+   *
+   * @param path Path of the String to get.
+   * @param replacer the replacer operator
+   * 
+   * @return Requested String.
+   */
+  default String getString(final P path, final UnaryOperator<Replacer> replacer) {
+    return Replacer.replace(this.getString(path), replacer);
   }
 
   /**
-   * @see {@link ConfigurationSection#isString(String)}
+   * Gets the requested String by path, returning a default value if not found.
+   * <p>
+   * If the String does not exist then the specified default value will returned
+   * regardless of if a default has been identified in the root
+   * {@link Configuration}.
+   *
+   * @param path Path of the String to get.
+   * @param def The default value to return if the path is not found or is not a
+   * String.
+   * @param replacer the replacer operator
+   * 
+   * @return Requested String.
    */
-  default boolean isString(final E path) {
+  default String getString(final P path, final String def, final UnaryOperator<Replacer> replacer) {
+    return Replacer.replace(this.getString(path, def), replacer);
+  }
+
+  /**
+   * Checks if the specified path is a String.
+   * <p>
+   * If the path exists but is not a String, this will return false. If the path
+   * does not exist, this will return false. If the path does not exist but a
+   * default value has been specified, this will check if that default value is
+   * a String and return appropriately.
+   *
+   * @param path Path of the String to check.
+   * 
+   * @return Whether or not the specified path is a String.
+   */
+  default boolean isString(final P path) {
     return this.getConfig().isString(path.getPath());
   }
 
   /**
-   * @see {@link ConfigurationSection#getInt(String)}
+   * Gets the requested int by path.
+   * <p>
+   * If the int does not exist but a default value has been specified, this will
+   * return the default value. If the int does not exist and no default value
+   * was specified, this will return 0.
+   *
+   * @param path Path of the int to get.
+   * 
+   * @return Requested int.
    */
-  default int getInt(final E path) {
+  default int getInt(final P path) {
     return this.getConfig().getInt(path.getPath());
   }
 
   /**
-   * @see {@link ConfigurationSection#getInt(String, int)}
+   * Gets the requested int by path, returning a default value if not found.
+   * <p>
+   * If the int does not exist then the specified default value will returned
+   * regardless of if a default has been identified in the root
+   * {@link Configuration}.
+   *
+   * @param path Path of the int to get.
+   * @param def The default value to return if the path is not found or is not
+   * an int.
+   * 
+   * @return Requested int.
    */
-  default int getInt(final E path, final int def) {
+  default int getInt(final P path, final int def) {
     return this.getConfig().getInt(path.getPath(), def);
   }
 
   /**
-   * @see {@link ConfigurationSection#isInt(String)}
+   * Checks if the specified path is an int.
+   * <p>
+   * If the path exists but is not a int, this will return false. If the path
+   * does not exist, this will return false. If the path does not exist but a
+   * default value has been specified, this will check if that default value is
+   * a int and return appropriately.
+   *
+   * @param path Path of the int to check.
+   * 
+   * @return Whether or not the specified path is an int.
    */
-  default boolean isInt(final E path) {
+  default boolean isInt(final P path) {
     return this.getConfig().isInt(path.getPath());
   }
 
   /**
-   * @see {@link ConfigurationSection#getBoolean(String)}
+   * Gets the requested boolean by path.
+   * <p>
+   * If the boolean does not exist but a default value has been specified, this
+   * will return the default value. If the boolean does not exist and no default
+   * value was specified, this will return false.
+   *
+   * @param path Path of the boolean to get.
+   * 
+   * @return Requested boolean.
    */
-  default boolean getBoolean(final E path, final boolean def) {
+  default boolean getBoolean(final P path) {
     return this.getConfig().getBoolean(path.getPath());
   }
 
   /**
-   * @see {@link ConfigurationSection#getBoolean(String, boolean)}
+   * Gets the requested boolean by path, returning a default value if not found.
+   * <p>
+   * If the boolean does not exist then the specified default value will
+   * returned regardless of if a default has been identified in the root
+   * {@link Configuration}.
+   *
+   * @param path Path of the boolean to get.
+   * @param def The default value to return if the path is not found or is not a
+   * boolean.
+   * 
+   * @return Requested boolean.
    */
-  default boolean isBoolean(final E path) {
+  default boolean getBoolean(final P path, final boolean def) {
+    return this.getConfig().getBoolean(path.getPath(), def);
+  }
+
+  /**
+   * Checks if the specified path is a boolean.
+   * <p>
+   * If the path exists but is not a boolean, this will return false. If the
+   * path does not exist, this will return false. If the path does not exist but
+   * a default value has been specified, this will check if that default value
+   * is a boolean and return appropriately.
+   *
+   * @param path Path of the boolean to check.
+   * 
+   * @return Whether or not the specified path is a boolean.
+   */
+  default boolean isBoolean(final P path) {
     return this.getConfig().isBoolean(path.getPath());
   }
 
   /**
-   * @see {@link ConfigurationSection#isBoolean(String)}
+   * Gets the requested double by path.
+   * <p>
+   * If the double does not exist but a default value has been specified, this
+   * will return the default value. If the double does not exist and no default
+   * value was specified, this will return 0.
+   *
+   * @param path Path of the double to get.
+   * 
+   * @return Requested double.
    */
-  default double getDouble(final E path) {
+  default double getDouble(final P path) {
     return this.getConfig().getDouble(path.getPath());
   }
 
   /**
-   * @see {@link ConfigurationSection#getDouble(String,def)}
+   * Gets the requested double by path, returning a default value if not found.
+   * <p>
+   * If the double does not exist then the specified default value will returned
+   * regardless of if a default has been identified in the root
+   * {@link Configuration}.
+   *
+   * @param path Path of the double to get.
+   * @param def The default value to return if the path is not found or is not a
+   * double.
+   * 
+   * @return Requested double.
    */
-  default double getDouble(final E path, final double def) {
+  default double getDouble(final P path, final double def) {
     return this.getConfig().getDouble(path.getPath(), def);
   }
 
   /**
-   * @see {@link ConfigurationSection#isDouble(String)}
+   * Checks if the specified path is a double.
+   * <p>
+   * If the path exists but is not a double, this will return false. If the path
+   * does not exist, this will return false. If the path does not exist but a
+   * default value has been specified, this will check if that default value is
+   * a double and return appropriately.
+   *
+   * @param path Path of the double to check.
+   * 
+   * @return Whether or not the specified path is a double.
    */
-  default boolean isDouble(final E path) {
+  default boolean isDouble(final P path) {
     return this.getConfig().isDouble(path.getPath());
   }
 
   /**
-   * @see {@link ConfigurationSection#getLong(String)}
+   * Checks if the specified path is a double.
+   * <p>
+   * If the path exists but is not a double, this will return false. If the path
+   * does not exist, this will return false. If the path does not exist but a
+   * default value has been specified, this will check if that default value is
+   * a double and return appropriately.
+   *
+   * @param path Path of the double to check.
+   * 
+   * @return Whether or not the specified path is a double.
    */
-  default long getLong(final E path) {
+  default long getLong(final P path) {
     return this.getConfig().getLong(path.getPath());
   }
 
   /**
-   * @see {@link ConfigurationSection#getLong(String, long)}
+   * Gets the requested long by path, returning a default value if not found.
+   * <p>
+   * If the long does not exist then the specified default value will returned
+   * regardless of if a default has been identified in the root
+   * {@link Configuration}.
+   *
+   * @param path Path of the long to get.
+   * @param def The default value to return if the path is not found or is not a
+   * long.
+   * 
+   * @return Requested long.
    */
-  default long getLong(final E path, final long def) {
+  default long getLong(final P path, final long def) {
     return this.getConfig().getLong(path.getPath(), def);
   }
 
   /**
-   * @see {@link ConfigurationSection#isLong(String)}
+   * Checks if the specified path is a long.
+   * <p>
+   * If the path exists but is not a long, this will return false. If the path
+   * does not exist, this will return false. If the path does not exist but a
+   * default value has been specified, this will check if that default value is
+   * a long and return appropriately.
+   *
+   * @param path Path of the long to check.
+   * 
+   * @return Whether or not the specified path is a long.
    */
-  default boolean isLong(final E path) {
+  default boolean isLong(final P path) {
     return this.getConfig().isLong(path.getPath());
   }
 
   /**
-   * @see {@link ConfigurationSection#isList(String)}
+   * Gets the requested List by path.
+   * <p>
+   * If the List does not exist but a default value has been specified, this
+   * will return the default value. If the List does not exist and no default
+   * value was specified, this will return null.
+   *
+   * @param path Path of the List to get.
+   * 
+   * @return Requested List.
    */
-  default List<?> getList(final E path) {
+  default List<?> getList(final P path) {
     return this.getConfig().getList(path.getPath());
   }
 
   /**
-   * @see {@link ConfigurationSection#getList(String, List)}
+   * Gets the requested List by path, returning a default value if not found.
+   * <p>
+   * If the List does not exist then the specified default value will returned
+   * regardless of if a default has been identified in the root
+   * {@link Configuration}.
+   *
+   * @param path Path of the List to get.
+   * @param def The default value to return if the path is not found or is not a
+   * List.
+   * 
+   * @return Requested List.
    */
-  default List<?> getList(final E path, final List<?> def) {
+  default List<?> getList(final P path, final List<?> def) {
     return this.getConfig().getList(path.getPath(), def);
   }
 
   /**
-   * @see {@link ConfigurationSection#isList(String)}
+   * Checks if the specified path is a List.
+   * <p>
+   * If the path exists but is not a List, this will return false. If the path
+   * does not exist, this will return false. If the path does not exist but a
+   * default value has been specified, this will check if that default value is
+   * a List and return appropriately.
+   *
+   * @param path Path of the List to check.
+   * 
+   * @return Whether or not the specified path is a List.
    */
-  default boolean isList(final E path) {
+  default boolean isList(final P path) {
     return this.getConfig().isList(path.getPath());
   }
 
   /**
-   * @see {@link ConfigurationSection#getStringList(String)}
+   * Gets the requested List of String by path.
+   * <p>
+   * If the List does not exist but a default value has been specified, this
+   * will return the default value. If the List does not exist and no default
+   * value was specified, this will return an empty List.
+   * <p>
+   * This method will attempt to cast any values into a String if possible, but
+   * may miss any values out if they are not compatible.
+   *
+   * @param path Path of the List to get.
+   * 
+   * @return Requested List of String.
    */
-  default List<String> getStringList(final E path) {
+  default List<String> getStringList(final P path) {
     return this.getConfig().getStringList(path.getPath());
   }
 
-  default List<String> getStringList(final E lang, final UnaryOperator<Replacer> replacer) {
-    return this.getStringList(lang)
-      .stream()
-      .map(str -> Replacer.replace(str, replacer))
-      .collect(Collectors.toList());
+  /**
+   * Gets the requested List of String by path.
+   * <p>
+   * If the List does not exist but a default value has been specified, this
+   * will return the default value. If the List does not exist and no default
+   * value was specified, this will return an empty List.
+   * <p>
+   * This method will attempt to cast any values into a String if possible, but
+   * may miss any values out if they are not compatible.
+   *
+   * @param path Path of the List to get.
+   * @param replacer the replacer operator
+   * 
+   * @return Requested List of String.
+   */
+  default List<String> getStringList(final P path, final UnaryOperator<Replacer> replacer) {
+    return this.getStringList(path).stream().map(str -> Replacer.replace(str, replacer)).collect(Collectors.toList());
   }
 
   /**
-   * @see {@link ConfigurationSection#getIntegerList(String)}
+   * Gets the requested List of Integer by path.
+   * <p>
+   * If the List does not exist but a default value has been specified, this
+   * will return the default value. If the List does not exist and no default
+   * value was specified, this will return an empty List.
+   * <p>
+   * This method will attempt to cast any values into a Integer if possible, but
+   * may miss any values out if they are not compatible.
+   *
+   * @param path Path of the List to get.
+   * 
+   * @return Requested List of Integer.
    */
-  default List<Integer> getIntegerList(final E path) {
+  default List<Integer> getIntegerList(final P path) {
     return this.getConfig().getIntegerList(path.getPath());
   }
 
   /**
-   * @see {@link ConfigurationSection#getBooleanList(String)}
+   * Gets the requested List of Boolean by path.
+   * <p>
+   * If the List does not exist but a default value has been specified, this
+   * will return the default value. If the List does not exist and no default
+   * value was specified, this will return an empty List.
+   * <p>
+   * This method will attempt to cast any values into a Boolean if possible, but
+   * may miss any values out if they are not compatible.
+   *
+   * @param path Path of the List to get.
+   * 
+   * @return Requested List of Boolean.
    */
-  default List<Boolean> getBooleanList(final E path) {
+  default List<Boolean> getBooleanList(final P path) {
     return this.getConfig().getBooleanList(path.getPath());
   }
 
   /**
-   * @see {@link ConfigurationSection#getDoubleList(String)}
+   * Gets the requested List of Double by path.
+   * <p>
+   * If the List does not exist but a default value has been specified, this
+   * will return the default value. If the List does not exist and no default
+   * value was specified, this will return an empty List.
+   * <p>
+   * This method will attempt to cast any values into a Double if possible, but
+   * may miss any values out if they are not compatible.
+   *
+   * @param path Path of the List to get.
+   * 
+   * @return Requested List of Double.
    */
-  default List<Double> getDoubleList(final E path) {
+  default List<Double> getDoubleList(final P path) {
     return this.getConfig().getDoubleList(path.getPath());
   }
 
   /**
-   * @see {@link ConfigurationSection#getFloatList(String)}
+   * Gets the requested List of Float by path.
+   * <p>
+   * If the List does not exist but a default value has been specified, this
+   * will return the default value. If the List does not exist and no default
+   * value was specified, this will return an empty List.
+   * <p>
+   * This method will attempt to cast any values into a Float if possible, but
+   * may miss any values out if they are not compatible.
+   *
+   * @param path Path of the List to get.
+   * 
+   * @return Requested List of Float.
    */
-  default List<Float> getFloatList(final E path) {
+  default List<Float> getFloatList(final P path) {
     return this.getConfig().getFloatList(path.getPath());
   }
 
   /**
-   * @see {@link ConfigurationSection#getLongList(String)}
+   * Gets the requested List of Long by path.
+   * <p>
+   * If the List does not exist but a default value has been specified, this
+   * will return the default value. If the List does not exist and no default
+   * value was specified, this will return an empty List.
+   * <p>
+   * This method will attempt to cast any values into a Long if possible, but
+   * may miss any values out if they are not compatible.
+   *
+   * @param path Path of the List to get.
+   * 
+   * @return Requested List of Long.
    */
-  default List<Long> getLongList(final E path) {
+  default List<Long> getLongList(final P path) {
     return this.getConfig().getLongList(path.getPath());
   }
 
   /**
-   * @see {@link ConfigurationSection#getByteList(String)}
+   * Gets the requested List of Byte by path.
+   * <p>
+   * If the List does not exist but a default value has been specified, this
+   * will return the default value. If the List does not exist and no default
+   * value was specified, this will return an empty List.
+   * <p>
+   * This method will attempt to cast any values into a Byte if possible, but
+   * may miss any values out if they are not compatible.
+   *
+   * @param path Path of the List to get.
+   * 
+   * @return Requested List of Byte.
    */
-  default List<Byte> getByteList(final E path) {
+  default List<Byte> getByteList(final P path) {
     return this.getConfig().getByteList(path.getPath());
   }
 
   /**
-   * @see {@link ConfigurationSection#getCharacterList(String)}
+   * Gets the requested List of Character by path.
+   * <p>
+   * If the List does not exist but a default value has been specified, this
+   * will return the default value. If the List does not exist and no default
+   * value was specified, this will return an empty List.
+   * <p>
+   * This method will attempt to cast any values into a Character if possible,
+   * but may miss any values out if they are not compatible.
+   *
+   * @param path Path of the List to get.
+   * 
+   * @return Requested List of Character.
    */
-  default List<Character> getCharacterList(final E path) {
+  default List<Character> getCharacterList(final P path) {
     return this.getConfig().getCharacterList(path.getPath());
   }
 
   /**
-   * @see {@link ConfigurationSection#getShortList(String)}
+   * Gets the requested List of Short by path.
+   * <p>
+   * If the List does not exist but a default value has been specified, this
+   * will return the default value. If the List does not exist and no default
+   * value was specified, this will return an empty List.
+   * <p>
+   * This method will attempt to cast any values into a Short if possible, but
+   * may miss any values out if they are not compatible.
+   *
+   * @param path Path of the List to get.
+   * 
+   * @return Requested List of Short.
    */
-  default List<Short> getShortList(final E path) {
+  default List<Short> getShortList(final P path) {
     return this.getConfig().getShortList(path.getPath());
   }
 
   /**
-   * @see {@link ConfigurationSection#getMapList(String)}
+   * Gets the requested List of Maps by path.
+   * <p>
+   * If the List does not exist but a default value has been specified, this
+   * will return the default value. If the List does not exist and no default
+   * value was specified, this will return an empty List.
+   * <p>
+   * This method will attempt to cast any values into a Map if possible, but may
+   * miss any values out if they are not compatible.
+   *
+   * @param path Path of the List to get.
+   * 
+   * @return Requested List of Maps.
    */
-  default List<Map<?, ?>> getMapList(final E path) {
+  default List<Map<?, ?>> getMapList(final P path) {
     return this.getConfig().getMapList(path.getPath());
   }
 
   /**
-   * @see {@link ConfigurationSection#getVector(String)v}
+   * Gets the requested Vector by path.
+   * <p>
+   * If the Vector does not exist but a default value has been specified, this
+   * will return the default value. If the Vector does not exist and no default
+   * value was specified, this will return null.
+   *
+   * @param path Path of the Vector to get.
+   * 
+   * @return Requested Vector.
    */
-  default Vector getVector(final E path) {
+  default Vector getVector(final P path) {
     return this.getConfig().getVector(path.getPath());
   }
 
   /**
-   * @see {@link ConfigurationSection#getVector(String, Vector)}
+   * Gets the requested {@link Vector} by path, returning a default value if not
+   * found.
+   * <p>
+   * If the Vector does not exist then the specified default value will returned
+   * regardless of if a default has been identified in the root
+   * {@link Configuration}.
+   *
+   * @param path Path of the Vector to get.
+   * @param def The default value to return if the path is not found or is not a
+   * Vector.
+   * 
+   * @return Requested Vector.
    */
-  default Vector getVector(final E path, final Vector def) {
+  default Vector getVector(final P path, final Vector def) {
     return this.getConfig().getVector(path.getPath(), def);
   }
 
   /**
-   * @see {@link ConfigurationSection#isVector(String)}
+   * Checks if the specified path is a Vector.
+   * <p>
+   * If the path exists but is not a Vector, this will return false. If the path
+   * does not exist, this will return false. If the path does not exist but a
+   * default value has been specified, this will check if that default value is
+   * a Vector and return appropriately.
+   *
+   * @param path Path of the Vector to check.
+   * 
+   * @return Whether or not the specified path is a Vector.
    */
-  default boolean isVector(final E path) {
+  default boolean isVector(final P path) {
     return this.getConfig().isVector(path.getPath());
   }
 
   /**
-   * @see {@link ConfigurationSection#getOfflinePlayer(String)}
+   * Gets the requested OfflinePlayer by path.
+   * <p>
+   * If the OfflinePlayer does not exist but a default value has been specified,
+   * this will return the default value. If the OfflinePlayer does not exist and
+   * no default value was specified, this will return null.
+   *
+   * @param path Path of the OfflinePlayer to get.
+   * 
+   * @return Requested OfflinePlayer.
    */
-  default OfflinePlayer getOfflinePlayer(final E path) {
+  default OfflinePlayer getOfflinePlayer(final P path) {
     return this.getConfig().getOfflinePlayer(path.getPath());
   }
 
   /**
-   * @see {@link ConfigurationSection#getOfflinePlayer(String, OfflinePlayer)f}
+   * Gets the requested {@link OfflinePlayer} by path, returning a default value
+   * if not found.
+   * <p>
+   * If the OfflinePlayer does not exist then the specified default value will
+   * returned regardless of if a default has been identified in the root
+   * {@link Configuration}.
+   *
+   * @param path Path of the OfflinePlayer to get.
+   * @param def The default value to return if the path is not found or is not
+   * an OfflinePlayer.
+   * 
+   * @return Requested OfflinePlayer.
    */
-  default OfflinePlayer getOfflinePlayer(final E path, final OfflinePlayer def) {
+  default OfflinePlayer getOfflinePlayer(final P path, final OfflinePlayer def) {
     return this.getConfig().getOfflinePlayer(path.getPath(), def);
   }
 
   /**
-   * @see {@link ConfigurationSection#isOfflinePlayer(String)}
+   * Checks if the specified path is an OfflinePlayer.
+   * <p>
+   * If the path exists but is not a OfflinePlayer, this will return false. If
+   * the path does not exist, this will return false. If the path does not exist
+   * but a default value has been specified, this will check if that default
+   * value is a OfflinePlayer and return appropriately.
+   *
+   * @param path Path of the OfflinePlayer to check.
+   * 
+   * @return Whether or not the specified path is an OfflinePlayer.
    */
-  default boolean isOfflinePlayer(final E path) {
+  default boolean isOfflinePlayer(final P path) {
     return this.getConfig().isOfflinePlayer(path.getPath());
   }
 
   /**
-   * @see {@link ConfigurationSection#getItemStack(String)}
+   * Gets the requested ItemStack by path.
+   * <p>
+   * If the ItemStack does not exist but a default value has been specified,
+   * this will return the default value. If the ItemStack does not exist and no
+   * default value was specified, this will return null.
+   *
+   * @param path Path of the ItemStack to get.
+   * 
+   * @return Requested ItemStack.
    */
-  default ItemStack getItemStack(final E path) {
+  default ItemStack getItemStack(final P path) {
     return this.getConfig().getItemStack(path.getPath());
   }
 
   /**
-   * @see {@link ConfigurationSection#getItemStack(String, ItemStack)}
+   * Gets the requested {@link ItemStack} by path, returning a default value if
+   * not found.
+   * <p>
+   * If the ItemStack does not exist then the specified default value will
+   * returned regardless of if a default has been identified in the root
+   * {@link Configuration}.
+   *
+   * @param path Path of the ItemStack to get.
+   * @param def The default value to return if the path is not found or is not
+   * an ItemStack.
+   * 
+   * @return Requested ItemStack.
    */
-  default ItemStack getItemStack(final E path, final ItemStack def) {
+  default ItemStack getItemStack(final P path, final ItemStack def) {
     return this.getConfig().getItemStack(path.getPath(), def);
   }
 
   /**
-   * @see {@link ConfigurationSection#isItemStack(String)}
+   * Checks if the specified path is an ItemStack.
+   * <p>
+   * If the path exists but is not a ItemStack, this will return false. If the
+   * path does not exist, this will return false. If the path does not exist but
+   * a default value has been specified, this will check if that default value
+   * is a ItemStack and return appropriately.
+   *
+   * @param path Path of the ItemStack to check.
+   * 
+   * @return Whether or not the specified path is an ItemStack.
    */
-  default boolean isItemStack(final E path) {
+  default boolean isItemStack(final P path) {
     return this.getConfig().isItemStack(path.getPath());
   }
 
   /**
-   * @see {@link ConfigurationSection#getColor(String)}
+   * Gets the requested Color by path.
+   * <p>
+   * If the Color does not exist but a default value has been specified, this
+   * will return the default value. If the Color does not exist and no default
+   * value was specified, this will return null.
+   *
+   * @param path Path of the Color to get.
+   * 
+   * @return Requested Color.
    */
-  default Color getColor(final E path) {
+  default Color getColor(final P path) {
     return this.getConfig().getColor(path.getPath());
   }
 
   /**
-   * @see {@link ConfigurationSection#getColor(String, Color)}
+   * Gets the requested {@link Color} by path, returning a default value if not
+   * found.
+   * <p>
+   * If the Color does not exist then the specified default value will returned
+   * regardless of if a default has been identified in the root
+   * {@link Configuration}.
+   *
+   * @param path Path of the Color to get.
+   * @param def The default value to return if the path is not found or is not a
+   * Color.
+   * 
+   * @return Requested Color.
    */
-  default Color getColor(final E path, final Color def) {
+  default Color getColor(final P path, final Color def) {
     return this.getConfig().getColor(path.getPath(), def);
   }
 
   /**
-   * @see {@link ConfigurationSection#isColor(String)}
+   * Checks if the specified path is a Color.
+   * <p>
+   * If the path exists but is not a Color, this will return false. If the path
+   * does not exist, this will return false. If the path does not exist but a
+   * default value has been specified, this will check if that default value is
+   * a Color and return appropriately.
+   *
+   * @param path Path of the Color to check.
+   * 
+   * @return Whether or not the specified path is a Color.
    */
-  default boolean isColor(final E path) {
+  default boolean isColor(final P path) {
     return this.getConfig().isColor(path.getPath());
   }
 
   /**
-   * @see {@link ConfigurationSection#getConfigurationSection(String)}
+   * Gets the requested ConfigurationSection by path.
+   * <p>
+   * If the ConfigurationSection does not exist but a default value has been
+   * specified, this will return the default value. If the ConfigurationSection
+   * does not exist and no default value was specified, this will return null.
+   *
+   * @param path Path of the ConfigurationSection to get.
+   * 
+   * @return Requested ConfigurationSection.
    */
-  default ConfigurationSection getConfigurationSection(final E path) {
+  default ConfigurationSection getConfigurationSection(final P path) {
     return this.getConfig().getConfigurationSection(path.getPath());
   }
 
   /**
-   * @see {@link ConfigurationSection#isConfigurationSection(String)}
+   * Checks if the specified path is a ConfigurationSection.
+   * <p>
+   * If the path exists but is not a ConfigurationSection, this will return
+   * false. If the path does not exist, this will return false. If the path does
+   * not exist but a default value has been specified, this will check if that
+   * default value is a ConfigurationSection and return appropriately.
+   *
+   * @param path Path of the ConfigurationSection to check.
+   * 
+   * @return Whether or not the specified path is a ConfigurationSection.
    */
-  default boolean isConfigurationSection(final E path) {
+  default boolean isConfigurationSection(final P path) {
     return this.getConfig().isConfigurationSection(path.getPath());
   }
 
   /**
-   * @see {@link ConfigurationSection#addDefault(String, Object)}
+   * Sets the default value in the root at the given path as provided.
+   * <p>
+   * If no source {@link Configuration} was provided as a default collection,
+   * then a new {@link MemoryConfiguration} will be created to hold the new
+   * default value.
+   * <p>
+   * If value is null, the value will be removed from the default Configuration
+   * source.
+   * <p>
+   * If the value as returned by {@link MemorySection#getDefaultSection()} is
+   * null, then this will create a new section at the path, replacing anything
+   * that may have existed there previously.
+   *
+   * @param path Path of the value to set.
+   * @param value Value to set the default to.
+   * 
+   * @throws IllegalArgumentException Thrown if path is null.
    */
-  default void addDefault(final E path, final Object value) {
+  default void addDefault(final P path, final Object value) {
     this.getConfig().addDefault(path.getPath(), value);
   }
 }

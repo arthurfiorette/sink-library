@@ -1,6 +1,6 @@
 package com.github.arthurfiorette.sinklibrary.item;
 
-import com.github.arthurfiorette.sinklibrary.menu.item.BuildedStack;
+import com.github.arthurfiorette.sinklibrary.menu.item.BuilderStack;
 import com.github.arthurfiorette.sinklibrary.menu.listener.ClickListener;
 import com.github.arthurfiorette.sinklibrary.services.SpigotService;
 import java.util.Arrays;
@@ -227,12 +227,12 @@ public class ItemBuilder {
     return this.lastBuild = item;
   }
 
-  public BuildedStack asMenuItem() {
-    return new BuildedStack(this);
+  public BuilderStack asMenuItem() {
+    return new BuilderStack(this);
   }
 
-  public BuildedStack asMenuItem(final ClickListener listener) {
-    return new BuildedStack(this, listener);
+  public BuilderStack asMenuItem(final ClickListener listener) {
+    return new BuilderStack(this, listener);
   }
 
   /**

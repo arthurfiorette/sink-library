@@ -26,33 +26,19 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class FastUuid {
 
-  public final boolean USE_JDK_UUID_TO_STRING;
+  public static final boolean USE_JDK_UUID_TO_STRING;
 
-  public final int UUID_STRING_LENGTH = 36;
+  public static final int UUID_STRING_LENGTH = 36;
 
-  public final int MOJANG_ID_LENGTH = FastUuid.UUID_STRING_LENGTH - 4; // Minus 4 dashes
+  public static final int MOJANG_ID_LENGTH = FastUuid.UUID_STRING_LENGTH - 4; // Minus
+                                                                              // 4
+                                                                              // dashes
   // chars
 
-  public final char[] HEX_DIGITS = new char[] {
-    '0',
-    '1',
-    '2',
-    '3',
-    '4',
-    '5',
-    '6',
-    '7',
-    '8',
-    '9',
-    'a',
-    'b',
-    'c',
-    'd',
-    'e',
-    'f',
-  };
+  public static final char[] HEX_DIGITS = new char[] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c',
+      'd', 'e', 'f', };
 
-  public final long[] HEX_VALUES = new long[128];
+  public static final long[] HEX_VALUES = new long[128];
 
   static {
     int majorVersion = 0;
@@ -106,13 +92,8 @@ public class FastUuid {
    * {@link UUID#toString()}
    */
   public UUID parseUUID(final CharSequence uuidSequence) {
-    if (
-      (uuidSequence.length() != FastUuid.UUID_STRING_LENGTH) ||
-      (uuidSequence.charAt(8) != '-') ||
-      (uuidSequence.charAt(13) != '-') ||
-      (uuidSequence.charAt(18) != '-') ||
-      (uuidSequence.charAt(23) != '-')
-    ) {
+    if ((uuidSequence.length() != FastUuid.UUID_STRING_LENGTH) || (uuidSequence.charAt(8) != '-')
+        || (uuidSequence.charAt(13) != '-') || (uuidSequence.charAt(18) != '-') || (uuidSequence.charAt(23) != '-')) {
       throw new IllegalArgumentException("Illegal UUID string: " + uuidSequence);
     }
 
@@ -255,33 +236,20 @@ public class FastUuid {
     uuidChars[16] = FastUuid.HEX_DIGITS[(int) ((mostSignificantBits & 0x00000000000000f0L) >>> 4)];
     uuidChars[17] = FastUuid.HEX_DIGITS[(int) (mostSignificantBits & 0x000000000000000fL)];
     uuidChars[18] = '-';
-    uuidChars[19] =
-      FastUuid.HEX_DIGITS[(int) ((leastSignificantBits & 0xf000000000000000L) >>> 60)];
-    uuidChars[20] =
-      FastUuid.HEX_DIGITS[(int) ((leastSignificantBits & 0x0f00000000000000L) >>> 56)];
-    uuidChars[21] =
-      FastUuid.HEX_DIGITS[(int) ((leastSignificantBits & 0x00f0000000000000L) >>> 52)];
-    uuidChars[22] =
-      FastUuid.HEX_DIGITS[(int) ((leastSignificantBits & 0x000f000000000000L) >>> 48)];
+    uuidChars[19] = FastUuid.HEX_DIGITS[(int) ((leastSignificantBits & 0xf000000000000000L) >>> 60)];
+    uuidChars[20] = FastUuid.HEX_DIGITS[(int) ((leastSignificantBits & 0x0f00000000000000L) >>> 56)];
+    uuidChars[21] = FastUuid.HEX_DIGITS[(int) ((leastSignificantBits & 0x00f0000000000000L) >>> 52)];
+    uuidChars[22] = FastUuid.HEX_DIGITS[(int) ((leastSignificantBits & 0x000f000000000000L) >>> 48)];
     uuidChars[23] = '-';
-    uuidChars[24] =
-      FastUuid.HEX_DIGITS[(int) ((leastSignificantBits & 0x0000f00000000000L) >>> 44)];
-    uuidChars[25] =
-      FastUuid.HEX_DIGITS[(int) ((leastSignificantBits & 0x00000f0000000000L) >>> 40)];
-    uuidChars[26] =
-      FastUuid.HEX_DIGITS[(int) ((leastSignificantBits & 0x000000f000000000L) >>> 36)];
-    uuidChars[27] =
-      FastUuid.HEX_DIGITS[(int) ((leastSignificantBits & 0x0000000f00000000L) >>> 32)];
-    uuidChars[28] =
-      FastUuid.HEX_DIGITS[(int) ((leastSignificantBits & 0x00000000f0000000L) >>> 28)];
-    uuidChars[29] =
-      FastUuid.HEX_DIGITS[(int) ((leastSignificantBits & 0x000000000f000000L) >>> 24)];
-    uuidChars[30] =
-      FastUuid.HEX_DIGITS[(int) ((leastSignificantBits & 0x0000000000f00000L) >>> 20)];
-    uuidChars[31] =
-      FastUuid.HEX_DIGITS[(int) ((leastSignificantBits & 0x00000000000f0000L) >>> 16)];
-    uuidChars[32] =
-      FastUuid.HEX_DIGITS[(int) ((leastSignificantBits & 0x000000000000f000L) >>> 12)];
+    uuidChars[24] = FastUuid.HEX_DIGITS[(int) ((leastSignificantBits & 0x0000f00000000000L) >>> 44)];
+    uuidChars[25] = FastUuid.HEX_DIGITS[(int) ((leastSignificantBits & 0x00000f0000000000L) >>> 40)];
+    uuidChars[26] = FastUuid.HEX_DIGITS[(int) ((leastSignificantBits & 0x000000f000000000L) >>> 36)];
+    uuidChars[27] = FastUuid.HEX_DIGITS[(int) ((leastSignificantBits & 0x0000000f00000000L) >>> 32)];
+    uuidChars[28] = FastUuid.HEX_DIGITS[(int) ((leastSignificantBits & 0x00000000f0000000L) >>> 28)];
+    uuidChars[29] = FastUuid.HEX_DIGITS[(int) ((leastSignificantBits & 0x000000000f000000L) >>> 24)];
+    uuidChars[30] = FastUuid.HEX_DIGITS[(int) ((leastSignificantBits & 0x0000000000f00000L) >>> 20)];
+    uuidChars[31] = FastUuid.HEX_DIGITS[(int) ((leastSignificantBits & 0x00000000000f0000L) >>> 16)];
+    uuidChars[32] = FastUuid.HEX_DIGITS[(int) ((leastSignificantBits & 0x000000000000f000L) >>> 12)];
     uuidChars[33] = FastUuid.HEX_DIGITS[(int) ((leastSignificantBits & 0x0000000000000f00L) >>> 8)];
     uuidChars[34] = FastUuid.HEX_DIGITS[(int) ((leastSignificantBits & 0x00000000000000f0L) >>> 4)];
     uuidChars[35] = FastUuid.HEX_DIGITS[(int) (leastSignificantBits & 0x000000000000000fL)];
@@ -322,32 +290,19 @@ public class FastUuid {
     uuidChars[13] = FastUuid.HEX_DIGITS[(int) ((mostSignificantBits & 0x0000000000000f00L) >>> 8)];
     uuidChars[14] = FastUuid.HEX_DIGITS[(int) ((mostSignificantBits & 0x00000000000000f0L) >>> 4)];
     uuidChars[15] = FastUuid.HEX_DIGITS[(int) (mostSignificantBits & 0x000000000000000fL)];
-    uuidChars[16] =
-      FastUuid.HEX_DIGITS[(int) ((leastSignificantBits & 0xf000000000000000L) >>> 60)];
-    uuidChars[17] =
-      FastUuid.HEX_DIGITS[(int) ((leastSignificantBits & 0x0f00000000000000L) >>> 56)];
-    uuidChars[18] =
-      FastUuid.HEX_DIGITS[(int) ((leastSignificantBits & 0x00f0000000000000L) >>> 52)];
-    uuidChars[19] =
-      FastUuid.HEX_DIGITS[(int) ((leastSignificantBits & 0x000f000000000000L) >>> 48)];
-    uuidChars[20] =
-      FastUuid.HEX_DIGITS[(int) ((leastSignificantBits & 0x0000f00000000000L) >>> 44)];
-    uuidChars[21] =
-      FastUuid.HEX_DIGITS[(int) ((leastSignificantBits & 0x00000f0000000000L) >>> 40)];
-    uuidChars[22] =
-      FastUuid.HEX_DIGITS[(int) ((leastSignificantBits & 0x000000f000000000L) >>> 36)];
-    uuidChars[23] =
-      FastUuid.HEX_DIGITS[(int) ((leastSignificantBits & 0x0000000f00000000L) >>> 32)];
-    uuidChars[24] =
-      FastUuid.HEX_DIGITS[(int) ((leastSignificantBits & 0x00000000f0000000L) >>> 28)];
-    uuidChars[25] =
-      FastUuid.HEX_DIGITS[(int) ((leastSignificantBits & 0x000000000f000000L) >>> 24)];
-    uuidChars[26] =
-      FastUuid.HEX_DIGITS[(int) ((leastSignificantBits & 0x0000000000f00000L) >>> 20)];
-    uuidChars[27] =
-      FastUuid.HEX_DIGITS[(int) ((leastSignificantBits & 0x00000000000f0000L) >>> 16)];
-    uuidChars[28] =
-      FastUuid.HEX_DIGITS[(int) ((leastSignificantBits & 0x000000000000f000L) >>> 12)];
+    uuidChars[16] = FastUuid.HEX_DIGITS[(int) ((leastSignificantBits & 0xf000000000000000L) >>> 60)];
+    uuidChars[17] = FastUuid.HEX_DIGITS[(int) ((leastSignificantBits & 0x0f00000000000000L) >>> 56)];
+    uuidChars[18] = FastUuid.HEX_DIGITS[(int) ((leastSignificantBits & 0x00f0000000000000L) >>> 52)];
+    uuidChars[19] = FastUuid.HEX_DIGITS[(int) ((leastSignificantBits & 0x000f000000000000L) >>> 48)];
+    uuidChars[20] = FastUuid.HEX_DIGITS[(int) ((leastSignificantBits & 0x0000f00000000000L) >>> 44)];
+    uuidChars[21] = FastUuid.HEX_DIGITS[(int) ((leastSignificantBits & 0x00000f0000000000L) >>> 40)];
+    uuidChars[22] = FastUuid.HEX_DIGITS[(int) ((leastSignificantBits & 0x000000f000000000L) >>> 36)];
+    uuidChars[23] = FastUuid.HEX_DIGITS[(int) ((leastSignificantBits & 0x0000000f00000000L) >>> 32)];
+    uuidChars[24] = FastUuid.HEX_DIGITS[(int) ((leastSignificantBits & 0x00000000f0000000L) >>> 28)];
+    uuidChars[25] = FastUuid.HEX_DIGITS[(int) ((leastSignificantBits & 0x000000000f000000L) >>> 24)];
+    uuidChars[26] = FastUuid.HEX_DIGITS[(int) ((leastSignificantBits & 0x0000000000f00000L) >>> 20)];
+    uuidChars[27] = FastUuid.HEX_DIGITS[(int) ((leastSignificantBits & 0x00000000000f0000L) >>> 16)];
+    uuidChars[28] = FastUuid.HEX_DIGITS[(int) ((leastSignificantBits & 0x000000000000f000L) >>> 12)];
     uuidChars[29] = FastUuid.HEX_DIGITS[(int) ((leastSignificantBits & 0x0000000000000f00L) >>> 8)];
     uuidChars[30] = FastUuid.HEX_DIGITS[(int) ((leastSignificantBits & 0x00000000000000f0L) >>> 4)];
     uuidChars[31] = FastUuid.HEX_DIGITS[(int) (leastSignificantBits & 0x000000000000000fL)];

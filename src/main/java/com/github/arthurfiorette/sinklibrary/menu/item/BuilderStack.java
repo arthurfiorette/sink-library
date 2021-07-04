@@ -10,7 +10,7 @@ import lombok.Setter;
 import org.bukkit.inventory.ItemStack;
 
 @RequiredArgsConstructor
-public class BuildedStack implements MenuItem {
+public class BuilderStack implements MenuItem {
 
   @Getter
   @NonNull
@@ -21,7 +21,7 @@ public class BuildedStack implements MenuItem {
   @NonNull
   private ClickListener listener;
 
-  public BuildedStack(final ItemBuilder builder) {
+  public BuilderStack(final ItemBuilder builder) {
     this(builder, ClickListener.ignore());
   }
 
@@ -33,6 +33,8 @@ public class BuildedStack implements MenuItem {
   /**
    * The inventory will only update when the next {@link BaseMenu#update()} be
    * called
+   * 
+   * @param builder the item builder
    */
   public void setBuilder(final ItemBuilder builder) {
     this.builder = builder;

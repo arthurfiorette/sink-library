@@ -16,6 +16,7 @@ public interface ClickListener {
   /**
    * Handles a inventory click.
    *
+   * @param item the clicked item
    * @param action the inventory action type
    */
   default void onClick(final ItemStack item, final InventoryAction action) {

@@ -1,16 +1,5 @@
 package com.github.arthurfiorette.sinklibrary.data.storage;
 
-import com.github.arthurfiorette.sinklibrary.data.database.Database;
-import com.github.arthurfiorette.sinklibrary.executor.BukkitExecutor;
-import com.github.arthurfiorette.sinklibrary.executor.TaskContext;
-import com.github.arthurfiorette.sinklibrary.interfaces.BaseService;
-import com.google.common.cache.Cache;
-import com.google.common.cache.CacheBuilder;
-import com.google.common.cache.CacheLoader;
-import com.google.common.cache.CacheStats;
-import com.google.common.cache.LoadingCache;
-import com.google.common.cache.RemovalListener;
-import com.google.common.collect.Lists;
 import java.util.Collection;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
@@ -20,6 +9,18 @@ import java.util.concurrent.Executor;
 import java.util.function.Function;
 import java.util.function.UnaryOperator;
 import java.util.stream.Collectors;
+
+import com.github.arthurfiorette.sinklibrary.data.database.Database;
+import com.github.arthurfiorette.sinklibrary.executor.BukkitExecutor;
+import com.github.arthurfiorette.sinklibrary.executor.TaskContext;
+import com.github.arthurfiorette.sinklibrary.interfaces.BaseService;
+import com.google.common.cache.CacheBuilder;
+import com.google.common.cache.CacheLoader;
+import com.google.common.cache.CacheStats;
+import com.google.common.cache.LoadingCache;
+import com.google.common.cache.RemovalListener;
+import com.google.common.collect.Lists;
+
 import lombok.NonNull;
 
 public abstract class LoadingStorage<K, V, R> implements Storage<K, V, R>, BaseService {
@@ -46,20 +47,14 @@ public abstract class LoadingStorage<K, V, R> implements Storage<K, V, R>, BaseS
    *
    * @param database the database to send and receive information
    * @param executor this executor to be used for all asynchronous calls,
-   * @param options a unary operator that will be applied when building the
+   * @param builder a unary operator that will be applied when building the
    * cache.
    */
-  protected LoadingStorage(
-    final Database<K, R> database,
-    final Executor executor,
-    final UnaryOperator<CacheBuilder<Object, Object>> builder
-  ) {
+  protected LoadingStorage(final Database<K, R> database, final Executor executor,
+      final UnaryOperator<CacheBuilder<Object, Object>> builder) {
     this.database = database;
     this.executor = executor;
-    this.cache =
-      builder
-        .apply(CacheBuilder.newBuilder())
-        .removalListener(this.removalListener())
+    this.cache = builder.apply(CacheBuilder.newBuilder()).removalListener(this.removalListener())
         .build(this.cacheLoader());
   }
 
@@ -69,10 +64,7 @@ public abstract class LoadingStorage<K, V, R> implements Storage<K, V, R>, BaseS
   protected RemovalListener<K, V> removalListener() {
     return notification -> {
       // Save synchronously
-      LoadingStorage.this.database.save(
-          notification.getKey(),
-          LoadingStorage.this.serialize(notification.getValue())
-        );
+      LoadingStorage.this.database.save(notification.getKey(), LoadingStorage.this.serialize(notification.getValue()));
     };
   }
 
@@ -121,12 +113,9 @@ public abstract class LoadingStorage<K, V, R> implements Storage<K, V, R>, BaseS
    */
   @Override
   public CompletableFuture<Void> save(final K key, final V value) {
-    return CompletableFuture.runAsync(
-      () -> {
-        this.cache.put(key, value);
-      },
-      this.executor
-    );
+    return CompletableFuture.runAsync(() -> {
+      this.cache.put(key, value);
+    }, this.executor);
   }
 
   @Override
@@ -136,16 +125,13 @@ public abstract class LoadingStorage<K, V, R> implements Storage<K, V, R>, BaseS
 
   @Override
   public CompletableFuture<Collection<V>> getMany(final Set<K> keys) {
-    return CompletableFuture.supplyAsync(
-      () -> {
-        try {
-          return Lists.newArrayList(this.cache.getAll(keys).values());
-        } catch (final ExecutionException e) {
-          throw new CompletionException(e);
-        }
-      },
-      this.executor
-    );
+    return CompletableFuture.supplyAsync(() -> {
+      try {
+        return Lists.newArrayList(this.cache.getAll(keys).values());
+      } catch (final ExecutionException e) {
+        throw new CompletionException(e);
+      }
+    }, this.executor);
   }
 
   /**
@@ -154,13 +140,9 @@ public abstract class LoadingStorage<K, V, R> implements Storage<K, V, R>, BaseS
    * <b>This method is not cached at all. Use carefully</b>
    */
   @Override
-  public CompletableFuture<Collection<V>> operation(
-    final Function<Database<K, R>, Collection<R>> func
-  ) {
+  public CompletableFuture<Collection<V>> operation(final Function<Database<K, R>, Collection<R>> func) {
     return CompletableFuture.supplyAsync(
-      () -> func.apply(this.database).stream().map(this::deserialize).collect(Collectors.toList()),
-      this.executor
-    );
+        () -> func.apply(this.database).stream().map(this::deserialize).collect(Collectors.toList()), this.executor);
   }
 
   /**
@@ -170,35 +152,59 @@ public abstract class LoadingStorage<K, V, R> implements Storage<K, V, R>, BaseS
    */
   @Override
   public CompletableFuture<V> operate(final Function<Database<K, R>, R> func) {
-    return CompletableFuture.supplyAsync(
-      () -> this.deserialize(func.apply(this.database)),
-      this.executor
-    );
+    return CompletableFuture.supplyAsync(() -> this.deserialize(func.apply(this.database)), this.executor);
   }
 
   /**
-   * @see {@link Cache#stats()}
+   * Returns a current snapshot of this cache's cumulative statistics. All stats
+   * are initialized to zero, and are monotonically increasing over the lifetime
+   * of the cache.
+   *
+   * @return the cache stats
    */
   public CacheStats stats() {
     return this.cache.stats();
   }
 
   /**
-   * @see {@link Cache#refresh()}
+   * Loads a new value for key {@code key}, possibly asynchronously. While the
+   * new value is loading the previous value (if any) will continue to be
+   * returned by {@code get(key)} unless it is evicted. If the new value is
+   * loaded successfully it will replace the previous value in the cache; if an
+   * exception is thrown while refreshing the previous value will remain, <i>and
+   * the exception will be logged (using {@link java.util.logging.Logger}) and
+   * swallowed</i>.
+   * <p>
+   * Caches loaded by a {@link CacheLoader} will call {@link CacheLoader#reload}
+   * if the cache currently contains a value for {@code key}, and
+   * {@link CacheLoader#load} otherwise. Loading is asynchronous only if
+   * {@link CacheLoader#reload} was overridden with an asynchronous
+   * implementation.
+   * <p>
+   * Returns without doing anything if another thread is currently loading the
+   * value for {@code key}. If the cache loader associated with this cache
+   * performs refresh asynchronously then this method may return before refresh
+   * completes.
+   *
+   * @param key the key to be refreshed
+   *
+   * @since 11.0
    */
   public void refresh(final K key) {
     this.cache.refresh(key);
   }
 
   /**
-   * @see {@link Cache#invalidate()}
+   * Discards any cached value for key {@code key}.
+   * 
+   * @param key the key to be invalidated
    */
   public void invalidate(final K key) {
     this.cache.invalidate(key);
   }
 
   /**
-   * @see {@link Cache#size()}
+   * @return the approximate number of entries in this cache.
    */
   public long size() {
     return this.cache.size();

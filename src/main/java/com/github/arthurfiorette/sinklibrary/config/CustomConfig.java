@@ -18,16 +18,18 @@ public class CustomConfig implements BaseConfig {
   protected FileConfiguration config;
 
   /**
-   * @see {@link org.bukkit.plugin.Plugin#saveResource(String, boolean)}
+   * @param plugin the owner plugin
+   * @param resourcePath the embedded resource path to look for within the
+   * plugin's .jar file. (No preceding slash).
+   * @param replace if true, the embedded resource will overwrite the contents
+   * of an existing file.
+   * 
+   * @see org.bukkit.plugin.Plugin#saveResource(String, boolean)
    */
-  public CustomConfig(
-    final BasePlugin plugin,
-    final String resourcePath,
-    final boolean replaceIfExists
-  ) {
+  public CustomConfig(final BasePlugin plugin, final String resourcePath, final boolean replace) {
     this.basePlugin = plugin;
     this.file = new File(plugin.getDataFolder(), resourcePath);
-    plugin.saveResource(resourcePath, replaceIfExists);
+    plugin.saveResource(resourcePath, replace);
     this.reload();
   }
 

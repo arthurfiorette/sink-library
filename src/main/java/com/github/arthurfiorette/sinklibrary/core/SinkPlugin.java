@@ -20,12 +20,13 @@ public abstract class SinkPlugin extends JavaPlugin implements BasePlugin, BaseS
   }
 
   /**
-   * Here you register all of yours components and services
+   * @return the component array to register all of yours components and
+   * services
    */
   protected abstract BaseComponent[] components();
 
   /**
-   * @see {@link SinkPlugin#enable()}
+   * @see SinkPlugin#enable()
    */
   @Override
   public final void onEnable() {
@@ -33,7 +34,7 @@ public abstract class SinkPlugin extends JavaPlugin implements BasePlugin, BaseS
   }
 
   /**
-   * @see {@link SinkPlugin#disable()}
+   * @see SinkPlugin#disable()
    */
   @Override
   public final void onDisable() {
@@ -41,12 +42,7 @@ public abstract class SinkPlugin extends JavaPlugin implements BasePlugin, BaseS
   }
 
   @Override
-  public void treatThrowable(
-    final Class<?> author,
-    final Throwable exc,
-    final String message,
-    final Object... args
-  ) {
+  public void treatThrowable(final Class<?> author, final Throwable exc, final String message, final Object... args) {
     this.log(Level.SEVERE, "An exception occurred in class %s:", author.getSimpleName());
     this.log(Level.SEVERE, message, args);
     exc.printStackTrace();

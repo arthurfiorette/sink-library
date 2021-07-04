@@ -18,7 +18,7 @@ public final class BukkitExecutor {
    * Creates a thread pool that creates new threads as needed, but will reuse
    * previously constructed threads when they are available.
    *
-   * @see {@link BukkitThreadFactory}
+   * @see BukkitThreadFactory
    *
    * @param plugin The basic plugin to assign to the created thread factory
    * @param context The thread context to be used
@@ -48,11 +48,7 @@ public final class BukkitExecutor {
    *
    * @throws IllegalArgumentException if {@code nThreads <= 0}
    */
-  public ExecutorService newFixedThreadPool(
-    final BasePlugin plugin,
-    final TaskContext context,
-    final int nThreads
-  ) {
+  public ExecutorService newFixedThreadPool(final BasePlugin plugin, final TaskContext context, final int nThreads) {
     return Executors.newFixedThreadPool(nThreads, new BukkitThreadFactory(plugin, context));
   }
 
@@ -69,11 +65,8 @@ public final class BukkitExecutor {
    *
    * @throws IllegalArgumentException if {@code corePoolSize < 0}
    */
-  public ScheduledExecutorService newScheduledThreadPool(
-    final BasePlugin plugin,
-    final TaskContext context,
-    final int corePoolSize
-  ) {
+  public ScheduledExecutorService newScheduledThreadPool(final BasePlugin plugin, final TaskContext context,
+      final int corePoolSize) {
     return Executors.newScheduledThreadPool(corePoolSize, new BukkitThreadFactory(plugin, context));
   }
 
@@ -89,10 +82,7 @@ public final class BukkitExecutor {
    *
    * @return the newly created single-threaded Executor
    */
-  public ExecutorService newSingleThreadExecutor(
-    final BasePlugin plugin,
-    final TaskContext context
-  ) {
+  public ExecutorService newSingleThreadExecutor(final BasePlugin plugin, final TaskContext context) {
     return Executors.newSingleThreadExecutor(new BukkitThreadFactory(plugin, context));
   }
 
@@ -105,7 +95,7 @@ public final class BukkitExecutor {
    * task will be active at any given time.
    * <p>
    * Unlike the otherwise equivalent
-   * {@link BukkitExecutor#newcheduledThreadPool(BasePlugin,TaskContext, int)}
+   * {@link BukkitExecutor#newScheduledThreadPool(BasePlugin, TaskContext, int)}
    * the returned executor is guaranteed not to be reconfigurable to use
    * additional threads.
    *
@@ -114,10 +104,7 @@ public final class BukkitExecutor {
    *
    * @return a newly created scheduled executor
    */
-  public ScheduledExecutorService newSingleThreadScheduledExecutor(
-    final BasePlugin plugin,
-    final TaskContext context
-  ) {
+  public ScheduledExecutorService newSingleThreadScheduledExecutor(final BasePlugin plugin, final TaskContext context) {
     return Executors.newSingleThreadScheduledExecutor(new BukkitThreadFactory(plugin, context));
   }
 }
