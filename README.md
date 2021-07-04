@@ -159,4 +159,4 @@ Create a new class that extends the designed class with the correct type
 public class MyStringClass extends MyGenericClass<String>  {}
 ```
 
-And then you can register it normally.
+And then you can register the `MyStringClass` normally.
