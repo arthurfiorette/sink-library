@@ -1,11 +1,13 @@
 package com.github.arthurfiorette.sinklibrary.core;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 import com.github.arthurfiorette.sinklibrary.exceptions.IllegalComponentException;
 import com.github.arthurfiorette.sinklibrary.interfaces.BaseComponent;
 import com.github.arthurfiorette.sinklibrary.interfaces.BaseService;
 import com.google.common.collect.Iterables;
-import java.util.LinkedHashMap;
-import java.util.Map;
+
 import lombok.Getter;
 import lombok.NonNull;
 

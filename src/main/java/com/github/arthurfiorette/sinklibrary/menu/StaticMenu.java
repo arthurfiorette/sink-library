@@ -1,16 +1,25 @@
 package com.github.arthurfiorette.sinklibrary.menu;
 
-import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
-import com.github.arthurfiorette.sinklibrary.menu.item.MenuItem;
 import java.util.Map;
+
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 
+import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
+import com.github.arthurfiorette.sinklibrary.menu.item.MenuItem;
+
+import lombok.Getter;
+
 public abstract class StaticMenu implements BaseMenu {
 
-  protected final BasePlugin plugin;
+  @Getter
+  protected final BasePlugin basePlugin;
+
+  @Getter
   protected final String title;
+
+  @Getter
   protected final int rows;
 
   protected Map<Byte, MenuItem> lastStaticItems;
@@ -19,7 +28,7 @@ public abstract class StaticMenu implements BaseMenu {
   protected abstract Map<Byte, MenuItem> staticItems();
 
   public StaticMenu(final BasePlugin plugin, final String title, final int rows) {
-    this.plugin = plugin;
+    this.basePlugin = plugin;
     this.inventory = Bukkit.createInventory(this, rows * 9, title);
     this.title = this.inventory.getTitle();
     this.rows = this.inventory.getSize() % 9;
@@ -30,7 +39,7 @@ public abstract class StaticMenu implements BaseMenu {
     if (this != inventory.getHolder()) {
       throw new IllegalArgumentException("The inventory holder must be this instance");
     }
-    this.plugin = plugin;
+    this.basePlugin = plugin;
     this.inventory = inventory;
     this.title = inventory.getTitle();
     this.rows = inventory.getSize() % 9;
@@ -47,11 +56,9 @@ public abstract class StaticMenu implements BaseMenu {
   @Override
   public void update() {
     this.lastStaticItems = this.staticItems();
-    this.lastStaticItems.forEach(
-        (slot, item) -> {
-          this.inventory.setItem(slot, item.getItem());
-        }
-      );
+    this.lastStaticItems.forEach((slot, item) -> {
+      this.inventory.setItem(slot, item.getItem());
+    });
   }
 
   @Override
@@ -59,18 +66,4 @@ public abstract class StaticMenu implements BaseMenu {
     return this.lastStaticItems.get(slot);
   }
 
-  @Override
-  public BasePlugin getBasePlugin() {
-    return this.plugin;
-  }
-
-  @Override
-  public Inventory getInventory() {
-    return this.inventory;
-  }
-
-  @Override
-  public int getRows() {
-    return this.rows;
-  }
 }

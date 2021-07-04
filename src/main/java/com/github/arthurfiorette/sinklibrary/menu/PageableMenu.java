@@ -1,27 +1,29 @@
 package com.github.arthurfiorette.sinklibrary.menu;
 
-import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
-import com.github.arthurfiorette.sinklibrary.menu.item.MenuItem;
 import java.util.List;
+
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
+import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
+import com.github.arthurfiorette.sinklibrary.menu.item.MenuItem;
+
+import lombok.Getter;
+import lombok.Setter;
+
 public abstract class PageableMenu extends PrivateMenu {
 
+  @Getter
   private int page = 1;
 
   protected List<MenuItem> lastPageableItems;
 
+  @Setter
   private ItemStack defaultItem = new ItemStack(Material.AIR);
 
-  public PageableMenu(
-    final BasePlugin plugin,
-    final Player owner,
-    final String title,
-    final int rows
-  ) {
+  public PageableMenu(final BasePlugin plugin, final Player owner, final String title, final int rows) {
     super(plugin, owner, title, rows);
   }
 
@@ -64,7 +66,7 @@ public abstract class PageableMenu extends PrivateMenu {
 
     byte slotIndex = 0;
     // for from initial to last element.
-    for (int i = initial; i < (initial + slots.length); i++) {
+    for(int i = initial; i < (initial + slots.length); i++) {
       MenuItem item;
       try {
         item = this.lastPageableItems.get(i);
@@ -121,7 +123,7 @@ public abstract class PageableMenu extends PrivateMenu {
     }
 
     int slotIndex = -1;
-    for (int i = 0; i < slots.length; i++) {
+    for(int i = 0; i < slots.length; i++) {
       if (slot == slots[i]) {
         slotIndex = i;
         break;
@@ -138,10 +140,4 @@ public abstract class PageableMenu extends PrivateMenu {
     return this.lastPageableItems.get(initial + slotIndex);
   }
 
-  /**
-   * Sets the item that will be placed when a page does not have enough items.
-   */
-  public void setDefaultItem(final ItemStack emptySlot) {
-    this.defaultItem = emptySlot;
-  }
 }

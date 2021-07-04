@@ -1,11 +1,16 @@
 package com.github.arthurfiorette.sinklibrary.data.database;
 
-import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
+
+import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
+
+import lombok.Getter;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
 /**
  * A memory database is a database saved in a concurrent hash map and resets
@@ -13,55 +18,54 @@ import java.util.concurrent.ConcurrentMap;
  *
  * @author https://github.com/ArthurFiorette/sink-library/
  */
+@RequiredArgsConstructor
 public class MemoryDatabase<K, T> implements Database<K, T> {
 
-  protected final BasePlugin plugin;
+  @Getter
+  @NonNull
+  protected final BasePlugin basePlugin;
+
   protected ConcurrentMap<K, T> database;
 
-  public MemoryDatabase(final BasePlugin plugin) {
-    this.plugin = plugin;
-  }
+  @Getter
+  protected transient boolean open = false;
 
-  /**
-   * Erase all data.
-   */
   public void clear() {
-    this.checkState();
-    this.database = new ConcurrentHashMap<>();
+    this.ensureState(true);
+    this.database.clear();
   }
 
   @Override
   public void enable() {
-    this.checkState();
+    this.ensureState(true);
     this.database = new ConcurrentHashMap<>();
-  }
-
-  public boolean isOpen() {
-    return this.database != null;
+    this.open = true;
   }
 
   @Override
   public void disable() {
+    this.ensureState(false);
     this.database = null;
+    this.open = false;
   }
 
   @Override
   public void save(final K key, final T value) {
-    this.checkState();
+    this.ensureState(true);
     this.database.put(key, value);
   }
 
   @Override
   public T get(final K key) {
-    this.checkState();
+    this.ensureState(true);
     return this.database.get(key);
   }
 
   @Override
   public Collection<T> getMany(final Collection<K> keys) {
-    this.checkState();
+    this.ensureState(true);
     final List<T> list = new ArrayList<>();
-    for (final K key : keys) {
+    for(final K key: keys) {
       final T t = this.get(key);
       if (t != null) {
         list.add(t);
@@ -70,13 +74,8 @@ public class MemoryDatabase<K, T> implements Database<K, T> {
     return list;
   }
 
-  @Override
-  public BasePlugin getBasePlugin() {
-    return this.plugin;
-  }
-
-  private void checkState() {
-    if (!this.isOpen()) {
+  private void ensureState(final boolean open) {
+    if (this.open != open) {
       throw new IllegalStateException("Attempt to access the database while it wasn't open.");
     }
   }

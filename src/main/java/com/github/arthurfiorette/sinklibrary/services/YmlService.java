@@ -1,24 +1,23 @@
 package com.github.arthurfiorette.sinklibrary.services;
 
-import com.google.common.collect.Maps;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
+
+import com.google.common.collect.Maps;
+
+import lombok.experimental.UtilityClass;
 
 /**
  * A service class that handles with yml.
  *
  * @author https://github.com/ArthurFiorette/sink-library/
  */
-public final class YmlService {
-
-  /**
-   * A private constructor prevent callers from accidentally instantiating an
-   * instance.
-   */
-  public YmlService() {}
+@UtilityClass
+public class YmlService {
 
   /**
    * Returns a map with the key being the name of the subsections and the value
@@ -29,34 +28,24 @@ public final class YmlService {
    *
    * @return the value map
    */
-  public static Map<String, Map<String, String>> getKeys(
-    final FileConfiguration file,
-    final String section
-  ) {
+  public Map<String, Map<String, String>> getKeys(final FileConfiguration file, final String section) {
     final Map<String, Map<String, String>> request = new HashMap<>();
     final ConfigurationSection cSection = file.getConfigurationSection(section);
     cSection.getKeys(false).stream().forEach(key -> request.put(key, Maps.newHashMap()));
-    cSection
-      .getKeys(true)
-      .stream()
-      .forEach(
-        key ->
-          request
-            .get(YmlService.getFirstKey(key))
-            .put(YmlService.getLastKeys(key), file.getString(section + "." + key))
-      );
+    cSection.getKeys(true).stream().forEach(key -> request.get(YmlService.getFirstKey(key))
+        .put(YmlService.getLastKeys(key), file.getString(section + "." + key)));
     return request;
   }
 
-  private static String[] getKeys(final String path) {
+  private String[] getKeys(final String path) {
     return path.split("\\.");
   }
 
-  private static String getFirstKey(final String path) {
+  private String getFirstKey(final String path) {
     return YmlService.getKeys(path)[0];
   }
 
-  private static String getLastKeys(final String path) {
+  private String getLastKeys(final String path) {
     final String[] keys = YmlService.getKeys(path);
     return String.join(".", Arrays.copyOfRange(keys, 1, keys.length));
   }

@@ -1,10 +1,16 @@
 package com.github.arthurfiorette.sinklibrary.executor;
 
-import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
-import com.github.arthurfiorette.sinklibrary.interfaces.BaseComponent;
 import java.util.concurrent.ThreadFactory;
+
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitScheduler;
+
+import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
+import com.github.arthurfiorette.sinklibrary.interfaces.BaseComponent;
+
+import lombok.Getter;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
 /**
  * Every created thread from this object runs with the specified
@@ -21,15 +27,16 @@ import org.bukkit.scheduler.BukkitScheduler;
  *
  * @author https://github.com/ArthurFiorette/sink-library/
  */
+@RequiredArgsConstructor
 public class BukkitThreadFactory implements ThreadFactory, BaseComponent {
 
-  private final BasePlugin plugin;
-  private final TaskContext context;
+  @Getter
+  @NonNull
+  private final BasePlugin basePlugin;
 
-  public BukkitThreadFactory(final BasePlugin plugin, final TaskContext context) {
-    this.plugin = plugin;
-    this.context = context;
-  }
+  @Getter
+  @NonNull
+  private final TaskContext context;
 
   /**
    * Create a async thread factory that every thread runs in asynchronously with
@@ -57,30 +64,16 @@ public class BukkitThreadFactory implements ThreadFactory, BaseComponent {
 
   @Override
   public Thread newThread(final Runnable runnable) {
-    final Thread thread = new Thread(
-      () -> {
-        try {
-          this.context.run(this.plugin, runnable);
-        } catch (final Throwable t) {
-          this.plugin.treatThrowable(
-              this.getClass(),
-              t,
-              "Catched exception while running this thread."
-            );
-        }
+    final Thread thread = new Thread(() -> {
+      try {
+        this.context.run(this.basePlugin, runnable);
+      } catch (final Throwable t) {
+        this.basePlugin.treatThrowable(this.getClass(), t, "Catched exception while running this thread.");
       }
-    );
+    });
     thread.setDaemon(false);
     thread.setName(this.getClass().getSimpleName() + "> " + runnable.getClass().getSimpleName());
     return thread;
   }
 
-  @Override
-  public BasePlugin getBasePlugin() {
-    return this.plugin;
-  }
-
-  public TaskContext getContext() {
-    return this.context;
-  }
 }

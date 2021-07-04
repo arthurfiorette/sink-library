@@ -1,28 +1,25 @@
 package com.github.arthurfiorette.sinklibrary.services;
 
-import com.google.common.collect.ObjectArrays;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
-import java.util.Objects;
 import java.util.Random;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+
+import com.google.common.collect.ObjectArrays;
+
+import lombok.experimental.UtilityClass;
 
 /**
  * A service class that handles handles anything in java.
  *
  * @author https://github.com/ArthurFiorette/sink-library/
  */
+@UtilityClass
 public final class JavaService {
-
-  /**
-   * A private constructor prevent callers from accidentally instantiating an
-   * instance
-   */
-  private JavaService() {}
 
   /**
    * Returns an array with the collection elements.
@@ -74,46 +71,6 @@ public final class JavaService {
    */
   public static <T> T[] removeFirst(final T[] arr) {
     return Arrays.copyOfRange(arr, 1, arr.length);
-  }
-
-  /**
-   * Checks if all the varargs aren't nulls.
-   *
-   * @param objects any objects that can be null
-   *
-   * @return true if all the objects aren't null
-   */
-  public static boolean nonNull(final Object... objects) {
-    return Arrays.stream(objects).allMatch(Objects::nonNull);
-  }
-
-  /**
-   * Checks if all the varargs aren't nulls, and if there's at least 1 null
-   * throws a NPE.
-   *
-   * @param objects any objects that can be null
-   *
-   * @throws NullPointerException if this varargs have at least 1 null
-   */
-  public static void requireNonNull(final Object... objects) {
-    if (!JavaService.nonNull(objects)) {
-      throw new NullPointerException();
-    }
-  }
-
-  /**
-   * Checks if all the varargs aren't nulls, and if there's at least 1 null
-   * throws a NPE with specified message.
-   *
-   * @param message the message shown if an NPE is thrown
-   * @param objects any objects that can be null
-   *
-   * @throws NullPointerException if this varargs have at least 1 null
-   */
-  public static void requireNonNull(final String message, final Object... objects) {
-    if (!JavaService.nonNull(objects)) {
-      throw new NullPointerException(message);
-    }
   }
 
   public static <T, R> Set<R> setMapper(final Set<T> set, final Function<T, R> mapper) {

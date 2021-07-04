@@ -1,24 +1,30 @@
 package com.github.arthurfiorette.sinklibrary.menu.management;
 
-import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
-import com.github.arthurfiorette.sinklibrary.interfaces.BaseService;
-import com.github.arthurfiorette.sinklibrary.menu.BaseMenu;
 import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+
 import org.bukkit.entity.Player;
+
+import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
+import com.github.arthurfiorette.sinklibrary.interfaces.BaseService;
+import com.github.arthurfiorette.sinklibrary.menu.BaseMenu;
+
+import lombok.Getter;
 
 public class MenuStorage<M extends Enum<M> & MenuFactory> implements BaseService {
 
   protected final Map<UUID, EnumMap<M, BaseMenu>> inventories = new HashMap<>();
   protected final MenuListener listener;
-  protected final BasePlugin plugin;
   protected final Class<M> clazz;
+
+  @Getter
+  protected final BasePlugin basePlugin;
 
   protected MenuStorage(final BasePlugin plugin, final Class<M> clazz) {
     this.listener = new MenuListener(plugin);
-    this.plugin = plugin;
+    this.basePlugin = plugin;
     this.clazz = clazz;
   }
 
@@ -34,7 +40,7 @@ public class MenuStorage<M extends Enum<M> & MenuFactory> implements BaseService
     BaseMenu baseMenu = invs.get(menu);
 
     if (baseMenu == null) {
-      baseMenu = menu.create(this.plugin, player);
+      baseMenu = menu.create(this.basePlugin, player);
       invs.put(menu, baseMenu);
     }
 
@@ -51,8 +57,4 @@ public class MenuStorage<M extends Enum<M> & MenuFactory> implements BaseService
     this.listener.disable();
   }
 
-  @Override
-  public BasePlugin getBasePlugin() {
-    return this.plugin;
-  }
 }

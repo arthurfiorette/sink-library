@@ -1,7 +1,5 @@
 package com.github.arthurfiorette.sinklibrary.listener;
 
-import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
-import com.github.arthurfiorette.sinklibrary.interfaces.BaseService;
 import org.bukkit.Bukkit;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
@@ -131,6 +129,13 @@ import org.bukkit.event.world.WorldLoadEvent;
 import org.bukkit.event.world.WorldSaveEvent;
 import org.bukkit.event.world.WorldUnloadEvent;
 
+import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
+import com.github.arthurfiorette.sinklibrary.interfaces.BaseService;
+
+import lombok.Getter;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+
 /**
  * A abstract Spigot listener implementation with the most methods implements.
  * Override and use {@link org.bukkit.event.EventHandler} to make the method be
@@ -138,18 +143,12 @@ import org.bukkit.event.world.WorldUnloadEvent;
  *
  * @author https://github.com/ArthurFiorette/sink-library/
  */
+@RequiredArgsConstructor
 public abstract class SinkListener implements Listener, BaseService {
 
-  protected final BasePlugin plugin;
-
-  /**
-   * Constructs a new SinkListener
-   *
-   * @param plugin the plugin owner;
-   */
-  public SinkListener(final BasePlugin plugin) {
-    this.plugin = plugin;
-  }
+  @Getter
+  @NonNull
+  protected final BasePlugin basePlugin;
 
   @Override
   public void enable() {
@@ -159,11 +158,6 @@ public abstract class SinkListener implements Listener, BaseService {
   @Override
   public void disable() {
     HandlerList.unregisterAll(this);
-  }
-
-  @Override
-  public BasePlugin getBasePlugin() {
-    return this.plugin;
   }
 
   public void onAsyncPlayerChat(final AsyncPlayerChatEvent event) {}

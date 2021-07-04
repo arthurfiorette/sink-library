@@ -1,16 +1,17 @@
 package com.github.arthurfiorette.sinklibrary.menu.management;
 
-import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
-import com.github.arthurfiorette.sinklibrary.listener.SinkListener;
-import com.github.arthurfiorette.sinklibrary.menu.BaseMenu;
-import com.github.arthurfiorette.sinklibrary.menu.item.MenuItem;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 
-public class MenuListener extends SinkListener {
+import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
+import com.github.arthurfiorette.sinklibrary.listener.SinkListener;
+import com.github.arthurfiorette.sinklibrary.menu.BaseMenu;
+import com.github.arthurfiorette.sinklibrary.menu.item.MenuItem;
+
+public final class MenuListener extends SinkListener {
 
   public MenuListener(final BasePlugin plugin) {
     super(plugin);
