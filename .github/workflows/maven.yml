@@ -50,4 +50,4 @@ jobs:
           name: build-result
           if-no-files-found: error
           path: |
-            target/sink-library-v*.jar
+            target/sink-library*.jar
