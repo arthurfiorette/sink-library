@@ -1,13 +1,14 @@
 package examples.starter;
 
+import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.UUID;
 
-import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
+public class Database
+  implements com.github.arthurfiorette.sinklibrary.data.database.Database<UUID, String[]> {
 
-public class Database implements com.github.arthurfiorette.sinklibrary.data.database.Database<UUID, String[]> {
   private final BasePlugin plugin;
 
   public Database(final BasePlugin plugin) {
@@ -48,10 +49,9 @@ public class Database implements com.github.arthurfiorette.sinklibrary.data.data
   @Override
   public Collection<String[]> getMany(final Collection<UUID> ids) {
     final Collection<String[]> col = new ArrayList<>();
-    for(final UUID id: ids) {
+    for (final UUID id : ids) {
       col.add(this.database.get(id));
     }
     return col;
   }
-
 }

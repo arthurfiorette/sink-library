@@ -1,9 +1,8 @@
 package examples;
 
+import com.github.arthurfiorette.sinklibrary.uuid.FastUuid;
 import java.util.Objects;
 import java.util.UUID;
-
-import com.github.arthurfiorette.sinklibrary.uuid.FastUuid;
 
 /**
  * Simple class model that contains an id and an name to be used in our examples
@@ -56,5 +55,4 @@ public class SimpleModel {
     final SimpleModel other = (SimpleModel) obj;
     return Objects.equals(this.id, other.id) && Objects.equals(this.name, other.name);
   }
-
 }

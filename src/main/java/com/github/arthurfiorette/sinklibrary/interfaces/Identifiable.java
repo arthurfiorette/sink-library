@@ -1,13 +1,11 @@
 package com.github.arthurfiorette.sinklibrary.interfaces;
 
+import com.github.arthurfiorette.sinklibrary.uuid.FastUuid;
 import java.util.Optional;
 import java.util.UUID;
-
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
-
-import com.github.arthurfiorette.sinklibrary.uuid.FastUuid;
 
 /**
  * This class is used to help any objects that are  with

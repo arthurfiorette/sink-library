@@ -1,14 +1,12 @@
 package com.github.arthurfiorette.sinklibrary.core;
 
-import java.util.concurrent.CompletableFuture;
-import java.util.function.Supplier;
-import java.util.logging.Level;
-
-import org.bukkit.plugin.Plugin;
-
 import com.github.arthurfiorette.sinklibrary.executor.TaskContext;
 import com.github.arthurfiorette.sinklibrary.interfaces.BaseComponent;
 import com.github.arthurfiorette.sinklibrary.interfaces.BaseService;
+import java.util.concurrent.CompletableFuture;
+import java.util.function.Supplier;
+import java.util.logging.Level;
+import org.bukkit.plugin.Plugin;
 
 public interface BasePlugin extends Plugin {
   @Override

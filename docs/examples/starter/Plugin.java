@@ -23,5 +23,4 @@ public class Plugin extends SinkPlugin {
     // be registered after it.
     return new BaseComponent[] { new Database(this), new Storage(this) };
   }
-
 }

@@ -1,19 +1,17 @@
 package examples.starter;
 
-import java.util.UUID;
-
 import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
 import com.github.arthurfiorette.sinklibrary.data.storage.AbstractStorage;
 import com.github.arthurfiorette.sinklibrary.executor.BukkitExecutor;
 import com.github.arthurfiorette.sinklibrary.executor.TaskContext;
 import com.github.arthurfiorette.sinklibrary.uuid.FastUuid;
-
 import examples.SerializingExamples;
 import examples.SimpleModel;
+import java.util.UUID;
 
 /**
  * Simple storage example, see more in docs/examples/storages
- * 
+ *
  * @author https://github.com/Hazork/sink-library/
  */
 public class Storage extends AbstractStorage<UUID, SimpleModel, String[]> {
@@ -26,13 +24,16 @@ public class Storage extends AbstractStorage<UUID, SimpleModel, String[]> {
    * {@link BasePlugin#getService(Class)}
    */
   public Storage(final BasePlugin plugin) {
-    super(plugin.getComponent(Database.class), BukkitExecutor.newFixedThreadPool(plugin, TaskContext.ASYNC, 2));
+    super(
+      plugin.getComponent(Database.class),
+      BukkitExecutor.newFixedThreadPool(plugin, TaskContext.ASYNC, 2)
+    );
     this.plugin = plugin;
   }
 
   /**
    * Simple serialization example.
-   * 
+   *
    * @see {@link SerializingExamples} for advanced examples
    */
   @Override
@@ -46,7 +47,7 @@ public class Storage extends AbstractStorage<UUID, SimpleModel, String[]> {
    * <p>
    * Uses {@link FastUuid#toString(UUID)} to generate an UUID from the string id
    * faster.
-   * 
+   *
    * @see {@link SerializingExamples} for advanced examples to generate an id
    * from this string faster
    */

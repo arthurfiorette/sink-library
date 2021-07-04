@@ -1,11 +1,10 @@
 package com.github.arthurfiorette.sinklibrary.uuid;
 
-import java.io.IOException;
-import java.util.UUID;
-
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import java.io.IOException;
+import java.util.UUID;
 
 /**
  * A simple {@link UUID} {@link TypeAdapter} that uses {@link FastUuid} to write
@@ -13,6 +12,7 @@ import com.google.gson.stream.JsonWriter;
  * format
  */
 public class MojangIdAdapter extends TypeAdapter<UUID> {
+
   @Override
   public void write(final JsonWriter out, final UUID value) throws IOException {
     out.value(FastUuid.toMojangId(value));

@@ -1,5 +1,3 @@
 package examples;
 
-public class SerializingExamples {
-
-}
+public class SerializingExamples {}

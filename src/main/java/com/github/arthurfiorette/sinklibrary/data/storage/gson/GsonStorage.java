@@ -1,15 +1,13 @@
 package com.github.arthurfiorette.sinklibrary.data.storage.gson;
 
-import java.util.concurrent.Executor;
-import java.util.function.Function;
-
 import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
 import com.github.arthurfiorette.sinklibrary.data.database.Database;
 import com.github.arthurfiorette.sinklibrary.data.storage.AbstractStorage;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
-
+import java.util.concurrent.Executor;
+import java.util.function.Function;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
@@ -18,7 +16,7 @@ public class GsonStorage<K, V> extends AbstractStorage<K, V, JsonObject> {
 
   @NonNull
   protected final Class<V> clazz;
-  
+
   @Getter
   @NonNull
   protected final BasePlugin basePlugin;
@@ -58,5 +56,4 @@ public class GsonStorage<K, V> extends AbstractStorage<K, V, JsonObject> {
   public V deserialize(final JsonObject raw) throws JsonSyntaxException {
     return this.gson.fromJson(raw, this.clazz);
   }
-
 }
