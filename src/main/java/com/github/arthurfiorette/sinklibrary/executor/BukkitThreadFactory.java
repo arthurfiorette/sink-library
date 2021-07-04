@@ -1,13 +1,13 @@
 package com.github.arthurfiorette.sinklibrary.executor;
 
+import java.util.concurrent.ThreadFactory;
+
 import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
 import com.github.arthurfiorette.sinklibrary.interfaces.BaseComponent;
-import java.util.concurrent.ThreadFactory;
+
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
-import org.bukkit.plugin.Plugin;
-import org.bukkit.scheduler.BukkitScheduler;
 
 /**
  * Every created thread from this object runs with the specified
@@ -34,30 +34,6 @@ public class BukkitThreadFactory implements ThreadFactory, BaseComponent {
   @Getter
   @NonNull
   private final TaskContext context;
-
-  /**
-   * Create a async thread factory that every thread runs in asynchronously with
-   * {@link BukkitScheduler#runTaskAsynchronously(Plugin, Runnable)}.
-   *
-   * @param plugin The basic plugin to assign to the created thread factory
-   *
-   * @return the newly created ThreadFactory
-   */
-  public static ThreadFactory ofAsync(final BasePlugin plugin) {
-    return new BukkitThreadFactory(plugin, TaskContext.ASYNC);
-  }
-
-  /**
-   * Create a sync thread factory that every thread runs in synchronously with
-   * {@link BukkitScheduler#runTask(Plugin, Runnable)}.
-   *
-   * @param plugin The basic plugin to assign to the created thread factory
-   *
-   * @return the newly created ThreadFactory
-   */
-  public static ThreadFactory ofSync(final BasePlugin plugin) {
-    return new BukkitThreadFactory(plugin, TaskContext.SYNC);
-  }
 
   @Override
   public Thread newThread(final Runnable runnable) {
