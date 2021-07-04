@@ -27,7 +27,7 @@ public class MenuStack implements MenuItem {
   /**
    * The inventory will only update when the next {@link BaseMenu#update()} be
    * called
-   * 
+   *
    * @param item the item stack
    */
   public void setItem(final ItemStack item) {

@@ -23,7 +23,7 @@ public class CustomConfig implements BaseConfig {
    * plugin's .jar file. (No preceding slash).
    * @param replace if true, the embedded resource will overwrite the contents
    * of an existing file.
-   * 
+   *
    * @see org.bukkit.plugin.Plugin#saveResource(String, boolean)
    */
   public CustomConfig(final BasePlugin plugin, final String resourcePath, final boolean replace) {

@@ -20,7 +20,12 @@ public abstract class PageableMenu extends PrivateMenu {
   @Setter
   private ItemStack defaultItem = new ItemStack(Material.AIR);
 
-  public PageableMenu(final BasePlugin plugin, final Player owner, final String title, final int rows) {
+  public PageableMenu(
+    final BasePlugin plugin,
+    final Player owner,
+    final String title,
+    final int rows
+  ) {
     super(plugin, owner, title, rows);
   }
 
@@ -30,7 +35,7 @@ public abstract class PageableMenu extends PrivateMenu {
 
   /**
    * This method MUST always return the same bytes.
-   * 
+   *
    * @return the pageable bytes
    */
   protected abstract byte[] pageableSlots();
@@ -38,7 +43,7 @@ public abstract class PageableMenu extends PrivateMenu {
   /**
    * This method is called every update request. There's no problem on returning
    * different values every time
-   * 
+   *
    * @return the pageable item list
    */
   protected abstract List<MenuItem> pageableItems();
@@ -67,7 +72,7 @@ public abstract class PageableMenu extends PrivateMenu {
 
     byte slotIndex = 0;
     // for from initial to last element.
-    for(int i = initial; i < (initial + slots.length); i++) {
+    for (int i = initial; i < (initial + slots.length); i++) {
       MenuItem item;
       try {
         item = this.lastPageableItems.get(i);
@@ -124,7 +129,7 @@ public abstract class PageableMenu extends PrivateMenu {
     }
 
     int slotIndex = -1;
-    for(int i = 0; i < slots.length; i++) {
+    for (int i = 0; i < slots.length; i++) {
       if (slot == slots[i]) {
         slotIndex = i;
         break;

@@ -1,15 +1,5 @@
 package com.github.arthurfiorette.sinklibrary.data.storage;
 
-import java.util.Collection;
-import java.util.Set;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.CompletionException;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Executor;
-import java.util.function.Function;
-import java.util.function.UnaryOperator;
-import java.util.stream.Collectors;
-
 import com.github.arthurfiorette.sinklibrary.data.database.Database;
 import com.github.arthurfiorette.sinklibrary.executor.BukkitExecutor;
 import com.github.arthurfiorette.sinklibrary.executor.TaskContext;
@@ -20,7 +10,15 @@ import com.google.common.cache.CacheStats;
 import com.google.common.cache.LoadingCache;
 import com.google.common.cache.RemovalListener;
 import com.google.common.collect.Lists;
-
+import java.util.Collection;
+import java.util.Set;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionException;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executor;
+import java.util.function.Function;
+import java.util.function.UnaryOperator;
+import java.util.stream.Collectors;
 import lombok.NonNull;
 
 public abstract class LoadingStorage<K, V, R> implements Storage<K, V, R>, BaseService {
@@ -50,11 +48,17 @@ public abstract class LoadingStorage<K, V, R> implements Storage<K, V, R>, BaseS
    * @param builder a unary operator that will be applied when building the
    * cache.
    */
-  protected LoadingStorage(final Database<K, R> database, final Executor executor,
-      final UnaryOperator<CacheBuilder<Object, Object>> builder) {
+  protected LoadingStorage(
+    final Database<K, R> database,
+    final Executor executor,
+    final UnaryOperator<CacheBuilder<Object, Object>> builder
+  ) {
     this.database = database;
     this.executor = executor;
-    this.cache = builder.apply(CacheBuilder.newBuilder()).removalListener(this.removalListener())
+    this.cache =
+      builder
+        .apply(CacheBuilder.newBuilder())
+        .removalListener(this.removalListener())
         .build(this.cacheLoader());
   }
 
@@ -64,7 +68,10 @@ public abstract class LoadingStorage<K, V, R> implements Storage<K, V, R>, BaseS
   protected RemovalListener<K, V> removalListener() {
     return notification -> {
       // Save synchronously
-      LoadingStorage.this.database.save(notification.getKey(), LoadingStorage.this.serialize(notification.getValue()));
+      LoadingStorage.this.database.save(
+          notification.getKey(),
+          LoadingStorage.this.serialize(notification.getValue())
+        );
     };
   }
 
@@ -113,9 +120,12 @@ public abstract class LoadingStorage<K, V, R> implements Storage<K, V, R>, BaseS
    */
   @Override
   public CompletableFuture<Void> save(final K key, final V value) {
-    return CompletableFuture.runAsync(() -> {
-      this.cache.put(key, value);
-    }, this.executor);
+    return CompletableFuture.runAsync(
+      () -> {
+        this.cache.put(key, value);
+      },
+      this.executor
+    );
   }
 
   @Override
@@ -125,13 +135,16 @@ public abstract class LoadingStorage<K, V, R> implements Storage<K, V, R>, BaseS
 
   @Override
   public CompletableFuture<Collection<V>> getMany(final Set<K> keys) {
-    return CompletableFuture.supplyAsync(() -> {
-      try {
-        return Lists.newArrayList(this.cache.getAll(keys).values());
-      } catch (final ExecutionException e) {
-        throw new CompletionException(e);
-      }
-    }, this.executor);
+    return CompletableFuture.supplyAsync(
+      () -> {
+        try {
+          return Lists.newArrayList(this.cache.getAll(keys).values());
+        } catch (final ExecutionException e) {
+          throw new CompletionException(e);
+        }
+      },
+      this.executor
+    );
   }
 
   /**
@@ -140,9 +153,13 @@ public abstract class LoadingStorage<K, V, R> implements Storage<K, V, R>, BaseS
    * <b>This method is not cached at all. Use carefully</b>
    */
   @Override
-  public CompletableFuture<Collection<V>> operation(final Function<Database<K, R>, Collection<R>> func) {
+  public CompletableFuture<Collection<V>> operation(
+    final Function<Database<K, R>, Collection<R>> func
+  ) {
     return CompletableFuture.supplyAsync(
-        () -> func.apply(this.database).stream().map(this::deserialize).collect(Collectors.toList()), this.executor);
+      () -> func.apply(this.database).stream().map(this::deserialize).collect(Collectors.toList()),
+      this.executor
+    );
   }
 
   /**
@@ -152,7 +169,10 @@ public abstract class LoadingStorage<K, V, R> implements Storage<K, V, R>, BaseS
    */
   @Override
   public CompletableFuture<V> operate(final Function<Database<K, R>, R> func) {
-    return CompletableFuture.supplyAsync(() -> this.deserialize(func.apply(this.database)), this.executor);
+    return CompletableFuture.supplyAsync(
+      () -> this.deserialize(func.apply(this.database)),
+      this.executor
+    );
   }
 
   /**
@@ -196,7 +216,7 @@ public abstract class LoadingStorage<K, V, R> implements Storage<K, V, R>, BaseS
 
   /**
    * Discards any cached value for key {@code key}.
-   * 
+   *
    * @param key the key to be invalidated
    */
   public void invalidate(final K key) {

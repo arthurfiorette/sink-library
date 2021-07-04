@@ -16,7 +16,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
 
 public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig {
-
   /**
    * Checks if this {@link ConfigurationSection} contains the given path.
    * <p>
@@ -24,10 +23,10 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * been specified, this will return true.
    *
    * @param path Path to check for existence.
-   * 
+   *
    * @return True if this section contains the requested path, either via
    * default or being set.
-   * 
+   *
    * @throws IllegalArgumentException Thrown when path is null.
    */
   default boolean contains(final P path) {
@@ -42,7 +41,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * value was specified, this will return null.
    *
    * @param path Path of the Object to get.
-   * 
+   *
    * @return Requested Object.
    */
   default Object get(final P path) {
@@ -58,7 +57,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    *
    * @param path Path of the Object to get.
    * @param def The default value to return if the path is not found.
-   * 
+   *
    * @return Requested Object.
    */
   default Object get(final P path, final Object def) {
@@ -91,7 +90,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * orphaned.
    *
    * @param path Path to create the section at.
-   * 
+   *
    * @return Newly created section
    */
   default ConfigurationSection createSection(final P path) {
@@ -108,7 +107,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    *
    * @param path Path to create the section at.
    * @param map The values to used.
-   * 
+   *
    * @return Newly created section
    */
   default ConfigurationSection createSection(final P path, final Map<?, ?> map) {
@@ -123,7 +122,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * value was specified, this will return null.
    *
    * @param path Path of the String to get.
-   * 
+   *
    * @return Requested String.
    */
   default String getString(final P path) {
@@ -140,7 +139,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * @param path Path of the String to get.
    * @param def The default value to return if the path is not found or is not a
    * String.
-   * 
+   *
    * @return Requested String.
    */
   default String getString(final P path, final String def) {
@@ -156,7 +155,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    *
    * @param path Path of the String to get.
    * @param replacer the replacer operator
-   * 
+   *
    * @return Requested String.
    */
   default String getString(final P path, final UnaryOperator<Replacer> replacer) {
@@ -174,7 +173,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * @param def The default value to return if the path is not found or is not a
    * String.
    * @param replacer the replacer operator
-   * 
+   *
    * @return Requested String.
    */
   default String getString(final P path, final String def, final UnaryOperator<Replacer> replacer) {
@@ -190,7 +189,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * a String and return appropriately.
    *
    * @param path Path of the String to check.
-   * 
+   *
    * @return Whether or not the specified path is a String.
    */
   default boolean isString(final P path) {
@@ -205,7 +204,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * was specified, this will return 0.
    *
    * @param path Path of the int to get.
-   * 
+   *
    * @return Requested int.
    */
   default int getInt(final P path) {
@@ -222,7 +221,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * @param path Path of the int to get.
    * @param def The default value to return if the path is not found or is not
    * an int.
-   * 
+   *
    * @return Requested int.
    */
   default int getInt(final P path, final int def) {
@@ -238,7 +237,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * a int and return appropriately.
    *
    * @param path Path of the int to check.
-   * 
+   *
    * @return Whether or not the specified path is an int.
    */
   default boolean isInt(final P path) {
@@ -253,7 +252,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * value was specified, this will return false.
    *
    * @param path Path of the boolean to get.
-   * 
+   *
    * @return Requested boolean.
    */
   default boolean getBoolean(final P path) {
@@ -270,7 +269,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * @param path Path of the boolean to get.
    * @param def The default value to return if the path is not found or is not a
    * boolean.
-   * 
+   *
    * @return Requested boolean.
    */
   default boolean getBoolean(final P path, final boolean def) {
@@ -286,7 +285,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * is a boolean and return appropriately.
    *
    * @param path Path of the boolean to check.
-   * 
+   *
    * @return Whether or not the specified path is a boolean.
    */
   default boolean isBoolean(final P path) {
@@ -301,7 +300,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * value was specified, this will return 0.
    *
    * @param path Path of the double to get.
-   * 
+   *
    * @return Requested double.
    */
   default double getDouble(final P path) {
@@ -318,7 +317,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * @param path Path of the double to get.
    * @param def The default value to return if the path is not found or is not a
    * double.
-   * 
+   *
    * @return Requested double.
    */
   default double getDouble(final P path, final double def) {
@@ -334,7 +333,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * a double and return appropriately.
    *
    * @param path Path of the double to check.
-   * 
+   *
    * @return Whether or not the specified path is a double.
    */
   default boolean isDouble(final P path) {
@@ -350,7 +349,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * a double and return appropriately.
    *
    * @param path Path of the double to check.
-   * 
+   *
    * @return Whether or not the specified path is a double.
    */
   default long getLong(final P path) {
@@ -367,7 +366,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * @param path Path of the long to get.
    * @param def The default value to return if the path is not found or is not a
    * long.
-   * 
+   *
    * @return Requested long.
    */
   default long getLong(final P path, final long def) {
@@ -383,7 +382,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * a long and return appropriately.
    *
    * @param path Path of the long to check.
-   * 
+   *
    * @return Whether or not the specified path is a long.
    */
   default boolean isLong(final P path) {
@@ -398,7 +397,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * value was specified, this will return null.
    *
    * @param path Path of the List to get.
-   * 
+   *
    * @return Requested List.
    */
   default List<?> getList(final P path) {
@@ -415,7 +414,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * @param path Path of the List to get.
    * @param def The default value to return if the path is not found or is not a
    * List.
-   * 
+   *
    * @return Requested List.
    */
   default List<?> getList(final P path, final List<?> def) {
@@ -431,7 +430,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * a List and return appropriately.
    *
    * @param path Path of the List to check.
-   * 
+   *
    * @return Whether or not the specified path is a List.
    */
   default boolean isList(final P path) {
@@ -449,7 +448,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * may miss any values out if they are not compatible.
    *
    * @param path Path of the List to get.
-   * 
+   *
    * @return Requested List of String.
    */
   default List<String> getStringList(final P path) {
@@ -468,11 +467,14 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    *
    * @param path Path of the List to get.
    * @param replacer the replacer operator
-   * 
+   *
    * @return Requested List of String.
    */
   default List<String> getStringList(final P path, final UnaryOperator<Replacer> replacer) {
-    return this.getStringList(path).stream().map(str -> Replacer.replace(str, replacer)).collect(Collectors.toList());
+    return this.getStringList(path)
+      .stream()
+      .map(str -> Replacer.replace(str, replacer))
+      .collect(Collectors.toList());
   }
 
   /**
@@ -486,7 +488,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * may miss any values out if they are not compatible.
    *
    * @param path Path of the List to get.
-   * 
+   *
    * @return Requested List of Integer.
    */
   default List<Integer> getIntegerList(final P path) {
@@ -504,7 +506,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * may miss any values out if they are not compatible.
    *
    * @param path Path of the List to get.
-   * 
+   *
    * @return Requested List of Boolean.
    */
   default List<Boolean> getBooleanList(final P path) {
@@ -522,7 +524,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * may miss any values out if they are not compatible.
    *
    * @param path Path of the List to get.
-   * 
+   *
    * @return Requested List of Double.
    */
   default List<Double> getDoubleList(final P path) {
@@ -540,7 +542,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * may miss any values out if they are not compatible.
    *
    * @param path Path of the List to get.
-   * 
+   *
    * @return Requested List of Float.
    */
   default List<Float> getFloatList(final P path) {
@@ -558,7 +560,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * may miss any values out if they are not compatible.
    *
    * @param path Path of the List to get.
-   * 
+   *
    * @return Requested List of Long.
    */
   default List<Long> getLongList(final P path) {
@@ -576,7 +578,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * may miss any values out if they are not compatible.
    *
    * @param path Path of the List to get.
-   * 
+   *
    * @return Requested List of Byte.
    */
   default List<Byte> getByteList(final P path) {
@@ -594,7 +596,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * but may miss any values out if they are not compatible.
    *
    * @param path Path of the List to get.
-   * 
+   *
    * @return Requested List of Character.
    */
   default List<Character> getCharacterList(final P path) {
@@ -612,7 +614,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * may miss any values out if they are not compatible.
    *
    * @param path Path of the List to get.
-   * 
+   *
    * @return Requested List of Short.
    */
   default List<Short> getShortList(final P path) {
@@ -630,7 +632,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * miss any values out if they are not compatible.
    *
    * @param path Path of the List to get.
-   * 
+   *
    * @return Requested List of Maps.
    */
   default List<Map<?, ?>> getMapList(final P path) {
@@ -645,7 +647,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * value was specified, this will return null.
    *
    * @param path Path of the Vector to get.
-   * 
+   *
    * @return Requested Vector.
    */
   default Vector getVector(final P path) {
@@ -663,7 +665,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * @param path Path of the Vector to get.
    * @param def The default value to return if the path is not found or is not a
    * Vector.
-   * 
+   *
    * @return Requested Vector.
    */
   default Vector getVector(final P path, final Vector def) {
@@ -679,7 +681,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * a Vector and return appropriately.
    *
    * @param path Path of the Vector to check.
-   * 
+   *
    * @return Whether or not the specified path is a Vector.
    */
   default boolean isVector(final P path) {
@@ -694,7 +696,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * no default value was specified, this will return null.
    *
    * @param path Path of the OfflinePlayer to get.
-   * 
+   *
    * @return Requested OfflinePlayer.
    */
   default OfflinePlayer getOfflinePlayer(final P path) {
@@ -712,7 +714,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * @param path Path of the OfflinePlayer to get.
    * @param def The default value to return if the path is not found or is not
    * an OfflinePlayer.
-   * 
+   *
    * @return Requested OfflinePlayer.
    */
   default OfflinePlayer getOfflinePlayer(final P path, final OfflinePlayer def) {
@@ -728,7 +730,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * value is a OfflinePlayer and return appropriately.
    *
    * @param path Path of the OfflinePlayer to check.
-   * 
+   *
    * @return Whether or not the specified path is an OfflinePlayer.
    */
   default boolean isOfflinePlayer(final P path) {
@@ -743,7 +745,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * default value was specified, this will return null.
    *
    * @param path Path of the ItemStack to get.
-   * 
+   *
    * @return Requested ItemStack.
    */
   default ItemStack getItemStack(final P path) {
@@ -761,7 +763,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * @param path Path of the ItemStack to get.
    * @param def The default value to return if the path is not found or is not
    * an ItemStack.
-   * 
+   *
    * @return Requested ItemStack.
    */
   default ItemStack getItemStack(final P path, final ItemStack def) {
@@ -777,7 +779,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * is a ItemStack and return appropriately.
    *
    * @param path Path of the ItemStack to check.
-   * 
+   *
    * @return Whether or not the specified path is an ItemStack.
    */
   default boolean isItemStack(final P path) {
@@ -792,7 +794,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * value was specified, this will return null.
    *
    * @param path Path of the Color to get.
-   * 
+   *
    * @return Requested Color.
    */
   default Color getColor(final P path) {
@@ -810,7 +812,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * @param path Path of the Color to get.
    * @param def The default value to return if the path is not found or is not a
    * Color.
-   * 
+   *
    * @return Requested Color.
    */
   default Color getColor(final P path, final Color def) {
@@ -826,7 +828,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * a Color and return appropriately.
    *
    * @param path Path of the Color to check.
-   * 
+   *
    * @return Whether or not the specified path is a Color.
    */
   default boolean isColor(final P path) {
@@ -841,7 +843,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * does not exist and no default value was specified, this will return null.
    *
    * @param path Path of the ConfigurationSection to get.
-   * 
+   *
    * @return Requested ConfigurationSection.
    */
   default ConfigurationSection getConfigurationSection(final P path) {
@@ -857,7 +859,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * default value is a ConfigurationSection and return appropriately.
    *
    * @param path Path of the ConfigurationSection to check.
-   * 
+   *
    * @return Whether or not the specified path is a ConfigurationSection.
    */
   default boolean isConfigurationSection(final P path) {
@@ -880,7 +882,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    *
    * @param path Path of the value to set.
    * @param value Value to set the default to.
-   * 
+   *
    * @throws IllegalArgumentException Thrown if path is null.
    */
   default void addDefault(final P path, final Object value) {

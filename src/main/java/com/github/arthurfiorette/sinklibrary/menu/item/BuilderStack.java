@@ -33,7 +33,7 @@ public class BuilderStack implements MenuItem {
   /**
    * The inventory will only update when the next {@link BaseMenu#update()} be
    * called
-   * 
+   *
    * @param builder the item builder
    */
   public void setBuilder(final ItemBuilder builder) {

@@ -23,7 +23,10 @@ public class Storage extends AbstractStorage<UUID, SimpleModel, String[]> {
    * {@link BasePlugin#getService(Class)}
    */
   public Storage(final BasePlugin plugin) {
-    super(plugin.getComponent(Database.class), BukkitExecutor.newFixedThreadPool(plugin, TaskContext.ASYNC, 2));
+    super(
+      plugin.getComponent(Database.class),
+      BukkitExecutor.newFixedThreadPool(plugin, TaskContext.ASYNC, 2)
+    );
     this.plugin = plugin;
   }
 

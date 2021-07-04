@@ -14,7 +14,7 @@ public interface BaseService extends BaseComponent {
 
   /**
    * Called when disabling this service
-   * 
+   *
    * @throws Exception An exception thrown means the enable cannot end
    * successfully.
    */
