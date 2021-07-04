@@ -34,7 +34,7 @@ jobs:
         # If this is a tag push
         if: startsWith(github.ref, 'refs/tags/')
         with:
-          args: target/sink-library-v*.jar
+          args: target/sink-library*.jar
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
