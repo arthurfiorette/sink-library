@@ -54,27 +54,16 @@
 
 <br />
 
-### Hello world example:
-
 ```java
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.player.PlayerJoinEvent;
+// /docs/examples/ReadmeExample.java
 
-import com.github.arthurfiorette.sinklibrary.interfaces.*;
-import com.github.arthurfiorette.sinklibrary.listener.SinkListener;
-
-public class MyPlugin extends SinkPlugin {
-
-  @Override
-  protected BaseService[] services() {
-    // This method is were we specify all our services
-    return new BaseService[] { new MyListener(this) };
-  }
-
+public class ReadmeExample extends SinkPlugin {
   @Override
   protected BaseComponent[] components() {
-    return new BaseComponent[] {};
+    return new BaseComponent[] { new MyListener(this) };
   }
+
+  ...
 }
 
 // A simple class to be our listener
@@ -92,6 +81,9 @@ class MyListener extends SinkListener {
   }
 }
 ```
+
+<br />
+<br />
 
 ### Installing
 
@@ -139,6 +131,12 @@ libraryDependencies += "com.github.ArthurFiorette" % "sink-library" % "VERSION"
 
 <br />
 
+### Documentation
+
+While the documentation is not done, you can look at the [examples](/docs/examples) and the **inline documentation** present.
+
+<br />
+
 ### Commons problems
 
 #### `IllegalComponentException`
@@ -160,3 +158,17 @@ public class MyStringClass extends MyGenericClass<String>  {}
 ```
 
 And then you can register the `MyStringClass` normally.
+
+<br />
+
+### License
+
+Licensed under the **MIT**. See [`LICENSE`](LICENSE) for more informations.
+
+<br />
+
+### Contact
+
+See my contact information on my [github profile](https://github.com/ArthurFiorette) or open a new issue.
+
+<br />
