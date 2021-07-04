@@ -1,18 +1,16 @@
 package com.github.arthurfiorette.sinklibrary.config.addons;
 
+import com.github.arthurfiorette.sinklibrary.config.BaseConfig;
+import com.github.arthurfiorette.sinklibrary.services.Replacer;
 import java.util.List;
 import java.util.Map;
 import java.util.function.UnaryOperator;
 import java.util.stream.Collectors;
-
 import org.bukkit.Color;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
-
-import com.github.arthurfiorette.sinklibrary.config.BaseConfig;
-import com.github.arthurfiorette.sinklibrary.services.Replacer;
 
 public interface EnumConfig<E extends Enum<E> & PathResolver> extends BaseConfig {
   /**

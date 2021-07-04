@@ -1,18 +1,21 @@
 package com.github.arthurfiorette.sinklibrary.menu;
 
+import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
+import lombok.Getter;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
-
-import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
-
-import lombok.Getter;
 
 public abstract class PrivateMenu extends StaticMenu {
 
   @Getter
   protected Player owner;
 
-  public PrivateMenu(final BasePlugin plugin, final Player owner, final String title, final int rows) {
+  public PrivateMenu(
+    final BasePlugin plugin,
+    final Player owner,
+    final String title,
+    final int rows
+  ) {
     super(plugin, title, rows);
     this.owner = owner;
   }
@@ -35,5 +38,4 @@ public abstract class PrivateMenu extends StaticMenu {
   public void open(final boolean update) {
     super.openFor(this.owner, update);
   }
-
 }

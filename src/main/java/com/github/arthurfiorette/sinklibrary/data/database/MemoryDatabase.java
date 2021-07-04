@@ -1,13 +1,11 @@
 package com.github.arthurfiorette.sinklibrary.data.database;
 
+import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
-
-import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
-
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -65,7 +63,7 @@ public class MemoryDatabase<K, T> implements Database<K, T> {
   public Collection<T> getMany(final Collection<K> keys) {
     this.ensureState(true);
     final List<T> list = new ArrayList<>();
-    for(final K key: keys) {
+    for (final K key : keys) {
       final T t = this.get(key);
       if (t != null) {
         list.add(t);
