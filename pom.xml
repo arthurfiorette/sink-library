@@ -1,8 +1,6 @@
-<project
-  xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd"
->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.github.arthurfiorette</groupId>
@@ -28,14 +26,20 @@
 	</licenses>
 
 	<repositories>
+
+		<!-- Spigot Mc -->
 		<repository>
 			<id>spigot-repo</id>
 			<url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
 		</repository>
+
+		<!-- Placeholder API -->
 		<repository>
 			<id>placeholderapi</id>
 			<url>https://repo.extendedclip.com/content/repositories/placeholderapi/</url>
 		</repository>
+
+		<!-- Mojang Authlib -->
 		<repository>
 			<id>minecraft-repo</id>
 			<url>https://libraries.minecraft.net/</url>
@@ -43,18 +47,32 @@
 	</repositories>
 
 	<dependencies>
+		<!-- Lombok -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.20</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- Spigot Mc -->
 		<dependency>
 			<groupId>org.spigotmc</groupId>
 			<artifactId>spigot-api</artifactId>
 			<version>1.8.8-R0.1-SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>
+
+		<!-- Placeholder API -->
 		<dependency>
 			<groupId>me.clip</groupId>
 			<artifactId>placeholderapi</artifactId>
 			<version>2.10.9</version>
+			<optional>true</optional>
 			<scope>provided</scope>
 		</dependency>
+
+		<!-- Mojang Authlib -->
 		<dependency>
 			<groupId>com.mojang</groupId>
 			<artifactId>authlib</artifactId>

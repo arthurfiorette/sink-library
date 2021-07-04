@@ -5,16 +5,19 @@ import com.github.arthurfiorette.sinklibrary.interfaces.BaseService;
 import java.util.logging.Level;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import lombok.Getter;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
 public abstract class SinkPlugin extends JavaPlugin implements BasePlugin, BaseService {
 
+  @Getter
+  @NonNull
   private final ComponentManager manager;
 
   public SinkPlugin() {
     this.manager = new SimpleComponentManager(this);
-  }
-
-  public SinkPlugin(final ComponentManager manager) {
-    this.manager = manager;
   }
 
   /**
@@ -39,12 +42,7 @@ public abstract class SinkPlugin extends JavaPlugin implements BasePlugin, BaseS
   }
 
   @Override
-  public void treatThrowable(
-    final Class<?> author,
-    final Throwable exc,
-    final String message,
-    final Object... args
-  ) {
+  public void treatThrowable(final Class<?> author, final Throwable exc, final String message, final Object... args) {
     this.log(Level.SEVERE, "An exception occurred in class %s:", author.getSimpleName());
     this.log(Level.SEVERE, message, args);
     exc.printStackTrace();
@@ -53,11 +51,6 @@ public abstract class SinkPlugin extends JavaPlugin implements BasePlugin, BaseS
       this.log(Level.SEVERE, "Disabling this plugin");
       this.getPluginLoader().disablePlugin(this);
     }
-  }
-
-  @Override
-  public ComponentManager getManager() {
-    return this.manager;
   }
 
   @Override

@@ -6,7 +6,5 @@ import org.bukkit.inventory.ItemStack;
 public interface MenuItem {
   ItemStack getItem();
 
-  default ClickListener getListener() {
-    return ClickListener.ignore();
-  }
+  ClickListener getListener();
 }

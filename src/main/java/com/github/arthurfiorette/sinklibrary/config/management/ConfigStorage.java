@@ -5,14 +5,19 @@ import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
 import com.github.arthurfiorette.sinklibrary.interfaces.BaseComponent;
 import java.util.EnumMap;
 
+import lombok.Getter;
+
 public class ConfigStorage<L extends Enum<L> & ConfigLoader> implements BaseComponent {
 
   protected final EnumMap<L, BaseConfig> configs;
+
   protected final Class<L> clazz;
-  protected final BasePlugin plugin;
+
+  @Getter
+  protected final BasePlugin basePlugin;
 
   public ConfigStorage(final BasePlugin plugin, final Class<L> clazz) {
-    this.plugin = plugin;
+    this.basePlugin = plugin;
     this.clazz = clazz;
     this.configs = new EnumMap<>(clazz);
   }
@@ -22,15 +27,11 @@ public class ConfigStorage<L extends Enum<L> & ConfigLoader> implements BaseComp
     BaseConfig config = this.configs.get(loader);
 
     if (config == null) {
-      config = loader.load(this.plugin);
+      config = loader.load(this.basePlugin);
       this.configs.put(loader, config);
     }
 
     return (T) config;
   }
 
-  @Override
-  public BasePlugin getBasePlugin() {
-    return this.plugin;
-  }
 }

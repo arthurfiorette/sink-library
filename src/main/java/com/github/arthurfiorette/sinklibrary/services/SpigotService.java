@@ -14,25 +14,22 @@ import org.bukkit.event.Event;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import lombok.experimental.UtilityClass;
+
 /**
  * A service class that handles with spigot.
  *
  * @author https://github.com/ArthurFiorette/sink-library/
  */
+@UtilityClass
 public final class SpigotService {
-
-  /**
-   * A private constructor prevent callers from accidentally instantiating an
-   * instance.
-   */
-  private SpigotService() {}
 
   /**
    * Call a {@link Event}
    *
    * @param event the event to be called.
    */
-  public static void callEvent(final Event event) {
+  public void callEvent(final Event event) {
     Bukkit.getPluginManager().callEvent(event);
   }
 
@@ -43,7 +40,7 @@ public final class SpigotService {
    * @param player the player to receive the items
    * @param items the items to give
    */
-  public static void giveItens(final Player player, final ItemStack... items) {
+  public void giveItens(final Player player, final ItemStack... items) {
     final HashMap<Integer, ItemStack> remainders = player.getInventory().addItem(items);
     if (!remainders.isEmpty()) {
       remainders.values().stream().forEach(i -> SpigotService.dropItens(player.getLocation(), i));
@@ -56,7 +53,7 @@ public final class SpigotService {
    * @param location the location to drop
    * @param items the items to give
    */
-  public static void dropItens(final Location location, final ItemStack... items) {
+  public void dropItens(final Location location, final ItemStack... items) {
     final World world = location.getWorld();
     Arrays.stream(items).forEach(i -> world.dropItemNaturally(location, i));
   }
@@ -69,7 +66,7 @@ public final class SpigotService {
    *
    * @return true if this plugin is enabled
    */
-  public static boolean hasPlugin(final String name) {
+  public boolean hasPlugin(final String name) {
     return Bukkit.getPluginManager().isPluginEnabled(name);
   }
 
@@ -80,7 +77,7 @@ public final class SpigotService {
    *
    * @return true if the player inventory has empty slots
    */
-  public static boolean hasEmptySlot(final Player player) {
+  public boolean hasEmptySlot(final Player player) {
     return player.getInventory().firstEmpty() != -1;
   }
 
@@ -91,7 +88,7 @@ public final class SpigotService {
    *
    * @return true if it fits between 0 and 64
    */
-  public static boolean isMinecraftPack(final long amount) {
+  public boolean isMinecraftPack(final long amount) {
     return (amount > 0) && (amount <= 64);
   }
 
@@ -102,7 +99,7 @@ public final class SpigotService {
    *
    * @return true if it's an instance of player
    */
-  public static boolean isPlayer(final Object obj) {
+  public boolean isPlayer(final Object obj) {
     return obj instanceof Player;
   }
 
@@ -127,7 +124,7 @@ public final class SpigotService {
    *
    * @return the amount of ticks into this time
    */
-  public static long asTicks(final long milliseconds) {
+  public long asTicks(final long milliseconds) {
     return milliseconds / 50;
   }
 
@@ -139,7 +136,7 @@ public final class SpigotService {
    *
    * @return the colored text
    */
-  public static String setColors(final String text) {
+  public String setColors(final String text) {
     return ChatColor.translateAlternateColorCodes('&', text);
   }
 
@@ -151,7 +148,7 @@ public final class SpigotService {
    *
    * @return the slot value based on the column and row
    */
-  public static int getChestSlot(int column, int row) {
+  public int getChestSlot(int column, int row) {
     row = row <= 0 ? 1 : row > 6 ? 6 : row;
     column = column <= 0 ? 1 : column > 9 ? 9 : column;
     return ((9 * (row - 1)) + column) - 1;
@@ -163,8 +160,8 @@ public final class SpigotService {
    * @param sound the sound to play
    * @param players the players to play the sound
    */
-  public static void playSound(final Sound sound, final Player... players) {
-    for (final Player p : players) {
+  public void playSound(final Sound sound, final Player... players) {
+    for(final Player p: players) {
       p.playSound(p.getLocation(), sound, 3.0F, 0.5F);
     }
   }
@@ -175,7 +172,7 @@ public final class SpigotService {
    * @param item the item stack to update
    * @param callback the callback to edit the meta
    */
-  public static void updateItemMeta(final ItemStack item, final Consumer<ItemMeta> callback) {
+  public void updateItemMeta(final ItemStack item, final Consumer<ItemMeta> callback) {
     final ItemMeta meta = item.getItemMeta();
     callback.accept(meta);
     item.setItemMeta(meta);

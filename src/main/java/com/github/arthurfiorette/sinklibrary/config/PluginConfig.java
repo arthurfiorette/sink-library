@@ -8,31 +8,25 @@ public class PluginConfig implements BaseConfig {
 
   public static final String FILENAME = "config.yml";
 
+  @Getter
   protected final File file;
-  protected final BasePlugin plugin;
+
+  @Getter
+  protected final BasePlugin basePlugin;
 
   public PluginConfig(final BasePlugin plugin) {
-    this.plugin = plugin;
+    this.basePlugin = plugin;
     this.file = new File(plugin.getDataFolder(), PluginConfig.FILENAME);
   }
 
   @Override
   public void reload() {
-    this.plugin.reloadConfig();
+    this.basePlugin.reloadConfig();
   }
 
   @Override
   public FileConfiguration getConfig() {
-    return this.plugin.getConfig();
+    return this.basePlugin.getConfig();
   }
 
-  @Override
-  public File getFile() {
-    return this.file;
-  }
-
-  @Override
-  public BasePlugin getBasePlugin() {
-    return this.plugin;
-  }
 }

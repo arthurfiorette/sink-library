@@ -17,8 +17,7 @@ public class MenuListener extends SinkListener {
   }
 
   @Override
-  @EventHandler(ignoreCancelled = false, priority = EventPriority.LOWEST) // Called
-  // first
+  @EventHandler(ignoreCancelled = false, priority = EventPriority.LOWEST)
   public void onInventoryClick(final InventoryClickEvent event) {
     final Inventory inv = event.getInventory();
 
@@ -28,7 +27,7 @@ public class MenuListener extends SinkListener {
       final BasePlugin menuPlugin = menu.getBasePlugin();
 
       // It's from the same owner
-      if (menuPlugin.getClass().equals(this.plugin.getClass())) {
+      if (menuPlugin.getClass().equals(this.basePlugin.getClass())) {
         // Cancel it
         event.setCancelled(true);
         final InventoryAction action = event.getAction();

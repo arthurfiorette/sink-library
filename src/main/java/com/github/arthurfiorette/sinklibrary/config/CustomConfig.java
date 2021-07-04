@@ -7,20 +7,21 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 public class CustomConfig implements BaseConfig {
 
+public class CustomConfig implements BaseConfig {
+  @Getter
   protected final File file;
-  protected final BasePlugin plugin;
 
+  @Getter
+  protected final BasePlugin basePlugin;
+
+  @Getter
   protected FileConfiguration config;
 
   /**
    * @see {@link org.bukkit.plugin.Plugin#saveResource(String, boolean)}
    */
-  public CustomConfig(
-    final BasePlugin plugin,
-    final String resourcePath,
-    final boolean replaceIfExists
-  ) {
-    this.plugin = plugin;
+  public CustomConfig(final BasePlugin plugin, final String resourcePath, final boolean replaceIfExists) {
+    this.basePlugin = plugin;
     this.file = new File(plugin.getDataFolder(), resourcePath);
     plugin.saveResource(resourcePath, replaceIfExists);
     this.reload();
@@ -31,18 +32,4 @@ public class CustomConfig implements BaseConfig {
     this.config = YamlConfiguration.loadConfiguration(this.file);
   }
 
-  @Override
-  public FileConfiguration getConfig() {
-    return this.config;
-  }
-
-  @Override
-  public File getFile() {
-    return this.file;
-  }
-
-  @Override
-  public BasePlugin getBasePlugin() {
-    return this.plugin;
-  }
 }

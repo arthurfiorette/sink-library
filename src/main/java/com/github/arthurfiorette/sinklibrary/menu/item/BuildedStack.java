@@ -5,36 +5,30 @@ import com.github.arthurfiorette.sinklibrary.menu.BaseMenu;
 import com.github.arthurfiorette.sinklibrary.menu.listener.ClickListener;
 import org.bukkit.inventory.ItemStack;
 
+import lombok.Getter;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+
+@RequiredArgsConstructor
 public class BuildedStack implements MenuItem {
 
+  @Getter
+  @NonNull
   private ItemBuilder builder;
+
+  @Getter
+  @Setter
+  @NonNull
   private ClickListener listener;
 
   public BuildedStack(final ItemBuilder builder) {
     this(builder, ClickListener.ignore());
   }
 
-  public BuildedStack(final ItemBuilder builder, final ClickListener listener) {
-    this.builder = builder;
-    this.setListener(listener);
-  }
-
   @Override
   public ItemStack getItem() {
-    return this.getBuilder().build();
-  }
-
-  @Override
-  public ClickListener getListener() {
-    return this.listener;
-  }
-
-  public void setListener(final ClickListener listener) {
-    this.listener = listener;
-  }
-
-  public ItemBuilder getBuilder() {
-    return this.builder;
+    return this.builder.build();
   }
 
   /**

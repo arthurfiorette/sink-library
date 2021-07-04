@@ -22,12 +22,21 @@ import org.bukkit.command.TabExecutor;
  */
 public final class CommandBase implements TabExecutor, BaseService {
 
+  @Getter
   private final String name;
-  private final SinkPlugin plugin;
+
+  @Getter
+  private final SinkPlugin basePlugin;
 
   private final Map<String, Argument> commandMap = new HashMap<>();
 
+  @Getter
+  @Setter
+  @NonNull
   private Argument defaultArgument = null;
+
+  @Getter
+  @Setter
   private String unknownMessage = "§7Unknown argument.";
 
   /**
@@ -37,7 +46,7 @@ public final class CommandBase implements TabExecutor, BaseService {
    * @param name the command name
    */
   public CommandBase(final SinkPlugin plugin, final String name) {
-    this.plugin = plugin;
+    this.basePlugin = plugin;
     this.name = name;
   }
 
@@ -49,7 +58,7 @@ public final class CommandBase implements TabExecutor, BaseService {
    */
   @Override
   public void enable() {
-    final PluginCommand command = this.plugin.getCommand(this.name);
+    final PluginCommand command = this.basePlugin.getCommand(this.name);
     Verify.verifyNotNull(command, "The command %s wasn't found", this.name);
     command.setExecutor(this);
     command.setTabCompleter(this);
@@ -57,18 +66,13 @@ public final class CommandBase implements TabExecutor, BaseService {
 
   @Override
   public void disable() {
-    final PluginCommand command = this.plugin.getCommand(this.name);
+    final PluginCommand command = this.basePlugin.getCommand(this.name);
     command.setExecutor(null);
     command.setTabCompleter(null);
   }
 
   @Override
-  public boolean onCommand(
-    final CommandSender sender,
-    final Command command,
-    final String alias,
-    final String[] args
-  ) {
+  public boolean onCommand(final CommandSender sender, final Command command, final String alias, final String[] args) {
     if (args.length == 0) {
       this.defaultArgument.handle(sender, alias, Arrays.asList(args));
       return true;
@@ -87,38 +91,22 @@ public final class CommandBase implements TabExecutor, BaseService {
   }
 
   @Override
-  public List<String> onTabComplete(
-    final CommandSender sender,
-    final Command command,
-    final String alias,
-    final String[] args
-  ) {
+  public List<String> onTabComplete(final CommandSender sender, final Command command, final String alias,
+      final String[] args) {
     if (args.length == 0) {
       return new ArrayList<>(this.commandMap.keySet());
     } else if (this.commandMap.containsKey(args[0])) {
-      return this.commandMap.get(args[0])
-        .onTabComplete(sender, alias, CommandBase.removeFirst(args));
+      return this.commandMap.get(args[0]).onTabComplete(sender, alias, CommandBase.removeFirst(args));
     } else {
       return null;
     }
   }
 
   /**
-   * Set an argument as a default command, (when no args are specified)
-   *
-   * @param arg the argument to be set or null to be none.
-   *
-   * @return the default argument.
-   */
-  public Argument setDefault(final Argument arg) {
-    return this.defaultArgument = arg == null ? this.defaultArgument : arg;
-  }
-
-  /**
    * @param args all the new arguments to be added to this command
    */
   public void addArguments(final Argument... args) {
-    for (final Argument arg : args) {
+    for(final Argument arg: args) {
       this.commandMap.put(arg.getName(), arg);
       if (this.defaultArgument == null) {
         this.defaultArgument = arg;
@@ -126,19 +114,8 @@ public final class CommandBase implements TabExecutor, BaseService {
     }
   }
 
-  /**
-   * @param msg change the default unknown message.
-   */
-  public void setUnknownMessage(final String msg) {
-    this.unknownMessage = msg;
-  }
-
   private static List<String> removeFirst(final String[] str) {
     return Arrays.asList(Arrays.copyOfRange(str, 1, str.length));
   }
 
-  @Override
-  public BasePlugin getBasePlugin() {
-    return this.plugin;
-  }
 }
