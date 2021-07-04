@@ -85,6 +85,7 @@
 
 	<build>
 		<plugins>
+			<!-- Sources -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
@@ -98,6 +99,8 @@
 					</execution>
 				</executions>
 			</plugin>
+			
+			<!-- Javadoc -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>

@@ -4,4 +4,6 @@
 
 <br />
 
-Browse through some examples
+> [Javadoc](https://arthurfiorette.github.io/sink-library/)
+
+Browse through some examples.
