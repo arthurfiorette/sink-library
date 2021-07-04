@@ -10,7 +10,6 @@ import com.google.gson.JsonSyntaxException;
 import java.util.concurrent.Executor;
 import java.util.function.Function;
 import java.util.function.UnaryOperator;
-
 import lombok.Getter;
 import lombok.NonNull;
 
@@ -31,9 +30,14 @@ public class GsonLoadingStorage<K, V> extends LoadingStorage<K, V, JsonObject> {
   @NonNull
   protected Gson gson = new Gson();
 
-  public GsonLoadingStorage(final BasePlugin plugin, final Database<K, JsonObject> database, final Class<V> clazz,
-      final Executor executor, final UnaryOperator<CacheBuilder<Object, Object>> builder,
-      final Function<K, V> generator) {
+  public GsonLoadingStorage(
+    final BasePlugin plugin,
+    final Database<K, JsonObject> database,
+    final Class<V> clazz,
+    final Executor executor,
+    final UnaryOperator<CacheBuilder<Object, Object>> builder,
+    final Function<K, V> generator
+  ) {
     super(database, executor, builder);
     this.basePlugin = plugin;
     this.clazz = clazz;
@@ -54,5 +58,4 @@ public class GsonLoadingStorage<K, V> extends LoadingStorage<K, V, JsonObject> {
   public V deserialize(final JsonObject raw) throws JsonSyntaxException {
     return this.gson.fromJson(raw, this.clazz);
   }
-
 }

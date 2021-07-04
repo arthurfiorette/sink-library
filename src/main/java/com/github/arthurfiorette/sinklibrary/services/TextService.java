@@ -4,10 +4,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
+import lombok.experimental.UtilityClass;
 import org.apache.commons.lang.WordUtils;
 import org.bukkit.ChatColor;
-
-import lombok.experimental.UtilityClass;
 
 /**
  * A service class that handles with texts.
@@ -17,7 +16,8 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public final class TextService {
 
-  public final String LINE_SEPARATOR = "a9f879156392911e229ffccd7618ed88213f293f472ca5eb5e79da1bb698dc45"; // S2
+  public final String LINE_SEPARATOR =
+    "a9f879156392911e229ffccd7618ed88213f293f472ca5eb5e79da1bb698dc45"; // S2
 
   /**
    * Returns a progress bar in String.
@@ -38,9 +38,19 @@ public final class TextService {
    *
    * @see TextService#buildProgressBar(int, String, String, double)
    */
-  public String buildProgressBar(final int width, final String incomplete, final String complete,
-      final long currentValue, final long maxValue) {
-    return TextService.buildProgressBar(width, incomplete, complete, (double) currentValue / maxValue);
+  public String buildProgressBar(
+    final int width,
+    final String incomplete,
+    final String complete,
+    final long currentValue,
+    final long maxValue
+  ) {
+    return TextService.buildProgressBar(
+      width,
+      incomplete,
+      complete,
+      (double) currentValue / maxValue
+    );
   }
 
   /**
@@ -57,17 +67,21 @@ public final class TextService {
    *
    * @return the progress bar string
    */
-  public String buildProgressBar(final int width, final String incomplete, final String complete,
-      final double percent) {
+  public String buildProgressBar(
+    final int width,
+    final String incomplete,
+    final String complete,
+    final double percent
+  ) {
     if ((percent > 1) || (percent < 0)) {
       throw new IllegalArgumentException("Percent should be between 1 and 0");
     }
     final StringBuilder sb = new StringBuilder();
     double i = 0;
-    for(; i < (percent * width); i++) {
+    for (; i < (percent * width); i++) {
       sb.append(complete);
     }
-    for(; i < width; i++) {
+    for (; i < width; i++) {
       sb.append(incomplete);
     }
     return sb.toString();
@@ -96,7 +110,10 @@ public final class TextService {
    */
   public List<String> splitText(final String text, final int width, final String newLine) {
     return Arrays.asList(
-        WordUtils.wrap(text, width, TextService.LINE_SEPARATOR + newLine, false).split(TextService.LINE_SEPARATOR));
+      WordUtils
+        .wrap(text, width, TextService.LINE_SEPARATOR + newLine, false)
+        .split(TextService.LINE_SEPARATOR)
+    );
   }
 
   /**
@@ -110,7 +127,7 @@ public final class TextService {
    */
   public String forceColor(final String text) {
     final List<String> texts = new ArrayList<>();
-    for(String str: text.split("§")) {
+    for (String str : text.split("§")) {
       if (str.isEmpty()) {
         continue;
       }
@@ -123,7 +140,7 @@ public final class TextService {
       } else {
         final String lastColor = ChatColor.getLastColors(str);
         final List<String> words = new ArrayList<>();
-        for(String word: str.split(" ")) {
+        for (String word : str.split(" ")) {
           if (!word.startsWith("§")) {
             word = lastColor + word;
           }

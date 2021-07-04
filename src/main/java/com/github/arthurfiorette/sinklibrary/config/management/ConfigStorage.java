@@ -4,7 +4,6 @@ import com.github.arthurfiorette.sinklibrary.config.BaseConfig;
 import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
 import com.github.arthurfiorette.sinklibrary.interfaces.BaseComponent;
 import java.util.EnumMap;
-
 import lombok.Getter;
 
 public class ConfigStorage<L extends Enum<L> & ConfigLoader> implements BaseComponent {
@@ -33,5 +32,4 @@ public class ConfigStorage<L extends Enum<L> & ConfigLoader> implements BaseComp
 
     return (T) config;
   }
-
 }

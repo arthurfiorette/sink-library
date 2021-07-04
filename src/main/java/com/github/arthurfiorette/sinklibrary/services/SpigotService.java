@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
+import lombok.experimental.UtilityClass;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -13,8 +14,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-
-import lombok.experimental.UtilityClass;
 
 /**
  * A service class that handles with spigot.
@@ -161,7 +160,7 @@ public final class SpigotService {
    * @param players the players to play the sound
    */
   public void playSound(final Sound sound, final Player... players) {
-    for(final Player p: players) {
+    for (final Player p : players) {
       p.playSound(p.getLocation(), sound, 3.0F, 0.5F);
     }
   }

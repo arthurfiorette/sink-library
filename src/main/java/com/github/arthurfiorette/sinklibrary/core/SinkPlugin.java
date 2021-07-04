@@ -3,11 +3,10 @@ package com.github.arthurfiorette.sinklibrary.core;
 import com.github.arthurfiorette.sinklibrary.interfaces.BaseComponent;
 import com.github.arthurfiorette.sinklibrary.interfaces.BaseService;
 import java.util.logging.Level;
-import org.bukkit.plugin.java.JavaPlugin;
-
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import org.bukkit.plugin.java.JavaPlugin;
 
 @RequiredArgsConstructor
 public abstract class SinkPlugin extends JavaPlugin implements BasePlugin, BaseService {
@@ -42,7 +41,12 @@ public abstract class SinkPlugin extends JavaPlugin implements BasePlugin, BaseS
   }
 
   @Override
-  public void treatThrowable(final Class<?> author, final Throwable exc, final String message, final Object... args) {
+  public void treatThrowable(
+    final Class<?> author,
+    final Throwable exc,
+    final String message,
+    final Object... args
+  ) {
     this.log(Level.SEVERE, "An exception occurred in class %s:", author.getSimpleName());
     this.log(Level.SEVERE, message, args);
     exc.printStackTrace();

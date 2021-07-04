@@ -72,7 +72,12 @@ public final class CommandBase implements TabExecutor, BaseService {
   }
 
   @Override
-  public boolean onCommand(final CommandSender sender, final Command command, final String alias, final String[] args) {
+  public boolean onCommand(
+    final CommandSender sender,
+    final Command command,
+    final String alias,
+    final String[] args
+  ) {
     if (args.length == 0) {
       this.defaultArgument.handle(sender, alias, Arrays.asList(args));
       return true;
@@ -91,12 +96,17 @@ public final class CommandBase implements TabExecutor, BaseService {
   }
 
   @Override
-  public List<String> onTabComplete(final CommandSender sender, final Command command, final String alias,
-      final String[] args) {
+  public List<String> onTabComplete(
+    final CommandSender sender,
+    final Command command,
+    final String alias,
+    final String[] args
+  ) {
     if (args.length == 0) {
       return new ArrayList<>(this.commandMap.keySet());
     } else if (this.commandMap.containsKey(args[0])) {
-      return this.commandMap.get(args[0]).onTabComplete(sender, alias, CommandBase.removeFirst(args));
+      return this.commandMap.get(args[0])
+        .onTabComplete(sender, alias, CommandBase.removeFirst(args));
     } else {
       return null;
     }
@@ -106,7 +116,7 @@ public final class CommandBase implements TabExecutor, BaseService {
    * @param args all the new arguments to be added to this command
    */
   public void addArguments(final Argument... args) {
-    for(final Argument arg: args) {
+    for (final Argument arg : args) {
       this.commandMap.put(arg.getName(), arg);
       if (this.defaultArgument == null) {
         this.defaultArgument = arg;
@@ -117,5 +127,4 @@ public final class CommandBase implements TabExecutor, BaseService {
   private static List<String> removeFirst(final String[] str) {
     return Arrays.asList(Arrays.copyOfRange(str, 1, str.length));
   }
-
 }

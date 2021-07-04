@@ -28,5 +28,4 @@ public class PluginConfig implements BaseConfig {
   public FileConfiguration getConfig() {
     return this.basePlugin.getConfig();
   }
-
 }
