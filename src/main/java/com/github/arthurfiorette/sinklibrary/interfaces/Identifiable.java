@@ -1,11 +1,13 @@
 package com.github.arthurfiorette.sinklibrary.interfaces;
 
-import com.github.arthurfiorette.sinklibrary.uuid.FastUUID;
 import java.util.Optional;
 import java.util.UUID;
+
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
+
+import com.github.arthurfiorette.sinklibrary.uuid.FastUuid;
 
 /**
  * This class is used to help any objects that are  with
@@ -25,7 +27,7 @@ public interface Identifiable {
    * @return this uuid stringified.
    */
   default String toIdString() {
-    return FastUUID.toString(this.getUniqueId());
+    return FastUuid.toString(this.getUniqueId());
   }
 
   /**

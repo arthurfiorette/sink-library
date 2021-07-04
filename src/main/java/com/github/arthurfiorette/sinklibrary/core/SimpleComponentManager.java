@@ -1,11 +1,13 @@
 package com.github.arthurfiorette.sinklibrary.core;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 import com.github.arthurfiorette.sinklibrary.exceptions.IllegalComponentException;
 import com.github.arthurfiorette.sinklibrary.interfaces.BaseComponent;
 import com.github.arthurfiorette.sinklibrary.interfaces.BaseService;
 import com.google.common.collect.Iterables;
-import java.util.LinkedHashMap;
-import java.util.Map;
+
 import lombok.Getter;
 import lombok.NonNull;
 
@@ -30,16 +32,19 @@ public final class SimpleComponentManager implements ComponentManager {
     this.plugin = plugin;
     this.services.put(plugin.getClass(), plugin);
 
-    for (final BaseComponent component : plugin.components()) {
+    for(final BaseComponent component: plugin.components()) {
       final Class<? extends BaseComponent> clazz = component.getClass();
       this.checkTypeParameters(clazz);
 
+      // Service
       if (component instanceof BaseService) {
         final BaseService service = (BaseService) component;
         this.services.put(service.getClass(), service);
-      } else {
-        this.components.put(clazz, component);
+        continue;
       }
+
+      // Component
+      this.components.put(clazz, component);
     }
   }
 
@@ -57,15 +62,11 @@ public final class SimpleComponentManager implements ComponentManager {
 
     this.state = ManagerState.ENABLING;
 
-    for (final BaseService service : this.services.values()) {
+    for(final BaseService service: this.services.values()) {
       try {
         service.enable();
       } catch (final Exception e) {
-        this.plugin.treatThrowable(
-            service.getClass(),
-            e,
-            "Throwable catch while enabling this service"
-          );
+        this.plugin.treatThrowable(service.getClass(), e, "Throwable catch while enabling this service");
       }
     }
 
@@ -81,17 +82,14 @@ public final class SimpleComponentManager implements ComponentManager {
     this.state = ManagerState.DISABLING;
 
     final BaseService[] servicesArr = Iterables.toArray(this.services.values(), BaseService.class);
-    for (int i = servicesArr.length - 1; i >= 0; i--) {
+    for(int i = servicesArr.length - 1; i >= 0; i--) {
       final BaseService service = servicesArr[i];
       try {
         service.disable();
       } catch (final Exception e) {
-        this.plugin.treatThrowable(
-            service.getClass(),
+        this.plugin.treatThrowable(service.getClass(),
             // Prevent infinite loop while disabling.
-            new RuntimeException(e),
-            "Throwable catch while disabling this service"
-          );
+            new RuntimeException(e), "Throwable catch while disabling this service");
       }
     }
 

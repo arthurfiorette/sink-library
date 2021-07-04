@@ -1,12 +1,15 @@
 package com.github.arthurfiorette.sinklibrary.core;
 
+import java.util.logging.Level;
+
+import org.bukkit.plugin.java.JavaPlugin;
+
 import com.github.arthurfiorette.sinklibrary.interfaces.BaseComponent;
 import com.github.arthurfiorette.sinklibrary.interfaces.BaseService;
-import java.util.logging.Level;
+
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
-import org.bukkit.plugin.java.JavaPlugin;
 
 @RequiredArgsConstructor
 public abstract class SinkPlugin extends JavaPlugin implements BasePlugin, BaseService {
