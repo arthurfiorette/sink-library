@@ -15,5 +15,6 @@ com.github.arthurfiorette.sinklibrary.menu
 com.github.arthurfiorette.sinklibrary.menu.item
 com.github.arthurfiorette.sinklibrary.menu.listener
 com.github.arthurfiorette.sinklibrary.menu.management
+com.github.arthurfiorette.sinklibrary.replacer
 com.github.arthurfiorette.sinklibrary.services
 com.github.arthurfiorette.sinklibrary.uuid
