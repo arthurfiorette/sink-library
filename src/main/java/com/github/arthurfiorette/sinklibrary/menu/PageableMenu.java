@@ -1,14 +1,15 @@
 package com.github.arthurfiorette.sinklibrary.menu;
 
-import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
-import com.github.arthurfiorette.sinklibrary.menu.item.MenuItem;
 import java.util.List;
-import lombok.Getter;
-import lombok.Setter;
-import org.bukkit.Material;
+
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+
+import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
+import com.github.arthurfiorette.sinklibrary.menu.item.MenuItem;
+
+import lombok.Getter;
 
 public abstract class PageableMenu extends PrivateMenu {
 
@@ -17,15 +18,7 @@ public abstract class PageableMenu extends PrivateMenu {
 
   protected List<MenuItem> lastPageableItems;
 
-  @Setter
-  private ItemStack defaultItem = new ItemStack(Material.AIR);
-
-  public PageableMenu(
-    final BasePlugin plugin,
-    final Player owner,
-    final String title,
-    final int rows
-  ) {
+  public PageableMenu(final BasePlugin plugin, final Player owner, final String title, final int rows) {
     super(plugin, owner, title, rows);
   }
 
@@ -43,7 +36,9 @@ public abstract class PageableMenu extends PrivateMenu {
   /**
    * This method is called every update request. There's no problem on returning
    * different values every time
-   *
+   * <p>
+   * You can use null values to use the default item.
+   * 
    * @return the pageable item list
    */
   protected abstract List<MenuItem> pageableItems();
@@ -72,7 +67,7 @@ public abstract class PageableMenu extends PrivateMenu {
 
     byte slotIndex = 0;
     // for from initial to last element.
-    for (int i = initial; i < (initial + slots.length); i++) {
+    for(int i = initial; i < (initial + slots.length); i++) {
       MenuItem item;
       try {
         item = this.lastPageableItems.get(i);
@@ -129,7 +124,7 @@ public abstract class PageableMenu extends PrivateMenu {
     }
 
     int slotIndex = -1;
-    for (int i = 0; i < slots.length; i++) {
+    for(int i = 0; i < slots.length; i++) {
       if (slot == slots[i]) {
         slotIndex = i;
         break;

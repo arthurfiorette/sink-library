@@ -1,12 +1,13 @@
 package com.github.arthurfiorette.sinklibrary.core;
 
-import com.github.arthurfiorette.sinklibrary.executor.TaskContext;
-import com.github.arthurfiorette.sinklibrary.interfaces.BaseComponent;
-import com.github.arthurfiorette.sinklibrary.interfaces.BaseService;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Supplier;
 import java.util.logging.Level;
+
 import org.bukkit.plugin.Plugin;
+
+import com.github.arthurfiorette.sinklibrary.executor.TaskContext;
+import com.github.arthurfiorette.sinklibrary.interfaces.BaseComponent;
 
 public interface BasePlugin extends Plugin {
   @Override
@@ -29,10 +30,6 @@ public interface BasePlugin extends Plugin {
 
   default void runSync(final Runnable runnable) {
     TaskContext.SYNC.run(this, runnable);
-  }
-
-  default <T extends BaseService> T getService(final Class<T> clazz) {
-    return this.getManager().getService(clazz);
   }
 
   default <T extends BaseComponent> T getComponent(final Class<T> clazz) {

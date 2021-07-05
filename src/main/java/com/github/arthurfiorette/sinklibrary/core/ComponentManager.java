@@ -1,7 +1,6 @@
 package com.github.arthurfiorette.sinklibrary.core;
 
 import com.github.arthurfiorette.sinklibrary.interfaces.BaseComponent;
-import com.github.arthurfiorette.sinklibrary.interfaces.BaseService;
 
 public interface ComponentManager {
   /**
@@ -15,8 +14,6 @@ public interface ComponentManager {
   void disableServices() throws IllegalStateException;
 
   <T extends BaseComponent> T getComponent(Class<T> clazz);
-
-  <T extends BaseService> T getService(Class<T> clazz);
 
   ManagerState getState();
 }

@@ -1,11 +1,14 @@
 package com.github.arthurfiorette.sinklibrary.core;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.logging.Level;
+
 import com.github.arthurfiorette.sinklibrary.exceptions.IllegalComponentException;
 import com.github.arthurfiorette.sinklibrary.interfaces.BaseComponent;
 import com.github.arthurfiorette.sinklibrary.interfaces.BaseService;
 import com.google.common.collect.Iterables;
-import java.util.LinkedHashMap;
-import java.util.Map;
+
 import lombok.Getter;
 import lombok.NonNull;
 
@@ -30,7 +33,7 @@ public final class SimpleComponentManager implements ComponentManager {
     this.plugin = plugin;
     this.services.put(plugin.getClass(), plugin);
 
-    for (final BaseComponent component : plugin.components()) {
+    for(final BaseComponent component: plugin.components()) {
       final Class<? extends BaseComponent> clazz = component.getClass();
       this.checkTypeParameters(clazz);
 
@@ -59,19 +62,18 @@ public final class SimpleComponentManager implements ComponentManager {
     }
 
     this.state = ManagerState.ENABLING;
+    this.plugin.log(Level.INFO, "Enabling all services");
 
-    for (final BaseService service : this.services.values()) {
+    for(final BaseService service: this.services.values()) {
       try {
         service.enable();
+        this.plugin.log(Level.INFO, "Service %s enabled", service.getClass().getSimpleName());
       } catch (final Exception e) {
-        this.plugin.treatThrowable(
-            service.getClass(),
-            e,
-            "Throwable catch while enabling this service"
-          );
+        this.plugin.treatThrowable(service.getClass(), e, "Could not enable this service.");
       }
     }
 
+    this.plugin.log(Level.INFO, "Services enabled");
     this.state = ManagerState.ENABLED;
   }
 
@@ -82,34 +84,33 @@ public final class SimpleComponentManager implements ComponentManager {
     }
 
     this.state = ManagerState.DISABLING;
+    this.plugin.log(Level.INFO, "Disabling all services");
 
     final BaseService[] servicesArr = Iterables.toArray(this.services.values(), BaseService.class);
-    for (int i = servicesArr.length - 1; i >= 0; i--) {
+    for(int i = servicesArr.length - 1; i >= 0; i--) {
       final BaseService service = servicesArr[i];
       try {
         service.disable();
+        this.plugin.log(Level.INFO, "Service %s disabled", service.getClass().getSimpleName());
       } catch (final Exception e) {
-        this.plugin.treatThrowable(
-            service.getClass(),
+        this.plugin.treatThrowable(service.getClass(),
             // Prevent infinite loop while disabling.
-            new RuntimeException(e),
-            "Throwable catch while disabling this service"
-          );
+            new RuntimeException(e), "Could not disable this service");
       }
     }
 
+    this.plugin.log(Level.INFO, "Services disabled");
     this.state = ManagerState.DISABLED;
   }
 
   @Override
   @SuppressWarnings("unchecked")
   public <T extends BaseComponent> T getComponent(final Class<T> clazz) {
-    return (T) this.components.get(clazz);
+    BaseComponent component = this.components.get(clazz);
+    if (component == null) {
+      component = this.services.get(clazz);
+    }
+    return (T) component;
   }
 
-  @Override
-  @SuppressWarnings("unchecked")
-  public <T extends BaseService> T getService(final Class<T> clazz) {
-    return (T) this.services.get(clazz);
-  }
 }

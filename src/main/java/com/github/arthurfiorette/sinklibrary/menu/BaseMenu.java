@@ -1,8 +1,9 @@
 package com.github.arthurfiorette.sinklibrary.menu;
 
+import org.bukkit.inventory.InventoryHolder;
+
 import com.github.arthurfiorette.sinklibrary.interfaces.BaseComponent;
 import com.github.arthurfiorette.sinklibrary.menu.item.MenuItem;
-import org.bukkit.inventory.InventoryHolder;
 
 public interface BaseMenu extends BaseComponent, InventoryHolder {
   void update();

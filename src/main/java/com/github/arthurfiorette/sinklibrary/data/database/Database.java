@@ -1,8 +1,10 @@
 package com.github.arthurfiorette.sinklibrary.data.database;
 
-import com.github.arthurfiorette.sinklibrary.interfaces.BaseService;
 import java.util.Collection;
+
 import javax.annotation.Nullable;
+
+import com.github.arthurfiorette.sinklibrary.interfaces.BaseService;
 
 /**
  * Represents a simple database model. <b>All of these methods are meant to be

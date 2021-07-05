@@ -1,12 +1,15 @@
-package com.github.arthurfiorette.sinklibrary.services;
+package com.github.arthurfiorette.sinklibrary.replacer;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.function.Supplier;
-import java.util.function.UnaryOperator;
-import me.clip.placeholderapi.PlaceholderAPI;
+
 import org.bukkit.OfflinePlayer;
+
+import com.github.arthurfiorette.sinklibrary.services.SpigotService;
+
+import me.clip.placeholderapi.PlaceholderAPI;
 
 /**
  * A better text replacer that supports PlaceholderAPI (if enabled)
@@ -16,6 +19,11 @@ import org.bukkit.OfflinePlayer;
 public class Replacer {
 
   private final Map<String, Supplier<String>> placeholders = new HashMap<>();
+
+  public Replacer merge(final Replacer other) {
+    this.placeholders.putAll(other.placeholders);
+    return this;
+  }
 
   /**
    * Add a placeholder to replace when called.
@@ -51,7 +59,7 @@ public class Replacer {
    */
   public String replace(final String str) {
     String replaced = str;
-    for (final Entry<String, Supplier<String>> entry : this.placeholders.entrySet()) {
+    for(final Entry<String, Supplier<String>> entry: this.placeholders.entrySet()) {
       replaced = replaced.replace(entry.getKey(), entry.getValue().get());
     }
     return SpigotService.setColors(replaced);
@@ -82,7 +90,7 @@ public class Replacer {
    *
    * @return the replaced text
    */
-  public static String replace(final String str, final UnaryOperator<Replacer> replacer) {
+  public static String replace(final String str, final ReplacerFunction replacer) {
     return replacer.apply(new Replacer()).replace(str);
   }
 
@@ -96,11 +104,7 @@ public class Replacer {
    *
    * @return the replaced text
    */
-  public static String replace(
-    final String str,
-    final OfflinePlayer player,
-    final UnaryOperator<Replacer> replacer
-  ) {
+  public static String replace(final String str, final OfflinePlayer player, final ReplacerFunction replacer) {
     return replacer.apply(new Replacer()).replace(str, player);
   }
 
