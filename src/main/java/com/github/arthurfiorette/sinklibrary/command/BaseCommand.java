@@ -1,0 +1,44 @@
+package com.github.arthurfiorette.sinklibrary.command;
+
+import java.util.Collection;
+import java.util.List;
+
+import org.bukkit.command.CommandSender;
+import org.bukkit.command.PluginIdentifiableCommand;
+
+import com.github.arthurfiorette.sinklibrary.command.wrapper.CommandInfo;
+import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
+import com.github.arthurfiorette.sinklibrary.interfaces.BaseComponent;
+
+public interface BaseCommand extends BaseComponent, PluginIdentifiableCommand {
+
+  void handle(final CommandSender sender, final Collection<String> args);
+
+  List<String> onTabComplete(final CommandSender sender, final Collection<String> args);
+
+  /**
+   * Use this methods to apply any information about this command;
+   */
+  void info(CommandInfo.CommandInfoBuilder info);
+
+  /**
+   * This method is used before the handling step, so we can know what entity
+   * can use this command.
+   * <p>
+   * This must return true for all entities that <b>with permission</b> can use
+   * this command.
+   */
+  boolean test(CommandSender sender);
+
+  /**
+   * The same as {@link #getBasePlugin()}
+   */
+  @Override
+  default BasePlugin getPlugin() {
+    return this.getBasePlugin();
+  }
+
+  default BaseCommand[] subCommands() {
+    return new BaseCommand[0];
+  }
+}
