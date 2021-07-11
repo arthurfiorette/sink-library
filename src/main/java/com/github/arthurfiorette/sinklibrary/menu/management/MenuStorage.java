@@ -1,17 +1,14 @@
 package com.github.arthurfiorette.sinklibrary.menu.management;
 
+import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
+import com.github.arthurfiorette.sinklibrary.interfaces.BaseService;
+import com.github.arthurfiorette.sinklibrary.menu.BaseMenu;
 import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
-
-import org.bukkit.entity.Player;
-
-import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
-import com.github.arthurfiorette.sinklibrary.interfaces.BaseService;
-import com.github.arthurfiorette.sinklibrary.menu.BaseMenu;
-
 import lombok.Getter;
+import org.bukkit.entity.Player;
 
 public class MenuStorage<M extends Enum<M> & MenuFactory> implements BaseService {
 

@@ -1,18 +1,15 @@
 package com.github.arthurfiorette.sinklibrary.menu;
 
+import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
+import com.github.arthurfiorette.sinklibrary.menu.item.MenuItem;
 import java.util.Map;
-
+import lombok.Getter;
+import lombok.Setter;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-
-import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
-import com.github.arthurfiorette.sinklibrary.menu.item.MenuItem;
-
-import lombok.Getter;
-import lombok.Setter;
 
 public abstract class StaticMenu implements BaseMenu {
 
@@ -35,7 +32,7 @@ public abstract class StaticMenu implements BaseMenu {
 
   /**
    * You can use null values to use the default item.
-   * 
+   *
    * @return the static item map
    */
   protected abstract Map<Byte, MenuItem> staticItems();
@@ -69,9 +66,11 @@ public abstract class StaticMenu implements BaseMenu {
   @Override
   public void update() {
     this.lastStaticItems = this.staticItems();
-    this.lastStaticItems.forEach((slot, item) -> {
-      this.inventory.setItem(slot, item == null ? this.defaultItem : item.getItem());
-    });
+    this.lastStaticItems.forEach(
+        (slot, item) -> {
+          this.inventory.setItem(slot, item == null ? this.defaultItem : item.getItem());
+        }
+      );
   }
 
   @Override

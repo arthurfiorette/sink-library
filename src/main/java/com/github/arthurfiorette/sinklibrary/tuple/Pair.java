@@ -1,7 +1,6 @@
 package com.github.arthurfiorette.sinklibrary.tuple;
 
 import java.io.Serializable;
-
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -29,5 +28,4 @@ public class Pair<L, R> implements Serializable {
   static <L, R> Pair<L, R> pair(final L left, final R right) {
     return new Pair<>(left, right);
   }
-
 }

@@ -1,7 +1,6 @@
 package com.github.arthurfiorette.sinklibrary.exceptions;
 
 import com.github.arthurfiorette.sinklibrary.interfaces.BaseService;
-
 import lombok.NoArgsConstructor;
 
 /**
@@ -25,7 +24,12 @@ public class DisablingException extends RuntimeException {
     super(cause);
   }
 
-  protected DisablingException(final String message, final Throwable cause, final boolean enableSuppression, final boolean writableStackTrace) {
+  protected DisablingException(
+    final String message,
+    final Throwable cause,
+    final boolean enableSuppression,
+    final boolean writableStackTrace
+  ) {
     super(message, cause, enableSuppression, writableStackTrace);
   }
 
@@ -35,5 +39,4 @@ public class DisablingException extends RuntimeException {
     final String message = this.getLocalizedMessage();
     return (message != null) ? (s + ": " + message) : s;
   }
-
 }

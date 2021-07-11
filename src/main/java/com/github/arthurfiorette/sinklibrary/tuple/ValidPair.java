@@ -28,5 +28,4 @@ public class ValidPair<L, R> extends Pair<L, R> {
   public void setRight(@NonNull final R right) {
     super.setRight(right);
   }
-
 }

@@ -1,15 +1,13 @@
 package com.github.arthurfiorette.sinklibrary.menu.item;
 
-import org.bukkit.inventory.ItemStack;
-
 import com.github.arthurfiorette.sinklibrary.item.ItemBuilder;
 import com.github.arthurfiorette.sinklibrary.menu.BaseMenu;
 import com.github.arthurfiorette.sinklibrary.menu.listener.ClickListener;
-
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import org.bukkit.inventory.ItemStack;
 
 @RequiredArgsConstructor
 public class BuilderStack implements MenuItem {

@@ -33,5 +33,4 @@ public class ValidTriple<L, M, R> extends Triple<L, M, R> {
   public void setRight(@NonNull final R right) {
     super.setRight(right);
   }
-
 }

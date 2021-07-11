@@ -1,18 +1,15 @@
 package com.github.arthurfiorette.sinklibrary.command.wrapper;
 
-import java.util.List;
-
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
-
 import com.github.arthurfiorette.sinklibrary.command.BaseCommand;
 import com.github.arthurfiorette.sinklibrary.command.CommandUtils;
 import com.github.arthurfiorette.sinklibrary.tuple.Pair;
 import com.github.arthurfiorette.sinklibrary.tuple.ValidPair;
 import com.google.common.collect.Lists;
-
+import java.util.List;
 import lombok.Getter;
 import lombok.NonNull;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
 
 public class CommandWrapper extends Command {
 
@@ -48,7 +45,11 @@ public class CommandWrapper extends Command {
    * {@inheritDoc}
    */
   @Override
-  public boolean execute(final CommandSender sender, final String nameOrAliasUsed, final String[] args) {
+  public boolean execute(
+    final CommandSender sender,
+    final String nameOrAliasUsed,
+    final String[] args
+  ) {
     if (!this.testPermission(sender)) {
       return true;
     }
@@ -65,8 +66,11 @@ public class CommandWrapper extends Command {
   }
 
   @Override
-  public List<String> tabComplete(final CommandSender sender, final String alias, final String[] args)
-      throws IllegalArgumentException {
+  public List<String> tabComplete(
+    final CommandSender sender,
+    final String alias,
+    final String[] args
+  ) throws IllegalArgumentException {
     Pair<CommandWrapper, List<String>> pair = findHandlerRecursively(args);
     return pair.getLeft().command.onTabComplete(sender, pair.getRight());
   }
@@ -78,7 +82,9 @@ public class CommandWrapper extends Command {
     }
 
     if (this.getPermissionMessage().length() != 0) {
-      for(final String line: this.getPermissionMessage().replace("<permission>", this.getPermission()).split("\n")) {
+      for (final String line : this.getPermissionMessage()
+        .replace("<permission>", this.getPermission())
+        .split("\n")) {
         target.sendMessage(line);
       }
     }
@@ -92,7 +98,7 @@ public class CommandWrapper extends Command {
 
   /**
    * @param args the initial argument list.
-   * 
+   *
    * @return a pair containing the wrapper found and the argument list that
    * should be used.
    */
@@ -105,9 +111,8 @@ public class CommandWrapper extends Command {
     // Começa a procura recusiva para handlers dos argumentos, e caso não for
     // encontrado,
     // continua sendo esta instancia
-    for(String arg: args) {
-
-      for(CommandWrapper wrapper: handler.subCommands) {
+    for (String arg : args) {
+      for (CommandWrapper wrapper : handler.subCommands) {
         if (wrapper.canHandle(arg)) {
           // Argumento encontrado!, Remova o nome da lista de argumentos. Pare
           // somente este primeiro for e continue a buscar por subhandlers deste
@@ -126,5 +131,4 @@ public class CommandWrapper extends Command {
 
     return new ValidPair<>(handler, argList);
   }
-
 }
