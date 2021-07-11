@@ -3,7 +3,7 @@
   <pre>
   <br />
   <h1>💧⚡🌊
-  Sink Library</h1>
+Sink Library</h1>
   <br />
   </pre>
   <br />
