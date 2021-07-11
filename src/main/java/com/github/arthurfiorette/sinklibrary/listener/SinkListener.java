@@ -170,7 +170,7 @@ public abstract class SinkListener implements Listener, BaseService {
 
   public void onBlockDamage(final BlockDamageEvent event) {}
 
-  public void onSinkListener(final BlockDispenseEvent event) {}
+  public void onBlockDispense(final BlockDispenseEvent event) {}
 
   public void onBlockFade(final BlockFadeEvent event) {}
 
