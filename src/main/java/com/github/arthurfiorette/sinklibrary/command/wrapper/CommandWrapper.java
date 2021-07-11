@@ -54,7 +54,7 @@ public class CommandWrapper extends Command {
       return true;
     }
 
-    Pair<CommandWrapper, List<String>> pair = findHandlerRecursively(args);
+    final Pair<CommandWrapper, List<String>> pair = this.findHandlerRecursively(args);
 
     try {
       pair.getLeft().command.handle(sender, pair.getRight());
@@ -71,7 +71,7 @@ public class CommandWrapper extends Command {
     final String alias,
     final String[] args
   ) throws IllegalArgumentException {
-    Pair<CommandWrapper, List<String>> pair = findHandlerRecursively(args);
+    final Pair<CommandWrapper, List<String>> pair = this.findHandlerRecursively(args);
     return pair.getLeft().command.onTabComplete(sender, pair.getRight());
   }
 
@@ -92,8 +92,8 @@ public class CommandWrapper extends Command {
     return false;
   }
 
-  private boolean canHandle(String nameOrAlias) {
-    return info.getName().equals(nameOrAlias) || info.getAliases().contains(nameOrAlias);
+  private boolean canHandle(final String nameOrAlias) {
+    return this.info.getName().equals(nameOrAlias) || this.info.getAliases().contains(nameOrAlias);
   }
 
   /**
@@ -102,17 +102,17 @@ public class CommandWrapper extends Command {
    * @return a pair containing the wrapper found and the argument list that
    * should be used.
    */
-  private Pair<CommandWrapper, List<String>> findHandlerRecursively(String[] args) {
+  private Pair<CommandWrapper, List<String>> findHandlerRecursively(final String[] args) {
     // Começa a buscar por handlers dos argumentos, e caso não for encontrado,
     // continue sendo esta instancia
     CommandWrapper handler = this;
-    List<String> argList = Lists.newArrayList(args);
+    final List<String> argList = Lists.newArrayList(args);
 
     // Começa a procura recusiva para handlers dos argumentos, e caso não for
     // encontrado,
     // continua sendo esta instancia
-    for (String arg : args) {
-      for (CommandWrapper wrapper : handler.subCommands) {
+    for (final String arg : args) {
+      for (final CommandWrapper wrapper : handler.subCommands) {
         if (wrapper.canHandle(arg)) {
           // Argumento encontrado!, Remova o nome da lista de argumentos. Pare
           // somente este primeiro for e continue a buscar por subhandlers deste
