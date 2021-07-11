@@ -1,4 +1,6 @@
 com.github.arthurfiorette.sinklibrary.command
+com.github.arthurfiorette.sinklibrary.command.reflection
+com.github.arthurfiorette.sinklibrary.command.wrapper
 com.github.arthurfiorette.sinklibrary.config
 com.github.arthurfiorette.sinklibrary.config.addons
 com.github.arthurfiorette.sinklibrary.config.management
@@ -17,4 +19,5 @@ com.github.arthurfiorette.sinklibrary.menu.listener
 com.github.arthurfiorette.sinklibrary.menu.management
 com.github.arthurfiorette.sinklibrary.replacer
 com.github.arthurfiorette.sinklibrary.services
+com.github.arthurfiorette.sinklibrary.tuple
 com.github.arthurfiorette.sinklibrary.uuid
