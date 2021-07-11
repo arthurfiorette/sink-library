@@ -10,10 +10,9 @@ import org.bukkit.ChatColor;
 @Builder
 public class CommandInfo {
 
-  private static String defaultPermissionMessage =
-    ChatColor.RED +
-    "I'm sorry, but you do not have permission to perform this command. " +
-    "Please contact the server administrators if you believe that this is in error.";
+  private static String defaultPermissionMessage = ChatColor.RED
+      + "I'm sorry, but you do not have permission to perform this command. "
+      + "Please contact the server administrators if you believe that this is in error.";
 
   @Getter
   @NonNull
@@ -31,7 +30,8 @@ public class CommandInfo {
 
   @Getter
   @NonNull
-  private String label;
+  @Builder.Default
+  private String label = "";
 
   @Getter
   @NonNull
@@ -39,11 +39,13 @@ public class CommandInfo {
 
   @Getter
   @NonNull
-  private String usage;
+  @Builder.Default
+  private String usage = "";
 
   @Getter
   @NonNull
-  private String description;
+  @Builder.Default
+  private String description = "";
 
   public static class CommandInfoBuilder {
 
