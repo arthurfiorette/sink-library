@@ -6,7 +6,6 @@ import java.lang.reflect.Field;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
-
 import org.bukkit.command.CommandMap;
 import org.bukkit.plugin.PluginManager;
 
@@ -14,7 +13,8 @@ public class SimpleCommandReflector implements CommandReflector {
 
   private static final String COMMAND_MAP_FIELD = "commandMap";
 
-  private static final String EXC_TITLE = "Field not found while accessing the SimpleCommandMap class,";
+  private static final String EXC_TITLE =
+    "Field not found while accessing the SimpleCommandMap class,";
 
   @Getter
   @NonNull
@@ -40,16 +40,20 @@ public class SimpleCommandReflector implements CommandReflector {
       this.commandMap = (CommandMap) field.get(pluginManager);
     } catch (final NoSuchFieldException | IllegalAccessException | IllegalArgumentException e) {
       throw new EnablingException(
-          SimpleCommandReflector.EXC_TITLE + " maybe you are using an incompatible version?", e);
+        SimpleCommandReflector.EXC_TITLE + " maybe you are using an incompatible version?",
+        e
+      );
     } catch (final SecurityException e) {
       throw new EnablingException(
-          SimpleCommandReflector.EXC_TITLE + " do we have permission to do this?", e);
+        SimpleCommandReflector.EXC_TITLE + " do we have permission to do this?",
+        e
+      );
     }
   }
 
   private Field getCommandMapField() throws NoSuchFieldException, SecurityException {
-    final Field field = this.pluginManager.getClass()
-        .getDeclaredField(SimpleCommandReflector.COMMAND_MAP_FIELD);
+    final Field field =
+      this.pluginManager.getClass().getDeclaredField(SimpleCommandReflector.COMMAND_MAP_FIELD);
     field.setAccessible(true);
     return field;
   }
