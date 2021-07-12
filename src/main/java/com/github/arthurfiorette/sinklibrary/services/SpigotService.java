@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 import java.util.logging.Level;
-
 import lombok.experimental.UtilityClass;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -162,7 +161,7 @@ public final class SpigotService {
    * @param players the players to play the sound
    */
   public void playSound(final Sound sound, final Player... players) {
-    for(final Player p: players) {
+    for (final Player p : players) {
       p.playSound(p.getLocation(), sound, 3.0F, 0.5F);
     }
   }
@@ -184,29 +183,24 @@ public final class SpigotService {
       // Off
       case Integer.MAX_VALUE:
         return ChatColor.GRAY;
-
       // Severe
       case 1000:
         return ChatColor.RED;
-
       // Warning
       case 900:
         return ChatColor.YELLOW;
-
       // Info
       case 800:
-        // Config
+      // Config
       case 700:
         return ChatColor.GREEN;
-
       // Fine
       case 500:
-        // Finer
+      // Finer
       case 400:
-        // Finest
+      // Finest
       case 300:
         return ChatColor.AQUA;
-
       default:
         return ChatColor.WHITE;
     }
