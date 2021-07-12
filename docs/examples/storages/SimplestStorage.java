@@ -1,15 +1,13 @@
 package examples.storages;
 
-import java.util.UUID;
-
 import com.github.arthurfiorette.sinklibrary.data.storage.gson.GsonStorage;
 import com.github.arthurfiorette.sinklibrary.executor.BukkitExecutor;
 import com.github.arthurfiorette.sinklibrary.executor.TaskContext;
 import com.github.arthurfiorette.sinklibrary.interfaces.BasePlugin;
 import com.github.arthurfiorette.sinklibrary.uuid.UuidAdapter;
 import com.google.gson.GsonBuilder;
-
 import examples.SimpleModel;
+import java.util.UUID;
 
 public class SimplestStorage extends GsonStorage<UUID, SimpleModel> {
 

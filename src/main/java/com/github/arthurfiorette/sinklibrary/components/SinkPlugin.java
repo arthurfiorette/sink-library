@@ -3,7 +3,6 @@ package com.github.arthurfiorette.sinklibrary.components;
 import com.github.arthurfiorette.sinklibrary.interfaces.BasePlugin;
 import com.github.arthurfiorette.sinklibrary.interfaces.BaseService;
 import com.github.arthurfiorette.sinklibrary.interfaces.ComponentLoader;
-
 import java.util.logging.Level;
 import lombok.Getter;
 import lombok.NonNull;
@@ -44,8 +43,12 @@ public abstract class SinkPlugin extends JavaPlugin implements BasePlugin, BaseS
   }
 
   @Override
-  public void treatThrowable(final Class<?> author, final Throwable exc, final String message,
-      final Object... args) {
+  public void treatThrowable(
+    final Class<?> author,
+    final Throwable exc,
+    final String message,
+    final Object... args
+  ) {
     this.log(Level.SEVERE, "An exception occurred in class %s.", author.getSimpleName());
     this.log(Level.SEVERE, message, args);
     exc.printStackTrace();

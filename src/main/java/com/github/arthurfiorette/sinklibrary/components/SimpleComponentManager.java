@@ -5,7 +5,6 @@ import com.github.arthurfiorette.sinklibrary.exceptions.IllegalComponentExceptio
 import com.github.arthurfiorette.sinklibrary.interfaces.BaseComponent;
 import com.github.arthurfiorette.sinklibrary.interfaces.BaseService;
 import com.github.arthurfiorette.sinklibrary.interfaces.ComponentLoader;
-
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.logging.Level;
@@ -55,7 +54,7 @@ public class SimpleComponentManager implements ComponentManager {
     this.state = ManagerState.ENABLING;
     this.plugin.log(Level.INFO, "Enabling all services");
 
-    for(final BaseService service: this.services.values()) {
+    for (final BaseService service : this.services.values()) {
       try {
         service.enable();
         this.plugin.log(Level.INFO, "Service %s enabled", service.getClass().getSimpleName());
@@ -78,15 +77,18 @@ public class SimpleComponentManager implements ComponentManager {
     this.plugin.log(Level.INFO, "Disabling all services");
 
     final BaseService[] servicesArr = this.services.values().toArray(new BaseService[0]);
-    for(int i = servicesArr.length - 1; i >= 0; i--) {
+    for (int i = servicesArr.length - 1; i >= 0; i--) {
       final BaseService service = servicesArr[i];
       try {
         service.disable();
         this.plugin.log(Level.INFO, "Service %s disabled", service.getClass().getSimpleName());
       } catch (final Exception e) {
-        this.plugin.treatThrowable(service.getClass(),
+        this.plugin.treatThrowable(
+            service.getClass(),
             // Prevent infinite loop while disabling.
-            new RuntimeException(e), "Could not disable this service");
+            new RuntimeException(e),
+            "Could not disable this service"
+          );
       }
     }
 
@@ -120,7 +122,7 @@ public class SimpleComponentManager implements ComponentManager {
     this.components.clear();
     this.services.clear();
 
-    for(final ComponentLoader loader: plugin.components()) {
+    for (final ComponentLoader loader : plugin.components()) {
       final BaseComponent component = loader.get();
       final Class<? extends BaseComponent> clazz = component.getClass();
       this.checkTypeParameters(clazz);
