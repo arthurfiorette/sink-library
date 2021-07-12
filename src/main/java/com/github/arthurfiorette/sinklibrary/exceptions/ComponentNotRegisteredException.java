@@ -11,7 +11,7 @@ public class ComponentNotRegisteredException extends SinkException {
     super(
       String.format(
         "Attempt to get component: %s, but it isn't registered. Maybe the registration order is wrong in your plugin.",
-        cause
+        cause.getSimpleName()
       )
     );
   }

@@ -2,9 +2,14 @@ package com.github.arthurfiorette.sinklibrary.interfaces;
 
 import com.github.arthurfiorette.sinklibrary.components.ComponentManager;
 import com.github.arthurfiorette.sinklibrary.executor.TaskContext;
+import com.github.arthurfiorette.sinklibrary.services.SpigotService;
+
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Supplier;
 import java.util.logging.Level;
+
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.plugin.Plugin;
 
 public interface BasePlugin extends Plugin {
@@ -19,7 +24,9 @@ public interface BasePlugin extends Plugin {
   ComponentManager getManager();
 
   default void log(final Level level, final String msg, final Object... args) {
-    this.getLogger().log(level, String.format(msg, args));
+    Bukkit.getConsoleSender()
+        .sendMessage("[" + getName() + "] (" + SpigotService.colorizeLogLevel(level)
+            + level.getName() + ChatColor.RESET + ") " + String.format(msg, args));
   }
 
   default void runAsync(final Runnable runnable) {
