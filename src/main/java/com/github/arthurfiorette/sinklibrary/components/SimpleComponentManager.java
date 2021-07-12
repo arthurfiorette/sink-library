@@ -98,7 +98,7 @@ public class SimpleComponentManager implements ComponentManager {
   @Override
   @SuppressWarnings("unchecked")
   public <T extends BaseComponent> T getComponent(final Class<T> clazz) {
-    if (this.state != ManagerState.ENABLED) {
+    if (this.state.isEnabled()) {
       throw new ComponentNotRegisteredException(clazz);
     }
 
