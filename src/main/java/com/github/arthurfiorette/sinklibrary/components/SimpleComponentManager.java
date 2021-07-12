@@ -8,7 +8,6 @@ import com.github.arthurfiorette.sinklibrary.exceptions.ComponentNotRegisteredEx
 import com.github.arthurfiorette.sinklibrary.exceptions.IllegalComponentException;
 import com.github.arthurfiorette.sinklibrary.interfaces.BaseComponent;
 import com.github.arthurfiorette.sinklibrary.interfaces.BaseService;
-import com.google.common.collect.Iterables;
 
 import lombok.Getter;
 import lombok.NonNull;
@@ -78,7 +77,7 @@ public class SimpleComponentManager implements ComponentManager {
     this.state = ManagerState.DISABLING;
     this.plugin.log(Level.INFO, "Disabling all services");
 
-    final BaseService[] servicesArr = Iterables.toArray(this.services.values(), BaseService.class);
+    final BaseService[] servicesArr = this.services.values().toArray(new BaseService[0]);
     for(int i = servicesArr.length - 1; i >= 0; i--) {
       final BaseService service = servicesArr[i];
       try {
