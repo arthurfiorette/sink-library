@@ -1,12 +1,14 @@
 package examples.starter;
 
+import java.util.UUID;
+
 import com.github.arthurfiorette.sinklibrary.data.storage.AbstractStorage;
 import com.github.arthurfiorette.sinklibrary.executor.BukkitExecutor;
 import com.github.arthurfiorette.sinklibrary.executor.TaskContext;
 import com.github.arthurfiorette.sinklibrary.interfaces.BasePlugin;
 import com.github.arthurfiorette.sinklibrary.uuid.FastUuid;
+
 import examples.SimpleModel;
-import java.util.UUID;
 
 /**
  * Simple storage example, see more in docs/examples/storages

@@ -59,8 +59,8 @@ Sink Library</h1>
 
 public class ReadmeExample extends SinkPlugin {
   @Override
-  protected BaseComponent[] components() {
-    return new BaseComponent[] { new MyListener(this) };
+  protected ComponentLoader[] components() {
+    return new ComponentLoader[] { () -> new MyListener(this) };
   }
 
   ...

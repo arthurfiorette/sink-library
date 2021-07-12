@@ -1,11 +1,12 @@
 package examples;
 
-import com.github.arthurfiorette.sinklibrary.components.SinkPlugin;
-import com.github.arthurfiorette.sinklibrary.interfaces.BaseComponent;
-import com.github.arthurfiorette.sinklibrary.interfaces.BasePlugin;
-import com.github.arthurfiorette.sinklibrary.listener.SinkListener;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerJoinEvent;
+
+import com.github.arthurfiorette.sinklibrary.components.SinkPlugin;
+import com.github.arthurfiorette.sinklibrary.interfaces.BasePlugin;
+import com.github.arthurfiorette.sinklibrary.interfaces.ComponentLoader;
+import com.github.arthurfiorette.sinklibrary.listener.SinkListener;
 
 public class ReadmeExample extends SinkPlugin {
 
@@ -16,8 +17,8 @@ public class ReadmeExample extends SinkPlugin {
   public void disable() throws Exception {}
 
   @Override
-  protected BaseComponent[] components() {
-    return new BaseComponent[] { new MyListener(this) };
+  protected ComponentLoader[] components() {
+    return new ComponentLoader[] { () -> new MyListener(this) };
   }
 }
 
