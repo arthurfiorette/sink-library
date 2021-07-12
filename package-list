@@ -1,12 +1,13 @@
 com.github.arthurfiorette.sinklibrary.command
 com.github.arthurfiorette.sinklibrary.command.reflection
 com.github.arthurfiorette.sinklibrary.command.wrapper
+com.github.arthurfiorette.sinklibrary.components
 com.github.arthurfiorette.sinklibrary.config
 com.github.arthurfiorette.sinklibrary.config.addons
 com.github.arthurfiorette.sinklibrary.config.management
-com.github.arthurfiorette.sinklibrary.core
 com.github.arthurfiorette.sinklibrary.data.database
 com.github.arthurfiorette.sinklibrary.data.storage
+com.github.arthurfiorette.sinklibrary.data.storage.addons
 com.github.arthurfiorette.sinklibrary.data.storage.gson
 com.github.arthurfiorette.sinklibrary.exceptions
 com.github.arthurfiorette.sinklibrary.executor
