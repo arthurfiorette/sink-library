@@ -45,32 +45,28 @@ public class CommandWrapper extends Command {
    * {@inheritDoc}
    */
   @Override
-  public boolean execute(
-    final CommandSender sender,
-    final String nameOrAliasUsed,
-    final String[] args
-  ) {
+  public boolean execute(final CommandSender sender, final String nameOrAliasUsed,
+      final String[] args) {
     final Pair<CommandWrapper, List<String>> pair = this.findHandlerRecursively(args);
 
     if (!pair.getLeft().testPermission(sender)) {
       return true;
     }
-    
+
     try {
       pair.getLeft().command.handle(sender, pair.getRight());
     } catch (final Throwable e) {
       sender.sendMessage("§cThis command had some problems, we are sorry for the inconvenience...");
+      pair.getLeft().command.getBasePlugin().treatThrowable(pair.getLeft().command.getClass(), e,
+          "");
     }
 
     return true;
   }
 
   @Override
-  public List<String> tabComplete(
-    final CommandSender sender,
-    final String alias,
-    final String[] args
-  ) throws IllegalArgumentException {
+  public List<String> tabComplete(final CommandSender sender, final String alias,
+      final String[] args) throws IllegalArgumentException {
     final Pair<CommandWrapper, List<String>> pair = this.findHandlerRecursively(args);
     return pair.getLeft().command.onTabComplete(sender, pair.getRight());
   }
@@ -82,9 +78,8 @@ public class CommandWrapper extends Command {
     }
 
     if (this.getPermissionMessage().length() != 0) {
-      for (final String line : this.getPermissionMessage()
-        .replace("<permission>", this.getPermission())
-        .split("\n")) {
+      for(final String line: this.getPermissionMessage()
+          .replace("<permission>", this.getPermission()).split("\n")) {
         target.sendMessage(line);
       }
     }
@@ -111,8 +106,8 @@ public class CommandWrapper extends Command {
     // Começa a procura recusiva para handlers dos argumentos, e caso não for
     // encontrado,
     // continua sendo esta instancia
-    for (final String arg : args) {
-      for (final CommandWrapper wrapper : handler.subCommands) {
+    for(final String arg: args) {
+      for(final CommandWrapper wrapper: handler.subCommands) {
         if (wrapper.canHandle(arg)) {
           // Argumento encontrado!, Remova o nome da lista de argumentos. Pare
           // somente este primeiro for e continue a buscar por subhandlers deste
