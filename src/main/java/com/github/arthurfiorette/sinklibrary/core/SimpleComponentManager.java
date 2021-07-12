@@ -1,5 +1,6 @@
 package com.github.arthurfiorette.sinklibrary.core;
 
+import com.github.arthurfiorette.sinklibrary.exceptions.ComponentNotRegisteredException;
 import com.github.arthurfiorette.sinklibrary.exceptions.IllegalComponentException;
 import com.github.arthurfiorette.sinklibrary.interfaces.BaseComponent;
 import com.github.arthurfiorette.sinklibrary.interfaces.BaseService;
@@ -110,6 +111,10 @@ public final class SimpleComponentManager implements ComponentManager {
     BaseComponent component = this.components.get(clazz);
     if (component == null) {
       component = this.services.get(clazz);
+    }
+
+    if (component == null) {
+      throw new ComponentNotRegisteredException(clazz);
     }
     return (T) component;
   }

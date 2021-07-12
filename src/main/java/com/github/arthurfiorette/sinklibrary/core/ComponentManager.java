@@ -1,5 +1,6 @@
 package com.github.arthurfiorette.sinklibrary.core;
 
+import com.github.arthurfiorette.sinklibrary.exceptions.ComponentNotRegisteredException;
 import com.github.arthurfiorette.sinklibrary.interfaces.BaseComponent;
 
 public interface ComponentManager {
@@ -13,7 +14,7 @@ public interface ComponentManager {
    */
   void disableServices() throws IllegalStateException;
 
-  <T extends BaseComponent> T getComponent(Class<T> clazz);
+  <T extends BaseComponent> T getComponent(Class<T> clazz) throws ComponentNotRegisteredException;
 
   ManagerState getState();
 }
