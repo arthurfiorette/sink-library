@@ -50,12 +50,12 @@ public class CommandWrapper extends Command {
     final String nameOrAliasUsed,
     final String[] args
   ) {
-    if (!this.testPermission(sender)) {
-      return true;
-    }
-
     final Pair<CommandWrapper, List<String>> pair = this.findHandlerRecursively(args);
 
+    if (!pair.getLeft().testPermission(sender)) {
+      return true;
+    }
+    
     try {
       pair.getLeft().command.handle(sender, pair.getRight());
     } catch (final Throwable e) {
