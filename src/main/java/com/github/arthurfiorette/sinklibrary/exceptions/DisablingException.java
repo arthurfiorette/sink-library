@@ -35,7 +35,7 @@ public class DisablingException extends RuntimeException {
 
   @Override
   public String toString() {
-    final String s = this.getCause().getClass().getName();
+    final String s = this.getCause().getClass().getSimpleName();
     final String message = this.getLocalizedMessage();
     return (message != null) ? (s + ": " + message) : s;
   }
