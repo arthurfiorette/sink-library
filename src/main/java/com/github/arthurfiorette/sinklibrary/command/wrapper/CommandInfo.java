@@ -49,15 +49,16 @@ public class CommandInfo {
 
   public static class CommandInfoBuilder {
 
+    public CommandInfoBuilder() {
+      this.aliases = new ArrayList<>();
+    }
+
     // Disable these builder methods
     void subCommands() {}
 
     void aliases() {}
 
     public CommandInfoBuilder alias(final String alias) {
-      if (this.aliases == null) {
-        this.aliases = new ArrayList<>();
-      }
       this.aliases.add(alias);
       return this;
     }

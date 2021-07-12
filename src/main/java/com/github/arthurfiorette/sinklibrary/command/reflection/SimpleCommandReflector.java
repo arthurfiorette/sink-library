@@ -20,9 +20,11 @@ public class SimpleCommandReflector implements CommandReflector {
   private BasePlugin basePlugin;
 
   @Getter
+  @NonNull
   private CommandMap commandMap;
 
   @Getter
+  @NonNull
   private PluginManager pluginManager;
 
   @Override
