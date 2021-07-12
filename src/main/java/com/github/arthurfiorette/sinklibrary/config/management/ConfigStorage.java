@@ -3,7 +3,6 @@ package com.github.arthurfiorette.sinklibrary.config.management;
 import com.github.arthurfiorette.sinklibrary.config.BaseConfig;
 import com.github.arthurfiorette.sinklibrary.interfaces.BaseComponent;
 import com.github.arthurfiorette.sinklibrary.interfaces.BasePlugin;
-
 import java.util.EnumMap;
 import lombok.Getter;
 

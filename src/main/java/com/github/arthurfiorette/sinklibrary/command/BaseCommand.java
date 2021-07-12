@@ -3,7 +3,6 @@ package com.github.arthurfiorette.sinklibrary.command;
 import com.github.arthurfiorette.sinklibrary.command.wrapper.CommandInfo;
 import com.github.arthurfiorette.sinklibrary.interfaces.BaseComponent;
 import com.github.arthurfiorette.sinklibrary.interfaces.BasePlugin;
-
 import java.util.Collection;
 import java.util.List;
 import org.bukkit.command.CommandSender;

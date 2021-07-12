@@ -21,17 +21,17 @@ public interface BaseComponent {
    * With this example, you can enable a different NmsX class per version, and
    * only get it using componentManager.getComponent(Nms.class).
    * <p>
-   * 
+   *
    * <pre>
    * interface Nms { ... }
-   * 
+   *
    * // getRegistrationClass() returns Nms.class;
    * class NmsA implements BaseComponent, Nms { ... }
-   * 
+   *
    * // getRegistrationClass() returns Nms.class;
    * class NmsB implements BaseComponent, Nms { ... }
    * </pre>
-   * 
+   *
    * @return this registration class
    */
   default Class<? extends BaseComponent> getRegistrationClass() {

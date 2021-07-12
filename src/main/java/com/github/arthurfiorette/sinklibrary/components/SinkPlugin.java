@@ -3,7 +3,6 @@ package com.github.arthurfiorette.sinklibrary.components;
 import com.github.arthurfiorette.sinklibrary.interfaces.BaseComponent;
 import com.github.arthurfiorette.sinklibrary.interfaces.BasePlugin;
 import com.github.arthurfiorette.sinklibrary.interfaces.BaseService;
-
 import java.util.logging.Level;
 import lombok.Getter;
 import lombok.NonNull;

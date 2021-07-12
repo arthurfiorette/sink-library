@@ -2,7 +2,6 @@ package com.github.arthurfiorette.sinklibrary.interfaces;
 
 import com.github.arthurfiorette.sinklibrary.components.ComponentManager;
 import com.github.arthurfiorette.sinklibrary.executor.TaskContext;
-
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Supplier;
 import java.util.logging.Level;
