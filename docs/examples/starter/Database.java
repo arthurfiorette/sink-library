@@ -1,10 +1,11 @@
 package examples.starter;
 
-import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.UUID;
+
+import com.github.arthurfiorette.sinklibrary.interfaces.BasePlugin;
 
 public class Database
   implements com.github.arthurfiorette.sinklibrary.data.database.Database<UUID, String[]> {

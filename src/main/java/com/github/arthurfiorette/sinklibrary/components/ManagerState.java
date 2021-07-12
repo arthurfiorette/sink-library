@@ -1,4 +1,4 @@
-package com.github.arthurfiorette.sinklibrary.core;
+package com.github.arthurfiorette.sinklibrary.components;
 
 public enum ManagerState {
   ENABLING(true),

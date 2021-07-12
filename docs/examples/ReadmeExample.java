@@ -1,8 +1,8 @@
 package examples;
 
-import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
-import com.github.arthurfiorette.sinklibrary.core.SinkPlugin;
+import com.github.arthurfiorette.sinklibrary.components.SinkPlugin;
 import com.github.arthurfiorette.sinklibrary.interfaces.BaseComponent;
+import com.github.arthurfiorette.sinklibrary.interfaces.BasePlugin;
 import com.github.arthurfiorette.sinklibrary.listener.SinkListener;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerJoinEvent;

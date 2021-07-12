@@ -1,7 +1,8 @@
 package com.github.arthurfiorette.sinklibrary.command.reflection;
 
-import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
 import com.github.arthurfiorette.sinklibrary.exceptions.EnablingException;
+import com.github.arthurfiorette.sinklibrary.interfaces.BasePlugin;
+
 import java.lang.reflect.Field;
 import lombok.Getter;
 import lombok.NonNull;

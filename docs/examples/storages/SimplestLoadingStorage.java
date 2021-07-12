@@ -1,9 +1,9 @@
 package examples.storages;
 
-import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
 import com.github.arthurfiorette.sinklibrary.data.storage.gson.GsonLoadingStorage;
 import com.github.arthurfiorette.sinklibrary.executor.BukkitExecutor;
 import com.github.arthurfiorette.sinklibrary.executor.TaskContext;
+import com.github.arthurfiorette.sinklibrary.interfaces.BasePlugin;
 import com.github.arthurfiorette.sinklibrary.uuid.UuidAdapter;
 import com.google.gson.GsonBuilder;
 import examples.SimpleModel;

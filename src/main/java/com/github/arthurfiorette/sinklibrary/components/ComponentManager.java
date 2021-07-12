@@ -1,4 +1,4 @@
-package com.github.arthurfiorette.sinklibrary.core;
+package com.github.arthurfiorette.sinklibrary.components;
 
 import com.github.arthurfiorette.sinklibrary.exceptions.ComponentNotRegisteredException;
 import com.github.arthurfiorette.sinklibrary.interfaces.BaseComponent;

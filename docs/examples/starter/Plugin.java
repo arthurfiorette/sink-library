@@ -1,6 +1,6 @@
 package examples.starter;
 
-import com.github.arthurfiorette.sinklibrary.core.SinkPlugin;
+import com.github.arthurfiorette.sinklibrary.components.SinkPlugin;
 import com.github.arthurfiorette.sinklibrary.interfaces.BaseComponent;
 
 public class Plugin extends SinkPlugin {
