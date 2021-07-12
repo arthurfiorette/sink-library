@@ -5,7 +5,6 @@ import com.github.arthurfiorette.sinklibrary.interfaces.BasePlugin;
 import java.lang.reflect.Field;
 import lombok.Getter;
 import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
 import org.bukkit.command.CommandMap;
 import org.bukkit.plugin.PluginManager;
 

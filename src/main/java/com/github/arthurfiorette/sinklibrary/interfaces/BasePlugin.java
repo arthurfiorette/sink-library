@@ -19,7 +19,7 @@ public interface BasePlugin extends Plugin {
   ComponentManager getManager();
 
   default void log(final Level level, final String msg, final Object... args) {
-    this.getLogger().log(level, msg, args);
+    this.getLogger().log(level, String.format(msg, args));
   }
 
   default void runAsync(final Runnable runnable) {
