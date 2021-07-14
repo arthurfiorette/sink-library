@@ -11,6 +11,7 @@ com.github.arthurfiorette.sinklibrary.data.storage.addons
 com.github.arthurfiorette.sinklibrary.data.storage.gson
 com.github.arthurfiorette.sinklibrary.exceptions
 com.github.arthurfiorette.sinklibrary.executor
+com.github.arthurfiorette.sinklibrary.executor.v2
 com.github.arthurfiorette.sinklibrary.interfaces
 com.github.arthurfiorette.sinklibrary.item
 com.github.arthurfiorette.sinklibrary.listener
