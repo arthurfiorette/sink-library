@@ -2,6 +2,8 @@ package com.github.arthurfiorette.sinklibrary.menu;
 
 import com.github.arthurfiorette.sinklibrary.interfaces.BasePlugin;
 import com.github.arthurfiorette.sinklibrary.menu.item.MenuItem;
+
+import java.util.ArrayList;
 import java.util.List;
 import lombok.Getter;
 import org.bukkit.entity.Player;
@@ -13,7 +15,7 @@ public abstract class PageableMenu extends PrivateMenu {
   @Getter
   private int page = 1;
 
-  protected List<MenuItem> lastPageableItems;
+  protected List<MenuItem> lastPageableItems = new ArrayList<>();
 
   public PageableMenu(final BasePlugin plugin, final Player owner, final String title,
       final int rows) {
@@ -48,12 +50,13 @@ public abstract class PageableMenu extends PrivateMenu {
    */
   @Override
   public void update() {
-    super.update();
     this.updatePageable();
+    super.update();
   }
 
   public void updatePageable() {
     final byte[] slots = this.pageableSlots();
+
     this.lastPageableItems = this.pageableItems();
 
     // List first index to this page
@@ -65,7 +68,10 @@ public abstract class PageableMenu extends PrivateMenu {
       MenuItem item;
       try {
         item = this.lastPageableItems.get(i);
-      } catch (final ArrayIndexOutOfBoundsException e) {
+
+        // When the pageable list ends without completing all
+        // pageableSlots().length size.
+      } catch (final IndexOutOfBoundsException ignore) {
         item = null;
       }
 
@@ -78,19 +84,19 @@ public abstract class PageableMenu extends PrivateMenu {
 
   public void nextPage(final boolean update) {
     if (this.hasNextPage()) {
-      this.page++;
-      if (update) {
-        this.update();
-      }
+      this.page += 1;
+    }
+    if (update) {
+      this.update();
     }
   }
 
   public void previousPage(final boolean update) {
     if (this.hasPreviousPage()) {
-      this.page--;
-      if (update) {
-        this.update();
-      }
+      this.page -= 1;
+    }
+    if (update) {
+      this.update();
     }
   }
 

@@ -31,8 +31,7 @@ public class FastUuid {
   public static final int UUID_STRING_LENGTH = 36;
 
   // Minus 4 dashes chars
-  public static final int MOJANG_ID_LENGTH = FastUuid.UUID_STRING_LENGTH - 4; 
-
+  public static final int MOJANG_ID_LENGTH = FastUuid.UUID_STRING_LENGTH - 4;
 
   public static final char[] HEX_DIGITS = new char[] { '0', '1', '2', '3', '4', '5', '6', '7', '8',
       '9', 'a', 'b', 'c', 'd', 'e', 'f', };
