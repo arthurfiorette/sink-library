@@ -2,7 +2,6 @@ package com.github.arthurfiorette.sinklibrary.menu;
 
 import com.github.arthurfiorette.sinklibrary.interfaces.BasePlugin;
 import com.github.arthurfiorette.sinklibrary.menu.item.MenuItem;
-
 import java.util.ArrayList;
 import java.util.List;
 import lombok.Getter;
@@ -17,8 +16,12 @@ public abstract class PageableMenu extends PrivateMenu {
 
   protected List<MenuItem> lastPageableItems = new ArrayList<>();
 
-  public PageableMenu(final BasePlugin plugin, final Player owner, final String title,
-      final int rows) {
+  public PageableMenu(
+    final BasePlugin plugin,
+    final Player owner,
+    final String title,
+    final int rows
+  ) {
     super(plugin, owner, title, rows);
   }
 
@@ -64,11 +67,10 @@ public abstract class PageableMenu extends PrivateMenu {
 
     byte slotIndex = 0;
     // for from initial to last element.
-    for(int i = initial; i < (initial + slots.length); i++) {
+    for (int i = initial; i < (initial + slots.length); i++) {
       MenuItem item;
       try {
         item = this.lastPageableItems.get(i);
-
         // When the pageable list ends without completing all
         // pageableSlots().length size.
       } catch (final IndexOutOfBoundsException ignore) {
@@ -124,7 +126,7 @@ public abstract class PageableMenu extends PrivateMenu {
     }
 
     int slotIndex = -1;
-    for(int i = 0; i < slots.length; i++) {
+    for (int i = 0; i < slots.length; i++) {
       if (slot == slots[i]) {
         slotIndex = i;
         break;

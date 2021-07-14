@@ -1,34 +1,33 @@
 package examples.storages;
 
-import java.util.UUID;
-
 import com.github.arthurfiorette.sinklibrary.data.storage.gson.GsonStorage;
 import com.github.arthurfiorette.sinklibrary.interfaces.BasePlugin;
 import com.github.arthurfiorette.sinklibrary.uuid.UuidAdapter;
 import com.google.gson.GsonBuilder;
-
 import examples.SimpleModel;
+import java.util.UUID;
 
 public class SimplestStorage extends GsonStorage<UUID, SimpleModel> {
 
   public SimplestStorage(final BasePlugin plugin) {
     super(
-        // this plugin instance
-        plugin,
-        // Your database component, just be sure that the database is being
-        // registered before this storage.
-        plugin.getComponent(/* my database component */null),
-        // The class of your instance
-        SimpleModel.class,
-        // The generator function. This function is called when the databse
-        // return null for a key, meaning that it does not have this value
-        // saved, so we have to create a new one.
-        id -> {
-          final SimpleModel model = new SimpleModel();
-          model.setId(id);
-          model.setName("Model A");
-          return model;
-        });
+      // this plugin instance
+      plugin,
+      // Your database component, just be sure that the database is being
+      // registered before this storage.
+      plugin.getComponent(/* my database component */null),
+      // The class of your instance
+      SimpleModel.class,
+      // The generator function. This function is called when the databse
+      // return null for a key, meaning that it does not have this value
+      // saved, so we have to create a new one.
+      id -> {
+        final SimpleModel model = new SimpleModel();
+        model.setId(id);
+        model.setName("Model A");
+        return model;
+      }
+    );
     // As we are using UUID as keys, we can override the default gson instance
     // to use an faster UUID Adapter and pass any other preference
     // If you want use Mojang ids, use MojangIdAdapter instead.

@@ -63,7 +63,7 @@ public class MemoryDatabase<K, T> implements Database<K, T> {
   public Collection<T> getMany(final Collection<K> keys) {
     this.ensureState(true);
     final List<T> list = new ArrayList<>();
-    for(final K key: keys) {
+    for (final K key : keys) {
       final T t = this.get(key);
       if (t != null) {
         list.add(t);

@@ -471,8 +471,10 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * @return Requested List of String.
    */
   default List<String> getStringList(final P path, final ReplacerFunction replacer) {
-    return this.getStringList(path).stream().map(str -> Replacer.replace(str, replacer))
-        .collect(Collectors.toList());
+    return this.getStringList(path)
+      .stream()
+      .map(str -> Replacer.replace(str, replacer))
+      .collect(Collectors.toList());
   }
 
   /**

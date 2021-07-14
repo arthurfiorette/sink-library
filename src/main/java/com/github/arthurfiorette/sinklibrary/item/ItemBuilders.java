@@ -36,11 +36,13 @@ public class ItemBuilders {
    */
   public static ItemBuilder ofHead(final String playerName) {
     final ItemBuilder builder = new ItemBuilder(Material.SKULL_ITEM).setDurability(3);
-    return builder.addCustomMeta(im -> {
-      final SkullMeta sm = (SkullMeta) im;
-      sm.setOwner(playerName);
-      return sm;
-    });
+    return builder.addCustomMeta(
+      im -> {
+        final SkullMeta sm = (SkullMeta) im;
+        sm.setOwner(playerName);
+        return sm;
+      }
+    );
   }
 
   /**
@@ -52,8 +54,9 @@ public class ItemBuilders {
    */
   public static ItemBuilder ofHeadUrl(final String url) {
     final GameProfile profile = new GameProfile(UUID.randomUUID(), null);
-    final byte[] encodedData = Base64
-        .encodeBase64(String.format("{textures:{SKIN:{url:\"%s\"}}}", url).getBytes());
+    final byte[] encodedData = Base64.encodeBase64(
+      String.format("{textures:{SKIN:{url:\"%s\"}}}", url).getBytes()
+    );
     profile.getProperties().put("textures", new Property("textures", new String(encodedData)));
     return ItemBuilders.ofSkullGameProfile(profile);
   }
@@ -67,17 +70,19 @@ public class ItemBuilders {
    */
   public static ItemBuilder ofSkullGameProfile(final GameProfile gameProfile) {
     final ItemBuilder builder = new ItemBuilder(Material.SKULL_ITEM).setDurability(3);
-    builder.addCustomMeta(meta -> {
-      try {
-        final SkullMeta headMeta = (SkullMeta) meta;
-        final Field profileField = headMeta.getClass().getDeclaredField("profile");
-        profileField.setAccessible(true);
-        profileField.set(headMeta, gameProfile);
-        return headMeta;
-      } catch (IllegalAccessException | NoSuchFieldException restore) {
-        return meta;
+    builder.addCustomMeta(
+      meta -> {
+        try {
+          final SkullMeta headMeta = (SkullMeta) meta;
+          final Field profileField = headMeta.getClass().getDeclaredField("profile");
+          profileField.setAccessible(true);
+          profileField.set(headMeta, gameProfile);
+          return headMeta;
+        } catch (IllegalAccessException | NoSuchFieldException restore) {
+          return meta;
+        }
       }
-    });
+    );
     return builder;
   }
 

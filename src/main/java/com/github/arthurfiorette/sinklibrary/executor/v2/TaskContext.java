@@ -1,16 +1,13 @@
 package com.github.arthurfiorette.sinklibrary.executor.v2;
 
+import com.github.arthurfiorette.sinklibrary.interfaces.BasePlugin;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-
 import org.bukkit.Bukkit;
 
-import com.github.arthurfiorette.sinklibrary.interfaces.BasePlugin;
-
 public enum TaskContext {
-
   /**
    * Represents the synchronous context of the bukkit.
    *
@@ -28,8 +25,12 @@ public enum TaskContext {
     }
 
     @Override
-    public void runTimer(final BasePlugin plugin, final Runnable runnable, final long delay,
-        final long interval) {
+    public void runTimer(
+      final BasePlugin plugin,
+      final Runnable runnable,
+      final long delay,
+      final long interval
+    ) {
       Bukkit.getScheduler().runTaskTimer(plugin, runnable, delay, interval);
     }
   },
@@ -52,11 +53,19 @@ public enum TaskContext {
     }
 
     @Override
-    public void runTimer(final BasePlugin plugin, final Runnable runnable, final long delay,
-        final long interval) {
+    public void runTimer(
+      final BasePlugin plugin,
+      final Runnable runnable,
+      final long delay,
+      final long interval
+    ) {
       final ScheduledExecutorService service = TaskContext.asScheduled(plugin);
-      service.scheduleAtFixedRate(runnable, TaskContext.ticksToSecond(delay),
-          TaskContext.ticksToSecond(interval), TimeUnit.SECONDS);
+      service.scheduleAtFixedRate(
+        runnable,
+        TaskContext.ticksToSecond(delay),
+        TaskContext.ticksToSecond(interval),
+        TimeUnit.SECONDS
+      );
     }
   },
 
@@ -77,11 +86,19 @@ public enum TaskContext {
     }
 
     @Override
-    public void runTimer(final BasePlugin plugin, final Runnable runnable, final long delay,
-        final long interval) {
+    public void runTimer(
+      final BasePlugin plugin,
+      final Runnable runnable,
+      final long delay,
+      final long interval
+    ) {
       final ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
-      executor.scheduleAtFixedRate(runnable, TaskContext.ticksToSecond(delay),
-          TaskContext.ticksToSecond(interval), TimeUnit.SECONDS);
+      executor.scheduleAtFixedRate(
+        runnable,
+        TaskContext.ticksToSecond(delay),
+        TaskContext.ticksToSecond(interval),
+        TimeUnit.SECONDS
+      );
       executor.shutdown();
     }
   };
@@ -120,7 +137,8 @@ public enum TaskContext {
     final ExecutorService executor = plugin.getExecutor();
     if (!(executor instanceof ScheduledExecutorService)) {
       throw new IllegalArgumentException(
-          "To ran scheduled tasks, your plugin must use a java.util.concurrent.ScheduledExecutorService");
+        "To ran scheduled tasks, your plugin must use a java.util.concurrent.ScheduledExecutorService"
+      );
     }
     return (ScheduledExecutorService) executor;
   }
@@ -128,5 +146,4 @@ public enum TaskContext {
   private static long ticksToSecond(final long ticks) {
     return ticks * 20;
   }
-
 }

@@ -47,23 +47,18 @@ public enum ClickAction {
       case PLACE_SOME:
       case SWAP_WITH_CURSOR:
         return ClickAction.LEFT;
-
       case PICKUP_HALF:
       case PLACE_ONE:
         return ClickAction.RIGHT;
-
       case MOVE_TO_OTHER_INVENTORY:
         return ClickAction.SHIFT_LEFT;
-
       case DROP_ALL_CURSOR:
       case DROP_ALL_SLOT:
       case DROP_ONE_CURSOR:
       case DROP_ONE_SLOT:
         return ClickAction.DROP;
-
       case CLONE_STACK:
         return ClickAction.SCROLL;
-
       default:
         return ClickAction.OTHER;
     }

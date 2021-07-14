@@ -1,11 +1,10 @@
 package com.github.arthurfiorette.sinklibrary.executor;
 
+import com.github.arthurfiorette.sinklibrary.interfaces.BasePlugin;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitScheduler;
 import org.bukkit.scheduler.BukkitTask;
-
-import com.github.arthurfiorette.sinklibrary.interfaces.BasePlugin;
 
 /**
  * A helper enum to run schedule task with {@link BukkitScheduler}
@@ -33,8 +32,12 @@ public enum TaskContext {
     }
 
     @Override
-    public BukkitTask runTimer(final Plugin plugin, final Runnable runnable, final long delay,
-        final long interval) {
+    public BukkitTask runTimer(
+      final Plugin plugin,
+      final Runnable runnable,
+      final long delay,
+      final long interval
+    ) {
       return Bukkit.getScheduler().runTaskTimer(plugin, runnable, delay, interval);
     }
   },
@@ -71,8 +74,12 @@ public enum TaskContext {
      * {@inheritDoc}
      */
     @Override
-    public BukkitTask runTimer(final Plugin plugin, final Runnable runnable, final long delay,
-        final long interval) {
+    public BukkitTask runTimer(
+      final Plugin plugin,
+      final Runnable runnable,
+      final long delay,
+      final long interval
+    ) {
       return Bukkit.getScheduler().runTaskTimerAsynchronously(plugin, runnable, delay, interval);
     }
   };

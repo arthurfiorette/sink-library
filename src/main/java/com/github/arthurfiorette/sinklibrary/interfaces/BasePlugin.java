@@ -40,9 +40,18 @@ public interface BasePlugin extends Plugin {
   }
 
   default void log(final Level level, final String msg, final Object... args) {
-    Bukkit.getConsoleSender()
-        .sendMessage("[" + this.getName() + "] (" + SpigotService.colorizeLogLevel(level)
-            + level.getName() + ChatColor.RESET + ") " + String.format(msg, args));
+    Bukkit
+      .getConsoleSender()
+      .sendMessage(
+        "[" +
+        this.getName() +
+        "] (" +
+        SpigotService.colorizeLogLevel(level) +
+        level.getName() +
+        ChatColor.RESET +
+        ") " +
+        String.format(msg, args)
+      );
   }
 
   default <T extends BaseComponent> T getComponent(final Class<T> clazz) {
