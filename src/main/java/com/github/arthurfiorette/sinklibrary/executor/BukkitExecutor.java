@@ -10,7 +10,12 @@ import org.bukkit.scheduler.BukkitScheduler;
 /**
  * Simple interface to target all executors that runs with a
  * {@link BukkitScheduler}.
+ *
+ * @deprecated in flavor of
+ * {@link com.github.arthurfiorette.sinklibrary.executor.v2.TaskContext} and
+ * {@link BasePlugin#getExecutor()}
  */
+@Deprecated
 @UtilityClass
 public final class BukkitExecutor {
 
@@ -48,11 +53,8 @@ public final class BukkitExecutor {
    *
    * @throws IllegalArgumentException if {@code nThreads <= 0}
    */
-  public ExecutorService newFixedThreadPool(
-    final BasePlugin plugin,
-    final TaskContext context,
-    final int nThreads
-  ) {
+  public ExecutorService newFixedThreadPool(final BasePlugin plugin, final TaskContext context,
+      final int nThreads) {
     return Executors.newFixedThreadPool(nThreads, new BukkitThreadFactory(plugin, context));
   }
 
@@ -69,11 +71,8 @@ public final class BukkitExecutor {
    *
    * @throws IllegalArgumentException if {@code corePoolSize < 0}
    */
-  public ScheduledExecutorService newScheduledThreadPool(
-    final BasePlugin plugin,
-    final TaskContext context,
-    final int corePoolSize
-  ) {
+  public ScheduledExecutorService newScheduledThreadPool(final BasePlugin plugin,
+      final TaskContext context, final int corePoolSize) {
     return Executors.newScheduledThreadPool(corePoolSize, new BukkitThreadFactory(plugin, context));
   }
 
@@ -89,10 +88,8 @@ public final class BukkitExecutor {
    *
    * @return the newly created single-threaded Executor
    */
-  public ExecutorService newSingleThreadExecutor(
-    final BasePlugin plugin,
-    final TaskContext context
-  ) {
+  public ExecutorService newSingleThreadExecutor(final BasePlugin plugin,
+      final TaskContext context) {
     return Executors.newSingleThreadExecutor(new BukkitThreadFactory(plugin, context));
   }
 
@@ -114,10 +111,8 @@ public final class BukkitExecutor {
    *
    * @return a newly created scheduled executor
    */
-  public ScheduledExecutorService newSingleThreadScheduledExecutor(
-    final BasePlugin plugin,
-    final TaskContext context
-  ) {
+  public ScheduledExecutorService newSingleThreadScheduledExecutor(final BasePlugin plugin,
+      final TaskContext context) {
     return Executors.newSingleThreadScheduledExecutor(new BukkitThreadFactory(plugin, context));
   }
 }

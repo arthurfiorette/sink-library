@@ -1,5 +1,8 @@
 package com.github.arthurfiorette.sinklibrary.data.storage.gson;
 
+import java.util.function.Function;
+import java.util.function.UnaryOperator;
+
 import com.github.arthurfiorette.sinklibrary.data.database.Database;
 import com.github.arthurfiorette.sinklibrary.data.storage.LoadingStorage;
 import com.github.arthurfiorette.sinklibrary.interfaces.BasePlugin;
@@ -7,9 +10,7 @@ import com.google.common.cache.CacheBuilder;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
-import java.util.concurrent.Executor;
-import java.util.function.Function;
-import java.util.function.UnaryOperator;
+
 import lombok.Getter;
 import lombok.NonNull;
 
@@ -30,15 +31,10 @@ public class GsonLoadingStorage<K, V> extends LoadingStorage<K, V, JsonObject> {
   @NonNull
   protected Gson gson = new Gson();
 
-  public GsonLoadingStorage(
-    final BasePlugin plugin,
-    final Database<K, JsonObject> database,
-    final Class<V> clazz,
-    final Executor executor,
-    final Function<K, V> generator,
-    final UnaryOperator<CacheBuilder<Object, Object>> builder
-  ) {
-    super(database, executor, builder);
+  public GsonLoadingStorage(final BasePlugin plugin, final Database<K, JsonObject> database,
+      final Class<V> clazz, final Function<K, V> generator,
+      final UnaryOperator<CacheBuilder<Object, Object>> builder) {
+    super(database, builder);
     this.basePlugin = plugin;
     this.clazz = clazz;
     this.generator = generator;

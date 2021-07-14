@@ -1,12 +1,12 @@
 package examples.starter;
 
+import java.util.UUID;
+
 import com.github.arthurfiorette.sinklibrary.data.storage.AbstractStorage;
-import com.github.arthurfiorette.sinklibrary.executor.BukkitExecutor;
-import com.github.arthurfiorette.sinklibrary.executor.TaskContext;
 import com.github.arthurfiorette.sinklibrary.interfaces.BasePlugin;
 import com.github.arthurfiorette.sinklibrary.uuid.FastUuid;
+
 import examples.SimpleModel;
-import java.util.UUID;
 
 /**
  * Simple storage example, see more in docs/examples/storages
@@ -15,19 +15,13 @@ import java.util.UUID;
  */
 public class Storage extends AbstractStorage<UUID, SimpleModel, String[]> {
 
-  private final BasePlugin plugin;
-
   /**
    * Note that we only use the plugin as an argument, and get the database after
    * it. with {@link BasePlugin#getComponent(Class)} or
    * {@link BasePlugin#getService(Class)}
    */
-  public Storage(final BasePlugin plugin) {
-    super(
-      plugin.getComponent(Database.class),
-      BukkitExecutor.newFixedThreadPool(plugin, TaskContext.ASYNC, 2)
-    );
-    this.plugin = plugin;
+  public Storage(final BasePlugin basePlugin) {
+    super(basePlugin.getComponent(Database.class), basePlugin);
   }
 
   /**
@@ -47,8 +41,8 @@ public class Storage extends AbstractStorage<UUID, SimpleModel, String[]> {
    * Uses {@link FastUuid#toString(UUID)} to generate an UUID from the string id
    * faster.
    *
-   * @see SerializingExamples for advanced examples to generate an id
-   * from this string faster
+   * @see SerializingExamples for advanced examples to generate an id from this
+   * string faster
    */
   @Override
   public SimpleModel deserialize(final String[] args) {
@@ -68,10 +62,5 @@ public class Storage extends AbstractStorage<UUID, SimpleModel, String[]> {
     obj.setId(id);
     obj.setName("Foo");
     return obj;
-  }
-
-  @Override
-  public BasePlugin getBasePlugin() {
-    return this.plugin;
   }
 }

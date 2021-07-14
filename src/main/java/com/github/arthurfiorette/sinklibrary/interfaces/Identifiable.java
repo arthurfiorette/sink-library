@@ -8,10 +8,10 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
 /**
- * This class is used to help any objects that are  with
- * {@link org.bukkit.entity.Player} or {@link java.util.UUID},related as Storing them
- * with the Player object isn't safety, a {@link java.util.UUID} should be used
- * instead.
+ * This class is used to help any objects that are with
+ * {@link org.bukkit.entity.Player} or {@link java.util.UUID},related as Storing
+ * them with the Player object isn't safety, a {@link java.util.UUID} should be
+ * used instead.
  *
  * @author https://github.com/ArthurFiorette/sink-library/
  */

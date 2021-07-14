@@ -1,11 +1,12 @@
 package examples;
 
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.player.PlayerJoinEvent;
+
 import com.github.arthurfiorette.sinklibrary.components.SinkPlugin;
 import com.github.arthurfiorette.sinklibrary.interfaces.BasePlugin;
 import com.github.arthurfiorette.sinklibrary.interfaces.ComponentLoader;
 import com.github.arthurfiorette.sinklibrary.listener.SinkListener;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.player.PlayerJoinEvent;
 
 public class ReadmeExample extends SinkPlugin {
 

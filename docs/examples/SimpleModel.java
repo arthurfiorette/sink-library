@@ -1,8 +1,9 @@
 package examples;
 
-import com.github.arthurfiorette.sinklibrary.uuid.FastUuid;
 import java.util.Objects;
 import java.util.UUID;
+
+import com.github.arthurfiorette.sinklibrary.uuid.FastUuid;
 
 /**
  * Simple class model that contains an id and an name to be used in our examples

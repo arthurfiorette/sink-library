@@ -8,14 +8,10 @@ import org.bukkit.inventory.Inventory;
 public abstract class PrivateMenu extends StaticMenu {
 
   @Getter
-  protected Player owner;
+  protected final Player owner;
 
-  public PrivateMenu(
-    final BasePlugin plugin,
-    final Player owner,
-    final String title,
-    final int rows
-  ) {
+  public PrivateMenu(final BasePlugin plugin, final Player owner, final String title,
+      final int rows) {
     super(plugin, title, rows);
     this.owner = owner;
   }

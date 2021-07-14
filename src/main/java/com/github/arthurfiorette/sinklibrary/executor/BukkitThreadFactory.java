@@ -16,7 +16,12 @@ import lombok.RequiredArgsConstructor;
  * applications to use special thread subclasses, priorities, etc.
  *
  * @author https://github.com/ArthurFiorette/sink-library/
+ *
+ * @deprecated in flavor of
+ * {@link com.github.arthurfiorette.sinklibrary.executor.v2.TaskContext} and
+ * {@link BasePlugin#getExecutor()}
  */
+@Deprecated
 @RequiredArgsConstructor
 public class BukkitThreadFactory implements ThreadFactory, BaseComponent {
 
@@ -30,19 +35,14 @@ public class BukkitThreadFactory implements ThreadFactory, BaseComponent {
 
   @Override
   public Thread newThread(final Runnable runnable) {
-    final Thread thread = new Thread(
-      () -> {
-        try {
-          this.context.run(this.basePlugin, runnable);
-        } catch (final Throwable t) {
-          this.basePlugin.treatThrowable(
-              this.getClass(),
-              t,
-              "Catched exception while running this thread."
-            );
-        }
+    final Thread thread = new Thread(() -> {
+      try {
+        this.context.run(this.basePlugin, runnable);
+      } catch (final Throwable t) {
+        this.basePlugin.treatThrowable(this.getClass(), t,
+            "Catched exception while running this thread.");
       }
-    );
+    });
     thread.setDaemon(false);
     thread.setName(this.getClass().getSimpleName() + "> " + runnable.getClass().getSimpleName());
     return thread;

@@ -15,12 +15,8 @@ public abstract class PageableMenu extends PrivateMenu {
 
   protected List<MenuItem> lastPageableItems;
 
-  public PageableMenu(
-    final BasePlugin plugin,
-    final Player owner,
-    final String title,
-    final int rows
-  ) {
+  public PageableMenu(final BasePlugin plugin, final Player owner, final String title,
+      final int rows) {
     super(plugin, owner, title, rows);
   }
 
@@ -52,12 +48,8 @@ public abstract class PageableMenu extends PrivateMenu {
    */
   @Override
   public void update() {
-    this.updateStatic();
-    this.updatePageable();
-  }
-
-  public void updateStatic() {
     super.update();
+    this.updatePageable();
   }
 
   public void updatePageable() {
@@ -69,7 +61,7 @@ public abstract class PageableMenu extends PrivateMenu {
 
     byte slotIndex = 0;
     // for from initial to last element.
-    for (int i = initial; i < (initial + slots.length); i++) {
+    for(int i = initial; i < (initial + slots.length); i++) {
       MenuItem item;
       try {
         item = this.lastPageableItems.get(i);
@@ -126,7 +118,7 @@ public abstract class PageableMenu extends PrivateMenu {
     }
 
     int slotIndex = -1;
-    for (int i = 0; i < slots.length; i++) {
+    for(int i = 0; i < slots.length; i++) {
       if (slot == slots[i]) {
         slotIndex = i;
         break;

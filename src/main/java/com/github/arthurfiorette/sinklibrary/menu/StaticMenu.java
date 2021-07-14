@@ -42,7 +42,6 @@ public abstract class StaticMenu implements BaseMenu {
     this.inventory = Bukkit.createInventory(this, rows * 9, title);
     this.title = this.inventory.getTitle();
     this.rows = this.inventory.getSize() % 9;
-    this.update(); // Calls the first draw
   }
 
   public StaticMenu(final BasePlugin plugin, final Inventory inventory) {
@@ -53,7 +52,6 @@ public abstract class StaticMenu implements BaseMenu {
     this.inventory = inventory;
     this.title = inventory.getTitle();
     this.rows = inventory.getSize() % 9;
-    this.update(); // Calls the first draw
   }
 
   public void openFor(final Player player, final boolean update) {
@@ -66,11 +64,9 @@ public abstract class StaticMenu implements BaseMenu {
   @Override
   public void update() {
     this.lastStaticItems = this.staticItems();
-    this.lastStaticItems.forEach(
-        (slot, item) -> {
-          this.inventory.setItem(slot, item == null ? this.defaultItem : item.getItem());
-        }
-      );
+    this.lastStaticItems.forEach((slot, item) -> {
+      this.inventory.setItem(slot, item == null ? this.defaultItem : item.getItem());
+    });
   }
 
   @Override
