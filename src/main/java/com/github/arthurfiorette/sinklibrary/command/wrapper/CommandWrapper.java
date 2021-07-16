@@ -45,50 +45,48 @@ public class CommandWrapper extends Command {
    * {@inheritDoc}
    */
   @Override
-  public boolean execute(
-    final CommandSender sender,
-    final String nameOrAliasUsed,
-    final String[] args
-  ) {
-    final Pair<CommandWrapper, List<String>> pair = this.findHandlerRecursively(args);
+  public boolean execute(final CommandSender sender, final String nameOrAliasUsed,
+      final String[] argsArr) {
+    final Pair<CommandWrapper, List<String>> pair = this.findHandlerRecursively(argsArr);
 
-    if (!pair.getLeft().testPermission(sender)) {
+    CommandWrapper wrapper = pair.getLeft();
+    List<String> argsList = pair.getRight();
+
+    if (!wrapper.testPermission(sender)) {
       return true;
     }
 
     try {
-      pair.getLeft().command.handle(sender, pair.getRight());
+      wrapper.command.handle(sender, argsList);
     } catch (final Throwable e) {
       sender.sendMessage("§cThis command had some problems, we are sorry for the inconvenience...");
-      pair
-        .getLeft()
-        .command.getBasePlugin()
-        .treatThrowable(pair.getLeft().command.getClass(), e, "");
+      wrapper.command.getBasePlugin().treatThrowable(wrapper.command.getClass(), e, "");
     }
 
     return true;
   }
 
   @Override
-  public List<String> tabComplete(
-    final CommandSender sender,
-    final String alias,
-    final String[] args
-  ) throws IllegalArgumentException {
+  public List<String> tabComplete(final CommandSender sender, final String alias,
+      final String[] args) throws IllegalArgumentException {
     final Pair<CommandWrapper, List<String>> pair = this.findHandlerRecursively(args);
     return pair.getLeft().command.onTabComplete(sender, pair.getRight());
   }
 
   @Override
   public boolean testPermission(final CommandSender target) {
-    if (this.testPermissionSilent(target) && this.command.test(target)) {
-      return true;
+    if (this.testPermissionSilent(target)) {
+      if (this.command.test(target)) {
+        return true;
+      } else {
+        target.sendMessage("§cYou cannot execute this command.");
+        return false;
+      }
     }
 
     if (this.getPermissionMessage().length() != 0) {
-      for (final String line : this.getPermissionMessage()
-        .replace("<permission>", this.getPermission())
-        .split("\n")) {
+      for(final String line: this.getPermissionMessage()
+          .replace("<permission>", this.getPermission()).split("\n")) {
         target.sendMessage(line);
       }
     }
@@ -97,7 +95,8 @@ public class CommandWrapper extends Command {
   }
 
   private boolean canHandle(final String nameOrAlias) {
-    return this.info.getName().equals(nameOrAlias) || this.info.getAliases().contains(nameOrAlias);
+    return this.info.getName().equalsIgnoreCase(nameOrAlias)
+        || this.info.getAliases().stream().anyMatch(s -> s.equalsIgnoreCase(nameOrAlias));
   }
 
   /**
@@ -115,8 +114,11 @@ public class CommandWrapper extends Command {
     // Começa a procura recusiva para handlers dos argumentos, e caso não for
     // encontrado,
     // continua sendo esta instancia
-    for (final String arg : args) {
-      for (final CommandWrapper wrapper : handler.subCommands) {
+    for(final String arg: args) {
+
+      inner: for(final CommandWrapper wrapper: handler.subCommands) {
+        System.out
+            .println("passando por wrapper: " + wrapper.getCommand().getClass().getSimpleName());
         if (wrapper.canHandle(arg)) {
           // Argumento encontrado!, Remova o nome da lista de argumentos. Pare
           // somente este primeiro for e continue a buscar por subhandlers deste
@@ -124,7 +126,7 @@ public class CommandWrapper extends Command {
 
           handler = wrapper;
           argList.remove(0);
-          break;
+          break inner;
         }
       }
 

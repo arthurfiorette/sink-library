@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
  * {@link BaseService}
  */
 @NoArgsConstructor
-@lombok.Generated
 public class EnablingException extends RuntimeException {
 
   private static final long serialVersionUID = -908936539462914980L;

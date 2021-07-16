@@ -18,6 +18,8 @@ public class PluginConfig implements BaseConfig {
   public PluginConfig(final BasePlugin plugin) {
     this.basePlugin = plugin;
     this.file = new File(plugin.getDataFolder(), PluginConfig.FILENAME);
+    plugin.saveDefaultConfig();
+    this.reload();
   }
 
   @Override

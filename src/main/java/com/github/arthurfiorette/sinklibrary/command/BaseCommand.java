@@ -1,6 +1,6 @@
 package com.github.arthurfiorette.sinklibrary.command;
 
-import com.github.arthurfiorette.sinklibrary.command.wrapper.CommandInfo;
+import com.github.arthurfiorette.sinklibrary.command.wrapper.CommandInfo.CommandInfoBuilder;
 import com.github.arthurfiorette.sinklibrary.interfaces.BaseComponent;
 import com.github.arthurfiorette.sinklibrary.interfaces.BasePlugin;
 import java.util.Collection;
@@ -16,7 +16,7 @@ public interface BaseCommand extends BaseComponent, PluginIdentifiableCommand {
   /**
    * Use this methods to apply any information about this command;
    */
-  void info(CommandInfo.CommandInfoBuilder info);
+  void info(final CommandInfoBuilder info);
 
   /**
    * This method is used before the handling step, so we can know what entity
@@ -25,7 +25,7 @@ public interface BaseCommand extends BaseComponent, PluginIdentifiableCommand {
    * This must return true for all entities that <b>with permission</b> can use
    * this command.
    */
-  boolean test(CommandSender sender);
+  boolean test(final CommandSender sender);
 
   /**
    * The same as {@link #getBasePlugin()}
