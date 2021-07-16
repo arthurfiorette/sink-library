@@ -31,19 +31,19 @@
 
   <repositories>
 
-    <!-- Spigot Mc -->
+    <!-- Spigot Mc --><!-- Spigot Mc -->
     <repository>
       <id>spigot-repo</id>
       <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
     </repository>
 
-    <!-- Placeholder API -->
+    <!-- Placeholder API --><!-- Placeholder API -->
     <repository>
       <id>placeholderapi</id>
       <url>https://repo.extendedclip.com/content/repositories/placeholderapi/</url>
     </repository>
 
-    <!-- Mojang Authlib -->
+    <!-- Mojang Authlib --><!-- Mojang Authlib -->
     <repository>
       <id>minecraft-repo</id>
       <url>https://libraries.minecraft.net/</url>
@@ -51,7 +51,7 @@
   </repositories>
 
   <dependencies>
-    <!-- Lombok -->
+    <!-- Lombok --><!-- Lombok -->
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
@@ -59,7 +59,7 @@
       <scope>provided</scope>
     </dependency>
 
-    <!-- Spigot Mc -->
+    <!-- Spigot Mc --><!-- Spigot Mc -->
     <dependency>
       <groupId>org.spigotmc</groupId>
       <artifactId>spigot-api</artifactId>
@@ -67,7 +67,7 @@
       <scope>provided</scope>
     </dependency>
 
-    <!-- Placeholder API -->
+    <!-- Placeholder API --><!-- Placeholder API -->
     <dependency>
       <groupId>me.clip</groupId>
       <artifactId>placeholderapi</artifactId>
@@ -76,7 +76,7 @@
       <scope>provided</scope>
     </dependency>
 
-    <!-- Mojang Authlib -->
+    <!-- Mojang Authlib --><!-- Mojang Authlib -->
     <dependency>
       <groupId>com.mojang</groupId>
       <artifactId>authlib</artifactId>
@@ -87,7 +87,7 @@
 
   <build>
     <plugins>
-      <!-- Sources -->
+      <!-- Sources --><!-- Sources -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-source-plugin</artifactId>
@@ -102,7 +102,7 @@
         </executions>
       </plugin>
       
-      <!-- Javadoc -->
+      <!-- Javadoc --><!-- Javadoc -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>

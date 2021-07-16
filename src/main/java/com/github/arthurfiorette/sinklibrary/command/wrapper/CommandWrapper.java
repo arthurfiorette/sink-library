@@ -45,8 +45,11 @@ public class CommandWrapper extends Command {
    * {@inheritDoc}
    */
   @Override
-  public boolean execute(final CommandSender sender, final String nameOrAliasUsed,
-      final String[] argsArr) {
+  public boolean execute(
+    final CommandSender sender,
+    final String nameOrAliasUsed,
+    final String[] argsArr
+  ) {
     final Pair<CommandWrapper, List<String>> pair = this.findHandlerRecursively(argsArr);
 
     CommandWrapper wrapper = pair.getLeft();
@@ -67,8 +70,11 @@ public class CommandWrapper extends Command {
   }
 
   @Override
-  public List<String> tabComplete(final CommandSender sender, final String alias,
-      final String[] args) throws IllegalArgumentException {
+  public List<String> tabComplete(
+    final CommandSender sender,
+    final String alias,
+    final String[] args
+  ) throws IllegalArgumentException {
     final Pair<CommandWrapper, List<String>> pair = this.findHandlerRecursively(args);
     return pair.getLeft().command.onTabComplete(sender, pair.getRight());
   }
@@ -85,8 +91,9 @@ public class CommandWrapper extends Command {
     }
 
     if (this.getPermissionMessage().length() != 0) {
-      for(final String line: this.getPermissionMessage()
-          .replace("<permission>", this.getPermission()).split("\n")) {
+      for (final String line : this.getPermissionMessage()
+        .replace("<permission>", this.getPermission())
+        .split("\n")) {
         target.sendMessage(line);
       }
     }
@@ -95,8 +102,10 @@ public class CommandWrapper extends Command {
   }
 
   private boolean canHandle(final String nameOrAlias) {
-    return this.info.getName().equalsIgnoreCase(nameOrAlias)
-        || this.info.getAliases().stream().anyMatch(s -> s.equalsIgnoreCase(nameOrAlias));
+    return (
+      this.info.getName().equalsIgnoreCase(nameOrAlias) ||
+      this.info.getAliases().stream().anyMatch(s -> s.equalsIgnoreCase(nameOrAlias))
+    );
   }
 
   /**
@@ -114,11 +123,11 @@ public class CommandWrapper extends Command {
     // Começa a procura recusiva para handlers dos argumentos, e caso não for
     // encontrado,
     // continua sendo esta instancia
-    for(final String arg: args) {
-
-      inner: for(final CommandWrapper wrapper: handler.subCommands) {
-        System.out
-            .println("passando por wrapper: " + wrapper.getCommand().getClass().getSimpleName());
+    for (final String arg : args) {
+      inner:for (final CommandWrapper wrapper : handler.subCommands) {
+        System.out.println(
+          "passando por wrapper: " + wrapper.getCommand().getClass().getSimpleName()
+        );
         if (wrapper.canHandle(arg)) {
           // Argumento encontrado!, Remova o nome da lista de argumentos. Pare
           // somente este primeiro for e continue a buscar por subhandlers deste
