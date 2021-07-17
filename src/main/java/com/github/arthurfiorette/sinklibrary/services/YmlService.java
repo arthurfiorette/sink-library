@@ -25,13 +25,22 @@ public class YmlService {
    *
    * @return the value map
    */
-  public Map<String, Map<String, String>> getKeys(final FileConfiguration file,
-      final String section) {
+  public Map<String, Map<String, String>> getKeys(
+    final FileConfiguration file,
+    final String section
+  ) {
     final Map<String, Map<String, String>> request = new HashMap<>();
     final ConfigurationSection cSection = file.getConfigurationSection(section);
     cSection.getKeys(false).stream().forEach(key -> request.put(key, Maps.newHashMap()));
-    cSection.getKeys(true).stream().forEach(key -> request.get(YmlService.getFirstKey(key))
-        .put(YmlService.getLastKeys(key), file.getString(section + "." + key)));
+    cSection
+      .getKeys(true)
+      .stream()
+      .forEach(
+        key ->
+          request
+            .get(YmlService.getFirstKey(key))
+            .put(YmlService.getLastKeys(key), file.getString(section + "." + key))
+      );
     return request;
   }
 

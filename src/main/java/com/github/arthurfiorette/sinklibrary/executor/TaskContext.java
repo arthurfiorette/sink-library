@@ -32,8 +32,12 @@ public enum TaskContext {
     }
 
     @Override
-    public BukkitTask runTimer(final Plugin plugin, final Runnable runnable, final long delay,
-        final long interval) {
+    public BukkitTask runTimer(
+      final Plugin plugin,
+      final Runnable runnable,
+      final long delay,
+      final long interval
+    ) {
       return Bukkit.getScheduler().runTaskTimer(plugin, runnable, delay, interval);
     }
   },
@@ -70,8 +74,12 @@ public enum TaskContext {
      * {@inheritDoc}
      */
     @Override
-    public BukkitTask runTimer(final Plugin plugin, final Runnable runnable, final long delay,
-        final long interval) {
+    public BukkitTask runTimer(
+      final Plugin plugin,
+      final Runnable runnable,
+      final long delay,
+      final long interval
+    ) {
       return Bukkit.getScheduler().runTaskTimerAsynchronously(plugin, runnable, delay, interval);
     }
   };

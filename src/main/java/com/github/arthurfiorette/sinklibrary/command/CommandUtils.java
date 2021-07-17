@@ -11,7 +11,7 @@ public class CommandUtils {
   public CommandWrapper[] wrapAll(final BaseCommand[] commands) {
     final CommandWrapper[] wrapped = new CommandWrapper[commands.length];
 
-    for(int i = 0; i < commands.length; i++) {
+    for (int i = 0; i < commands.length; i++) {
       wrapped[i] = CommandUtils.wrap(commands[i]);
     }
 

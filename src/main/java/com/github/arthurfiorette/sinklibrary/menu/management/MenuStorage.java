@@ -8,7 +8,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 import lombok.Getter;
-
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
@@ -56,7 +55,7 @@ public abstract class MenuStorage<M extends Enum<M> & MenuFactory> implements Ba
   public void disable() throws Exception {
     this.listener.disable();
 
-    for(final UUID id: this.inventories.keySet()) {
+    for (final UUID id : this.inventories.keySet()) {
       final Player player = Bukkit.getPlayer(id);
 
       if (player == null) {

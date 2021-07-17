@@ -29,9 +29,13 @@ public class GsonLoadingStorage<K, V> extends LoadingStorage<K, V, JsonObject> {
   @NonNull
   protected Gson gson = new Gson();
 
-  public GsonLoadingStorage(final BasePlugin plugin, final Database<K, JsonObject> database,
-      final Class<V> clazz, final Function<K, V> generator,
-      final UnaryOperator<CacheBuilder<Object, Object>> builder) {
+  public GsonLoadingStorage(
+    final BasePlugin plugin,
+    final Database<K, JsonObject> database,
+    final Class<V> clazz,
+    final Function<K, V> generator,
+    final UnaryOperator<CacheBuilder<Object, Object>> builder
+  ) {
     super(database, builder);
     this.basePlugin = plugin;
     this.clazz = clazz;
