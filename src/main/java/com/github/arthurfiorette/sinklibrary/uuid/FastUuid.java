@@ -2,6 +2,8 @@ package com.github.arthurfiorette.sinklibrary.uuid;
 
 import java.util.Arrays;
 import java.util.UUID;
+
+import lombok.NonNull;
 import lombok.experimental.UtilityClass;
 
 /**
@@ -33,24 +35,8 @@ public class FastUuid {
   // Minus 4 dashes chars
   public static final int MOJANG_ID_LENGTH = FastUuid.UUID_STRING_LENGTH - 4;
 
-  public static final char[] HEX_DIGITS = new char[] {
-    '0',
-    '1',
-    '2',
-    '3',
-    '4',
-    '5',
-    '6',
-    '7',
-    '8',
-    '9',
-    'a',
-    'b',
-    'c',
-    'd',
-    'e',
-    'f',
-  };
+  public static final char[] HEX_DIGITS = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a',
+      'b', 'c', 'd', 'e', 'f', };
 
   public static final long[] HEX_VALUES = new long[128];
 
@@ -105,14 +91,10 @@ public class FastUuid {
    * conform to the string representation as described in
    * {@link UUID#toString()}
    */
-  public UUID parseUUID(final CharSequence uuidSequence) {
-    if (
-      (uuidSequence.length() != FastUuid.UUID_STRING_LENGTH) ||
-      (uuidSequence.charAt(8) != '-') ||
-      (uuidSequence.charAt(13) != '-') ||
-      (uuidSequence.charAt(18) != '-') ||
-      (uuidSequence.charAt(23) != '-')
-    ) {
+  public UUID parseUUID(@NonNull final CharSequence uuidSequence) {
+    if ((uuidSequence.length() != FastUuid.UUID_STRING_LENGTH) || (uuidSequence.charAt(8) != '-')
+        || (uuidSequence.charAt(13) != '-') || (uuidSequence.charAt(18) != '-')
+        || (uuidSequence.charAt(23) != '-')) {
       throw new IllegalArgumentException("Illegal UUID string: " + uuidSequence);
     }
 
@@ -171,7 +153,7 @@ public class FastUuid {
    * conform to the string representation as described in
    * {@link UUID#toString()}
    */
-  public static UUID parseMojangId(final CharSequence uuidSequence) {
+  public UUID parseMojangId(@NonNull final CharSequence uuidSequence) {
     if (uuidSequence.length() != FastUuid.MOJANG_ID_LENGTH) {
       throw new IllegalArgumentException("Illegal UUID string: " + uuidSequence);
     }
@@ -223,7 +205,7 @@ public class FastUuid {
    *
    * @return a string representation of the given UUID
    */
-  public String toString(final UUID uuid) {
+  public String toString(@NonNull final UUID uuid) {
     if (FastUuid.USE_JDK_UUID_TO_STRING) {
       // OpenJDK 9 and newer use a fancy native approach to converting UUIDs to
       // strings and we're better off using
@@ -255,33 +237,33 @@ public class FastUuid {
     uuidChars[16] = FastUuid.HEX_DIGITS[(int) ((mostSignificantBits & 0x00000000000000f0L) >>> 4)];
     uuidChars[17] = FastUuid.HEX_DIGITS[(int) (mostSignificantBits & 0x000000000000000fL)];
     uuidChars[18] = '-';
-    uuidChars[19] =
-      FastUuid.HEX_DIGITS[(int) ((leastSignificantBits & 0xf000000000000000L) >>> 60)];
-    uuidChars[20] =
-      FastUuid.HEX_DIGITS[(int) ((leastSignificantBits & 0x0f00000000000000L) >>> 56)];
-    uuidChars[21] =
-      FastUuid.HEX_DIGITS[(int) ((leastSignificantBits & 0x00f0000000000000L) >>> 52)];
-    uuidChars[22] =
-      FastUuid.HEX_DIGITS[(int) ((leastSignificantBits & 0x000f000000000000L) >>> 48)];
+    uuidChars[19] = FastUuid.HEX_DIGITS[(int) ((leastSignificantBits
+        & 0xf000000000000000L) >>> 60)];
+    uuidChars[20] = FastUuid.HEX_DIGITS[(int) ((leastSignificantBits
+        & 0x0f00000000000000L) >>> 56)];
+    uuidChars[21] = FastUuid.HEX_DIGITS[(int) ((leastSignificantBits
+        & 0x00f0000000000000L) >>> 52)];
+    uuidChars[22] = FastUuid.HEX_DIGITS[(int) ((leastSignificantBits
+        & 0x000f000000000000L) >>> 48)];
     uuidChars[23] = '-';
-    uuidChars[24] =
-      FastUuid.HEX_DIGITS[(int) ((leastSignificantBits & 0x0000f00000000000L) >>> 44)];
-    uuidChars[25] =
-      FastUuid.HEX_DIGITS[(int) ((leastSignificantBits & 0x00000f0000000000L) >>> 40)];
-    uuidChars[26] =
-      FastUuid.HEX_DIGITS[(int) ((leastSignificantBits & 0x000000f000000000L) >>> 36)];
-    uuidChars[27] =
-      FastUuid.HEX_DIGITS[(int) ((leastSignificantBits & 0x0000000f00000000L) >>> 32)];
-    uuidChars[28] =
-      FastUuid.HEX_DIGITS[(int) ((leastSignificantBits & 0x00000000f0000000L) >>> 28)];
-    uuidChars[29] =
-      FastUuid.HEX_DIGITS[(int) ((leastSignificantBits & 0x000000000f000000L) >>> 24)];
-    uuidChars[30] =
-      FastUuid.HEX_DIGITS[(int) ((leastSignificantBits & 0x0000000000f00000L) >>> 20)];
-    uuidChars[31] =
-      FastUuid.HEX_DIGITS[(int) ((leastSignificantBits & 0x00000000000f0000L) >>> 16)];
-    uuidChars[32] =
-      FastUuid.HEX_DIGITS[(int) ((leastSignificantBits & 0x000000000000f000L) >>> 12)];
+    uuidChars[24] = FastUuid.HEX_DIGITS[(int) ((leastSignificantBits
+        & 0x0000f00000000000L) >>> 44)];
+    uuidChars[25] = FastUuid.HEX_DIGITS[(int) ((leastSignificantBits
+        & 0x00000f0000000000L) >>> 40)];
+    uuidChars[26] = FastUuid.HEX_DIGITS[(int) ((leastSignificantBits
+        & 0x000000f000000000L) >>> 36)];
+    uuidChars[27] = FastUuid.HEX_DIGITS[(int) ((leastSignificantBits
+        & 0x0000000f00000000L) >>> 32)];
+    uuidChars[28] = FastUuid.HEX_DIGITS[(int) ((leastSignificantBits
+        & 0x00000000f0000000L) >>> 28)];
+    uuidChars[29] = FastUuid.HEX_DIGITS[(int) ((leastSignificantBits
+        & 0x000000000f000000L) >>> 24)];
+    uuidChars[30] = FastUuid.HEX_DIGITS[(int) ((leastSignificantBits
+        & 0x0000000000f00000L) >>> 20)];
+    uuidChars[31] = FastUuid.HEX_DIGITS[(int) ((leastSignificantBits
+        & 0x00000000000f0000L) >>> 16)];
+    uuidChars[32] = FastUuid.HEX_DIGITS[(int) ((leastSignificantBits
+        & 0x000000000000f000L) >>> 12)];
     uuidChars[33] = FastUuid.HEX_DIGITS[(int) ((leastSignificantBits & 0x0000000000000f00L) >>> 8)];
     uuidChars[34] = FastUuid.HEX_DIGITS[(int) ((leastSignificantBits & 0x00000000000000f0L) >>> 4)];
     uuidChars[35] = FastUuid.HEX_DIGITS[(int) (leastSignificantBits & 0x000000000000000fL)];
@@ -300,7 +282,7 @@ public class FastUuid {
    *
    * @return a string representation of the given UUID
    */
-  public static String toMojangId(final UUID uuid) {
+  public String toMojangId(@NonNull final UUID uuid) {
     final long mostSignificantBits = uuid.getMostSignificantBits();
     final long leastSignificantBits = uuid.getLeastSignificantBits();
 
@@ -322,32 +304,32 @@ public class FastUuid {
     uuidChars[13] = FastUuid.HEX_DIGITS[(int) ((mostSignificantBits & 0x0000000000000f00L) >>> 8)];
     uuidChars[14] = FastUuid.HEX_DIGITS[(int) ((mostSignificantBits & 0x00000000000000f0L) >>> 4)];
     uuidChars[15] = FastUuid.HEX_DIGITS[(int) (mostSignificantBits & 0x000000000000000fL)];
-    uuidChars[16] =
-      FastUuid.HEX_DIGITS[(int) ((leastSignificantBits & 0xf000000000000000L) >>> 60)];
-    uuidChars[17] =
-      FastUuid.HEX_DIGITS[(int) ((leastSignificantBits & 0x0f00000000000000L) >>> 56)];
-    uuidChars[18] =
-      FastUuid.HEX_DIGITS[(int) ((leastSignificantBits & 0x00f0000000000000L) >>> 52)];
-    uuidChars[19] =
-      FastUuid.HEX_DIGITS[(int) ((leastSignificantBits & 0x000f000000000000L) >>> 48)];
-    uuidChars[20] =
-      FastUuid.HEX_DIGITS[(int) ((leastSignificantBits & 0x0000f00000000000L) >>> 44)];
-    uuidChars[21] =
-      FastUuid.HEX_DIGITS[(int) ((leastSignificantBits & 0x00000f0000000000L) >>> 40)];
-    uuidChars[22] =
-      FastUuid.HEX_DIGITS[(int) ((leastSignificantBits & 0x000000f000000000L) >>> 36)];
-    uuidChars[23] =
-      FastUuid.HEX_DIGITS[(int) ((leastSignificantBits & 0x0000000f00000000L) >>> 32)];
-    uuidChars[24] =
-      FastUuid.HEX_DIGITS[(int) ((leastSignificantBits & 0x00000000f0000000L) >>> 28)];
-    uuidChars[25] =
-      FastUuid.HEX_DIGITS[(int) ((leastSignificantBits & 0x000000000f000000L) >>> 24)];
-    uuidChars[26] =
-      FastUuid.HEX_DIGITS[(int) ((leastSignificantBits & 0x0000000000f00000L) >>> 20)];
-    uuidChars[27] =
-      FastUuid.HEX_DIGITS[(int) ((leastSignificantBits & 0x00000000000f0000L) >>> 16)];
-    uuidChars[28] =
-      FastUuid.HEX_DIGITS[(int) ((leastSignificantBits & 0x000000000000f000L) >>> 12)];
+    uuidChars[16] = FastUuid.HEX_DIGITS[(int) ((leastSignificantBits
+        & 0xf000000000000000L) >>> 60)];
+    uuidChars[17] = FastUuid.HEX_DIGITS[(int) ((leastSignificantBits
+        & 0x0f00000000000000L) >>> 56)];
+    uuidChars[18] = FastUuid.HEX_DIGITS[(int) ((leastSignificantBits
+        & 0x00f0000000000000L) >>> 52)];
+    uuidChars[19] = FastUuid.HEX_DIGITS[(int) ((leastSignificantBits
+        & 0x000f000000000000L) >>> 48)];
+    uuidChars[20] = FastUuid.HEX_DIGITS[(int) ((leastSignificantBits
+        & 0x0000f00000000000L) >>> 44)];
+    uuidChars[21] = FastUuid.HEX_DIGITS[(int) ((leastSignificantBits
+        & 0x00000f0000000000L) >>> 40)];
+    uuidChars[22] = FastUuid.HEX_DIGITS[(int) ((leastSignificantBits
+        & 0x000000f000000000L) >>> 36)];
+    uuidChars[23] = FastUuid.HEX_DIGITS[(int) ((leastSignificantBits
+        & 0x0000000f00000000L) >>> 32)];
+    uuidChars[24] = FastUuid.HEX_DIGITS[(int) ((leastSignificantBits
+        & 0x00000000f0000000L) >>> 28)];
+    uuidChars[25] = FastUuid.HEX_DIGITS[(int) ((leastSignificantBits
+        & 0x000000000f000000L) >>> 24)];
+    uuidChars[26] = FastUuid.HEX_DIGITS[(int) ((leastSignificantBits
+        & 0x0000000000f00000L) >>> 20)];
+    uuidChars[27] = FastUuid.HEX_DIGITS[(int) ((leastSignificantBits
+        & 0x00000000000f0000L) >>> 16)];
+    uuidChars[28] = FastUuid.HEX_DIGITS[(int) ((leastSignificantBits
+        & 0x000000000000f000L) >>> 12)];
     uuidChars[29] = FastUuid.HEX_DIGITS[(int) ((leastSignificantBits & 0x0000000000000f00L) >>> 8)];
     uuidChars[30] = FastUuid.HEX_DIGITS[(int) ((leastSignificantBits & 0x00000000000000f0L) >>> 4)];
     uuidChars[31] = FastUuid.HEX_DIGITS[(int) (leastSignificantBits & 0x000000000000000fL)];
