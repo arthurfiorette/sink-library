@@ -92,9 +92,9 @@ public class FastUuid {
    * {@link UUID#toString()}
    */
   public UUID parseUUID(@NonNull final CharSequence uuidSequence) {
-    if ((uuidSequence.length() != FastUuid.UUID_STRING_LENGTH) || (uuidSequence.charAt(8) != '-')
-        || (uuidSequence.charAt(13) != '-') || (uuidSequence.charAt(18) != '-')
-        || (uuidSequence.charAt(23) != '-')) {
+    if (uuidSequence.length() != FastUuid.UUID_STRING_LENGTH || uuidSequence.charAt(8) != '-'
+        || uuidSequence.charAt(13) != '-' || uuidSequence.charAt(18) != '-'
+        || uuidSequence.charAt(23) != '-') {
       throw new IllegalArgumentException("Illegal UUID string: " + uuidSequence);
     }
 

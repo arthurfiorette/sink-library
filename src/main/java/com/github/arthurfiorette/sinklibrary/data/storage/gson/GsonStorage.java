@@ -24,12 +24,8 @@ public class GsonStorage<K, V> extends AbstractStorage<K, V, JsonObject> {
   @NonNull
   protected Function<K, V> generator;
 
-  public GsonStorage(
-    final BasePlugin basePlugin,
-    final Database<K, JsonObject> database,
-    final Class<V> clazz,
-    final Function<K, V> generator
-  ) {
+  public GsonStorage(final BasePlugin basePlugin, final Database<K, JsonObject> database,
+      final Class<V> clazz, final Function<K, V> generator) {
     super(database, basePlugin);
     this.clazz = clazz;
     this.generator = generator;

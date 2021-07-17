@@ -56,7 +56,7 @@ public class Replacer {
    */
   public String replace(final String str) {
     String replaced = str;
-    for (final Entry<String, Supplier<String>> entry : this.placeholders.entrySet()) {
+    for(final Entry<String, Supplier<String>> entry: this.placeholders.entrySet()) {
       replaced = replaced.replace(entry.getKey(), entry.getValue().get());
     }
     return SpigotService.setColors(replaced);
@@ -101,11 +101,8 @@ public class Replacer {
    *
    * @return the replaced text
    */
-  public static String replace(
-    final String str,
-    final OfflinePlayer player,
-    final ReplacerFunction replacer
-  ) {
+  public static String replace(final String str, final OfflinePlayer player,
+      final ReplacerFunction replacer) {
     return replacer.apply(new Replacer()).replace(str, player);
   }
 

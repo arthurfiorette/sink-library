@@ -84,10 +84,8 @@ public class ItemBuilder {
    * @return itself
    */
   public ItemBuilder addEnchantments(final Map<Enchantment, Integer> enchantments) {
-    return this.addProperties(
-        ItemProperty.ENCHANTMENT,
-        is -> is.addUnsafeEnchantments(enchantments)
-      );
+    return this.addProperties(ItemProperty.ENCHANTMENT,
+        is -> is.addUnsafeEnchantments(enchantments));
   }
 
   /**
@@ -96,10 +94,8 @@ public class ItemBuilder {
    * @return itself
    */
   public ItemBuilder setName(final String name) {
-    return this.addProperties(
-        ItemProperty.NAME,
-        is -> SpigotService.updateItemMeta(is, im -> im.setDisplayName(name))
-      );
+    return this.addProperties(ItemProperty.NAME,
+        is -> SpigotService.updateItemMeta(is, im -> im.setDisplayName(name)));
   }
 
   /**
@@ -117,17 +113,10 @@ public class ItemBuilder {
    * @return itself
    */
   public ItemBuilder setItemFlags(final ItemFlag... itemFlags) {
-    return this.addProperties(
-        ItemProperty.ITEM_FLAG,
-        is ->
-          SpigotService.updateItemMeta(
-            is,
-            im -> {
-              im.removeItemFlags(ItemFlag.values());
-              im.addItemFlags(itemFlags);
-            }
-          )
-      );
+    return this.addProperties(ItemProperty.ITEM_FLAG, is -> SpigotService.updateItemMeta(is, im -> {
+      im.removeItemFlags(ItemFlag.values());
+      im.addItemFlags(itemFlags);
+    }));
   }
 
   /**
@@ -136,10 +125,8 @@ public class ItemBuilder {
    * @return itself
    */
   public ItemBuilder addItemFlags(final ItemFlag... itemFlags) {
-    return this.addProperties(
-        ItemProperty.ITEM_FLAG,
-        is -> SpigotService.updateItemMeta(is, im -> im.addItemFlags(itemFlags))
-      );
+    return this.addProperties(ItemProperty.ITEM_FLAG,
+        is -> SpigotService.updateItemMeta(is, im -> im.addItemFlags(itemFlags)));
   }
 
   /**
@@ -157,10 +144,8 @@ public class ItemBuilder {
    * @return itself
    */
   public ItemBuilder setLore(final List<String> lore) {
-    return this.addProperties(
-        ItemProperty.LORE,
-        is -> SpigotService.updateItemMeta(is, im -> im.setLore(lore))
-      );
+    return this.addProperties(ItemProperty.LORE,
+        is -> SpigotService.updateItemMeta(is, im -> im.setLore(lore)));
   }
 
   /**
@@ -179,10 +164,8 @@ public class ItemBuilder {
    */
   public ItemBuilder addLore(final List<String> lore) {
     if (this.properties.containsKey(ItemProperty.LORE)) {
-      return this.addProperties(
-          ItemProperty.LORE,
-          is -> SpigotService.updateItemMeta(is, im -> im.getLore().addAll(lore))
-        );
+      return this.addProperties(ItemProperty.LORE,
+          is -> SpigotService.updateItemMeta(is, im -> im.getLore().addAll(lore)));
     }
     return this.setLore(lore);
   }
@@ -193,10 +176,8 @@ public class ItemBuilder {
    * @return itself
    */
   public ItemBuilder setUnbreakable(final boolean unbreakable) {
-    return this.addProperties(
-        ItemProperty.CUSTOM_META,
-        is -> SpigotService.updateItemMeta(is, im -> im.spigot().setUnbreakable(unbreakable))
-      );
+    return this.addProperties(ItemProperty.CUSTOM_META,
+        is -> SpigotService.updateItemMeta(is, im -> im.spigot().setUnbreakable(unbreakable)));
   }
 
   /**
@@ -205,10 +186,8 @@ public class ItemBuilder {
    * @return itself
    */
   public ItemBuilder addCustomMeta(final UnaryOperator<ItemMeta> customMeta) {
-    return this.addProperties(
-        ItemProperty.CUSTOM_META,
-        is -> is.setItemMeta(customMeta.apply(is.getItemMeta()))
-      );
+    return this.addProperties(ItemProperty.CUSTOM_META,
+        is -> is.setItemMeta(customMeta.apply(is.getItemMeta())));
   }
 
   /**

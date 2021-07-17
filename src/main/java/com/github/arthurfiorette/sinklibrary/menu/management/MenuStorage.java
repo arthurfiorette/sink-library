@@ -56,14 +56,14 @@ public abstract class MenuStorage<M extends Enum<M> & MenuFactory> implements Ba
   public void disable() throws Exception {
     this.listener.disable();
 
-    for(UUID id: this.inventories.keySet()) {
-      Player player = Bukkit.getPlayer(id);
+    for(final UUID id: this.inventories.keySet()) {
+      final Player player = Bukkit.getPlayer(id);
 
       if (player == null) {
         continue;
       }
 
-      Inventory inventory = player.getOpenInventory().getTopInventory();
+      final Inventory inventory = player.getOpenInventory().getTopInventory();
 
       if (inventory == null || !(inventory.getHolder() instanceof BaseMenu)) {
         continue;

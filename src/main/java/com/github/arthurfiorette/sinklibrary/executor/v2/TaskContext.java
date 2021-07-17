@@ -25,12 +25,8 @@ public enum TaskContext {
     }
 
     @Override
-    public void runTimer(
-      final BasePlugin plugin,
-      final Runnable runnable,
-      final long delay,
-      final long interval
-    ) {
+    public void runTimer(final BasePlugin plugin, final Runnable runnable, final long delay,
+        final long interval) {
       Bukkit.getScheduler().runTaskTimer(plugin, runnable, delay, interval);
     }
   },
@@ -53,19 +49,11 @@ public enum TaskContext {
     }
 
     @Override
-    public void runTimer(
-      final BasePlugin plugin,
-      final Runnable runnable,
-      final long delay,
-      final long interval
-    ) {
+    public void runTimer(final BasePlugin plugin, final Runnable runnable, final long delay,
+        final long interval) {
       final ScheduledExecutorService service = TaskContext.asScheduled(plugin);
-      service.scheduleAtFixedRate(
-        runnable,
-        TaskContext.ticksToSecond(delay),
-        TaskContext.ticksToSecond(interval),
-        TimeUnit.SECONDS
-      );
+      service.scheduleAtFixedRate(runnable, TaskContext.ticksToSecond(delay),
+          TaskContext.ticksToSecond(interval), TimeUnit.SECONDS);
     }
   },
 
@@ -86,19 +74,11 @@ public enum TaskContext {
     }
 
     @Override
-    public void runTimer(
-      final BasePlugin plugin,
-      final Runnable runnable,
-      final long delay,
-      final long interval
-    ) {
+    public void runTimer(final BasePlugin plugin, final Runnable runnable, final long delay,
+        final long interval) {
       final ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
-      executor.scheduleAtFixedRate(
-        runnable,
-        TaskContext.ticksToSecond(delay),
-        TaskContext.ticksToSecond(interval),
-        TimeUnit.SECONDS
-      );
+      executor.scheduleAtFixedRate(runnable, TaskContext.ticksToSecond(delay),
+          TaskContext.ticksToSecond(interval), TimeUnit.SECONDS);
       executor.shutdown();
     }
   };
@@ -137,8 +117,7 @@ public enum TaskContext {
     final ExecutorService executor = plugin.getExecutor();
     if (!(executor instanceof ScheduledExecutorService)) {
       throw new IllegalArgumentException(
-        "To ran scheduled tasks, your plugin must use a java.util.concurrent.ScheduledExecutorService"
-      );
+          "To ran scheduled tasks, your plugin must use a java.util.concurrent.ScheduledExecutorService");
     }
     return (ScheduledExecutorService) executor;
   }

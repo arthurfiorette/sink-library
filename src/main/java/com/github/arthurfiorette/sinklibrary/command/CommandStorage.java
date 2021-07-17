@@ -32,7 +32,7 @@ public abstract class CommandStorage implements BaseService {
     this.commandReflector.enable();
     final CommandMap commandMap = this.commandReflector.getCommandMap();
 
-    for (final BaseCommand command : this.commands()) {
+    for(final BaseCommand command: this.commands()) {
       final String prefix = this.getBasePlugin().getName();
       commandMap.register(prefix, CommandUtils.wrap(command));
     }

@@ -89,7 +89,7 @@ public final class SpigotService {
    * @return true if it fits between 0 and 64
    */
   public boolean isMinecraftPack(final long amount) {
-    return (amount > 0) && (amount <= 64);
+    return amount > 0 && amount <= 64;
   }
 
   /**
@@ -151,7 +151,7 @@ public final class SpigotService {
   public int getChestSlot(int column, int row) {
     row = row <= 0 ? 1 : row > 6 ? 6 : row;
     column = column <= 0 ? 1 : column > 9 ? 9 : column;
-    return ((9 * (row - 1)) + column) - 1;
+    return 9 * (row - 1) + column - 1;
   }
 
   /**
@@ -161,7 +161,7 @@ public final class SpigotService {
    * @param players the players to play the sound
    */
   public void playSound(final Sound sound, final Player... players) {
-    for (final Player p : players) {
+    for(final Player p: players) {
       p.playSound(p.getLocation(), sound, 3.0F, 0.5F);
     }
   }
@@ -183,24 +183,29 @@ public final class SpigotService {
       // Off
       case Integer.MAX_VALUE:
         return ChatColor.GRAY;
+
       // Severe
       case 1000:
         return ChatColor.RED;
+
       // Warning
       case 900:
         return ChatColor.YELLOW;
+
       // Info
       case 800:
-      // Config
+        // Config
       case 700:
         return ChatColor.GREEN;
+
       // Fine
       case 500:
-      // Finer
+        // Finer
       case 400:
-      // Finest
+        // Finest
       case 300:
         return ChatColor.AQUA;
+
       default:
         return ChatColor.WHITE;
     }
