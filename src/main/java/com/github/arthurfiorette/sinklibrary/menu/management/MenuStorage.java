@@ -8,9 +8,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 import lombok.Getter;
-import org.bukkit.entity.Player;
 
-public class MenuStorage<M extends Enum<M> & MenuFactory> implements BaseService {
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
+
+public abstract class MenuStorage<M extends Enum<M> & MenuFactory> implements BaseService {
 
   protected final Map<UUID, EnumMap<M, BaseMenu>> inventories = new HashMap<>();
   protected final MenuListener listener;
@@ -52,5 +55,22 @@ public class MenuStorage<M extends Enum<M> & MenuFactory> implements BaseService
   @Override
   public void disable() throws Exception {
     this.listener.disable();
+
+    for(UUID id: this.inventories.keySet()) {
+      Player player = Bukkit.getPlayer(id);
+
+      if (player == null) {
+        continue;
+      }
+
+      Inventory inventory = player.getOpenInventory().getTopInventory();
+
+      if (inventory == null || !(inventory.getHolder() instanceof BaseMenu)) {
+        continue;
+      }
+
+      player.closeInventory();
+      player.sendMessage("§cYour inventory was closed because it handler was disabled.");
+    }
   }
 }
