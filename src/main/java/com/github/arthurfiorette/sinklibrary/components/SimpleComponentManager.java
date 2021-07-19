@@ -37,7 +37,7 @@ public class SimpleComponentManager implements ComponentManager {
     this.plugin = plugin;
   }
 
-  public void checkTypeParameters(final Class<? extends Object> clazz) {
+  private void checkTypeParameters(final Class<? extends Object> clazz) {
     if (clazz.getTypeParameters().length > 0) {
       throw new IllegalComponentException(clazz);
     }
@@ -124,16 +124,14 @@ public class SimpleComponentManager implements ComponentManager {
 
     for (final ComponentLoader loader : this.plugin.components()) {
       final BaseComponent component = loader.get();
-      final Class<? extends BaseComponent> clazz = component.getClass();
-      this.checkTypeParameters(clazz);
-
-      if (component instanceof BaseService) {
-        this.registerAsService(component);
+      
+      if (component instanceof MultiComponent<?>) {
+        this.registerMultiComponent(component);
         continue;
       }
 
-      if (component instanceof MultiComponent<?>) {
-        this.registerMultiComponent(component);
+      if (component instanceof BaseService) {
+        this.registerAsService(component);
         continue;
       }
 
@@ -154,11 +152,13 @@ public class SimpleComponentManager implements ComponentManager {
   }
 
   private void registerAsService(final BaseComponent component) {
+    this.checkTypeParameters(component.getClass());
     final BaseService service = (BaseService) component;
     this.services.put(service.getClass(), service);
   }
 
   private void registerAsComponent(final BaseComponent component) {
+    this.checkTypeParameters(component.getClass());
     this.components.put(component.getClass(), component);
   }
 }
