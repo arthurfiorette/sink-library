@@ -13,14 +13,14 @@ import java.util.UUID;
 public class MojangIdSerializer implements JsonDeserializer<UUID>, JsonSerializer<UUID> {
 
   @Override
-  public JsonElement serialize(UUID src, Type typeOfSrc, JsonSerializationContext context) {
+  public JsonElement serialize(final UUID src, final Type typeOfSrc, final JsonSerializationContext context) {
     return new JsonPrimitive(FastUuid.toMojangId(src));
   }
 
   @Override
-  public UUID deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
+  public UUID deserialize(final JsonElement json, final Type typeOfT, final JsonDeserializationContext context)
     throws JsonParseException {
-    String uuid = json.getAsString();
+    final String uuid = json.getAsString();
     return uuid.contains("-") ? FastUuid.parseUUID(uuid) : FastUuid.parseMojangId(uuid);
   }
 }

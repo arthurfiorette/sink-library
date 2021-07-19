@@ -128,37 +128,37 @@ public class SimpleComponentManager implements ComponentManager {
       this.checkTypeParameters(clazz);
 
       if (component instanceof BaseService) {
-        registerAsService(component);
+        this.registerAsService(component);
         continue;
       }
 
       if (component instanceof MultiComponent<?>) {
-        registerMultiComponent(component);
+        this.registerMultiComponent(component);
         continue;
       }
 
-      registerAsComponent(component);
+      this.registerAsComponent(component);
     }
   }
 
-  private void registerMultiComponent(BaseComponent component) {
+  private void registerMultiComponent(final BaseComponent component) {
     final MultiComponent<?> multiComponent = (MultiComponent<?>) component;
-    BaseComponent choosed = multiComponent.getComponent();
+    final BaseComponent choosed = multiComponent.getComponent();
 
     if (choosed instanceof BaseService) {
-      registerAsService(choosed);
+      this.registerAsService(choosed);
       return;
     }
 
-    registerAsComponent(choosed);
+    this.registerAsComponent(choosed);
   }
 
-  private void registerAsService(BaseComponent component) {
+  private void registerAsService(final BaseComponent component) {
     final BaseService service = (BaseService) component;
     this.services.put(service.getClass(), service);
   }
 
-  private void registerAsComponent(BaseComponent component) {
+  private void registerAsComponent(final BaseComponent component) {
     this.components.put(component.getClass(), component);
   }
 }
