@@ -124,7 +124,7 @@ public class SimpleComponentManager implements ComponentManager {
 
     for (final ComponentLoader loader : this.plugin.components()) {
       final BaseComponent component = loader.get();
-      
+
       if (component instanceof MultiComponent<?>) {
         this.registerMultiComponent(component);
         continue;
