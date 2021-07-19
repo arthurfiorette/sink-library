@@ -1,15 +1,12 @@
 package com.github.arthurfiorette.sinklibrary.components;
 
-import java.util.logging.Level;
-
-import org.bukkit.plugin.java.JavaPlugin;
-
 import com.github.arthurfiorette.sinklibrary.interfaces.BasePlugin;
 import com.github.arthurfiorette.sinklibrary.interfaces.ComponentLoader;
-
+import java.util.logging.Level;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import org.bukkit.plugin.java.JavaPlugin;
 
 @RequiredArgsConstructor
 public abstract class SinkPlugin extends JavaPlugin implements BasePlugin {
@@ -30,7 +27,7 @@ public abstract class SinkPlugin extends JavaPlugin implements BasePlugin {
    *       () -> new SecondComponent(this) };
    * }
    * </pre>
-   * 
+   *
    * @return the component array to register all of yours components and
    * services.
    */
@@ -53,8 +50,12 @@ public abstract class SinkPlugin extends JavaPlugin implements BasePlugin {
   }
 
   @Override
-  public void treatThrowable(final Class<?> author, final Throwable exc, final String message,
-      final Object... args) {
+  public void treatThrowable(
+    final Class<?> author,
+    final Throwable exc,
+    final String message,
+    final Object... args
+  ) {
     this.log(Level.SEVERE, "An exception occurred in class %s.", author.getSimpleName());
     this.log(Level.SEVERE, message, args);
     exc.printStackTrace();

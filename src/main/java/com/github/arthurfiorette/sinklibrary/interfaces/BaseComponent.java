@@ -11,5 +11,4 @@ public interface BaseComponent {
    * @return his {@link BasePlugin} owner
    */
   BasePlugin getBasePlugin();
-
 }

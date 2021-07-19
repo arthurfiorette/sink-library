@@ -21,6 +21,6 @@ public final class UuidAdapter extends TypeAdapter<UUID> {
   @Override
   public UUID read(final JsonReader in) throws IOException {
     final String uuid = in.nextString();
-    return uuid.contains("-") ?  FastUuid.parseUUID(uuid) : FastUuid.parseMojangId(uuid);
+    return uuid.contains("-") ? FastUuid.parseUUID(uuid) : FastUuid.parseMojangId(uuid);
   }
 }
