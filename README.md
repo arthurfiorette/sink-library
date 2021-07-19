@@ -62,20 +62,17 @@ public class ReadmeExample extends SinkPlugin {
   protected ComponentLoader[] components() {
     return new ComponentLoader[] { () -> new MyListener(this) };
   }
-
-  ...
 }
 
 // A simple class to be our listener
 class MyListener extends SinkListener {
-
-  public MyListener(BasePlugin owner) {
+  public MyListener(final BasePlugin owner) {
     super(owner);
   }
 
   @Override
   @EventHandler
-  public void onPlayerJoin(PlayerJoinEvent event) {
+  public void onPlayerJoin(final PlayerJoinEvent event) {
     // On every player join event, get the player and send a message
     event.getPlayer().sendMessage("Hello World!");
   }

@@ -10,12 +10,6 @@ import org.bukkit.event.player.PlayerJoinEvent;
 public class ReadmeExample extends SinkPlugin {
 
   @Override
-  public void enable() throws Exception {}
-
-  @Override
-  public void disable() throws Exception {}
-
-  @Override
   protected ComponentLoader[] components() {
     return new ComponentLoader[] { () -> new MyListener(this) };
   }
