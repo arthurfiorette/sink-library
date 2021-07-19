@@ -5,6 +5,8 @@ import com.github.arthurfiorette.sinklibrary.exceptions.IllegalComponentExceptio
 import com.github.arthurfiorette.sinklibrary.interfaces.BaseComponent;
 import com.github.arthurfiorette.sinklibrary.interfaces.BaseService;
 import com.github.arthurfiorette.sinklibrary.interfaces.ComponentLoader;
+import com.github.arthurfiorette.sinklibrary.interfaces.MultiComponent;
+
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.logging.Level;
@@ -53,7 +55,7 @@ public class SimpleComponentManager implements ComponentManager {
 
     this.updateComponents();
 
-    for (final BaseService service : this.services.values()) {
+    for(final BaseService service: this.services.values()) {
       try {
         service.enable();
         this.plugin.log(Level.INFO, "Service §a%s§f enabled", service.getClass().getSimpleName());
@@ -76,22 +78,16 @@ public class SimpleComponentManager implements ComponentManager {
     this.plugin.log(Level.WARNING, "Disabling all services");
 
     final BaseService[] servicesArr = this.services.values().toArray(new BaseService[0]);
-    for (int i = servicesArr.length - 1; i >= 0; i--) {
+    for(int i = servicesArr.length - 1; i >= 0; i--) {
       final BaseService service = servicesArr[i];
       try {
         service.disable();
-        this.plugin.log(
-            Level.WARNING,
-            "Service §e%s§f disabled",
-            service.getClass().getSimpleName()
-          );
+        this.plugin.log(Level.WARNING, "Service §e%s§f disabled",
+            service.getClass().getSimpleName());
       } catch (final Exception e) {
-        this.plugin.treatThrowable(
-            service.getClass(),
+        this.plugin.treatThrowable(service.getClass(),
             // Prevent infinite loop while disabling.
-            new RuntimeException(e),
-            "Could not disable this service"
-          );
+            new RuntimeException(e), "Could not disable this service");
       }
     }
 
@@ -121,23 +117,43 @@ public class SimpleComponentManager implements ComponentManager {
     this.components.clear();
     this.services.clear();
 
-    for (final ComponentLoader loader : this.plugin.components()) {
+    for(final ComponentLoader loader: this.plugin.components()) {
       final BaseComponent component = loader.get();
       final Class<? extends BaseComponent> clazz = component.getClass();
       this.checkTypeParameters(clazz);
 
-      // Service
       if (component instanceof BaseService) {
-        final BaseService service = (BaseService) component;
-        this.services.put(service.getClass(), service);
+        registerAsService(component);
         continue;
       }
 
-      // Component
-      this.components.put(clazz, component);
+      if (component instanceof MultiComponent<?>) {
+        registerMultiComponent(component);
+        continue;
+      }
+
+      registerAsComponent(component);
+    }
+  }
+
+  private void registerMultiComponent(BaseComponent component) {
+    final MultiComponent<?> multiComponent = (MultiComponent<?>) component;
+    BaseComponent choosed = multiComponent.getComponent();
+
+    if (choosed instanceof BaseService) {
+      registerAsService(choosed);
+      return;
     }
 
-    // Plugin is the last to execute
-    this.services.put(this.plugin.getClass(), this.plugin);
+    registerAsComponent(choosed);
+  }
+
+  private void registerAsService(BaseComponent component) {
+    final BaseService service = (BaseService) component;
+    this.services.put(service.getClass(), service);
+  }
+
+  private void registerAsComponent(BaseComponent component) {
+    this.components.put(component.getClass(), component);
   }
 }
