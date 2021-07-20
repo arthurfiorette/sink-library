@@ -7,7 +7,7 @@ import java.util.function.Consumer;
 public interface CacheOperator<K, V> extends Consumer<CacheBuilder<K, V>> {
   @SuppressWarnings("unchecked")
   default CacheBuilder<K, V> withNewBuilder() {
-    CacheBuilder<K, V> builder = (CacheBuilder<K, V>) CacheBuilder.newBuilder();
+    final CacheBuilder<K, V> builder = (CacheBuilder<K, V>) CacheBuilder.newBuilder();
     this.accept(builder);
     return builder;
   }
