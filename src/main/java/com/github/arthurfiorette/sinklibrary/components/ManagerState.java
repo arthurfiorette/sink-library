@@ -1,9 +1,9 @@
 package com.github.arthurfiorette.sinklibrary.components;
 
 public enum ManagerState {
-  ENABLING(true),
+  ENABLING(false),
   ENABLED(true),
-  DISABLING(false),
+  DISABLING(true),
   DISABLED(false);
 
   private boolean enabled;

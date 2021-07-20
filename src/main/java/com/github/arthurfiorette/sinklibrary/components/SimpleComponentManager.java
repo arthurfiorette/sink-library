@@ -104,7 +104,7 @@ public class SimpleComponentManager implements ComponentManager {
   @SuppressWarnings("unchecked")
   public <T extends BaseComponent> T getComponent(final Class<T> clazz) {
     if (!this.state.isEnabled()) {
-      throw new ComponentNotRegisteredException(clazz);
+      throw new IllegalStateException("This manager is disabled");
     }
 
     BaseComponent component = this.components.get(clazz);
@@ -115,6 +115,7 @@ public class SimpleComponentManager implements ComponentManager {
     if (component == null) {
       throw new ComponentNotRegisteredException(clazz);
     }
+    
     return (T) component;
   }
 
