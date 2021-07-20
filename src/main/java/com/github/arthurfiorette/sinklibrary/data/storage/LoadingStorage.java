@@ -1,21 +1,21 @@
 package com.github.arthurfiorette.sinklibrary.data.storage;
 
-import com.github.arthurfiorette.sinklibrary.data.database.Database;
-import com.github.arthurfiorette.sinklibrary.interfaces.BaseService;
-import com.google.common.cache.CacheBuilder;
-import com.google.common.cache.CacheLoader;
-import com.google.common.cache.CacheStats;
-import com.google.common.cache.LoadingCache;
-import com.google.common.cache.RemovalListener;
-import com.google.common.collect.Lists;
 import java.util.Collection;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionException;
 import java.util.concurrent.ExecutionException;
 import java.util.function.Function;
-import java.util.function.UnaryOperator;
 import java.util.stream.Collectors;
+
+import com.github.arthurfiorette.sinklibrary.data.database.Database;
+import com.github.arthurfiorette.sinklibrary.interfaces.BaseService;
+import com.google.common.cache.CacheLoader;
+import com.google.common.cache.CacheStats;
+import com.google.common.cache.LoadingCache;
+import com.google.common.cache.RemovalListener;
+import com.google.common.collect.Lists;
+
 import lombok.NonNull;
 
 public abstract class LoadingStorage<K, V, R> implements Storage<K, V, R>, BaseService {
@@ -40,12 +40,12 @@ public abstract class LoadingStorage<K, V, R> implements Storage<K, V, R>, BaseS
    */
   protected LoadingStorage(
     final Database<K, R> database,
-    final UnaryOperator<CacheBuilder<Object, Object>> builder
+    final CacheOperator<K, V> builder
   ) {
     this.database = database;
     this.cache =
       builder
-        .apply(CacheBuilder.newBuilder())
+        .withNewBuilder()
         .removalListener(this.removalListener())
         .build(this.cacheLoader());
   }
