@@ -22,9 +22,6 @@ public class Triple<L, M, R> extends Pair<L, R> {
     this.middle = middle;
   }
 
-  /**
-   * Intended to be used with static imports
-   */
   public static <L, M, R> Triple<L, M, R> triple(final L left, final M middle, final R right) {
     return new Triple<>(left, middle, right);
   }

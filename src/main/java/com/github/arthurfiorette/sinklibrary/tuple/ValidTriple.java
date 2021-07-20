@@ -12,9 +12,6 @@ public class ValidTriple<L, M, R> extends Triple<L, M, R> {
     super(left, middle, right);
   }
 
-  /**
-   * Intended to be used with static imports
-   */
   public static <L, M, R> Triple<L, M, R> validTriple(final L left, final M middle, final R right) {
     return new Triple<>(left, middle, right);
   }

@@ -22,9 +22,6 @@ public class Pair<L, R> implements Serializable {
 
   protected R right;
 
-  /**
-   * Intended to be used with static imports
-   */
   public static <L, R> Pair<L, R> pair(final L left, final R right) {
     return new Pair<>(left, right);
   }

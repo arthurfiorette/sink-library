@@ -1,6 +1,7 @@
 package com.github.arthurfiorette.sinklibrary.components;
 
 import com.github.arthurfiorette.sinklibrary.interfaces.BasePlugin;
+import com.github.arthurfiorette.sinklibrary.interfaces.BaseService;
 import com.github.arthurfiorette.sinklibrary.interfaces.ComponentLoader;
 import java.util.logging.Level;
 import lombok.Getter;
@@ -20,21 +21,15 @@ public abstract class SinkPlugin extends JavaPlugin implements BasePlugin {
   }
 
   /**
-   * Example:
-   * <pre>
-   * protected ComponentLoader[] components() {
-   *   return new ComponentLoader[] { () -> new FirstComponent(this),
-   *       () -> new SecondComponent(this) };
-   * }
-   * </pre>
-   *
    * @return the component array to register all of yours components and
    * services.
    */
   protected abstract ComponentLoader[] components();
 
   /**
-   * @see SinkPlugin#enable()
+   * If you need to execute code on startup, implements the {@link BaseService}
+   * class on your {@link SinkPlugin} and register it on
+   * {@link SinkPlugin#components()}
    */
   @Override
   public final void onEnable() {
@@ -42,7 +37,9 @@ public abstract class SinkPlugin extends JavaPlugin implements BasePlugin {
   }
 
   /**
-   * @see SinkPlugin#disable()
+   * If you need to execute code on startup, implements the {@link BaseService}
+   * class on your {@link SinkPlugin} and register it on
+   * {@link SinkPlugin#components()}
    */
   @Override
   public final void onDisable() {
@@ -50,12 +47,8 @@ public abstract class SinkPlugin extends JavaPlugin implements BasePlugin {
   }
 
   @Override
-  public void treatThrowable(
-    final Class<?> author,
-    final Throwable exc,
-    final String message,
-    final Object... args
-  ) {
+  public void treatThrowable(final Class<?> author, final Throwable exc, final String message,
+      final Object... args) {
     this.log(Level.SEVERE, "An exception occurred in class %s.", author.getSimpleName());
     this.log(Level.SEVERE, message, args);
     exc.printStackTrace();

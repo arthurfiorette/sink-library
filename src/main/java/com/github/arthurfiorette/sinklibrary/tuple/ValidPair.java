@@ -12,9 +12,6 @@ public class ValidPair<L, R> extends Pair<L, R> {
     super(left, right);
   }
 
-  /**
-   * Intended to be used with static imports
-   */
   public static <L, R> Pair<L, R> validPair(final L left, final R right) {
     return new Pair<>(left, right);
   }
