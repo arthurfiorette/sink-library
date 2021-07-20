@@ -115,7 +115,7 @@ public class SimpleComponentManager implements ComponentManager {
     if (component == null) {
       throw new ComponentNotRegisteredException(clazz);
     }
-    
+
     return (T) component;
   }
 
