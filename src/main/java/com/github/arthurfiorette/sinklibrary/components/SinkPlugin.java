@@ -47,8 +47,12 @@ public abstract class SinkPlugin extends JavaPlugin implements BasePlugin {
   }
 
   @Override
-  public void treatThrowable(final Class<?> author, final Throwable exc, final String message,
-      final Object... args) {
+  public void treatThrowable(
+    final Class<?> author,
+    final Throwable exc,
+    final String message,
+    final Object... args
+  ) {
     this.log(Level.SEVERE, "An exception occurred in class %s.", author.getSimpleName());
     this.log(Level.SEVERE, message, args);
     exc.printStackTrace();

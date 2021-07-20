@@ -15,7 +15,7 @@ public interface BaseCommand extends BaseComponent, PluginIdentifiableCommand {
 
   /**
    * Use this methods to apply any information about this command;
-   * 
+   *
    * @param info the command info
    */
   void info(final CommandInfoBuilder info);
@@ -26,9 +26,9 @@ public interface BaseCommand extends BaseComponent, PluginIdentifiableCommand {
    * <p>
    * This must return true for all entities that <b>with permission</b> can use
    * this command.
-   * 
+   *
    * @param sender the sender to test
-   * 
+   *
    * @return true if it can use this command
    */
   boolean test(final CommandSender sender);
