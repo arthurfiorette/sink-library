@@ -124,7 +124,7 @@ public class SimpleComponentManager implements ComponentManager {
 
     for (final ComponentLoader loader : this.plugin.components()) {
       final BaseComponent component = loader.get();
-      
+
       if (component instanceof MultiComponent<?>) {
         this.registerMultiComponent((MultiComponent<?>) component);
         continue;
@@ -143,14 +143,14 @@ public class SimpleComponentManager implements ComponentManager {
   private void registerMultiComponent(final MultiComponent<?> multiComponent) {
     final BaseComponent component = multiComponent.getComponent();
     final Class<?> registrationClass = multiComponent.getRegistrationClass();
-    
+
     this.checkTypeParameters(registrationClass);
-    
+
     if (component instanceof BaseService) {
       this.services.put((Class<BaseService>) registrationClass, (BaseService) component);
       return;
     }
-    
+
     this.components.put((Class<BaseService>) registrationClass, (BaseService) component);
   }
 
