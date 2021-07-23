@@ -5,6 +5,7 @@ com.github.arthurfiorette.sinklibrary.components
 com.github.arthurfiorette.sinklibrary.config
 com.github.arthurfiorette.sinklibrary.config.addons
 com.github.arthurfiorette.sinklibrary.config.management
+com.github.arthurfiorette.sinklibrary.core
 com.github.arthurfiorette.sinklibrary.data.database
 com.github.arthurfiorette.sinklibrary.data.storage
 com.github.arthurfiorette.sinklibrary.data.storage.addons
@@ -15,6 +16,7 @@ com.github.arthurfiorette.sinklibrary.executor.v2
 com.github.arthurfiorette.sinklibrary.interfaces
 com.github.arthurfiorette.sinklibrary.item
 com.github.arthurfiorette.sinklibrary.listener
+com.github.arthurfiorette.sinklibrary.logging
 com.github.arthurfiorette.sinklibrary.menu
 com.github.arthurfiorette.sinklibrary.menu.item
 com.github.arthurfiorette.sinklibrary.menu.listener
