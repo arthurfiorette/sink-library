@@ -1,11 +1,9 @@
 package com.github.arthurfiorette.sinklibrary.logging;
 
+import com.github.arthurfiorette.sinklibrary.interfaces.BaseComponent;
 import java.util.Collection;
 
-import com.github.arthurfiorette.sinklibrary.interfaces.BaseComponent;
-
 public interface BaseLogger extends BaseComponent {
-
   void log(Level level, Object author, String message, Object... args);
 
   void log(Level level, Object author, String message, Throwable throwable);
@@ -37,5 +35,4 @@ public interface BaseLogger extends BaseComponent {
   default String format(final Level level) {
     return level.toColorUpperCase();
   }
-
 }

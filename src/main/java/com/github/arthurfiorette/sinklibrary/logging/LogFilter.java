@@ -12,7 +12,6 @@ import org.apache.logging.log4j.Level;
  * can be called from any of the filter methods.
  */
 public interface LogFilter {
-
   /**
    * The result that can returned from a filter method call.
    */
@@ -29,7 +28,7 @@ public interface LogFilter {
     /**
      * The event should not be processed.
      */
-    DENY;
+    DENY,
   }
 
   Result filter(BaseLogger logger, Level level, String message, Object... args);
@@ -38,6 +37,11 @@ public interface LogFilter {
 
   Result filter(BaseLogger logger, Level level, Class<?> author, String message, Object... args);
 
-  Result filter(BaseLogger logger, Level level, Class<?> author, String message, Throwable throwable);
-
+  Result filter(
+    BaseLogger logger,
+    Level level,
+    Class<?> author,
+    String message,
+    Throwable throwable
+  );
 }

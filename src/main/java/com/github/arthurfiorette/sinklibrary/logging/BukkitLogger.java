@@ -1,16 +1,13 @@
 package com.github.arthurfiorette.sinklibrary.logging;
 
-import java.util.ArrayList;
-
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-
 import com.github.arthurfiorette.sinklibrary.core.BaseModule;
-
+import java.util.ArrayList;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 
 @RequiredArgsConstructor
 public class BukkitLogger implements BaseLogger {
@@ -34,17 +31,35 @@ public class BukkitLogger implements BaseLogger {
   }
 
   @Override
-  public void log(final Level level, final Object author, final String message, final Object... args) {
-    Bukkit.getConsoleSender().sendMessage("[" + author.getClass().getSimpleName() + "] ("
-        + this.format(level) + ChatColor.RESET + ") " + String.format(message, args));
+  public void log(
+    final Level level,
+    final Object author,
+    final String message,
+    final Object... args
+  ) {
+    Bukkit
+      .getConsoleSender()
+      .sendMessage(
+        "[" +
+        author.getClass().getSimpleName() +
+        "] (" +
+        this.format(level) +
+        ChatColor.RESET +
+        ") " +
+        String.format(message, args)
+      );
   }
 
   @Override
-  public void log(final Level level, final Object author, final String message, final Throwable throwable) {
+  public void log(
+    final Level level,
+    final Object author,
+    final String message,
+    final Throwable throwable
+  ) {
     this.log(level, author, message);
-    for(final StackTraceElement trace: throwable.getStackTrace()) {
+    for (final StackTraceElement trace : throwable.getStackTrace()) {
       Bukkit.getConsoleSender().sendMessage(trace.toString());
     }
   }
-
 }

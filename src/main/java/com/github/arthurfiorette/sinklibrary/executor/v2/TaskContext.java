@@ -1,12 +1,11 @@
 package com.github.arthurfiorette.sinklibrary.executor.v2;
 
+import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import org.bukkit.Bukkit;
-
-import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
 
 public enum TaskContext {
   /**

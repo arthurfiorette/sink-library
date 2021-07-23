@@ -1,17 +1,15 @@
 package com.github.arthurfiorette.sinklibrary.core;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-
 import com.github.arthurfiorette.sinklibrary.components.ComponentManager;
 import com.github.arthurfiorette.sinklibrary.executor.v2.TaskContext;
 import com.github.arthurfiorette.sinklibrary.interfaces.BaseComponent;
 import com.github.arthurfiorette.sinklibrary.logging.BaseLogger;
 import com.github.arthurfiorette.sinklibrary.logging.Level;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 
 public interface BaseModule {
-
   void treatThrowable(Object author, Throwable throwable, String message, Object... args);
 
   ComponentManager getManager();
@@ -39,11 +37,21 @@ public interface BaseModule {
     return this.getManager().getComponent(clazz);
   }
 
-  default void log(final Level level, final Object author, final String message, final Object... args) {
+  default void log(
+    final Level level,
+    final Object author,
+    final String message,
+    final Object... args
+  ) {
     this.getBaseLogger().log(level, author, message, args);
   }
 
-  default void log(final Level level, final Object author, final String message, final Throwable throwable) {
+  default void log(
+    final Level level,
+    final Object author,
+    final String message,
+    final Throwable throwable
+  ) {
     this.getBaseLogger().log(level, author, message, throwable);
   }
 
@@ -54,5 +62,4 @@ public interface BaseModule {
   default void log(final Level level, final String message, final Throwable throwable) {
     this.getBaseLogger().log(level, message, throwable);
   }
-
 }

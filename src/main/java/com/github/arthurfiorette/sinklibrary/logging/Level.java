@@ -1,10 +1,9 @@
 package com.github.arthurfiorette.sinklibrary.logging;
 
-import org.bukkit.ChatColor;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NonNull;
+import org.bukkit.ChatColor;
 
 /**
  * Modified to support Bukkit chat colors and more.
@@ -25,12 +24,11 @@ import lombok.NonNull;
  * events of that level and those that are more specific to pass through the
  * filter. A special level, {@link #ALL}, is guaranteed to capture all levels
  * when used in logging configurations.
- * 
+ *
  * @see org.apache.logging.log4j.Level
  */
 @AllArgsConstructor
 public enum Level {
-
   /**
    * No events will be logged.
    */
@@ -87,7 +85,7 @@ public enum Level {
    * then this method returns {@link #DEBUG}.
    *
    * @param sArg The name of the desired Level.
-   * 
+   *
    * @return The Level associated with the String.
    */
   public static Level toLevel(final String sArg) {
@@ -100,7 +98,7 @@ public enum Level {
    *
    * @param name The name of the desired Level.
    * @param defaultLevel The Level to use if the String is invalid.
-   * 
+   *
    * @return The Level associated with the String.
    */
   public static Level toLevel(final String name, final Level defaultLevel) {
@@ -108,7 +106,7 @@ public enum Level {
       return defaultLevel;
     }
 
-    for(final Level level: Level.values()) {
+    for (final Level level : Level.values()) {
       if (level.name().equalsIgnoreCase(name)) {
         return level;
       }
@@ -122,7 +120,7 @@ public enum Level {
    * true if this level is the same or more specific.
    *
    * @param level The level to check.
-   * 
+   *
    * @return True if the passed Level is more specific or the same as this
    * Level.
    */
@@ -135,7 +133,7 @@ public enum Level {
    * true if this level is the same or more specific.
    *
    * @param level The level to check.
-   * 
+   *
    * @return True if the passed Level is more specific or the same as this
    * Level.
    */
@@ -145,9 +143,9 @@ public enum Level {
 
   /**
    * Compares the specified Level against this one.
-   * 
+   *
    * @param level The level to check.
-   * 
+   *
    * @return True if the passed Level is more specific or the same as this
    * Level.
    */
@@ -157,9 +155,9 @@ public enum Level {
 
   /**
    * Compares the specified Level against this one.
-   * 
+   *
    * @param level The level to check.
-   * 
+   *
    * @return True if the passed Level is more specific or the same as this
    * Level.
    */
@@ -169,7 +167,7 @@ public enum Level {
 
   /**
    * Returns the integer value of the Level.
-   * 
+   *
    * @return the integer value of the Level.
    */
   public int intValue() {
