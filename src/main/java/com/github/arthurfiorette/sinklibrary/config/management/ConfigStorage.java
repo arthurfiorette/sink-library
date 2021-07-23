@@ -1,8 +1,9 @@
 package com.github.arthurfiorette.sinklibrary.config.management;
 
 import com.github.arthurfiorette.sinklibrary.config.BaseConfig;
+import com.github.arthurfiorette.sinklibrary.core.BaseModule;
 import com.github.arthurfiorette.sinklibrary.interfaces.BaseComponent;
-import com.github.arthurfiorette.sinklibrary.interfaces.BasePlugin;
+
 import java.util.EnumMap;
 import lombok.Getter;
 
@@ -13,9 +14,9 @@ public class ConfigStorage<L extends Enum<L> & ConfigLoader> implements BaseComp
   protected final Class<L> clazz;
 
   @Getter
-  protected final BasePlugin basePlugin;
+  protected final BaseModule basePlugin;
 
-  public ConfigStorage(final BasePlugin plugin, final Class<L> clazz) {
+  public ConfigStorage(final BaseModule plugin, final Class<L> clazz) {
     this.basePlugin = plugin;
     this.clazz = clazz;
     this.configs = new EnumMap<>(clazz);

@@ -1,17 +1,18 @@
 package examples.starter;
 
-import com.github.arthurfiorette.sinklibrary.interfaces.BasePlugin;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.UUID;
 
+import com.github.arthurfiorette.sinklibrary.core.BaseModule;
+
 public class Database
   implements com.github.arthurfiorette.sinklibrary.data.database.Database<UUID, String[]> {
 
-  private final BasePlugin plugin;
+  private final BaseModule plugin;
 
-  public Database(final BasePlugin plugin) {
+  public Database(final BaseModule plugin) {
     this.plugin = plugin;
   }
 
@@ -32,7 +33,7 @@ public class Database
   public void disable() throws Exception {}
 
   @Override
-  public BasePlugin getBasePlugin() {
+  public BaseModule getBasePlugin() {
     return this.plugin;
   }
 

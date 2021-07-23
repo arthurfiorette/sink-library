@@ -1,9 +1,9 @@
 package com.github.arthurfiorette.sinklibrary.data.storage.gson;
 
+import com.github.arthurfiorette.sinklibrary.core.BaseModule;
 import com.github.arthurfiorette.sinklibrary.data.database.Database;
 import com.github.arthurfiorette.sinklibrary.data.storage.CacheOperator;
 import com.github.arthurfiorette.sinklibrary.data.storage.LoadingStorage;
-import com.github.arthurfiorette.sinklibrary.interfaces.BasePlugin;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
@@ -22,14 +22,14 @@ public class GsonLoadingStorage<K, V> extends LoadingStorage<K, V, JsonObject> {
 
   @Getter
   @NonNull
-  protected final BasePlugin basePlugin;
+  protected final BaseModule basePlugin;
 
   @Getter
   @NonNull
   protected Gson gson = new Gson();
 
   public GsonLoadingStorage(
-    final BasePlugin plugin,
+    final BaseModule plugin,
     final Database<K, JsonObject> database,
     final Class<V> clazz,
     final Function<K, V> generator,

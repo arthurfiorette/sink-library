@@ -1,14 +1,17 @@
 package com.github.arthurfiorette.sinklibrary.command;
 
-import com.github.arthurfiorette.sinklibrary.command.wrapper.CommandInfo.CommandInfoBuilder;
-import com.github.arthurfiorette.sinklibrary.interfaces.BaseComponent;
-import com.github.arthurfiorette.sinklibrary.interfaces.BasePlugin;
 import java.util.Collection;
 import java.util.List;
+
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.PluginIdentifiableCommand;
 
+import com.github.arthurfiorette.sinklibrary.command.wrapper.CommandInfo.CommandInfoBuilder;
+import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
+import com.github.arthurfiorette.sinklibrary.interfaces.BaseComponent;
+
 public interface BaseCommand extends BaseComponent, PluginIdentifiableCommand {
+  
   void handle(final CommandSender sender, final Collection<String> args);
 
   List<String> onTabComplete(final CommandSender sender, final Collection<String> args);
@@ -33,6 +36,9 @@ public interface BaseCommand extends BaseComponent, PluginIdentifiableCommand {
    */
   boolean test(final CommandSender sender);
 
+  @Override
+  BasePlugin getBasePlugin();
+  
   /**
    * The same as {@link #getBasePlugin()}
    */

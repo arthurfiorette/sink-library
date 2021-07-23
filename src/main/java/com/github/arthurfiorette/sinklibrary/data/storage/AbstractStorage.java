@@ -1,8 +1,9 @@
 package com.github.arthurfiorette.sinklibrary.data.storage;
 
+import com.github.arthurfiorette.sinklibrary.core.BaseModule;
 import com.github.arthurfiorette.sinklibrary.data.database.Database;
 import com.github.arthurfiorette.sinklibrary.interfaces.BaseComponent;
-import com.github.arthurfiorette.sinklibrary.interfaces.BasePlugin;
+
 import java.util.Collection;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
@@ -18,7 +19,7 @@ public abstract class AbstractStorage<K, V, R> implements Storage<K, V, R>, Base
   protected final Database<K, R> database;
 
   @NonNull
-  protected final BasePlugin basePlugin;
+  protected final BaseModule basePlugin;
 
   /**
    * Create a new entry if the database returns null for a key.
@@ -81,7 +82,7 @@ public abstract class AbstractStorage<K, V, R> implements Storage<K, V, R>, Base
   }
 
   @Override
-  public BasePlugin getBasePlugin() {
+  public BaseModule getBasePlugin() {
     return this.basePlugin;
   }
 }

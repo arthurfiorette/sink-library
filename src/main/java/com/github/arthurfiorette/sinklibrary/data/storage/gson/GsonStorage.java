@@ -1,8 +1,8 @@
 package com.github.arthurfiorette.sinklibrary.data.storage.gson;
 
+import com.github.arthurfiorette.sinklibrary.core.BaseModule;
 import com.github.arthurfiorette.sinklibrary.data.database.Database;
 import com.github.arthurfiorette.sinklibrary.data.storage.AbstractStorage;
-import com.github.arthurfiorette.sinklibrary.interfaces.BasePlugin;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
@@ -25,7 +25,7 @@ public class GsonStorage<K, V> extends AbstractStorage<K, V, JsonObject> {
   protected Function<K, V> generator;
 
   public GsonStorage(
-    final BasePlugin basePlugin,
+    final BaseModule basePlugin,
     final Database<K, JsonObject> database,
     final Class<V> clazz,
     final Function<K, V> generator

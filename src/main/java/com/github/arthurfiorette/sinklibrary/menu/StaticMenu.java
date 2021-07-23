@@ -1,6 +1,6 @@
 package com.github.arthurfiorette.sinklibrary.menu;
 
-import com.github.arthurfiorette.sinklibrary.interfaces.BasePlugin;
+import com.github.arthurfiorette.sinklibrary.core.BaseModule;
 import com.github.arthurfiorette.sinklibrary.menu.item.MenuItem;
 import java.util.Map;
 import lombok.Getter;
@@ -14,7 +14,7 @@ import org.bukkit.inventory.ItemStack;
 public abstract class StaticMenu implements BaseMenu {
 
   @Getter
-  protected final BasePlugin basePlugin;
+  protected final BaseModule basePlugin;
 
   @Getter
   protected final String title;
@@ -37,14 +37,14 @@ public abstract class StaticMenu implements BaseMenu {
    */
   protected abstract Map<Byte, MenuItem> staticItems();
 
-  public StaticMenu(final BasePlugin plugin, final String title, final int rows) {
+  public StaticMenu(final BaseModule plugin, final String title, final int rows) {
     this.basePlugin = plugin;
     this.inventory = Bukkit.createInventory(this, rows * 9, title);
     this.title = this.inventory.getTitle();
     this.rows = this.inventory.getSize() % 9;
   }
 
-  public StaticMenu(final BasePlugin plugin, final Inventory inventory) {
+  public StaticMenu(final BaseModule plugin, final Inventory inventory) {
     if (this != inventory.getHolder()) {
       throw new IllegalArgumentException("The inventory holder must be this instance");
     }

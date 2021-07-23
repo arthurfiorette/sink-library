@@ -1,10 +1,13 @@
 package com.github.arthurfiorette.sinklibrary.config;
 
-import com.github.arthurfiorette.sinklibrary.interfaces.BasePlugin;
 import java.io.File;
-import lombok.Getter;
+
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+
+import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
+
+import lombok.Getter;
 
 public class CustomConfig implements BaseConfig {
 

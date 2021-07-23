@@ -1,6 +1,7 @@
 package com.github.arthurfiorette.sinklibrary.menu.management;
 
-import com.github.arthurfiorette.sinklibrary.interfaces.BasePlugin;
+import com.github.arthurfiorette.sinklibrary.core.BaseModule;
+import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
 import com.github.arthurfiorette.sinklibrary.listener.SinkListener;
 import com.github.arthurfiorette.sinklibrary.menu.BaseMenu;
 import com.github.arthurfiorette.sinklibrary.menu.item.MenuItem;
@@ -27,7 +28,7 @@ public final class MenuListener extends SinkListener {
     }
 
     final BaseMenu menu = (BaseMenu) inv.getHolder();
-    final BasePlugin menuPlugin = menu.getBasePlugin();
+    final BaseModule menuPlugin = menu.getBasePlugin();
 
     if (!menuPlugin.getClass().equals(this.basePlugin.getClass())) {
       return;

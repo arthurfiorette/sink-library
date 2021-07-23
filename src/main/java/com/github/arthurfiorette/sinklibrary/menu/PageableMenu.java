@@ -1,6 +1,6 @@
 package com.github.arthurfiorette.sinklibrary.menu;
 
-import com.github.arthurfiorette.sinklibrary.interfaces.BasePlugin;
+import com.github.arthurfiorette.sinklibrary.core.BaseModule;
 import com.github.arthurfiorette.sinklibrary.menu.item.MenuItem;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +17,7 @@ public abstract class PageableMenu extends PrivateMenu {
   protected List<MenuItem> lastPageableItems = new ArrayList<>();
 
   public PageableMenu(
-    final BasePlugin plugin,
+    final BaseModule plugin,
     final Player owner,
     final String title,
     final int rows
@@ -25,7 +25,7 @@ public abstract class PageableMenu extends PrivateMenu {
     super(plugin, owner, title, rows);
   }
 
-  public PageableMenu(final BasePlugin plugin, final Player owner, final Inventory inventory) {
+  public PageableMenu(final BaseModule plugin, final Player owner, final Inventory inventory) {
     super(plugin, owner, inventory);
   }
 

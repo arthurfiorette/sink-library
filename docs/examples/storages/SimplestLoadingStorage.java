@@ -1,7 +1,7 @@
 package examples.storages;
 
+import com.github.arthurfiorette.sinklibrary.core.BaseModule;
 import com.github.arthurfiorette.sinklibrary.data.storage.gson.GsonLoadingStorage;
-import com.github.arthurfiorette.sinklibrary.interfaces.BasePlugin;
 import com.github.arthurfiorette.sinklibrary.uuid.UuidAdapter;
 import com.google.gson.GsonBuilder;
 import examples.SimpleModel;
@@ -15,7 +15,7 @@ public class SimplestLoadingStorage extends GsonLoadingStorage<UUID, SimpleModel
    *
    * @param plugin
    */
-  public SimplestLoadingStorage(final BasePlugin plugin) {
+  public SimplestLoadingStorage(final BaseModule plugin) {
     super( // this plugin instance
       plugin,
       // Your database component, just be sure that the database is being

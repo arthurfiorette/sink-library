@@ -1,6 +1,7 @@
 package com.github.arthurfiorette.sinklibrary.menu.management;
 
-import com.github.arthurfiorette.sinklibrary.interfaces.BasePlugin;
+import com.github.arthurfiorette.sinklibrary.core.BaseModule;
+import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
 import com.github.arthurfiorette.sinklibrary.interfaces.BaseService;
 import com.github.arthurfiorette.sinklibrary.menu.BaseMenu;
 import java.util.EnumMap;
@@ -19,7 +20,7 @@ public abstract class MenuStorage<M extends Enum<M> & MenuFactory> implements Ba
   protected final Class<M> clazz;
 
   @Getter
-  protected final BasePlugin basePlugin;
+  protected final BaseModule basePlugin;
 
   protected MenuStorage(final BasePlugin plugin, final Class<M> clazz) {
     this.listener = new MenuListener(plugin);

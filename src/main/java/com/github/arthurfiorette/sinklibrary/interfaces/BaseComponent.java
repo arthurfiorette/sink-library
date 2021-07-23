@@ -1,5 +1,7 @@
 package com.github.arthurfiorette.sinklibrary.interfaces;
 
+import com.github.arthurfiorette.sinklibrary.core.BaseModule;
+
 /**
  * A class that implement this means that his instances need a BasePlugin to
  * work.
@@ -8,7 +10,7 @@ package com.github.arthurfiorette.sinklibrary.interfaces;
  */
 public interface BaseComponent {
   /**
-   * @return his {@link BasePlugin} owner
+   * @return his {@link BaseModule} owner
    */
-  BasePlugin getBasePlugin();
+  BaseModule getBasePlugin();
 }

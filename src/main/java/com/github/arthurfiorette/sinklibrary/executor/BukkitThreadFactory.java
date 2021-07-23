@@ -1,8 +1,11 @@
 package com.github.arthurfiorette.sinklibrary.executor;
 
-import com.github.arthurfiorette.sinklibrary.interfaces.BaseComponent;
-import com.github.arthurfiorette.sinklibrary.interfaces.BasePlugin;
 import java.util.concurrent.ThreadFactory;
+
+import com.github.arthurfiorette.sinklibrary.core.BaseModule;
+import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
+import com.github.arthurfiorette.sinklibrary.interfaces.BaseComponent;
+
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +22,7 @@ import lombok.RequiredArgsConstructor;
  *
  * @deprecated in flavor of
  * {@link com.github.arthurfiorette.sinklibrary.executor.v2.TaskContext} and
- * {@link BasePlugin#getExecutor()}
+ * {@link BaseModule#getExecutor()}
  */
 @Deprecated
 @RequiredArgsConstructor
