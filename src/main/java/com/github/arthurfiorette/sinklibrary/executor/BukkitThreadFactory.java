@@ -1,11 +1,9 @@
 package com.github.arthurfiorette.sinklibrary.executor;
 
-import java.util.concurrent.ThreadFactory;
-
 import com.github.arthurfiorette.sinklibrary.core.BaseModule;
 import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
 import com.github.arthurfiorette.sinklibrary.interfaces.BaseComponent;
-
+import java.util.concurrent.ThreadFactory;
 import lombok.*;
 
 /**

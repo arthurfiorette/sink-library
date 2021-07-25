@@ -1,13 +1,10 @@
 package com.github.arthurfiorette.sinklibrary.logging;
 
+import com.github.arthurfiorette.sinklibrary.core.BaseModule;
 import java.util.ArrayList;
-
+import lombok.*;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-
-import com.github.arthurfiorette.sinklibrary.core.BaseModule;
-
-import lombok.*;
 
 @RequiredArgsConstructor
 public class BukkitLogger implements BaseLogger {

@@ -1,9 +1,5 @@
 package com.github.arthurfiorette.sinklibrary.data.repository;
 
-import java.util.Collection;
-import java.util.Set;
-import java.util.concurrent.*;
-
 import com.github.arthurfiorette.sinklibrary.data.CacheOperator;
 import com.github.arthurfiorette.sinklibrary.data.LoadingWrapper;
 import com.github.arthurfiorette.sinklibrary.data.database.Database;
@@ -11,12 +7,14 @@ import com.github.arthurfiorette.sinklibrary.data.storage.LoadingStorage;
 import com.github.arthurfiorette.sinklibrary.interfaces.BaseService;
 import com.google.common.cache.*;
 import com.google.common.collect.Lists;
-
+import java.util.Collection;
+import java.util.Set;
+import java.util.concurrent.*;
 import lombok.Getter;
 import lombok.NonNull;
 
 public abstract class LoadingRepository<K, V>
-    implements Repository<K, V>, BaseService, LoadingWrapper<K, V> {
+  implements Repository<K, V>, BaseService, LoadingWrapper<K, V> {
 
   @Getter
   @NonNull
@@ -39,10 +37,9 @@ public abstract class LoadingRepository<K, V>
    */
   protected LoadingRepository(final Database<K, V> database, final CacheOperator<K, V> builder) {
     this.database = database;
-    this.cache = builder.withNewBuilder().removalListener(this.removalListener())
-        .build(this.cacheLoader());
+    this.cache =
+      builder.withNewBuilder().removalListener(this.removalListener()).build(this.cacheLoader());
   }
-
 
   @Override
   public RemovalListener<K, V> removalListener() {
@@ -51,7 +48,6 @@ public abstract class LoadingRepository<K, V>
       LoadingRepository.this.database.save(notification.getKey(), notification.getValue());
     };
   }
-
 
   @Override
   public CacheLoader<K, V> cacheLoader() {
@@ -98,26 +94,33 @@ public abstract class LoadingRepository<K, V>
    */
   @Override
   public CompletableFuture<Void> save(final K key, final V value) {
-    return CompletableFuture.runAsync(() -> {
-      this.cache.put(key, value);
-    }, this.getBasePlugin().getExecutor());
+    return CompletableFuture.runAsync(
+      () -> {
+        this.cache.put(key, value);
+      },
+      this.getBasePlugin().getExecutor()
+    );
   }
 
   @Override
   public CompletableFuture<V> get(final K key) {
-    return CompletableFuture.supplyAsync(() -> this.cache.getUnchecked(key),
-        this.getBasePlugin().getExecutor());
+    return CompletableFuture.supplyAsync(
+      () -> this.cache.getUnchecked(key),
+      this.getBasePlugin().getExecutor()
+    );
   }
 
   @Override
   public CompletableFuture<Collection<V>> getMany(final Set<K> keys) {
-    return CompletableFuture.supplyAsync(() -> {
-      try {
-        return Lists.newArrayList(this.cache.getAll(keys).values());
-      } catch (final ExecutionException e) {
-        throw new CompletionException(e);
-      }
-    }, this.getBasePlugin().getExecutor());
+    return CompletableFuture.supplyAsync(
+      () -> {
+        try {
+          return Lists.newArrayList(this.cache.getAll(keys).values());
+        } catch (final ExecutionException e) {
+          throw new CompletionException(e);
+        }
+      },
+      this.getBasePlugin().getExecutor()
+    );
   }
-
 }

@@ -1,11 +1,10 @@
 package com.github.arthurfiorette.sinklibrary.data.repository;
 
+import com.github.arthurfiorette.sinklibrary.data.database.Database;
+import com.github.arthurfiorette.sinklibrary.data.storage.Storage;
 import java.util.Collection;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
-
-import com.github.arthurfiorette.sinklibrary.data.database.Database;
-import com.github.arthurfiorette.sinklibrary.data.storage.Storage;
 
 /**
  * It's something between a {@link Storage} and a {@link Database}, but it has
@@ -13,12 +12,11 @@ import com.github.arthurfiorette.sinklibrary.data.storage.Storage;
  * <p>
  * It can be some kind of pre-processor, such as for caching or asynchronous
  * operations
- * 
+ *
  * @param <K> key type
  * @param <V> value type
  */
 public interface Repository<K, V> {
-
   CompletableFuture<Void> save(K key, V value);
 
   CompletableFuture<V> get(K key);
@@ -36,5 +34,4 @@ public interface Repository<K, V> {
   default Collection<V> getManySync(final Set<K> keys) {
     return this.getMany(keys).join();
   }
-
 }

@@ -1,13 +1,11 @@
 package com.github.arthurfiorette.sinklibrary.data.repository;
 
-import java.util.Collection;
-import java.util.Set;
-import java.util.concurrent.CompletableFuture;
-
 import com.github.arthurfiorette.sinklibrary.core.BaseModule;
 import com.github.arthurfiorette.sinklibrary.data.database.Database;
 import com.github.arthurfiorette.sinklibrary.interfaces.BaseComponent;
-
+import java.util.Collection;
+import java.util.Set;
+import java.util.concurrent.CompletableFuture;
 import lombok.*;
 
 @RequiredArgsConstructor
@@ -31,28 +29,35 @@ public abstract class AbstractRepository<K, V> implements Repository<K, V>, Base
 
   @Override
   public CompletableFuture<Void> save(final K key, final V value) {
-    return CompletableFuture.runAsync(() -> {
-      this.save(key, value);
-    }, this.getBasePlugin().getExecutor());
+    return CompletableFuture.runAsync(
+      () -> {
+        this.save(key, value);
+      },
+      this.getBasePlugin().getExecutor()
+    );
   }
 
   @Override
   public CompletableFuture<V> get(final K key) {
-    return CompletableFuture.supplyAsync(() -> {
-      final V value = this.database.get(key);
+    return CompletableFuture.supplyAsync(
+      () -> {
+        final V value = this.database.get(key);
 
-      if (value != null) {
-        return value;
-      }
+        if (value != null) {
+          return value;
+        }
 
-      return this.create(key);
-    }, this.getBasePlugin().getExecutor());
+        return this.create(key);
+      },
+      this.getBasePlugin().getExecutor()
+    );
   }
 
   @Override
   public CompletableFuture<Collection<V>> getMany(final Set<K> keys) {
-    return CompletableFuture.supplyAsync(() -> this.database.getMany(keys),
-        this.getBasePlugin().getExecutor());
+    return CompletableFuture.supplyAsync(
+      () -> this.database.getMany(keys),
+      this.getBasePlugin().getExecutor()
+    );
   }
-
 }

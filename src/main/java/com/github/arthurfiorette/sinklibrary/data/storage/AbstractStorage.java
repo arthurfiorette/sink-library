@@ -1,15 +1,13 @@
 package com.github.arthurfiorette.sinklibrary.data.storage;
 
+import com.github.arthurfiorette.sinklibrary.core.BaseModule;
+import com.github.arthurfiorette.sinklibrary.data.database.Database;
+import com.github.arthurfiorette.sinklibrary.interfaces.BaseComponent;
 import java.util.Collection;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-
-import com.github.arthurfiorette.sinklibrary.core.BaseModule;
-import com.github.arthurfiorette.sinklibrary.data.database.Database;
-import com.github.arthurfiorette.sinklibrary.interfaces.BaseComponent;
-
 import lombok.*;
 
 @RequiredArgsConstructor
@@ -81,5 +79,4 @@ public abstract class AbstractStorage<K, V, R> implements Storage<K, V, R>, Base
       this.getBasePlugin().getExecutor()
     );
   }
-
 }

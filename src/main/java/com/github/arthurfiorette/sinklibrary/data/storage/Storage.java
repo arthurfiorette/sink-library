@@ -1,11 +1,10 @@
 package com.github.arthurfiorette.sinklibrary.data.storage;
 
+import com.github.arthurfiorette.sinklibrary.data.database.Database;
 import java.util.Collection;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Function;
-
-import com.github.arthurfiorette.sinklibrary.data.database.Database;
 
 /**
  * @param <K> Storage key type
@@ -15,7 +14,6 @@ import com.github.arthurfiorette.sinklibrary.data.database.Database;
  * @author https://github.com/arthurfiorette/sink-library/
  */
 public interface Storage<K, V, R> {
-
   CompletableFuture<Void> save(K key, V value);
 
   CompletableFuture<V> get(K key);
@@ -49,5 +47,4 @@ public interface Storage<K, V, R> {
   default V operateSync(final Function<Database<K, R>, R> func) {
     return this.operate(func).join();
   }
-
 }

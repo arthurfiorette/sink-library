@@ -1,11 +1,9 @@
 package com.github.arthurfiorette.sinklibrary.data.database;
 
+import com.github.arthurfiorette.sinklibrary.core.BaseModule;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
-
-import com.github.arthurfiorette.sinklibrary.core.BaseModule;
-
 import lombok.*;
 
 /**
@@ -37,12 +35,12 @@ public class MemoryDatabase<K, T> implements Database<K, T> {
   public void enable() {
     this.ensureState(true);
     this.open = true;
-    
-    if(this.database == null) {
+
+    if (this.database == null) {
       this.database = new ConcurrentHashMap<>();
       return;
     }
-    
+
     this.database.clear();
   }
 
@@ -50,12 +48,12 @@ public class MemoryDatabase<K, T> implements Database<K, T> {
   public void disable() {
     this.ensureState(false);
     this.open = false;
-    
-    if(this.database != null) {
+
+    if (this.database != null) {
       this.database.clear();
       return;
     }
-    
+
     this.database = null;
   }
 

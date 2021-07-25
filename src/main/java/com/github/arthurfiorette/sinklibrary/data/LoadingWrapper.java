@@ -3,19 +3,18 @@ package com.github.arthurfiorette.sinklibrary.data;
 import com.google.common.cache.*;
 
 public interface LoadingWrapper<K, V> {
-
   LoadingCache<K, V> getCache();
 
   /**
    * Return a independent removal listener for this wrapper.
-   * 
+   *
    * @return this instance removal listener.
    */
   RemovalListener<K, V> removalListener();
 
   /**
    * Return a independent cache loder for this wrapper.
-   * 
+   *
    * @return this instance cache loader.
    */
   CacheLoader<K, V> cacheLoader();
