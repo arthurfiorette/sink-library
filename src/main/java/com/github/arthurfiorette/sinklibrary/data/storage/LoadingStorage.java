@@ -1,19 +1,16 @@
 package com.github.arthurfiorette.sinklibrary.data.storage;
 
-import com.github.arthurfiorette.sinklibrary.data.database.Database;
-import com.github.arthurfiorette.sinklibrary.interfaces.BaseService;
-import com.google.common.cache.CacheLoader;
-import com.google.common.cache.CacheStats;
-import com.google.common.cache.LoadingCache;
-import com.google.common.cache.RemovalListener;
-import com.google.common.collect.Lists;
 import java.util.Collection;
 import java.util.Set;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.CompletionException;
-import java.util.concurrent.ExecutionException;
+import java.util.concurrent.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+
+import com.github.arthurfiorette.sinklibrary.data.database.Database;
+import com.github.arthurfiorette.sinklibrary.interfaces.BaseService;
+import com.google.common.cache.*;
+import com.google.common.collect.Lists;
+
 import lombok.NonNull;
 
 public abstract class LoadingStorage<K, V, R> implements Storage<K, V, R>, BaseService {

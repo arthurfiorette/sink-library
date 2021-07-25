@@ -1,17 +1,17 @@
 package com.github.arthurfiorette.sinklibrary.menu.management;
 
+import java.util.*;
+
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
+
 import com.github.arthurfiorette.sinklibrary.core.BaseModule;
 import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
 import com.github.arthurfiorette.sinklibrary.interfaces.BaseService;
 import com.github.arthurfiorette.sinklibrary.menu.BaseMenu;
-import java.util.EnumMap;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+
 import lombok.Getter;
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.Inventory;
 
 public abstract class MenuStorage<M extends Enum<M> & MenuFactory> implements BaseService {
 

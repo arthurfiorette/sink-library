@@ -2,10 +2,10 @@ package com.github.arthurfiorette.sinklibrary.command.wrapper;
 
 import java.util.ArrayList;
 import java.util.List;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NonNull;
+
 import org.bukkit.ChatColor;
+
+import lombok.*;
 
 @Builder
 public class CommandInfo {
