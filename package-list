@@ -6,7 +6,10 @@ com.github.arthurfiorette.sinklibrary.config
 com.github.arthurfiorette.sinklibrary.config.addons
 com.github.arthurfiorette.sinklibrary.config.management
 com.github.arthurfiorette.sinklibrary.core
+com.github.arthurfiorette.sinklibrary.data
 com.github.arthurfiorette.sinklibrary.data.database
+com.github.arthurfiorette.sinklibrary.data.repository
+com.github.arthurfiorette.sinklibrary.data.repository.addons
 com.github.arthurfiorette.sinklibrary.data.storage
 com.github.arthurfiorette.sinklibrary.data.storage.addons
 com.github.arthurfiorette.sinklibrary.data.storage.gson
