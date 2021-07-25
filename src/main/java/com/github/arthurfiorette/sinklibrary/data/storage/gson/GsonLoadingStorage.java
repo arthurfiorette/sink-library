@@ -1,13 +1,13 @@
 package com.github.arthurfiorette.sinklibrary.data.storage.gson;
 
-import com.github.arthurfiorette.sinklibrary.core.BaseModule;
-import com.github.arthurfiorette.sinklibrary.data.database.Database;
-import com.github.arthurfiorette.sinklibrary.data.storage.CacheOperator;
-import com.github.arthurfiorette.sinklibrary.data.storage.LoadingStorage;
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonSyntaxException;
 import java.util.function.Function;
+
+import com.github.arthurfiorette.sinklibrary.core.BaseModule;
+import com.github.arthurfiorette.sinklibrary.data.CacheOperator;
+import com.github.arthurfiorette.sinklibrary.data.database.Database;
+import com.github.arthurfiorette.sinklibrary.data.storage.LoadingStorage;
+import com.google.gson.*;
+
 import lombok.Getter;
 import lombok.NonNull;
 
@@ -55,4 +55,5 @@ public class GsonLoadingStorage<K, V> extends LoadingStorage<K, V, JsonObject> {
   public V deserialize(final JsonObject raw) throws JsonSyntaxException {
     return this.gson.fromJson(raw, this.clazz);
   }
+
 }

@@ -1,4 +1,4 @@
-package com.github.arthurfiorette.sinklibrary.data.storage;
+package com.github.arthurfiorette.sinklibrary.data;
 
 import java.util.function.Consumer;
 

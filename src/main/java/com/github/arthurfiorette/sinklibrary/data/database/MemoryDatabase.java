@@ -1,14 +1,12 @@
 package com.github.arthurfiorette.sinklibrary.data.database;
 
-import com.github.arthurfiorette.sinklibrary.core.BaseModule;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
-import lombok.Getter;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
+
+import com.github.arthurfiorette.sinklibrary.core.BaseModule;
+
+import lombok.*;
 
 /**
  * A memory database is a database saved in a concurrent hash map and resets
@@ -17,12 +15,14 @@ import lombok.RequiredArgsConstructor;
  * @author https://github.com/ArthurFiorette/sink-library/
  */
 @RequiredArgsConstructor
+@AllArgsConstructor
 public class MemoryDatabase<K, T> implements Database<K, T> {
 
   @Getter
   @NonNull
   protected final BaseModule basePlugin;
 
+  @Getter
   protected ConcurrentMap<K, T> database;
 
   @Getter
@@ -36,15 +36,27 @@ public class MemoryDatabase<K, T> implements Database<K, T> {
   @Override
   public void enable() {
     this.ensureState(true);
-    this.database = new ConcurrentHashMap<>();
     this.open = true;
+    
+    if(this.database == null) {
+      this.database = new ConcurrentHashMap<>();
+      return;
+    }
+    
+    this.database.clear();
   }
 
   @Override
   public void disable() {
     this.ensureState(false);
-    this.database = null;
     this.open = false;
+    
+    if(this.database != null) {
+      this.database.clear();
+      return;
+    }
+    
+    this.database = null;
   }
 
   @Override

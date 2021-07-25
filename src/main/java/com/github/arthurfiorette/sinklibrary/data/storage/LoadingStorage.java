@@ -6,15 +6,19 @@ import java.util.concurrent.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import com.github.arthurfiorette.sinklibrary.data.CacheOperator;
+import com.github.arthurfiorette.sinklibrary.data.LoadingWrapper;
 import com.github.arthurfiorette.sinklibrary.data.database.Database;
 import com.github.arthurfiorette.sinklibrary.interfaces.BaseService;
 import com.google.common.cache.*;
 import com.google.common.collect.Lists;
 
+import lombok.Getter;
 import lombok.NonNull;
 
-public abstract class LoadingStorage<K, V, R> implements Storage<K, V, R>, BaseService {
+public abstract class LoadingStorage<K, V, R> implements Storage<K, V, R>, BaseService, LoadingWrapper<K, V> {
 
+  @Getter
   @NonNull
   protected final LoadingCache<K, V> cache;
 
@@ -39,10 +43,8 @@ public abstract class LoadingStorage<K, V, R> implements Storage<K, V, R>, BaseS
       builder.withNewBuilder().removalListener(this.removalListener()).build(this.cacheLoader());
   }
 
-  /**
-   * @return this instance removal listener.
-   */
-  protected RemovalListener<K, V> removalListener() {
+  @Override
+  public RemovalListener<K, V> removalListener() {
     return notification -> {
       // Save synchronously
       LoadingStorage.this.database.save(
@@ -52,10 +54,8 @@ public abstract class LoadingStorage<K, V, R> implements Storage<K, V, R>, BaseS
     };
   }
 
-  /**
-   * @return this instance cache loader.
-   */
-  protected CacheLoader<K, V> cacheLoader() {
+  @Override
+  public CacheLoader<K, V> cacheLoader() {
     return new CacheLoader<K, V>() {
       @Override
       public V load(final K key) throws Exception {
@@ -153,60 +153,5 @@ public abstract class LoadingStorage<K, V, R> implements Storage<K, V, R>, BaseS
       () -> this.deserialize(func.apply(this.database)),
       this.getBasePlugin().getExecutor()
     );
-  }
-
-  /**
-   * Returns a current snapshot of this cache's cumulative statistics. All stats
-   * are initialized to zero, and are monotonically increasing over the lifetime
-   * of the cache.
-   *
-   * @return the cache stats
-   */
-  public CacheStats stats() {
-    return this.cache.stats();
-  }
-
-  /**
-   * Loads a new value for key {@code key}, possibly asynchronously. While the
-   * new value is loading the previous value (if any) will continue to be
-   * returned by {@code get(key)} unless it is evicted. If the new value is
-   * loaded successfully it will replace the previous value in the cache; if an
-   * exception is thrown while refreshing the previous value will remain, <i>and
-   * the exception will be logged (using {@link java.util.logging.Logger}) and
-   * swallowed</i>.
-   * <p>
-   * Caches loaded by a {@link CacheLoader} will call {@link CacheLoader#reload}
-   * if the cache currently contains a value for {@code key}, and
-   * {@link CacheLoader#load} otherwise. Loading is asynchronous only if
-   * {@link CacheLoader#reload} was overridden with an asynchronous
-   * implementation.
-   * <p>
-   * Returns without doing anything if another thread is currently loading the
-   * value for {@code key}. If the cache loader associated with this cache
-   * performs refresh asynchronously then this method may return before refresh
-   * completes.
-   *
-   * @param key the key to be refreshed
-   *
-   * @since 11.0
-   */
-  public void refresh(final K key) {
-    this.cache.refresh(key);
-  }
-
-  /**
-   * Discards any cached value for key {@code key}.
-   *
-   * @param key the key to be invalidated
-   */
-  public void invalidate(final K key) {
-    this.cache.invalidate(key);
-  }
-
-  /**
-   * @return the approximate number of entries in this cache.
-   */
-  public long size() {
-    return this.cache.size();
   }
 }
