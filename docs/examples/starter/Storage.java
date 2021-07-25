@@ -1,6 +1,6 @@
 package examples.starter;
 
-import com.github.arthurfiorette.sinklibrary.core.BaseModule;
+import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
 import com.github.arthurfiorette.sinklibrary.data.storage.AbstractStorage;
 import com.github.arthurfiorette.sinklibrary.uuid.FastUuid;
 import examples.SimpleModel;
@@ -15,10 +15,10 @@ public class Storage extends AbstractStorage<UUID, SimpleModel, String[]> {
 
   /**
    * Note that we only use the plugin as an argument, and get the database after
-   * it. with {@link BaseModule#getComponent(Class)} or
-   * {@link BaseModule#getService(Class)}
+   * it. with {@link BasePlugin#getComponent(Class)} or
+   * {@link BasePlugin#getService(Class)}
    */
-  public Storage(final BaseModule basePlugin) {
+  public Storage(final BasePlugin basePlugin) {
     super(basePlugin.getComponent(Database.class), basePlugin);
   }
 

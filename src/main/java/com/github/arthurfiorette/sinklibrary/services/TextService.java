@@ -2,9 +2,11 @@ package com.github.arthurfiorette.sinklibrary.services;
 
 import java.util.*;
 import java.util.regex.Pattern;
-import lombok.experimental.UtilityClass;
+
 import org.apache.commons.lang.WordUtils;
 import org.bukkit.ChatColor;
+
+import lombok.experimental.UtilityClass;
 
 /**
  * A service class that handles with texts.

@@ -1,6 +1,6 @@
 package com.github.arthurfiorette.sinklibrary.interfaces;
 
-import com.github.arthurfiorette.sinklibrary.core.BaseModule;
+import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
 
 /**
  * A class that implement this means that his instances need a BasePlugin to
@@ -10,7 +10,7 @@ import com.github.arthurfiorette.sinklibrary.core.BaseModule;
  */
 public interface BaseComponent {
   /**
-   * @return his {@link BaseModule} owner
+   * @return his {@link BasePlugin} owner
    */
-  BaseModule getBasePlugin();
+  BasePlugin getBasePlugin();
 }

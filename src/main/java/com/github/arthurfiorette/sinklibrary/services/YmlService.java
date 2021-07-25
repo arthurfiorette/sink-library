@@ -1,10 +1,13 @@
 package com.github.arthurfiorette.sinklibrary.services;
 
-import com.google.common.collect.Maps;
 import java.util.*;
-import lombok.experimental.UtilityClass;
+
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
+
+import com.google.common.collect.Maps;
+
+import lombok.experimental.UtilityClass;
 
 /**
  * A service class that handles with yml.

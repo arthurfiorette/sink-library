@@ -1,11 +1,13 @@
 package com.github.arthurfiorette.sinklibrary.data.storage.addons;
 
-import com.github.arthurfiorette.sinklibrary.data.storage.Storage;
 import java.util.Collection;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
+
 import org.bukkit.entity.Player;
+
+import com.github.arthurfiorette.sinklibrary.data.storage.Storage;
 
 public interface PlayerAdapter<V, R> extends Storage<UUID, V, R> {
   default CompletableFuture<V> get(final Player player) {

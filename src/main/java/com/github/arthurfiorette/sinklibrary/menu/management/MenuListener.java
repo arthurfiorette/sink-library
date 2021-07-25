@@ -1,16 +1,16 @@
 package com.github.arthurfiorette.sinklibrary.menu.management;
 
-import com.github.arthurfiorette.sinklibrary.core.BaseModule;
-import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
-import com.github.arthurfiorette.sinklibrary.listener.SinkListener;
-import com.github.arthurfiorette.sinklibrary.menu.BaseMenu;
-import com.github.arthurfiorette.sinklibrary.menu.item.MenuItem;
-import com.github.arthurfiorette.sinklibrary.menu.listener.ClickListener;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
+
+import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
+import com.github.arthurfiorette.sinklibrary.listener.SinkListener;
+import com.github.arthurfiorette.sinklibrary.menu.BaseMenu;
+import com.github.arthurfiorette.sinklibrary.menu.item.MenuItem;
+import com.github.arthurfiorette.sinklibrary.menu.listener.ClickListener;
 
 public final class MenuListener extends SinkListener {
 
@@ -28,7 +28,7 @@ public final class MenuListener extends SinkListener {
     }
 
     final BaseMenu menu = (BaseMenu) inv.getHolder();
-    final BaseModule menuPlugin = menu.getBasePlugin();
+    final BasePlugin menuPlugin = menu.getBasePlugin();
 
     if (!menuPlugin.getClass().equals(this.basePlugin.getClass())) {
       return;

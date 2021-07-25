@@ -1,6 +1,7 @@
 package com.github.arthurfiorette.sinklibrary.exceptions;
 
 import com.github.arthurfiorette.sinklibrary.interfaces.BaseService;
+
 import lombok.NoArgsConstructor;
 
 /**

@@ -1,14 +1,16 @@
 package com.github.arthurfiorette.sinklibrary.menu.management;
 
-import com.github.arthurfiorette.sinklibrary.core.BaseModule;
-import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
-import com.github.arthurfiorette.sinklibrary.interfaces.BaseService;
-import com.github.arthurfiorette.sinklibrary.menu.BaseMenu;
 import java.util.*;
-import lombok.Getter;
+
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
+
+import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
+import com.github.arthurfiorette.sinklibrary.interfaces.BaseService;
+import com.github.arthurfiorette.sinklibrary.menu.BaseMenu;
+
+import lombok.Getter;
 
 public abstract class MenuStorage<M extends Enum<M> & MenuFactory> implements BaseService {
 
@@ -17,7 +19,7 @@ public abstract class MenuStorage<M extends Enum<M> & MenuFactory> implements Ba
   protected final Class<M> clazz;
 
   @Getter
-  protected final BaseModule basePlugin;
+  protected final BasePlugin basePlugin;
 
   protected MenuStorage(final BasePlugin plugin, final Class<M> clazz) {
     this.listener = new MenuListener(plugin);

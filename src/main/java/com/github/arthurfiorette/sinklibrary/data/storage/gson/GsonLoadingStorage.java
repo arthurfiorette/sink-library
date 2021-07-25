@@ -1,11 +1,13 @@
 package com.github.arthurfiorette.sinklibrary.data.storage.gson;
 
-import com.github.arthurfiorette.sinklibrary.core.BaseModule;
+import java.util.function.Function;
+
+import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
 import com.github.arthurfiorette.sinklibrary.data.CacheOperator;
 import com.github.arthurfiorette.sinklibrary.data.database.Database;
 import com.github.arthurfiorette.sinklibrary.data.storage.LoadingStorage;
 import com.google.gson.*;
-import java.util.function.Function;
+
 import lombok.Getter;
 import lombok.NonNull;
 
@@ -20,14 +22,14 @@ public class GsonLoadingStorage<K, V> extends LoadingStorage<K, V, JsonObject> {
 
   @Getter
   @NonNull
-  protected final BaseModule basePlugin;
+  protected final BasePlugin basePlugin;
 
   @Getter
   @NonNull
   protected Gson gson = new Gson();
 
   public GsonLoadingStorage(
-    final BaseModule plugin,
+    final BasePlugin plugin,
     final Database<K, JsonObject> database,
     final Class<V> clazz,
     final Function<K, V> generator,

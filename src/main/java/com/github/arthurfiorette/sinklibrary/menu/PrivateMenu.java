@@ -1,9 +1,11 @@
 package com.github.arthurfiorette.sinklibrary.menu;
 
-import com.github.arthurfiorette.sinklibrary.core.BaseModule;
-import lombok.Getter;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
+
+import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
+
+import lombok.Getter;
 
 public abstract class PrivateMenu extends StaticMenu {
 
@@ -11,7 +13,7 @@ public abstract class PrivateMenu extends StaticMenu {
   protected final Player owner;
 
   public PrivateMenu(
-    final BaseModule plugin,
+    final BasePlugin plugin,
     final Player owner,
     final String title,
     final int rows
@@ -20,7 +22,7 @@ public abstract class PrivateMenu extends StaticMenu {
     this.owner = owner;
   }
 
-  public PrivateMenu(final BaseModule plugin, final Player owner, final Inventory inventory) {
+  public PrivateMenu(final BasePlugin plugin, final Player owner, final Inventory inventory) {
     super(plugin, inventory);
     this.owner = owner;
   }

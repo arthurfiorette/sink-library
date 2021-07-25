@@ -1,6 +1,6 @@
 package examples.storages;
 
-import com.github.arthurfiorette.sinklibrary.core.BaseModule;
+import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
 import com.github.arthurfiorette.sinklibrary.data.storage.gson.GsonStorage;
 import com.github.arthurfiorette.sinklibrary.uuid.UuidAdapter;
 import com.google.gson.GsonBuilder;
@@ -9,7 +9,7 @@ import java.util.UUID;
 
 public class SimplestStorage extends GsonStorage<UUID, SimpleModel> {
 
-  public SimplestStorage(final BaseModule plugin) {
+  public SimplestStorage(final BasePlugin plugin) {
     super(
       // this plugin instance
       plugin,

@@ -1,11 +1,13 @@
 package com.github.arthurfiorette.sinklibrary.data.repository;
 
-import com.github.arthurfiorette.sinklibrary.core.BaseModule;
-import com.github.arthurfiorette.sinklibrary.data.database.Database;
-import com.github.arthurfiorette.sinklibrary.interfaces.BaseComponent;
 import java.util.Collection;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
+
+import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
+import com.github.arthurfiorette.sinklibrary.data.database.Database;
+import com.github.arthurfiorette.sinklibrary.interfaces.BaseComponent;
+
 import lombok.*;
 
 @RequiredArgsConstructor
@@ -16,7 +18,7 @@ public abstract class AbstractRepository<K, V> implements Repository<K, V>, Base
 
   @Getter
   @NonNull
-  protected final BaseModule basePlugin;
+  protected final BasePlugin basePlugin;
 
   /**
    * Create a new entry if the database returns null for a key.

@@ -1,12 +1,14 @@
 package com.github.arthurfiorette.sinklibrary.components;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 import com.github.arthurfiorette.sinklibrary.core.SinkPlugin;
 import com.github.arthurfiorette.sinklibrary.exceptions.ComponentNotRegisteredException;
 import com.github.arthurfiorette.sinklibrary.exceptions.IllegalComponentException;
 import com.github.arthurfiorette.sinklibrary.interfaces.*;
 import com.github.arthurfiorette.sinklibrary.logging.Level;
-import java.util.LinkedHashMap;
-import java.util.Map;
+
 import lombok.Getter;
 import lombok.NonNull;
 

@@ -1,11 +1,13 @@
 package com.github.arthurfiorette.sinklibrary.command;
 
+import org.bukkit.command.CommandMap;
+
 import com.github.arthurfiorette.sinklibrary.command.reflection.CommandReflector;
 import com.github.arthurfiorette.sinklibrary.command.reflection.SimpleCommandReflector;
 import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
 import com.github.arthurfiorette.sinklibrary.interfaces.BaseService;
+
 import lombok.*;
-import org.bukkit.command.CommandMap;
 
 @RequiredArgsConstructor
 public abstract class CommandStorage implements BaseService {

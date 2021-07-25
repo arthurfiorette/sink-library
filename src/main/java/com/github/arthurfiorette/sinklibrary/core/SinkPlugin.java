@@ -1,13 +1,15 @@
 package com.github.arthurfiorette.sinklibrary.core;
 
+import org.bukkit.plugin.java.JavaPlugin;
+
 import com.github.arthurfiorette.sinklibrary.components.ComponentManager;
 import com.github.arthurfiorette.sinklibrary.components.SimpleComponentManager;
 import com.github.arthurfiorette.sinklibrary.executor.v2.TaskContext;
 import com.github.arthurfiorette.sinklibrary.interfaces.BaseService;
 import com.github.arthurfiorette.sinklibrary.interfaces.ComponentLoader;
 import com.github.arthurfiorette.sinklibrary.logging.*;
+
 import lombok.*;
-import org.bukkit.plugin.java.JavaPlugin;
 
 @RequiredArgsConstructor
 public abstract class SinkPlugin extends JavaPlugin implements BasePlugin {
@@ -23,8 +25,8 @@ public abstract class SinkPlugin extends JavaPlugin implements BasePlugin {
   public SinkPlugin() {
     this.manager = new SimpleComponentManager(this);
     this.baseLogger =
-      new BukkitLogger(this, com.github.arthurfiorette.sinklibrary.logging.Level.ALL);
-  }
+      new BukkitLogger(this, Level.ALL);
+  } 
 
   /**
    * @return the component array to register all of yours components and

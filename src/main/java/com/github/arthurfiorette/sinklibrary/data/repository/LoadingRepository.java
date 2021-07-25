@@ -1,5 +1,9 @@
 package com.github.arthurfiorette.sinklibrary.data.repository;
 
+import java.util.Collection;
+import java.util.Set;
+import java.util.concurrent.*;
+
 import com.github.arthurfiorette.sinklibrary.data.CacheOperator;
 import com.github.arthurfiorette.sinklibrary.data.LoadingWrapper;
 import com.github.arthurfiorette.sinklibrary.data.database.Database;
@@ -7,9 +11,7 @@ import com.github.arthurfiorette.sinklibrary.data.storage.LoadingStorage;
 import com.github.arthurfiorette.sinklibrary.interfaces.BaseService;
 import com.google.common.cache.*;
 import com.google.common.collect.Lists;
-import java.util.Collection;
-import java.util.Set;
-import java.util.concurrent.*;
+
 import lombok.Getter;
 import lombok.NonNull;
 

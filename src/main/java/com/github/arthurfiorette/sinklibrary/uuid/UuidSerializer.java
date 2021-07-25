@@ -1,8 +1,9 @@
 package com.github.arthurfiorette.sinklibrary.uuid;
 
-import com.google.gson.*;
 import java.lang.reflect.Type;
 import java.util.UUID;
+
+import com.google.gson.*;
 
 public class UuidSerializer implements JsonDeserializer<UUID>, JsonSerializer<UUID> {
 

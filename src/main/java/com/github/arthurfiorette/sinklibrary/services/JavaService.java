@@ -1,9 +1,11 @@
 package com.github.arthurfiorette.sinklibrary.services;
 
-import com.google.common.collect.ObjectArrays;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+
+import com.google.common.collect.ObjectArrays;
+
 import lombok.experimental.UtilityClass;
 
 /**

@@ -1,9 +1,12 @@
 package com.github.arthurfiorette.sinklibrary.executor;
 
-import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
 import java.util.concurrent.*;
-import lombok.experimental.UtilityClass;
+
 import org.bukkit.scheduler.BukkitScheduler;
+
+import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
+
+import lombok.experimental.UtilityClass;
 
 /**
  * Simple interface to target all executors that runs with a

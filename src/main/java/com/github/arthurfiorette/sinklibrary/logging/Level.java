@@ -1,7 +1,8 @@
 package com.github.arthurfiorette.sinklibrary.logging;
 
-import lombok.*;
 import org.bukkit.ChatColor;
+
+import lombok.*;
 
 /**
  * Modified to support Bukkit chat colors and more.

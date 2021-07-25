@@ -1,6 +1,7 @@
 package com.github.arthurfiorette.sinklibrary.tuple;
 
 import java.io.Serializable;
+
 import lombok.*;
 
 @Getter

@@ -1,9 +1,11 @@
 package com.github.arthurfiorette.sinklibrary.data.database;
 
-import com.github.arthurfiorette.sinklibrary.core.BaseModule;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
+
+import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
+
 import lombok.*;
 
 /**
@@ -18,7 +20,7 @@ public class MemoryDatabase<K, T> implements Database<K, T> {
 
   @Getter
   @NonNull
-  protected final BaseModule basePlugin;
+  protected final BasePlugin basePlugin;
 
   @Getter
   protected ConcurrentMap<K, T> database;
