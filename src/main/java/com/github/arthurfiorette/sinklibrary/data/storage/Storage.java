@@ -1,11 +1,10 @@
 package com.github.arthurfiorette.sinklibrary.data.storage;
 
+import com.github.arthurfiorette.sinklibrary.data.database.Database;
 import java.util.Collection;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Function;
-
-import com.github.arthurfiorette.sinklibrary.data.database.Database;
 
 /**
  * @param <K> Storage key type

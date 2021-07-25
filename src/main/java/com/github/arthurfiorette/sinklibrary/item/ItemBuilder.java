@@ -1,21 +1,18 @@
 package com.github.arthurfiorette.sinklibrary.item;
 
+import com.github.arthurfiorette.sinklibrary.menu.item.BuilderStack;
+import com.github.arthurfiorette.sinklibrary.menu.listener.ClickListener;
+import com.github.arthurfiorette.sinklibrary.services.SpigotService;
 import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.UnaryOperator;
-
+import lombok.*;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.material.MaterialData;
-
-import com.github.arthurfiorette.sinklibrary.menu.item.BuilderStack;
-import com.github.arthurfiorette.sinklibrary.menu.listener.ClickListener;
-import com.github.arthurfiorette.sinklibrary.services.SpigotService;
-
-import lombok.*;
 
 /**
  * A builder class to customize in multiple ways a item stack.

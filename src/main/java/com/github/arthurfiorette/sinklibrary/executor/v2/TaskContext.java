@@ -1,10 +1,8 @@
 package com.github.arthurfiorette.sinklibrary.executor.v2;
 
-import java.util.concurrent.*;
-
-import org.bukkit.Bukkit;
-
 import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
+import java.util.concurrent.*;
+import org.bukkit.Bukkit;
 
 public enum TaskContext {
   /**

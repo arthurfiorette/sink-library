@@ -1,13 +1,11 @@
 package com.github.arthurfiorette.sinklibrary.data.storage.gson;
 
-import java.util.function.Function;
-
 import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
 import com.github.arthurfiorette.sinklibrary.data.CacheOperator;
 import com.github.arthurfiorette.sinklibrary.data.database.Database;
 import com.github.arthurfiorette.sinklibrary.data.storage.LoadingStorage;
 import com.google.gson.*;
-
+import java.util.function.Function;
 import lombok.Getter;
 import lombok.NonNull;
 

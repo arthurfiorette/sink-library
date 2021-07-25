@@ -1,18 +1,15 @@
 package com.github.arthurfiorette.sinklibrary.command.wrapper;
 
-import java.util.List;
-
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
-
 import com.github.arthurfiorette.sinklibrary.command.BaseCommand;
 import com.github.arthurfiorette.sinklibrary.command.CommandUtils;
 import com.github.arthurfiorette.sinklibrary.tuple.Pair;
 import com.github.arthurfiorette.sinklibrary.tuple.ValidPair;
 import com.google.common.collect.Lists;
-
+import java.util.List;
 import lombok.Getter;
 import lombok.NonNull;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
 
 public class CommandWrapper extends Command {
 

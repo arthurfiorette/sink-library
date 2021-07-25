@@ -1,11 +1,10 @@
 package com.github.arthurfiorette.sinklibrary.executor;
 
+import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitScheduler;
 import org.bukkit.scheduler.BukkitTask;
-
-import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
 
 /**
  * A helper enum to run schedule task with {@link BukkitScheduler}

@@ -1,14 +1,12 @@
 package com.github.arthurfiorette.sinklibrary.core;
 
-import java.util.concurrent.*;
-
-import org.bukkit.plugin.Plugin;
-
 import com.github.arthurfiorette.sinklibrary.components.ComponentManager;
 import com.github.arthurfiorette.sinklibrary.executor.v2.TaskContext;
 import com.github.arthurfiorette.sinklibrary.interfaces.BaseComponent;
 import com.github.arthurfiorette.sinklibrary.logging.BaseLogger;
 import com.github.arthurfiorette.sinklibrary.logging.Level;
+import java.util.concurrent.*;
+import org.bukkit.plugin.Plugin;
 
 public interface BasePlugin extends Plugin {
   void treatThrowable(Object author, Throwable throwable, String message, Object... args);
@@ -38,13 +36,21 @@ public interface BasePlugin extends Plugin {
     return this.getManager().getComponent(clazz);
   }
 
-  default void log(final Level level, final Object author, final String message,
-      final Object... args) {
+  default void log(
+    final Level level,
+    final Object author,
+    final String message,
+    final Object... args
+  ) {
     this.getBaseLogger().log(level, author, message, args);
   }
 
-  default void log(final Level level, final Object author, final String message,
-      final Throwable throwable) {
+  default void log(
+    final Level level,
+    final Object author,
+    final String message,
+    final Throwable throwable
+  ) {
     this.getBaseLogger().log(level, author, message, throwable);
   }
 
@@ -55,5 +61,4 @@ public interface BasePlugin extends Plugin {
   default void log(final Level level, final String message, final Throwable throwable) {
     this.getBaseLogger().log(level, message, throwable);
   }
-
 }

@@ -1,12 +1,10 @@
 package com.github.arthurfiorette.sinklibrary.data.storage.gson;
 
-import java.util.function.Function;
-
 import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
 import com.github.arthurfiorette.sinklibrary.data.database.Database;
 import com.github.arthurfiorette.sinklibrary.data.storage.AbstractStorage;
 import com.google.gson.*;
-
+import java.util.function.Function;
 import lombok.*;
 
 public class GsonStorage<K, V> extends AbstractStorage<K, V, JsonObject> {
