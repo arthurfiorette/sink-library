@@ -3,13 +3,11 @@ package com.github.arthurfiorette.sinklibrary.menu.item;
 import com.github.arthurfiorette.sinklibrary.interfaces.SimpleBuilder;
 import com.github.arthurfiorette.sinklibrary.menu.BaseMenu;
 import com.github.arthurfiorette.sinklibrary.menu.listener.ClickListener;
-
-import org.bukkit.inventory.ItemStack;
-
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import org.bukkit.inventory.ItemStack;
 
 @RequiredArgsConstructor
 public class BuilderStack implements MenuItem {
@@ -38,5 +36,4 @@ public class BuilderStack implements MenuItem {
   public ItemStack getItem() {
     return this.builder.build();
   }
-
 }

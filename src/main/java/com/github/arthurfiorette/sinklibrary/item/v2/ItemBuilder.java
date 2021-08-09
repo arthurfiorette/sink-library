@@ -3,21 +3,18 @@ package com.github.arthurfiorette.sinklibrary.item.v2;
 import com.github.arthurfiorette.sinklibrary.interfaces.SimpleBuilder;
 import com.github.arthurfiorette.sinklibrary.menu.item.BuilderStack;
 import com.github.arthurfiorette.sinklibrary.menu.listener.ClickListener;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-
+import lombok.Getter;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.material.MaterialData;
-
-import lombok.Getter;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public class ItemBuilder implements SimpleBuilder<ItemStack> {
@@ -48,22 +45,27 @@ public class ItemBuilder implements SimpleBuilder<ItemStack> {
    * @return itself
    */
   public ItemBuilder material(final Material material) {
-    return this.addProperties(ItemProperty.MATERIAL, (is, meta) -> {
-      is.setType(material);
-    });
+    return this.addProperties(
+        ItemProperty.MATERIAL,
+        (is, meta) -> {
+          is.setType(material);
+        }
+      );
   }
-  
+
   /**
    * @param durability set item durability
    *
    * @return itself
    */
   public ItemBuilder durability(final short durability) {
-    return this.addProperties(ItemProperty.DAMAGE, (is, meta) -> {
-      is.setDurability(durability);
-    });
+    return this.addProperties(
+        ItemProperty.DAMAGE,
+        (is, meta) -> {
+          is.setDurability(durability);
+        }
+      );
   }
-
 
   /**
    * @param amount set the item amount
@@ -71,9 +73,12 @@ public class ItemBuilder implements SimpleBuilder<ItemStack> {
    * @return itself
    */
   public ItemBuilder amount(final int amount) {
-    return this.addProperties(ItemProperty.AMOUNT, (is, meta) -> {
-      is.setAmount(amount);
-    });
+    return this.addProperties(
+        ItemProperty.AMOUNT,
+        (is, meta) -> {
+          is.setAmount(amount);
+        }
+      );
   }
 
   /**
@@ -82,9 +87,12 @@ public class ItemBuilder implements SimpleBuilder<ItemStack> {
    * @return itself
    */
   public ItemBuilder data(final MaterialData data) {
-    return this.addProperties(ItemProperty.MATERIAL_DATA, (is, meta) -> {
-      is.setData(data);
-    });
+    return this.addProperties(
+        ItemProperty.MATERIAL_DATA,
+        (is, meta) -> {
+          is.setData(data);
+        }
+      );
   }
 
   /**
@@ -94,9 +102,12 @@ public class ItemBuilder implements SimpleBuilder<ItemStack> {
    * @return itself
    */
   public ItemBuilder enchantment(final Enchantment ench, final int level) {
-    return this.addProperties(ItemProperty.ENCHANTMENT, (is, meta) -> {
-      is.addUnsafeEnchantment(ench, level);
-    });
+    return this.addProperties(
+        ItemProperty.ENCHANTMENT,
+        (is, meta) -> {
+          is.addUnsafeEnchantment(ench, level);
+        }
+      );
   }
 
   /**
@@ -107,9 +118,12 @@ public class ItemBuilder implements SimpleBuilder<ItemStack> {
    * @return itself
    */
   public ItemBuilder enchantments(final Map<Enchantment, Integer> enchantments) {
-    return this.addProperties(ItemProperty.ENCHANTMENT, (is, meta) -> {
-      is.addUnsafeEnchantments(enchantments);
-    });
+    return this.addProperties(
+        ItemProperty.ENCHANTMENT,
+        (is, meta) -> {
+          is.addUnsafeEnchantments(enchantments);
+        }
+      );
   }
 
   /**
@@ -118,9 +132,12 @@ public class ItemBuilder implements SimpleBuilder<ItemStack> {
    * @return itself
    */
   public ItemBuilder name(final String name) {
-    return this.addProperties(ItemProperty.NAME, (is, meta) -> {
-      meta.setDisplayName(name);
-    });
+    return this.addProperties(
+        ItemProperty.NAME,
+        (is, meta) -> {
+          meta.setDisplayName(name);
+        }
+      );
   }
 
   /**
@@ -138,9 +155,12 @@ public class ItemBuilder implements SimpleBuilder<ItemStack> {
    * @return itself
    */
   public ItemBuilder itemFlags(final ItemFlag... itemFlags) {
-    return this.addProperties(ItemProperty.ITEM_FLAG, (is, meta) -> {
-      meta.addItemFlags(itemFlags);
-    });
+    return this.addProperties(
+        ItemProperty.ITEM_FLAG,
+        (is, meta) -> {
+          meta.addItemFlags(itemFlags);
+        }
+      );
   }
 
   public ItemBuilder lores(final String... lines) {
@@ -148,11 +168,14 @@ public class ItemBuilder implements SimpleBuilder<ItemStack> {
   }
 
   public ItemBuilder lores(final List<String> lines) {
-    return this.addProperties(ItemProperty.LORE, (is, meta) -> {
-      final List<String> lore = meta.getLore() == null ? new ArrayList<>() : meta.getLore();
-      lore.addAll(lines);
-      meta.setLore(lore);
-    });
+    return this.addProperties(
+        ItemProperty.LORE,
+        (is, meta) -> {
+          final List<String> lore = meta.getLore() == null ? new ArrayList<>() : meta.getLore();
+          lore.addAll(lines);
+          meta.setLore(lore);
+        }
+      );
   }
 
   /**
@@ -161,9 +184,12 @@ public class ItemBuilder implements SimpleBuilder<ItemStack> {
    * @return itself
    */
   public ItemBuilder unbreakable(final boolean unbreakable) {
-    return this.addProperties(ItemProperty.UNBREAKABLE, (is, meta) -> {
-      meta.spigot().setUnbreakable(unbreakable);
-    });
+    return this.addProperties(
+        ItemProperty.UNBREAKABLE,
+        (is, meta) -> {
+          meta.spigot().setUnbreakable(unbreakable);
+        }
+      );
   }
 
   /**
@@ -186,10 +212,10 @@ public class ItemBuilder implements SimpleBuilder<ItemStack> {
     if (!this.modified) {
       return this.lastBuild;
     }
-    
+
     final ItemStack item = new ItemStack(this.material);
     this.propertiesMap.apply(item);
-    
+
     this.modified = false;
     return this.lastBuild = item;
   }
@@ -232,5 +258,4 @@ public class ItemBuilder implements SimpleBuilder<ItemStack> {
     this.modified = true;
     return this;
   }
-
 }

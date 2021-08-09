@@ -13,7 +13,7 @@ import org.bukkit.inventory.meta.SkullMeta;
  * A static class to help with item builder templates.
  *
  * @author https://github.com/ArthurFiorette/sink-library/
- * 
+ *
  * @deprecated in flavor of
  * {@link com.github.arthurfiorette.sinklibrary.item.v2.SkullBuilder}
  */

@@ -5,7 +5,6 @@ import lombok.Getter;
 
 @AllArgsConstructor
 public enum ItemProperty {
-  
   AMOUNT(false),
   CUSTOM_META(true),
   DAMAGE(false),
@@ -23,4 +22,3 @@ public enum ItemProperty {
   @Getter
   private boolean cumulative;
 }
-
