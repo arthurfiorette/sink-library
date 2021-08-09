@@ -1,5 +1,10 @@
 package com.github.arthurfiorette.sinklibrary.item;
 
+/**
+ * @deprecated in flavor of
+ * {@link com.github.arthurfiorette.sinklibrary.item.v2.ItemProperty}
+ */
+@Deprecated
 public enum ItemProperty {
   NAME(false),
   LORE(false),
