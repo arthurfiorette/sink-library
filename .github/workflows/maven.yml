@@ -18,9 +18,6 @@ jobs:
         with:
           java-version: '8'
 
-      - name: Install with maven
-        run: mvn --batch-mode --update-snapshots clean install
-
       - name: Cache local Maven repository
         uses: actions/cache@v2
         with:
