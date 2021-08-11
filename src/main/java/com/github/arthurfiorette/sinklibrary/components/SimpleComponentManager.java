@@ -3,10 +3,15 @@ package com.github.arthurfiorette.sinklibrary.components;
 import com.github.arthurfiorette.sinklibrary.core.SinkPlugin;
 import com.github.arthurfiorette.sinklibrary.exception.sink.ComponentNotRegisteredException;
 import com.github.arthurfiorette.sinklibrary.exception.sink.IllegalComponentException;
-import com.github.arthurfiorette.sinklibrary.interfaces.*;
+import com.github.arthurfiorette.sinklibrary.interfaces.BaseComponent;
+import com.github.arthurfiorette.sinklibrary.interfaces.BaseService;
+import com.github.arthurfiorette.sinklibrary.interfaces.ComponentLoader;
 import com.github.arthurfiorette.sinklibrary.logging.Level;
-import java.util.LinkedHashMap;
+import com.github.arthurfiorette.sinklibrary.modules.MultiComponent;
+
+import java.util.HashMap;
 import java.util.Map;
+
 import lombok.Getter;
 import lombok.NonNull;
 
@@ -20,9 +25,8 @@ import lombok.NonNull;
  */
 public class SimpleComponentManager implements ComponentManager {
 
-  private final Map<Class<? extends BaseComponent>, BaseComponent> components = new LinkedHashMap<>();
-
-  private final Map<Class<? extends BaseService>, BaseService> services = new LinkedHashMap<>();
+  private final Map<Class<? extends BaseComponent>, BaseComponent> components = new HashMap<>();
+  private final Map<Class<? extends BaseService>, BaseService> services = new HashMap<>();
 
   @Getter
   @NonNull
@@ -149,7 +153,7 @@ public class SimpleComponentManager implements ComponentManager {
   @SuppressWarnings("unchecked")
   private void registerMultiComponent(final MultiComponent<?> multiComponent) {
     final BaseComponent component = multiComponent.getComponent();
-    final Class<?> registrationClass = multiComponent.getRegistrationClass();
+    final Class<?> registrationClass = multiComponent.getCommonClass();
 
     this.checkTypeParameters(registrationClass);
 
@@ -158,7 +162,7 @@ public class SimpleComponentManager implements ComponentManager {
       return;
     }
 
-    this.components.put((Class<BaseService>) registrationClass, (BaseService) component);
+    this.components.put((Class<BaseComponent>) registrationClass, (BaseService) component);
   }
 
   private void registerAsService(final BaseService service) {
