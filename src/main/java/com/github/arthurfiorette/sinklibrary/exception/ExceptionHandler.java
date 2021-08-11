@@ -1,16 +1,16 @@
 package com.github.arthurfiorette.sinklibrary.exception;
 
-import com.github.arthurfiorette.sinklibrary.interfaces.BaseComponent;
+import com.github.arthurfiorette.sinklibrary.component.Component;
 
-public interface BaseExceptionHandler extends BaseComponent {
-  public void handle(
+public interface ExceptionHandler extends Component {
+  void handle(
     final Class<?> author,
     final Throwable exc,
     final String message,
     final Object... args
   );
 
-  public void handle(final Class<?> author, final Throwable exc);
+  void handle(final Class<?> author, final Throwable exc);
 
   //
 
@@ -28,10 +28,10 @@ public interface BaseExceptionHandler extends BaseComponent {
   }
 
   default void handle(final Throwable exc, final String message, final Object... args) {
-    this.handle(getBasePlugin().getClass(), exc, message, args);
+    this.handle(this.getBasePlugin().getClass(), exc, message, args);
   }
 
   default void handle(final Throwable exc) {
-    this.handle(getBasePlugin().getClass(), exc);
+    this.handle(this.getBasePlugin().getClass(), exc);
   }
 }

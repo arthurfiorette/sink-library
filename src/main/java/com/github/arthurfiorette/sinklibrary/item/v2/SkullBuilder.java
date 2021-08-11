@@ -2,13 +2,16 @@ package com.github.arthurfiorette.sinklibrary.item.v2;
 
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
+
 import java.lang.reflect.Field;
 import java.util.UUID;
-import lombok.experimental.UtilityClass;
+
 import org.apache.commons.codec.binary.Base64;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.inventory.meta.SkullMeta;
+
+import lombok.experimental.UtilityClass;
 
 @UtilityClass
 public class SkullBuilder {

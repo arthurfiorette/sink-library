@@ -1,19 +1,27 @@
 package com.github.arthurfiorette.sinklibrary.item;
 
-import com.github.arthurfiorette.sinklibrary.interfaces.SimpleBuilder;
+import com.github.arthurfiorette.sinklibrary.interfaces.Builder;
 import com.github.arthurfiorette.sinklibrary.menu.item.BuilderStack;
 import com.github.arthurfiorette.sinklibrary.menu.listener.ClickListener;
 import com.github.arthurfiorette.sinklibrary.services.SpigotService;
-import java.util.*;
+
+import java.util.Arrays;
+import java.util.EnumMap;
+import java.util.List;
+import java.util.Map;
 import java.util.function.Consumer;
 import java.util.function.UnaryOperator;
-import lombok.*;
+
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.material.MaterialData;
+
+import lombok.Getter;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
 /**
  * A builder class to customize in multiple ways a item stack.
@@ -25,7 +33,7 @@ import org.bukkit.material.MaterialData;
  */
 @Deprecated
 @RequiredArgsConstructor
-public class ItemBuilder implements SimpleBuilder<ItemStack> {
+public class ItemBuilder implements Builder<ItemStack> {
 
   @Getter
   private transient ItemStack lastBuild = new ItemStack(Material.AIR);
@@ -239,7 +247,6 @@ public class ItemBuilder implements SimpleBuilder<ItemStack> {
   /**
    * @return a copy fro this builder
    */
-  @Override
   public ItemBuilder copy() {
     final ItemBuilder clone = new ItemBuilder(this.material);
     clone.properties = this.properties;

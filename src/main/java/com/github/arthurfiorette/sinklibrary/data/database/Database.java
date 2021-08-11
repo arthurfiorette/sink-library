@@ -1,8 +1,11 @@
 package com.github.arthurfiorette.sinklibrary.data.database;
 
-import com.github.arthurfiorette.sinklibrary.interfaces.BaseService;
+import com.github.arthurfiorette.sinklibrary.component.Service;
+
 import java.util.Collection;
+
 import javax.annotation.Nullable;
+
 
 /**
  * Represents a simple database model. <b>All of these methods are meant to be
@@ -10,7 +13,7 @@ import javax.annotation.Nullable;
  *
  * @author https://github.com/ArthurFiorette/sink-library/
  */
-public interface Database<K, V> extends BaseService {
+public interface Database<K, V> extends Service {
   /**
    * Save a value in this database
    *

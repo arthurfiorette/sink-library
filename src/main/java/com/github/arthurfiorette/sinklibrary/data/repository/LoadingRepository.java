@@ -1,20 +1,26 @@
 package com.github.arthurfiorette.sinklibrary.data.repository;
 
+import com.github.arthurfiorette.sinklibrary.component.Service;
 import com.github.arthurfiorette.sinklibrary.data.CacheOperator;
 import com.github.arthurfiorette.sinklibrary.data.LoadingWrapper;
 import com.github.arthurfiorette.sinklibrary.data.database.Database;
 import com.github.arthurfiorette.sinklibrary.data.storage.LoadingStorage;
-import com.github.arthurfiorette.sinklibrary.interfaces.BaseService;
-import com.google.common.cache.*;
+import com.google.common.cache.CacheLoader;
+import com.google.common.cache.LoadingCache;
+import com.google.common.cache.RemovalListener;
 import com.google.common.collect.Lists;
+
 import java.util.Collection;
 import java.util.Set;
-import java.util.concurrent.*;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionException;
+import java.util.concurrent.ExecutionException;
+
 import lombok.Getter;
 import lombok.NonNull;
 
 public abstract class LoadingRepository<K, V>
-  implements Repository<K, V>, BaseService, LoadingWrapper<K, V> {
+  implements Repository<K, V>, Service, LoadingWrapper<K, V> {
 
   @Getter
   @NonNull
@@ -76,13 +82,13 @@ public abstract class LoadingRepository<K, V>
   protected abstract V create(K key);
 
   @Override
-  public void enable() throws Exception {}
+  public void enable()  {}
 
   /**
    * Saves all entities in this cache to the dabatase when disabling.
    */
   @Override
-  public void disable() throws Exception {
+  public void disable()  {
     this.cache.cleanUp();
   }
 

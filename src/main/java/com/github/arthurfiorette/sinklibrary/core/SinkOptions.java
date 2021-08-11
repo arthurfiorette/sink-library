@@ -1,14 +1,16 @@
 package com.github.arthurfiorette.sinklibrary.core;
 
-import com.github.arthurfiorette.sinklibrary.components.ComponentManager;
-import com.github.arthurfiorette.sinklibrary.components.SimpleComponentManager;
-import com.github.arthurfiorette.sinklibrary.exception.BaseExceptionHandler;
+import com.github.arthurfiorette.sinklibrary.component.providers.ComponentProvider;
+import com.github.arthurfiorette.sinklibrary.component.providers.SimpleComponentProvider;
+import com.github.arthurfiorette.sinklibrary.exception.ExceptionHandler;
 import com.github.arthurfiorette.sinklibrary.exception.SimpleExceptionHandler;
 import com.github.arthurfiorette.sinklibrary.logging.BaseLogger;
 import com.github.arthurfiorette.sinklibrary.logging.BukkitLogger;
 import com.github.arthurfiorette.sinklibrary.logging.Level;
+
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -20,7 +22,7 @@ public class SinkOptions {
 
   @Getter
   @NonNull
-  private ComponentManager manager;
+  private ComponentProvider componentProvider;
 
   @Getter
   @NonNull
@@ -28,11 +30,11 @@ public class SinkOptions {
 
   @Getter
   @NonNull
-  private ExecutorService executor;
+  private ExecutorService executorService;
 
   @Getter
   @NonNull
-  private BaseExceptionHandler exceptionHandler;
+  private ExceptionHandler exceptionHandler;
 
   /**
    * Create a new builder for the provided {@link SinkPlugin}
@@ -41,7 +43,7 @@ public class SinkOptions {
    *
    * @return the new builder
    */
-  public static SinkOptionsBuilder builder(SinkPlugin plugin) {
+  public static SinkOptionsBuilder builder(final SinkPlugin plugin) {
     return new SinkOptionsBuilder(plugin);
   }
 
@@ -52,11 +54,11 @@ public class SinkOptions {
    */
   public static class SinkOptionsBuilder {
 
-    private SinkOptionsBuilder(SinkPlugin plugin) {
-      manager(new SimpleComponentManager(plugin));
-      baseLogger(new BukkitLogger(plugin, Level.ALL));
-      executor(new ScheduledThreadPoolExecutor(1));
-      exceptionHandler(new SimpleExceptionHandler(plugin));
+    private SinkOptionsBuilder(final BasePlugin plugin) {
+      this.componentProvider(new SimpleComponentProvider(plugin));
+      this.baseLogger(new BukkitLogger(plugin, Level.ALL));
+      this.executorService(new ScheduledThreadPoolExecutor(1));
+      this.exceptionHandler(new SimpleExceptionHandler(plugin));
     }
   }
 }

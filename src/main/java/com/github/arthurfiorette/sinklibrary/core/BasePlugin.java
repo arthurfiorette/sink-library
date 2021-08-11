@@ -1,16 +1,21 @@
 package com.github.arthurfiorette.sinklibrary.core;
 
-import com.github.arthurfiorette.sinklibrary.components.ComponentManager;
-import com.github.arthurfiorette.sinklibrary.exception.BaseExceptionHandler;
+import com.github.arthurfiorette.sinklibrary.component.Component;
+import com.github.arthurfiorette.sinklibrary.component.loaders.ComponentLoader;
+import com.github.arthurfiorette.sinklibrary.component.providers.ComponentProvider;
+import com.github.arthurfiorette.sinklibrary.exception.ExceptionHandler;
 import com.github.arthurfiorette.sinklibrary.executor.v2.TaskContext;
-import com.github.arthurfiorette.sinklibrary.interfaces.BaseComponent;
 import com.github.arthurfiorette.sinklibrary.logging.BaseLogger;
 import com.github.arthurfiorette.sinklibrary.logging.Level;
-import java.util.concurrent.*;
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.ScheduledExecutorService;
+
 import org.bukkit.plugin.Plugin;
 
 public interface BasePlugin extends Plugin {
-  ComponentManager getManager();
+  
+  ComponentProvider getProvider();
 
   BaseLogger getBaseLogger();
 
@@ -26,10 +31,16 @@ public interface BasePlugin extends Plugin {
    */
   ExecutorService getExecutor();
 
-  BaseExceptionHandler getExceptionHandler();
+  ExceptionHandler getExceptionHandler();
+  
+  /**
+   * @return the component array to register all of yours components and
+   * services.
+   */
+  ComponentLoader[] components();
 
-  default <T extends BaseComponent> T getComponent(final Class<T> clazz) {
-    return this.getManager().getComponent(clazz);
+  default <T extends Component> T get(final Class<T> clazz) {
+    return this.getProvider().get(clazz);
   }
 
   default void log(

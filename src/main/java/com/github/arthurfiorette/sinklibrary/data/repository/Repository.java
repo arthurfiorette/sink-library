@@ -2,6 +2,7 @@ package com.github.arthurfiorette.sinklibrary.data.repository;
 
 import com.github.arthurfiorette.sinklibrary.data.database.Database;
 import com.github.arthurfiorette.sinklibrary.data.storage.Storage;
+
 import java.util.Collection;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;

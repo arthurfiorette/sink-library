@@ -1,15 +1,21 @@
 package com.github.arthurfiorette.sinklibrary.menu.management;
 
+import com.github.arthurfiorette.sinklibrary.component.Service;
 import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
-import com.github.arthurfiorette.sinklibrary.interfaces.BaseService;
 import com.github.arthurfiorette.sinklibrary.menu.BaseMenu;
-import java.util.*;
-import lombok.Getter;
+
+import java.util.EnumMap;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 
-public abstract class MenuStorage<M extends Enum<M> & MenuFactory> implements BaseService {
+import lombok.Getter;
+
+public abstract class MenuStorage<M extends Enum<M> & MenuFactory> implements Service {
 
   protected final Map<UUID, EnumMap<M, BaseMenu>> inventories = new HashMap<>();
   protected final MenuListener listener;
@@ -44,12 +50,12 @@ public abstract class MenuStorage<M extends Enum<M> & MenuFactory> implements Ba
   }
 
   @Override
-  public void enable() throws Exception {
+  public void enable()  {
     this.listener.enable();
   }
 
   @Override
-  public void disable() throws Exception {
+  public void disable()  {
     this.listener.disable();
 
     for (final UUID id : this.inventories.keySet()) {

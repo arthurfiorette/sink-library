@@ -1,11 +1,12 @@
 package com.github.arthurfiorette.sinklibrary.config;
 
-import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
-import com.github.arthurfiorette.sinklibrary.interfaces.BaseComponent;
+import com.github.arthurfiorette.sinklibrary.component.Component;
+
 import java.io.File;
+
 import org.bukkit.configuration.file.FileConfiguration;
 
-public interface BaseConfig extends BaseComponent {
+public interface BaseConfig extends Component {
   /**
    * Reload his configuration
    */
@@ -21,6 +22,4 @@ public interface BaseConfig extends BaseComponent {
    */
   File getFile();
 
-  @Override
-  BasePlugin getBasePlugin();
 }

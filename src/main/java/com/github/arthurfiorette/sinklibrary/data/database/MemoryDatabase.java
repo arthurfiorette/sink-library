@@ -1,10 +1,17 @@
 package com.github.arthurfiorette.sinklibrary.data.database;
 
 import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
-import java.util.*;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
-import lombok.*;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
 /**
  * A memory database is a database saved in a concurrent hash map and resets

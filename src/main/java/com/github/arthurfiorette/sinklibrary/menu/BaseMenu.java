@@ -1,10 +1,11 @@
 package com.github.arthurfiorette.sinklibrary.menu;
 
-import com.github.arthurfiorette.sinklibrary.interfaces.BaseComponent;
+import com.github.arthurfiorette.sinklibrary.component.Component;
 import com.github.arthurfiorette.sinklibrary.menu.item.MenuItem;
+
 import org.bukkit.inventory.InventoryHolder;
 
-public interface BaseMenu extends BaseComponent, InventoryHolder {
+public interface BaseMenu extends Component, InventoryHolder {
   void update();
 
   MenuItem getItemAt(byte slot);

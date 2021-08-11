@@ -1,7 +1,9 @@
 package examples.starter;
 
+import static com.github.arthurfiorette.sinklibrary.component.loaders.ComponentLoader.reflect;
+
+import com.github.arthurfiorette.sinklibrary.component.loaders.ComponentLoader;
 import com.github.arthurfiorette.sinklibrary.core.SinkPlugin;
-import com.github.arthurfiorette.sinklibrary.interfaces.ComponentLoader;
 
 public class Plugin extends SinkPlugin {
 
@@ -9,6 +11,6 @@ public class Plugin extends SinkPlugin {
   public ComponentLoader[] components() {
     // Pay attention that the Storage needs the Database component, so it must
     // be registered after it.
-    return new ComponentLoader[] { () -> new Database(this), () -> new Storage(this) };
+    return reflect(this, Database.class, Storage.class);
   }
 }

@@ -1,6 +1,9 @@
 package com.github.arthurfiorette.sinklibrary.data;
 
-import com.google.common.cache.*;
+import com.google.common.cache.CacheLoader;
+import com.google.common.cache.CacheStats;
+import com.google.common.cache.LoadingCache;
+import com.google.common.cache.RemovalListener;
 
 public interface LoadingWrapper<K, V> {
   LoadingCache<K, V> getCache();

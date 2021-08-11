@@ -2,6 +2,7 @@ package com.github.arthurfiorette.sinklibrary.uuid;
 
 import java.util.Arrays;
 import java.util.UUID;
+
 import lombok.NonNull;
 import lombok.experimental.UtilityClass;
 

@@ -1,9 +1,10 @@
 package com.github.arthurfiorette.sinklibrary.logging;
 
-import com.github.arthurfiorette.sinklibrary.interfaces.BaseComponent;
+import com.github.arthurfiorette.sinklibrary.component.Component;
+
 import java.util.Collection;
 
-public interface BaseLogger extends BaseComponent {
+public interface BaseLogger extends Component {
   void log(Level level, Object author, String message, Object... args);
 
   void log(Level level, Object author, String message, Throwable throwable);

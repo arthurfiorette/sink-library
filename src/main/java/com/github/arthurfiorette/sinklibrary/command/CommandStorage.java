@@ -2,13 +2,17 @@ package com.github.arthurfiorette.sinklibrary.command;
 
 import com.github.arthurfiorette.sinklibrary.command.reflection.CommandReflector;
 import com.github.arthurfiorette.sinklibrary.command.reflection.SimpleCommandReflector;
+import com.github.arthurfiorette.sinklibrary.component.Service;
 import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
-import com.github.arthurfiorette.sinklibrary.interfaces.BaseService;
-import lombok.*;
+
 import org.bukkit.command.CommandMap;
 
+import lombok.Getter;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+
 @RequiredArgsConstructor
-public abstract class CommandStorage implements BaseService {
+public abstract class CommandStorage implements Service {
 
   @Getter
   @NonNull
@@ -26,8 +30,8 @@ public abstract class CommandStorage implements BaseService {
   protected abstract BaseCommand[] commands();
 
   @Override
-  public void enable() throws Exception {
-    this.commandReflector.enable();
+  public void enable()  {
+    this.commandReflector.run();
     final CommandMap commandMap = this.commandReflector.getCommandMap();
 
     for (final BaseCommand command : this.commands()) {
@@ -37,5 +41,5 @@ public abstract class CommandStorage implements BaseService {
   }
 
   @Override
-  public void disable() throws Exception {}
+  public void disable()  {}
 }

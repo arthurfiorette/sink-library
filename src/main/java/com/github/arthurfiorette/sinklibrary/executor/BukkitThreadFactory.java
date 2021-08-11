@@ -1,9 +1,13 @@
 package com.github.arthurfiorette.sinklibrary.executor;
 
+import com.github.arthurfiorette.sinklibrary.component.Component;
 import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
-import com.github.arthurfiorette.sinklibrary.interfaces.BaseComponent;
+
 import java.util.concurrent.ThreadFactory;
-import lombok.*;
+
+import lombok.Getter;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
 /**
  * Every created thread from this object runs with the specified
@@ -21,7 +25,7 @@ import lombok.*;
  */
 @Deprecated
 @RequiredArgsConstructor
-public class BukkitThreadFactory implements ThreadFactory, BaseComponent {
+public class BukkitThreadFactory implements ThreadFactory, Component {
 
   @Getter
   @NonNull

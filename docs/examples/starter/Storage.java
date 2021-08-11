@@ -3,8 +3,10 @@ package examples.starter;
 import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
 import com.github.arthurfiorette.sinklibrary.data.storage.AbstractStorage;
 import com.github.arthurfiorette.sinklibrary.uuid.FastUuid;
-import examples.SimpleModel;
+
 import java.util.UUID;
+
+import examples.SimpleModel;
 
 /**
  * Simple storage example, see more in docs/examples/storages
@@ -19,7 +21,7 @@ public class Storage extends AbstractStorage<UUID, SimpleModel, String[]> {
    * {@link BasePlugin#getService(Class)}
    */
   public Storage(final BasePlugin basePlugin) {
-    super(basePlugin.getComponent(Database.class), basePlugin);
+    super(basePlugin.get(Database.class), basePlugin);
   }
 
   /**

@@ -1,12 +1,14 @@
 package com.github.arthurfiorette.sinklibrary.command.reflection;
 
 import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
-import com.github.arthurfiorette.sinklibrary.exception.service.EnablingException;
+
 import java.lang.reflect.Field;
-import lombok.Getter;
-import lombok.NonNull;
+
 import org.bukkit.command.CommandMap;
 import org.bukkit.plugin.PluginManager;
+
+import lombok.Getter;
+import lombok.NonNull;
 
 public class SimpleCommandReflector implements CommandReflector {
 
@@ -32,18 +34,18 @@ public class SimpleCommandReflector implements CommandReflector {
   }
 
   @Override
-  public void enable() {
+  public void run() {
     try {
       this.pluginManager = this.getBasePlugin().getServer().getPluginManager();
       final Field field = this.getCommandMapField();
       this.commandMap = (CommandMap) field.get(this.pluginManager);
     } catch (final NoSuchFieldException | IllegalAccessException | IllegalArgumentException e) {
-      throw new EnablingException(
+      throw new RuntimeException(
         SimpleCommandReflector.EXC_TITLE + " maybe you are using an incompatible version?",
         e
       );
     } catch (final SecurityException e) {
-      throw new EnablingException(
+      throw new RuntimeException(
         SimpleCommandReflector.EXC_TITLE + " do we have permission to do this?",
         e
       );

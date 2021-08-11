@@ -1,22 +1,24 @@
 package com.github.arthurfiorette.sinklibrary.core;
 
-import com.github.arthurfiorette.sinklibrary.components.ComponentManager;
+import com.github.arthurfiorette.sinklibrary.component.Service;
+import com.github.arthurfiorette.sinklibrary.component.providers.ComponentProvider;
 import com.github.arthurfiorette.sinklibrary.core.SinkOptions.SinkOptionsBuilder;
-import com.github.arthurfiorette.sinklibrary.exception.BaseExceptionHandler;
-import com.github.arthurfiorette.sinklibrary.interfaces.BaseService;
-import com.github.arthurfiorette.sinklibrary.interfaces.ComponentLoader;
+import com.github.arthurfiorette.sinklibrary.exception.ExceptionHandler;
 import com.github.arthurfiorette.sinklibrary.logging.BaseLogger;
+
 import java.util.concurrent.ExecutorService;
 import java.util.function.Consumer;
+
+import org.bukkit.plugin.java.JavaPlugin;
+
 import lombok.Getter;
 import lombok.NonNull;
-import org.bukkit.plugin.java.JavaPlugin;
 
 public abstract class SinkPlugin extends JavaPlugin implements BasePlugin {
 
   @Getter
   @NonNull
-  private final ComponentManager manager;
+  private final ComponentProvider provider;
 
   @Getter
   @NonNull
@@ -28,7 +30,7 @@ public abstract class SinkPlugin extends JavaPlugin implements BasePlugin {
 
   @Getter
   @NonNull
-  private final BaseExceptionHandler exceptionHandler;
+  private final ExceptionHandler exceptionHandler;
 
   public SinkPlugin() {
     this(
@@ -38,42 +40,36 @@ public abstract class SinkPlugin extends JavaPlugin implements BasePlugin {
     );
   }
 
-  public SinkPlugin(Consumer<SinkOptionsBuilder> options) {
+  public SinkPlugin(final Consumer<SinkOptionsBuilder> options) {
     // Create and build this plugin options.
     final SinkOptionsBuilder builder = SinkOptions.builder(this);
     options.accept(builder);
-    SinkOptions so = builder.build();
+    final SinkOptions so = builder.build();
 
     // Apply his properties
-    this.manager = so.getManager();
+    this.provider = so.getComponentProvider();
     this.baseLogger = so.getBaseLogger();
-    this.executor = so.getExecutor();
+    this.executor = so.getExecutorService();
     this.exceptionHandler = so.getExceptionHandler();
   }
 
   /**
-   * @return the component array to register all of yours components and
-   * services.
-   */
-  public abstract ComponentLoader[] components();
-
-  /**
    * @implNote If you need to execute code on startup, implements the
-   * {@link BaseService} class on your {@link SinkPlugin} and register it on
+   * {@link Service} class on your {@link SinkPlugin} and register it on
    * {@link SinkPlugin#components()}
    */
   @Override
   public final void onEnable() {
-    this.manager.enableServices();
+    this.provider.enableAll();
   }
 
   /**
    * @implNote If you need to execute code on startup, implements the
-   * {@link BaseService} class on your {@link SinkPlugin} and register it on
+   * {@link Service} class on your {@link SinkPlugin} and register it on
    * {@link SinkPlugin#components()}
    */
   @Override
   public final void onDisable() {
-    this.manager.disableServices();
+    this.provider.disableAll();
   }
 }

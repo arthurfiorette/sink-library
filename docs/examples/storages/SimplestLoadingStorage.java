@@ -4,9 +4,11 @@ import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
 import com.github.arthurfiorette.sinklibrary.data.storage.gson.GsonLoadingStorage;
 import com.github.arthurfiorette.sinklibrary.uuid.UuidAdapter;
 import com.google.gson.GsonBuilder;
-import examples.SimpleModel;
+
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
+
+import examples.SimpleModel;
 
 public class SimplestLoadingStorage extends GsonLoadingStorage<UUID, SimpleModel> {
 
@@ -20,7 +22,7 @@ public class SimplestLoadingStorage extends GsonLoadingStorage<UUID, SimpleModel
       plugin,
       // Your database component, just be sure that the database is being
       // registered before this storage.
-      plugin.getComponent(/* my database component */null),
+      plugin.get(/* my database component */null),
       // The class of your instance
       SimpleModel.class,
       // The generator function. This function is called when the databse

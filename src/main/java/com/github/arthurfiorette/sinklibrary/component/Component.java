@@ -1,4 +1,4 @@
-package com.github.arthurfiorette.sinklibrary.interfaces;
+package com.github.arthurfiorette.sinklibrary.component;
 
 import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
 
@@ -8,7 +8,8 @@ import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
  *
  * @author https://github.com/ArthurFiorette/sink-library/
  */
-public interface BaseComponent {
+public interface Component {
+  
   /**
    * @return his {@link BasePlugin} owner
    */

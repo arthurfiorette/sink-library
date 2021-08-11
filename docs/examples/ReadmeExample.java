@@ -1,9 +1,12 @@
 package examples;
 
+import static com.github.arthurfiorette.sinklibrary.component.loaders.ComponentLoader.reflect;
+
+import com.github.arthurfiorette.sinklibrary.component.loaders.ComponentLoader;
 import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
 import com.github.arthurfiorette.sinklibrary.core.SinkPlugin;
-import com.github.arthurfiorette.sinklibrary.interfaces.ComponentLoader;
 import com.github.arthurfiorette.sinklibrary.listener.SinkListener;
+
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerJoinEvent;
 
@@ -11,8 +14,10 @@ public class ReadmeExample extends SinkPlugin {
 
   @Override
   public ComponentLoader[] components() {
-    return new ComponentLoader[] { () -> new MyListener(this) };
+    // A helper method to create a component loader array based on reflection
+    return reflect(this, MyListener.class);
   }
+
 }
 
 // A simple class to be our listener

@@ -2,14 +2,17 @@ package com.github.arthurfiorette.sinklibrary.menu;
 
 import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
 import com.github.arthurfiorette.sinklibrary.menu.item.MenuItem;
+
 import java.util.Map;
-import lombok.Getter;
-import lombok.Setter;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+
+import lombok.Getter;
+import lombok.Setter;
 
 public abstract class StaticMenu implements BaseMenu {
 

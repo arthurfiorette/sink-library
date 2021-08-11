@@ -2,8 +2,10 @@ package com.github.arthurfiorette.sinklibrary.item;
 
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
+
 import java.lang.reflect.Field;
 import java.util.UUID;
+
 import org.apache.commons.codec.binary.Base64;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;

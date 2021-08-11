@@ -2,13 +2,16 @@ package com.github.arthurfiorette.sinklibrary.executor.v2;
 
 import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
 import com.github.arthurfiorette.sinklibrary.services.SpigotService;
+
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-import lombok.NonNull;
+
 import org.bukkit.Bukkit;
+
+import lombok.NonNull;
 
 public enum TaskContext {
   /**
