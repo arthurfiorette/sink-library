@@ -63,14 +63,17 @@ Sink Library</h1>
 // /docs/examples/ReadmeExample.java
 
 public class ReadmeExample extends SinkPlugin {
+
   @Override
-  protected ComponentLoader[] components() {
-    return new ComponentLoader[] { () -> new MyListener(this) };
+  public ComponentLoader[] components() {
+    // A helper method to create a component loader array based on reflection
+    return reflect(this, MyListener.class);
   }
 }
 
 // A simple class to be our listener
 class MyListener extends SinkListener {
+
   public MyListener(final BasePlugin owner) {
     super(owner);
   }
