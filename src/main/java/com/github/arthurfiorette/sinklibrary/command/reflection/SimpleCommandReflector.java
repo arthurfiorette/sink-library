@@ -1,14 +1,11 @@
 package com.github.arthurfiorette.sinklibrary.command.reflection;
 
 import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
-
 import java.lang.reflect.Field;
-
-import org.bukkit.command.CommandMap;
-import org.bukkit.plugin.PluginManager;
-
 import lombok.Getter;
 import lombok.NonNull;
+import org.bukkit.command.CommandMap;
+import org.bukkit.plugin.PluginManager;
 
 public class SimpleCommandReflector implements CommandReflector {
 

@@ -3,9 +3,7 @@ package com.github.arthurfiorette.sinklibrary.component.loaders;
 import com.github.arthurfiorette.sinklibrary.component.Component;
 import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
 import com.github.arthurfiorette.sinklibrary.exception.sink.IllegalConstructorException;
-
 import java.lang.reflect.Constructor;
-
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -24,12 +22,12 @@ public class ConstructorLoader implements ComponentLoader {
   @Override
   public Component load() {
     try {
-      final Constructor<? extends Component> constructor = this.clazz.getConstructor(BasePlugin.class);
+      final Constructor<? extends Component> constructor =
+        this.clazz.getConstructor(BasePlugin.class);
       constructor.setAccessible(true);
       return constructor.newInstance(this.plugin);
     } catch (final Exception e) {
       throw new IllegalConstructorException(this.clazz);
     }
   }
-
 }

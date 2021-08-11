@@ -3,15 +3,12 @@ package com.github.arthurfiorette.sinklibrary.command;
 import com.github.arthurfiorette.sinklibrary.command.wrapper.CommandInfo.CommandInfoBuilder;
 import com.github.arthurfiorette.sinklibrary.component.Component;
 import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
-
 import java.util.Collection;
 import java.util.List;
-
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.PluginIdentifiableCommand;
 
 public interface BaseCommand extends Component, PluginIdentifiableCommand {
-  
   void handle(final CommandSender sender, final Collection<String> args);
 
   List<String> onTabComplete(final CommandSender sender, final Collection<String> args);

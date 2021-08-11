@@ -1,7 +1,6 @@
 package com.github.arthurfiorette.sinklibrary.tuple;
 
 import java.io.Serializable;
-
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

@@ -1,7 +1,6 @@
 package com.github.arthurfiorette.sinklibrary.executor;
 
 import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
-
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitScheduler;

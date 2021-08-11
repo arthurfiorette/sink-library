@@ -1,13 +1,11 @@
 package com.github.arthurfiorette.sinklibrary.data.database;
 
 import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NonNull;

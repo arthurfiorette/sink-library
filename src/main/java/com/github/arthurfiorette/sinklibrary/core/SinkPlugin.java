@@ -5,14 +5,11 @@ import com.github.arthurfiorette.sinklibrary.component.providers.ComponentProvid
 import com.github.arthurfiorette.sinklibrary.core.SinkOptions.SinkOptionsBuilder;
 import com.github.arthurfiorette.sinklibrary.exception.ExceptionHandler;
 import com.github.arthurfiorette.sinklibrary.logging.BaseLogger;
-
 import java.util.concurrent.ExecutorService;
 import java.util.function.Consumer;
-
-import org.bukkit.plugin.java.JavaPlugin;
-
 import lombok.Getter;
 import lombok.NonNull;
+import org.bukkit.plugin.java.JavaPlugin;
 
 public abstract class SinkPlugin extends JavaPlugin implements BasePlugin {
 

@@ -4,12 +4,10 @@ import com.github.arthurfiorette.sinklibrary.command.reflection.CommandReflector
 import com.github.arthurfiorette.sinklibrary.command.reflection.SimpleCommandReflector;
 import com.github.arthurfiorette.sinklibrary.component.Service;
 import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
-
-import org.bukkit.command.CommandMap;
-
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import org.bukkit.command.CommandMap;
 
 @RequiredArgsConstructor
 public abstract class CommandStorage implements Service {
@@ -30,7 +28,7 @@ public abstract class CommandStorage implements Service {
   protected abstract BaseCommand[] commands();
 
   @Override
-  public void enable()  {
+  public void enable() {
     this.commandReflector.run();
     final CommandMap commandMap = this.commandReflector.getCommandMap();
 
@@ -41,5 +39,5 @@ public abstract class CommandStorage implements Service {
   }
 
   @Override
-  public void disable()  {}
+  public void disable() {}
 }

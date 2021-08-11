@@ -8,7 +8,6 @@ import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 import com.google.common.cache.RemovalListener;
 import com.google.common.collect.Lists;
-
 import java.util.Collection;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
@@ -16,12 +15,11 @@ import java.util.concurrent.CompletionException;
 import java.util.concurrent.ExecutionException;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-
 import lombok.Getter;
 import lombok.NonNull;
 
 public abstract class LoadingStorage<K, V, R>
-    implements Storage<K, V, R>, Service, LoadingWrapper<K, V> {
+  implements Storage<K, V, R>, Service, LoadingWrapper<K, V> {
 
   @Getter
   @NonNull
@@ -44,16 +42,18 @@ public abstract class LoadingStorage<K, V, R>
    */
   protected LoadingStorage(final Database<K, R> database, final CacheOperator<K, V> builder) {
     this.database = database;
-    this.cache = builder.withNewBuilder().removalListener(this.removalListener())
-        .build(this.cacheLoader());
+    this.cache =
+      builder.withNewBuilder().removalListener(this.removalListener()).build(this.cacheLoader());
   }
 
   @Override
   public RemovalListener<K, V> removalListener() {
     return notification -> {
       // Save synchronously
-      LoadingStorage.this.database.save(notification.getKey(),
-          LoadingStorage.this.serialize(notification.getValue()));
+      LoadingStorage.this.database.save(
+          notification.getKey(),
+          LoadingStorage.this.serialize(notification.getValue())
+        );
     };
   }
 
@@ -82,13 +82,13 @@ public abstract class LoadingStorage<K, V, R>
   protected abstract V create(K key);
 
   @Override
-  public void enable()  {}
+  public void enable() {}
 
   /**
    * Saves all entities in this cache to the dabatase when disabling.
    */
   @Override
-  public void disable()  {
+  public void disable() {
     this.cache.cleanUp();
   }
 
@@ -100,26 +100,34 @@ public abstract class LoadingStorage<K, V, R>
    */
   @Override
   public CompletableFuture<Void> save(final K key, final V value) {
-    return CompletableFuture.runAsync(() -> {
-      this.cache.put(key, value);
-    }, this.getBasePlugin().getExecutor());
+    return CompletableFuture.runAsync(
+      () -> {
+        this.cache.put(key, value);
+      },
+      this.getBasePlugin().getExecutor()
+    );
   }
 
   @Override
   public CompletableFuture<V> get(final K key) {
-    return CompletableFuture.supplyAsync(() -> this.cache.getUnchecked(key),
-        this.getBasePlugin().getExecutor());
+    return CompletableFuture.supplyAsync(
+      () -> this.cache.getUnchecked(key),
+      this.getBasePlugin().getExecutor()
+    );
   }
 
   @Override
   public CompletableFuture<Collection<V>> getMany(final Set<K> keys) {
-    return CompletableFuture.supplyAsync(() -> {
-      try {
-        return Lists.newArrayList(this.cache.getAll(keys).values());
-      } catch (final ExecutionException e) {
-        throw new CompletionException(e);
-      }
-    }, this.getBasePlugin().getExecutor());
+    return CompletableFuture.supplyAsync(
+      () -> {
+        try {
+          return Lists.newArrayList(this.cache.getAll(keys).values());
+        } catch (final ExecutionException e) {
+          throw new CompletionException(e);
+        }
+      },
+      this.getBasePlugin().getExecutor()
+    );
   }
 
   /**
@@ -129,9 +137,12 @@ public abstract class LoadingStorage<K, V, R>
    */
   @Override
   public CompletableFuture<Collection<V>> operation(
-      final Function<Database<K, R>, Collection<R>> func) {
-    return CompletableFuture.supplyAsync(() -> func.apply(this.database).stream()
-        .map(this::deserialize).collect(Collectors.toList()), this.getBasePlugin().getExecutor());
+    final Function<Database<K, R>, Collection<R>> func
+  ) {
+    return CompletableFuture.supplyAsync(
+      () -> func.apply(this.database).stream().map(this::deserialize).collect(Collectors.toList()),
+      this.getBasePlugin().getExecutor()
+    );
   }
 
   /**
@@ -141,7 +152,9 @@ public abstract class LoadingStorage<K, V, R>
    */
   @Override
   public CompletableFuture<V> operate(final Function<Database<K, R>, R> func) {
-    return CompletableFuture.supplyAsync(() -> this.deserialize(func.apply(this.database)),
-        this.getBasePlugin().getExecutor());
+    return CompletableFuture.supplyAsync(
+      () -> this.deserialize(func.apply(this.database)),
+      this.getBasePlugin().getExecutor()
+    );
   }
 }

@@ -1,13 +1,11 @@
 package com.github.arthurfiorette.sinklibrary.command.wrapper;
 
 import java.util.List;
-
-import org.bukkit.ChatColor;
-
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Singular;
+import org.bukkit.ChatColor;
 
 @Builder
 public class CommandInfo {

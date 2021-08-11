@@ -1,7 +1,6 @@
 package com.github.arthurfiorette.sinklibrary.data;
 
 import com.google.common.cache.CacheBuilder;
-
 import java.util.function.Consumer;
 
 @FunctionalInterface

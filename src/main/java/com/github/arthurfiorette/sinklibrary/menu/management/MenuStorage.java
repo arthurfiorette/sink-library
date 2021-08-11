@@ -3,17 +3,14 @@ package com.github.arthurfiorette.sinklibrary.menu.management;
 import com.github.arthurfiorette.sinklibrary.component.Service;
 import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
 import com.github.arthurfiorette.sinklibrary.menu.BaseMenu;
-
 import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
-
+import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
-
-import lombok.Getter;
 
 public abstract class MenuStorage<M extends Enum<M> & MenuFactory> implements Service {
 
@@ -50,12 +47,12 @@ public abstract class MenuStorage<M extends Enum<M> & MenuFactory> implements Se
   }
 
   @Override
-  public void enable()  {
+  public void enable() {
     this.listener.enable();
   }
 
   @Override
-  public void disable()  {
+  public void disable() {
     this.listener.disable();
 
     for (final UUID id : this.inventories.keySet()) {

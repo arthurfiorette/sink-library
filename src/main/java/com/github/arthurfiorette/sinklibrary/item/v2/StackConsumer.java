@@ -1,9 +1,8 @@
 package com.github.arthurfiorette.sinklibrary.item.v2;
 
+import lombok.NonNull;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-
-import lombok.NonNull;
 
 @FunctionalInterface
 public interface StackConsumer {

@@ -3,7 +3,6 @@ package com.github.arthurfiorette.sinklibrary.command;
 import com.github.arthurfiorette.sinklibrary.command.wrapper.CommandInfo;
 import com.github.arthurfiorette.sinklibrary.command.wrapper.CommandInfo.CommandInfoBuilder;
 import com.github.arthurfiorette.sinklibrary.command.wrapper.CommandWrapper;
-
 import lombok.experimental.UtilityClass;
 
 @UtilityClass

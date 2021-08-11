@@ -9,13 +9,11 @@ import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 import com.google.common.cache.RemovalListener;
 import com.google.common.collect.Lists;
-
 import java.util.Collection;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionException;
 import java.util.concurrent.ExecutionException;
-
 import lombok.Getter;
 import lombok.NonNull;
 
@@ -82,13 +80,13 @@ public abstract class LoadingRepository<K, V>
   protected abstract V create(K key);
 
   @Override
-  public void enable()  {}
+  public void enable() {}
 
   /**
    * Saves all entities in this cache to the dabatase when disabling.
    */
   @Override
-  public void disable()  {
+  public void disable() {
     this.cache.cleanUp();
   }
 

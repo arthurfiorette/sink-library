@@ -4,11 +4,9 @@ import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
 import com.github.arthurfiorette.sinklibrary.data.storage.gson.GsonLoadingStorage;
 import com.github.arthurfiorette.sinklibrary.uuid.UuidAdapter;
 import com.google.gson.GsonBuilder;
-
+import examples.SimpleModel;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
-
-import examples.SimpleModel;
 
 public class SimplestLoadingStorage extends GsonLoadingStorage<UUID, SimpleModel> {
 

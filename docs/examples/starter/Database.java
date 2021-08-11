@@ -1,7 +1,6 @@
 package examples.starter;
 
 import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -23,14 +22,14 @@ public class Database
    * connection
    */
   @Override
-  public void enable()  {}
+  public void enable() {}
 
   /**
    * This is a simple template, but this method is intended to open the database
    * connection
    */
   @Override
-  public void disable()  {}
+  public void disable() {}
 
   @Override
   public BasePlugin getBasePlugin() {

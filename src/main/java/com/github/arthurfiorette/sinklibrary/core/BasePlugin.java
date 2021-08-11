@@ -7,14 +7,11 @@ import com.github.arthurfiorette.sinklibrary.exception.ExceptionHandler;
 import com.github.arthurfiorette.sinklibrary.executor.v2.TaskContext;
 import com.github.arthurfiorette.sinklibrary.logging.BaseLogger;
 import com.github.arthurfiorette.sinklibrary.logging.Level;
-
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ScheduledExecutorService;
-
 import org.bukkit.plugin.Plugin;
 
 public interface BasePlugin extends Plugin {
-  
   ComponentProvider getProvider();
 
   BaseLogger getBaseLogger();
@@ -32,7 +29,7 @@ public interface BasePlugin extends Plugin {
   ExecutorService getExecutor();
 
   ExceptionHandler getExceptionHandler();
-  
+
   /**
    * @return the component array to register all of yours components and
    * services.

@@ -1,12 +1,10 @@
 package com.github.arthurfiorette.sinklibrary.data.repository.addons;
 
 import com.github.arthurfiorette.sinklibrary.data.repository.Repository;
-
 import java.util.Collection;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
-
 import org.bukkit.entity.Player;
 
 public interface PlayerAdapter<V> extends Repository<UUID, V> {

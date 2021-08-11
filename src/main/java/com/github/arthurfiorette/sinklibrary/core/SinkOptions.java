@@ -7,10 +7,8 @@ import com.github.arthurfiorette.sinklibrary.exception.SimpleExceptionHandler;
 import com.github.arthurfiorette.sinklibrary.logging.BaseLogger;
 import com.github.arthurfiorette.sinklibrary.logging.BukkitLogger;
 import com.github.arthurfiorette.sinklibrary.logging.Level;
-
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

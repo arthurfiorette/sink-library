@@ -2,9 +2,7 @@ package com.github.arthurfiorette.sinklibrary.executor;
 
 import com.github.arthurfiorette.sinklibrary.component.Component;
 import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
-
 import java.util.concurrent.ThreadFactory;
-
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;

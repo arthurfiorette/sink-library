@@ -12,10 +12,8 @@ import com.github.arthurfiorette.sinklibrary.exception.sink.ComponentNotFoundExc
 import com.github.arthurfiorette.sinklibrary.exception.sink.GenericComponentException;
 import com.github.arthurfiorette.sinklibrary.logging.Level;
 import com.google.common.base.Preconditions;
-
 import java.util.HashMap;
 import java.util.Map;
-
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -41,7 +39,8 @@ public class SimpleComponentProvider implements ComponentProvider {
 
   @Override
   @SuppressWarnings("unchecked")
-  public <C extends Component> C get(@NonNull final Class<C> clazz) throws ComponentNotFoundException {
+  public <C extends Component> C get(@NonNull final Class<C> clazz)
+    throws ComponentNotFoundException {
     Preconditions.checkState(this.state.isEnabled());
 
     // Check if it is a Service
@@ -74,14 +73,18 @@ public class SimpleComponentProvider implements ComponentProvider {
 
     this.plugin.log(Level.DEBUG, this, "Enabling services");
 
-    for(final Service service: this.services.values()) {
+    for (final Service service : this.services.values()) {
       try {
         service.enable();
-        this.plugin.log(Level.DEBUG, this, "Service §a%s§f enabled",
-            service.getClass().getSimpleName());
+        this.plugin.log(
+            Level.DEBUG,
+            this,
+            "Service §a%s§f enabled",
+            service.getClass().getSimpleName()
+          );
       } catch (final Throwable e) {
-        this.plugin.getExceptionHandler().handle(service.getClass(), e,
-            "Could not enable this service.");
+        this.plugin.getExceptionHandler()
+          .handle(service.getClass(), e, "Could not enable this service.");
       }
     }
 
@@ -106,16 +109,20 @@ public class SimpleComponentProvider implements ComponentProvider {
 
     final Service[] servicesArr = this.services.values().toArray(new Service[0]);
 
-    for(int i = servicesArr.length - 1; i >= 0; i--) {
+    for (int i = servicesArr.length - 1; i >= 0; i--) {
       final Service service = servicesArr[i];
 
       try {
         service.disable();
-        this.plugin.log(Level.DEBUG, this, "Service §e%s§f disabled",
-            service.getClass().getSimpleName());
+        this.plugin.log(
+            Level.DEBUG,
+            this,
+            "Service §e%s§f disabled",
+            service.getClass().getSimpleName()
+          );
       } catch (final Throwable e) {
-        this.plugin.getExceptionHandler().handle(service.getClass(), new RuntimeException(e),
-            "Could not disable this service");
+        this.plugin.getExceptionHandler()
+          .handle(service.getClass(), new RuntimeException(e), "Could not disable this service");
       }
     }
 
@@ -126,9 +133,8 @@ public class SimpleComponentProvider implements ComponentProvider {
   private void reloadComponents() {
     this.services.clear();
     this.components.clear();
-    
 
-    for(final ComponentLoader supplier: this.plugin.components()) {
+    for (final ComponentLoader supplier : this.plugin.components()) {
       Component component = supplier.load();
       Class<?> clazz = component.getClass();
 
@@ -153,5 +159,4 @@ public class SimpleComponentProvider implements ComponentProvider {
       }
     }
   }
-
 }

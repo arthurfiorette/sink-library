@@ -1,11 +1,9 @@
 package com.github.arthurfiorette.sinklibrary.item.v2;
 
 import java.util.EnumMap;
-
+import lombok.NonNull;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-
-import lombok.NonNull;
 
 public final class PropertiesMap extends EnumMap<ItemProperty, StackConsumer> {
 

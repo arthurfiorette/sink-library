@@ -2,7 +2,6 @@ package com.github.arthurfiorette.sinklibrary.menu.management;
 
 import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
 import com.github.arthurfiorette.sinklibrary.menu.BaseMenu;
-
 import org.bukkit.entity.Player;
 
 /**

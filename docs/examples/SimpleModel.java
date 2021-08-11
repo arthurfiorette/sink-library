@@ -1,7 +1,6 @@
 package examples;
 
 import com.github.arthurfiorette.sinklibrary.uuid.FastUuid;
-
 import java.util.Objects;
 import java.util.UUID;
 

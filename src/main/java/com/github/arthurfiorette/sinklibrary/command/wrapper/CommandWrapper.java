@@ -5,14 +5,11 @@ import com.github.arthurfiorette.sinklibrary.command.CommandUtils;
 import com.github.arthurfiorette.sinklibrary.tuple.Pair;
 import com.github.arthurfiorette.sinklibrary.tuple.ValidPair;
 import com.google.common.collect.Lists;
-
 import java.util.List;
-
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
-
 import lombok.Getter;
 import lombok.NonNull;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
 
 public class CommandWrapper extends Command {
 
@@ -108,8 +105,10 @@ public class CommandWrapper extends Command {
   }
 
   private boolean canHandle(final String nameOrAlias) {
-    return this.info.getName().equalsIgnoreCase(nameOrAlias) ||
-    this.info.getAliases().stream().anyMatch(s -> s.equalsIgnoreCase(nameOrAlias));
+    return (
+      this.info.getName().equalsIgnoreCase(nameOrAlias) ||
+      this.info.getAliases().stream().anyMatch(s -> s.equalsIgnoreCase(nameOrAlias))
+    );
   }
 
   /**

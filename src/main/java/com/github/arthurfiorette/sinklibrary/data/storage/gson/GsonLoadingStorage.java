@@ -7,9 +7,7 @@ import com.github.arthurfiorette.sinklibrary.data.storage.LoadingStorage;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
-
 import java.util.function.Function;
-
 import lombok.Getter;
 import lombok.NonNull;
 

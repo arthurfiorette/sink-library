@@ -3,10 +3,8 @@ package examples.starter;
 import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
 import com.github.arthurfiorette.sinklibrary.data.storage.AbstractStorage;
 import com.github.arthurfiorette.sinklibrary.uuid.FastUuid;
-
-import java.util.UUID;
-
 import examples.SimpleModel;
+import java.util.UUID;
 
 /**
  * Simple storage example, see more in docs/examples/storages

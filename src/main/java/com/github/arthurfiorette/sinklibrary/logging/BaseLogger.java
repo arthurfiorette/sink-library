@@ -1,7 +1,6 @@
 package com.github.arthurfiorette.sinklibrary.logging;
 
 import com.github.arthurfiorette.sinklibrary.component.Component;
-
 import java.util.Collection;
 
 public interface BaseLogger extends Component {

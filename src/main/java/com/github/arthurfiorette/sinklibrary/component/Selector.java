@@ -6,14 +6,12 @@ package com.github.arthurfiorette.sinklibrary.component;
  * <p>
  * This can be used, for example, to register a different class for each version
  * to handle specific NMS imports and etc.
- * 
+ *
  * @param <M> A common type that any possible registered component from this
  * class should implement.
  */
 public interface Selector<M extends Component> {
-
   Class<M> getCommonClass();
 
   M select();
-
 }

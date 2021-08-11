@@ -9,7 +9,6 @@ import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
  * @author https://github.com/ArthurFiorette/sink-library/
  */
 public interface Component {
-  
   /**
    * @return his {@link BasePlugin} owner
    */
