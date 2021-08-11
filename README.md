@@ -50,6 +50,11 @@ Sink Library</h1>
 <br />
 <br />
 
+<div align="center"><b><pre>Until v5, possibly, we will have more major breaking changes. Update it carefully.</pre></b></div>
+
+<br />
+<br />
+
 #### `Sink-library` is a powerful and high-performance tool for building spigot plugins.
 
 <br />
