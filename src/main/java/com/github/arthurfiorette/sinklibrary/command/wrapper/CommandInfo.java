@@ -1,17 +1,20 @@
 package com.github.arthurfiorette.sinklibrary.command.wrapper;
 
-import java.util.ArrayList;
 import java.util.List;
-import lombok.*;
+
 import org.bukkit.ChatColor;
+
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NonNull;
+import lombok.Singular;
 
 @Builder
 public class CommandInfo {
 
-  private static String defaultPermissionMessage =
-    ChatColor.RED +
-    "I'm sorry, but you do not have permission to perform this command. " +
-    "Please contact the server administrators if you believe that this is in error.";
+  private static String defaultPermissionMessage = ChatColor.RED
+      + "I'm sorry, but you do not have permission to perform this command. "
+      + "Please contact the server administrators if you believe that this is in error.";
 
   @Getter
   @NonNull
@@ -34,6 +37,7 @@ public class CommandInfo {
 
   @Getter
   @NonNull
+  @Singular
   private List<String> aliases;
 
   @Getter
@@ -45,21 +49,5 @@ public class CommandInfo {
   @NonNull
   @Builder.Default
   private String description = "";
-
-  public static class CommandInfoBuilder {
-
-    public CommandInfoBuilder() {
-      this.aliases = new ArrayList<>();
-    }
-
-    // Disable these builder methods
-    void subCommands() {}
-
-    void aliases() {}
-
-    public CommandInfoBuilder alias(final String alias) {
-      this.aliases.add(alias);
-      return this;
-    }
-  }
+ 
 }

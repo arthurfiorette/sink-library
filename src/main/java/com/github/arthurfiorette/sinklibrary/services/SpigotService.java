@@ -123,6 +123,19 @@ public final class SpigotService {
   public long asTicks(final long milliseconds) {
     return milliseconds / 50;
   }
+  
+  
+  /**
+   * Convert any minecraft tick time to the provided unit.
+   *
+   * @param ticks the tick amount
+   * @param unit the {@link TimeUnit}
+   *
+   * @return the amount of ticks into this time
+   */
+  public static long fromTicks(final long ticks, final TimeUnit unit) {
+    return unit.convert(ticks * 50, TimeUnit.MILLISECONDS);
+  }
 
   /**
    * Convert any text using {@literal &} as color code to minecraft colored text

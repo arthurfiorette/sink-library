@@ -1,7 +1,7 @@
 /**
  *
  */
-package com.github.arthurfiorette.sinklibrary.exceptions;
+package com.github.arthurfiorette.sinklibrary.exception.sink;
 
 public class IllegalComponentException extends SinkException {
 

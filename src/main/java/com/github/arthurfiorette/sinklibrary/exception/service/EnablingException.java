@@ -1,4 +1,4 @@
-package com.github.arthurfiorette.sinklibrary.exceptions;
+package com.github.arthurfiorette.sinklibrary.exception.service;
 
 import com.github.arthurfiorette.sinklibrary.interfaces.BaseService;
 import lombok.NoArgsConstructor;

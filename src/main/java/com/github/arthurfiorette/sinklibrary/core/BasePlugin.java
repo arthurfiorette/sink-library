@@ -1,6 +1,7 @@
 package com.github.arthurfiorette.sinklibrary.core;
 
 import com.github.arthurfiorette.sinklibrary.components.ComponentManager;
+import com.github.arthurfiorette.sinklibrary.exception.BaseExceptionHandler;
 import com.github.arthurfiorette.sinklibrary.executor.v2.TaskContext;
 import com.github.arthurfiorette.sinklibrary.interfaces.BaseComponent;
 import com.github.arthurfiorette.sinklibrary.logging.BaseLogger;
@@ -9,7 +10,6 @@ import java.util.concurrent.*;
 import org.bukkit.plugin.Plugin;
 
 public interface BasePlugin extends Plugin {
-  void treatThrowable(Object author, Throwable throwable, String message, Object... args);
 
   ComponentManager getManager();
 
@@ -22,15 +22,12 @@ public interface BasePlugin extends Plugin {
    * {@link TaskContext#runLater(BasePlugin, Runnable, long)} or
    * {@link TaskContext#runTimer(BasePlugin, Runnable, long, long)}, that this
    * executor returns an instance of {@link ScheduledExecutorService}
-   * <p>
-   * Defaults to {@link Executors#newScheduledThreadPool(int)} with the number
-   * of processors available at runtime.
    *
    * @return the executor of this plugin
    */
-  default ExecutorService getExecutor() {
-    return Executors.newScheduledThreadPool(Runtime.getRuntime().availableProcessors());
-  }
+  ExecutorService getExecutor();
+  
+  BaseExceptionHandler getExceptionHandler();
 
   default <T extends BaseComponent> T getComponent(final Class<T> clazz) {
     return this.getManager().getComponent(clazz);

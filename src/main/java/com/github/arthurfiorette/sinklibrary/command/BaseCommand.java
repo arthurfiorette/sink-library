@@ -9,6 +9,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.PluginIdentifiableCommand;
 
 public interface BaseCommand extends BaseComponent, PluginIdentifiableCommand {
+  
   void handle(final CommandSender sender, final Collection<String> args);
 
   List<String> onTabComplete(final CommandSender sender, final Collection<String> args);

@@ -1,15 +1,20 @@
 package com.github.arthurfiorette.sinklibrary.core;
 
 import com.github.arthurfiorette.sinklibrary.components.ComponentManager;
-import com.github.arthurfiorette.sinklibrary.components.SimpleComponentManager;
-import com.github.arthurfiorette.sinklibrary.executor.v2.TaskContext;
+import com.github.arthurfiorette.sinklibrary.core.SinkOptions.SinkOptionsBuilder;
+import com.github.arthurfiorette.sinklibrary.exception.BaseExceptionHandler;
 import com.github.arthurfiorette.sinklibrary.interfaces.BaseService;
 import com.github.arthurfiorette.sinklibrary.interfaces.ComponentLoader;
-import com.github.arthurfiorette.sinklibrary.logging.*;
-import lombok.*;
+import com.github.arthurfiorette.sinklibrary.logging.BaseLogger;
+
+import java.util.concurrent.ExecutorService;
+import java.util.function.Consumer;
+
 import org.bukkit.plugin.java.JavaPlugin;
 
-@RequiredArgsConstructor
+import lombok.Getter;
+import lombok.NonNull;
+
 public abstract class SinkPlugin extends JavaPlugin implements BasePlugin {
 
   @Getter
@@ -20,9 +25,29 @@ public abstract class SinkPlugin extends JavaPlugin implements BasePlugin {
   @NonNull
   private final BaseLogger baseLogger;
 
+  @Getter
+  @NonNull
+  private final ExecutorService executor;
+
+  @Getter
+  @NonNull
+  private final BaseExceptionHandler exceptionHandler;
+
   public SinkPlugin() {
-    this.manager = new SimpleComponentManager(this);
-    this.baseLogger = new BukkitLogger(this, Level.ALL);
+    this((options) -> { /* Default Options */ });
+  }
+
+  public SinkPlugin(Consumer<SinkOptionsBuilder> options) {
+    // Create and build this plugin options.
+    final SinkOptionsBuilder builder = SinkOptions.builder(this);
+    options.accept(builder);
+    SinkOptions so = builder.build();
+
+    // Apply his properties
+    this.manager = so.getManager();
+    this.baseLogger = so.getBaseLogger();
+    this.executor = so.getExecutor();
+    this.exceptionHandler = so.getExceptionHandler();
   }
 
   /**
@@ -32,8 +57,8 @@ public abstract class SinkPlugin extends JavaPlugin implements BasePlugin {
   public abstract ComponentLoader[] components();
 
   /**
-   * If you need to execute code on startup, implements the {@link BaseService}
-   * class on your {@link SinkPlugin} and register it on
+   * @implNote If you need to execute code on startup, implements the
+   * {@link BaseService} class on your {@link SinkPlugin} and register it on
    * {@link SinkPlugin#components()}
    */
   @Override
@@ -42,30 +67,12 @@ public abstract class SinkPlugin extends JavaPlugin implements BasePlugin {
   }
 
   /**
-   * If you need to execute code on startup, implements the {@link BaseService}
-   * class on your {@link SinkPlugin} and register it on
+   * @implNote If you need to execute code on startup, implements the
+   * {@link BaseService} class on your {@link SinkPlugin} and register it on
    * {@link SinkPlugin#components()}
    */
   @Override
   public final void onDisable() {
     this.manager.disableServices();
-  }
-
-  @Override
-  public void treatThrowable(
-    final Object author,
-    final Throwable exc,
-    final String message,
-    final Object... args
-  ) {
-    if (exc instanceof RuntimeException) {
-      this.log(Level.ERROR, author, "Exception caugth", exc);
-      return;
-    }
-
-    // Disable this plugin if it isn't a runtime exception.
-
-    this.log(Level.FATAL, author, "Exception caugth, disabling this plugin.", exc);
-    TaskContext.BUKKIT.runLater(this, () -> this.getPluginLoader().disablePlugin(this), 1L);
   }
 }

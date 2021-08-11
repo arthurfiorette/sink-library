@@ -1,8 +1,8 @@
 package com.github.arthurfiorette.sinklibrary.components;
 
 import com.github.arthurfiorette.sinklibrary.core.SinkPlugin;
-import com.github.arthurfiorette.sinklibrary.exceptions.ComponentNotRegisteredException;
-import com.github.arthurfiorette.sinklibrary.exceptions.IllegalComponentException;
+import com.github.arthurfiorette.sinklibrary.exception.sink.ComponentNotRegisteredException;
+import com.github.arthurfiorette.sinklibrary.exception.sink.IllegalComponentException;
 import com.github.arthurfiorette.sinklibrary.interfaces.*;
 import com.github.arthurfiorette.sinklibrary.logging.Level;
 import java.util.LinkedHashMap;
@@ -62,7 +62,7 @@ public class SimpleComponentManager implements ComponentManager {
             service.getClass().getSimpleName()
           );
       } catch (final Exception e) {
-        this.plugin.treatThrowable(service.getClass(), e, "Could not enable this service.");
+        this.plugin.getExceptionHandler().handle(service.getClass(), e, "Could not enable this service.");
       }
     }
 
@@ -91,7 +91,7 @@ public class SimpleComponentManager implements ComponentManager {
             service.getClass().getSimpleName()
           );
       } catch (final Exception e) {
-        this.plugin.treatThrowable(
+        this.plugin.getExceptionHandler().handle(
             service.getClass(),
             // Prevent infinite loop while disabling.
             new RuntimeException(e),

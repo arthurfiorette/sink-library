@@ -1,6 +1,6 @@
 package com.github.arthurfiorette.sinklibrary.components;
 
-import com.github.arthurfiorette.sinklibrary.exceptions.ComponentNotRegisteredException;
+import com.github.arthurfiorette.sinklibrary.exception.sink.ComponentNotRegisteredException;
 import com.github.arthurfiorette.sinklibrary.interfaces.BaseComponent;
 
 public interface ComponentManager {
