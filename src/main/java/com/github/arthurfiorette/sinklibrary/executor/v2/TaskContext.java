@@ -2,16 +2,13 @@ package com.github.arthurfiorette.sinklibrary.executor.v2;
 
 import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
 import com.github.arthurfiorette.sinklibrary.services.SpigotService;
-
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-
-import org.bukkit.Bukkit;
-
 import lombok.NonNull;
+import org.bukkit.Bukkit;
 
 public enum TaskContext {
   /**
@@ -26,14 +23,17 @@ public enum TaskContext {
     }
 
     @Override
-    public void runLater(final BasePlugin plugin, final Runnable runnable,
-        final long delay) {
+    public void runLater(final BasePlugin plugin, final Runnable runnable, final long delay) {
       Bukkit.getScheduler().runTaskLater(plugin, runnable, delay);
     }
 
     @Override
-    public void runTimer(final BasePlugin plugin,final Runnable runnable,
-        final long delay, final long interval) {
+    public void runTimer(
+      final BasePlugin plugin,
+      final Runnable runnable,
+      final long delay,
+      final long interval
+    ) {
       Bukkit.getScheduler().runTaskTimer(plugin, runnable, delay, interval);
     }
   },
@@ -50,19 +50,29 @@ public enum TaskContext {
     }
 
     @Override
-    public void runLater(final BasePlugin plugin, final Runnable runnable,
-        final long delay) {
+    public void runLater(final BasePlugin plugin, final Runnable runnable, final long delay) {
       final ScheduledExecutorService service = TaskContext.getScheduledExecutor(plugin);
-      service.schedule(runnable, SpigotService.fromTicks(delay, TimeUnit.MILLISECONDS),
-          TimeUnit.SECONDS);
+      service.schedule(
+        runnable,
+        SpigotService.fromTicks(delay, TimeUnit.MILLISECONDS),
+        TimeUnit.SECONDS
+      );
     }
 
     @Override
-    public void runTimer(final BasePlugin plugin, final Runnable runnable,
-        final long delay, final long interval) {
+    public void runTimer(
+      final BasePlugin plugin,
+      final Runnable runnable,
+      final long delay,
+      final long interval
+    ) {
       final ScheduledExecutorService service = TaskContext.getScheduledExecutor(plugin);
-      service.scheduleAtFixedRate(runnable, SpigotService.fromTicks(delay, TimeUnit.MILLISECONDS),
-          SpigotService.fromTicks(delay, TimeUnit.SECONDS), TimeUnit.SECONDS);
+      service.scheduleAtFixedRate(
+        runnable,
+        SpigotService.fromTicks(delay, TimeUnit.MILLISECONDS),
+        SpigotService.fromTicks(delay, TimeUnit.SECONDS),
+        TimeUnit.SECONDS
+      );
     }
   },
 
@@ -70,7 +80,6 @@ public enum TaskContext {
    * Represents an isolated and asynchronous external execution context.
    */
   ASYNC {
-
     /**
      * @param plugin <b>Not used. can be null</b>
      * @param runnable the task to be run
@@ -80,7 +89,7 @@ public enum TaskContext {
     @Override
     public void run(final BasePlugin plugin, final Runnable runnable) {
       new Thread(runnable, "TaskContext.ASYNC - " + plugin == null ? "Unknown" : plugin.getName())
-          .run();
+        .run();
     }
 
     /**
@@ -91,14 +100,17 @@ public enum TaskContext {
      * @throws NullPointerException if the task is null
      */
     @Override
-    public void runLater(final BasePlugin plugin, final Runnable runnable,
-        final long delay) {
-      new Timer().schedule(new TimerTask() {
-        @Override
-        public void run() {
-          runnable.run();
-        }
-      }, SpigotService.fromTicks(delay, TimeUnit.MILLISECONDS));
+    public void runLater(final BasePlugin plugin, final Runnable runnable, final long delay) {
+      new Timer()
+        .schedule(
+          new TimerTask() {
+            @Override
+            public void run() {
+              runnable.run();
+            }
+          },
+          SpigotService.fromTicks(delay, TimeUnit.MILLISECONDS)
+        );
     }
 
     /**
@@ -108,15 +120,23 @@ public enum TaskContext {
      * @param interval the ticks to wait between runs
      */
     @Override
-    public void runTimer(final BasePlugin plugin, final Runnable runnable,
-        final long delay, final long interval) {
-      new Timer().scheduleAtFixedRate(new TimerTask() {
-        @Override
-        public void run() {
-          runnable.run();
-        }
-      }, SpigotService.fromTicks(delay, TimeUnit.MILLISECONDS),
-          SpigotService.fromTicks(interval, TimeUnit.MILLISECONDS));
+    public void runTimer(
+      final BasePlugin plugin,
+      final Runnable runnable,
+      final long delay,
+      final long interval
+    ) {
+      new Timer()
+        .scheduleAtFixedRate(
+          new TimerTask() {
+            @Override
+            public void run() {
+              runnable.run();
+            }
+          },
+          SpigotService.fromTicks(delay, TimeUnit.MILLISECONDS),
+          SpigotService.fromTicks(interval, TimeUnit.MILLISECONDS)
+        );
     }
   };
 
@@ -146,9 +166,9 @@ public enum TaskContext {
     final ExecutorService executor = plugin.getExecutor();
     if (!(executor instanceof ScheduledExecutorService)) {
       throw new IllegalArgumentException(
-          "To ran scheduled tasks, your plugin must use a java.util.concurrent.ScheduledExecutorService");
+        "To ran scheduled tasks, your plugin must use a java.util.concurrent.ScheduledExecutorService"
+      );
     }
     return (ScheduledExecutorService) executor;
   }
-
 }

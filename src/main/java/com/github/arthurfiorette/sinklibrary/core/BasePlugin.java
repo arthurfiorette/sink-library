@@ -10,7 +10,6 @@ import java.util.concurrent.*;
 import org.bukkit.plugin.Plugin;
 
 public interface BasePlugin extends Plugin {
-
   ComponentManager getManager();
 
   BaseLogger getBaseLogger();
@@ -26,7 +25,7 @@ public interface BasePlugin extends Plugin {
    * @return the executor of this plugin
    */
   ExecutorService getExecutor();
-  
+
   BaseExceptionHandler getExceptionHandler();
 
   default <T extends BaseComponent> T getComponent(final Class<T> clazz) {

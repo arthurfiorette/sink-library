@@ -3,7 +3,6 @@ package com.github.arthurfiorette.sinklibrary.exception;
 import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
 import com.github.arthurfiorette.sinklibrary.executor.v2.TaskContext;
 import com.github.arthurfiorette.sinklibrary.logging.Level;
-
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -27,8 +26,12 @@ public class SimpleExceptionHandler implements BaseExceptionHandler {
     }
 
     // Disable this plugin if it isn't a runtime exception.
-    basePlugin.log(Level.FATAL, author,
-        "Throwable caugth: " + message + "\n Disabling this plugin.", exc);
+    basePlugin.log(
+      Level.FATAL,
+      author,
+      "Throwable caugth: " + message + "\n Disabling this plugin.",
+      exc
+    );
     forceDisable();
   }
 
@@ -45,8 +48,10 @@ public class SimpleExceptionHandler implements BaseExceptionHandler {
   }
 
   private void forceDisable() {
-    TaskContext.BUKKIT.runLater(basePlugin,
-        () -> basePlugin.getPluginLoader().disablePlugin(basePlugin), 1L);
+    TaskContext.BUKKIT.runLater(
+      basePlugin,
+      () -> basePlugin.getPluginLoader().disablePlugin(basePlugin),
+      1L
+    );
   }
-
 }

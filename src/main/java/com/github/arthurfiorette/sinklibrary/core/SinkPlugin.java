@@ -6,14 +6,11 @@ import com.github.arthurfiorette.sinklibrary.exception.BaseExceptionHandler;
 import com.github.arthurfiorette.sinklibrary.interfaces.BaseService;
 import com.github.arthurfiorette.sinklibrary.interfaces.ComponentLoader;
 import com.github.arthurfiorette.sinklibrary.logging.BaseLogger;
-
 import java.util.concurrent.ExecutorService;
 import java.util.function.Consumer;
-
-import org.bukkit.plugin.java.JavaPlugin;
-
 import lombok.Getter;
 import lombok.NonNull;
+import org.bukkit.plugin.java.JavaPlugin;
 
 public abstract class SinkPlugin extends JavaPlugin implements BasePlugin {
 
@@ -34,7 +31,11 @@ public abstract class SinkPlugin extends JavaPlugin implements BasePlugin {
   private final BaseExceptionHandler exceptionHandler;
 
   public SinkPlugin() {
-    this((options) -> { /* Default Options */ });
+    this(
+      options -> {
+        /* Default Options */
+      }
+    );
   }
 
   public SinkPlugin(Consumer<SinkOptionsBuilder> options) {

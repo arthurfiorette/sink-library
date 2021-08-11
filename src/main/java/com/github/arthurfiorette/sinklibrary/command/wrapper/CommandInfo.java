@@ -1,20 +1,19 @@
 package com.github.arthurfiorette.sinklibrary.command.wrapper;
 
 import java.util.List;
-
-import org.bukkit.ChatColor;
-
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Singular;
+import org.bukkit.ChatColor;
 
 @Builder
 public class CommandInfo {
 
-  private static String defaultPermissionMessage = ChatColor.RED
-      + "I'm sorry, but you do not have permission to perform this command. "
-      + "Please contact the server administrators if you believe that this is in error.";
+  private static String defaultPermissionMessage =
+    ChatColor.RED +
+    "I'm sorry, but you do not have permission to perform this command. " +
+    "Please contact the server administrators if you believe that this is in error.";
 
   @Getter
   @NonNull
@@ -49,5 +48,4 @@ public class CommandInfo {
   @NonNull
   @Builder.Default
   private String description = "";
- 
 }

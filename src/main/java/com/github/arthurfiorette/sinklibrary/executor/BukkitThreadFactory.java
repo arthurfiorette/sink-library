@@ -38,11 +38,8 @@ public class BukkitThreadFactory implements ThreadFactory, BaseComponent {
         try {
           this.context.run(this.basePlugin, runnable);
         } catch (final Throwable t) {
-          this.basePlugin.getExceptionHandler().handle(
-              this.getClass(),
-              t,
-              "Catched exception while running this thread."
-            );
+          this.basePlugin.getExceptionHandler()
+            .handle(this.getClass(), t, "Catched exception while running this thread.");
         }
       }
     );

@@ -123,8 +123,7 @@ public final class SpigotService {
   public long asTicks(final long milliseconds) {
     return milliseconds / 50;
   }
-  
-  
+
   /**
    * Convert any minecraft tick time to the provided unit.
    *

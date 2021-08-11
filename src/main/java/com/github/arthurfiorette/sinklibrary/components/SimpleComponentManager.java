@@ -62,7 +62,8 @@ public class SimpleComponentManager implements ComponentManager {
             service.getClass().getSimpleName()
           );
       } catch (final Exception e) {
-        this.plugin.getExceptionHandler().handle(service.getClass(), e, "Could not enable this service.");
+        this.plugin.getExceptionHandler()
+          .handle(service.getClass(), e, "Could not enable this service.");
       }
     }
 
@@ -91,7 +92,8 @@ public class SimpleComponentManager implements ComponentManager {
             service.getClass().getSimpleName()
           );
       } catch (final Exception e) {
-        this.plugin.getExceptionHandler().handle(
+        this.plugin.getExceptionHandler()
+          .handle(
             service.getClass(),
             // Prevent infinite loop while disabling.
             new RuntimeException(e),
