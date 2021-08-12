@@ -71,7 +71,7 @@ public class SimpleComponentProvider implements ComponentProvider {
     this.state = State.ENABLING;
     this.reloadComponents();
 
-    logger.debug("Enabling services");
+    logger.info("Enabling services");
 
     for (final Service service : this.services.values()) {
       try {
@@ -83,7 +83,7 @@ public class SimpleComponentProvider implements ComponentProvider {
       }
     }
 
-    logger.debug("Services enabled");
+    logger.info("Services enabled");
     this.state = State.ENABLED;
   }
 
@@ -101,7 +101,7 @@ public class SimpleComponentProvider implements ComponentProvider {
     final BaseLogger logger = plugin.getBaseLogger();
 
     this.state = State.DISABLING;
-    logger.debug("Disabling all services");
+    logger.info("Disabling all services");
 
     final Service[] servicesArr = this.services.values().toArray(new Service[0]);
 
@@ -117,7 +117,7 @@ public class SimpleComponentProvider implements ComponentProvider {
       }
     }
 
-    logger.debug("Services disabled");
+    logger.info("Services disabled");
     this.state = State.DISABLED;
   }
 

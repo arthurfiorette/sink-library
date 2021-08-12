@@ -1,13 +1,14 @@
 package com.github.arthurfiorette.sinklibrary.logging;
 
 import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
-import java.util.ArrayList;
+
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 
 @RequiredArgsConstructor
 public class BukkitLogger implements BaseLogger {
@@ -20,10 +21,6 @@ public class BukkitLogger implements BaseLogger {
   @Getter
   @NonNull
   private Level maxLevel;
-
-  @Getter
-  @NonNull
-  private final ArrayList<LogFilter> filters = new ArrayList<>();
 
   @Override
   public void log(
