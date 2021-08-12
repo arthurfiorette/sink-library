@@ -2,6 +2,7 @@ package com.github.arthurfiorette.sinklibrary.exception;
 
 import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
 import com.github.arthurfiorette.sinklibrary.executor.v2.TaskContext;
+import com.github.arthurfiorette.sinklibrary.logging.BaseLogger;
 import com.github.arthurfiorette.sinklibrary.logging.Level;
 import lombok.Getter;
 import lombok.NonNull;
@@ -25,13 +26,15 @@ public class SimpleExceptionHandler implements ExceptionHandler {
     final String message,
     final Object... args
   ) {
+    final BaseLogger logger = basePlugin.getBaseLogger();
+    
     if (exc instanceof RuntimeException) {
-      this.basePlugin.log(Level.ERROR, author, "Runtime exception caugth: " + message, exc);
+      logger.log(Level.ERROR, author, "Runtime exception caugth: " + message, exc);
       return;
     }
 
     // Disable this plugin if it isn't a runtime exception.
-    this.basePlugin.log(
+    logger.log(
         Level.FATAL,
         author,
         "Throwable caugth: " + message + "\n Disabling this plugin.",
@@ -42,13 +45,15 @@ public class SimpleExceptionHandler implements ExceptionHandler {
 
   @Override
   public void handle(final Class<?> author, final Throwable exc) {
+    final BaseLogger logger = basePlugin.getBaseLogger();
+    
     if (exc instanceof RuntimeException) {
-      this.basePlugin.log(Level.ERROR, author, "Runtime exception caugth:", exc);
+      logger.log(Level.ERROR, author, "Runtime exception caugth:", exc);
       return;
     }
 
     // Disable this plugin if it isn't a runtime exception.
-    this.basePlugin.log(Level.FATAL, author, "Throwable caugth.\n Disabling this plugin.", exc);
+    logger.log(Level.FATAL, author, "Throwable caugth.\n Disabling this plugin.", exc);
     this.forceDisable();
   }
 

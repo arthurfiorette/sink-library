@@ -47,7 +47,7 @@ public enum Level {
   /**
    * An event that might possible lead to an error.
    */
-  WARN(ChatColor.YELLOW, "Debug", 300),
+  WARN(ChatColor.YELLOW, "Warn", 300),
 
   /**
    * An event for informational purposes.

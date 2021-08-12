@@ -26,39 +26,16 @@ public class BukkitLogger implements BaseLogger {
   private final ArrayList<LogFilter> filters = new ArrayList<>();
 
   @Override
-  public int intLevel() {
-    return this.maxLevel.intValue();
+  public void log(final Level level, final Class<?> author, final String message,
+      final Object... args) {
+    Bukkit.getConsoleSender().sendMessage("[" + author.getClass().getSimpleName() + "] ("
+        + this.format(level) + ChatColor.RESET + ") " + String.format(message, args));
   }
 
   @Override
-  public void log(
-    final Level level,
-    final Object author,
-    final String message,
-    final Object... args
-  ) {
-    Bukkit
-      .getConsoleSender()
-      .sendMessage(
-        "[" +
-        author.getClass().getSimpleName() +
-        "] (" +
-        this.format(level) +
-        ChatColor.RESET +
-        ") " +
-        String.format(message, args)
-      );
-  }
-
-  @Override
-  public void log(
-    final Level level,
-    final Object author,
-    final String message,
-    final Throwable throwable
-  ) {
+  public void log(Level level, Class<?> author, String message, Throwable throwable) {
     this.log(level, author, message);
-    for (final StackTraceElement trace : throwable.getStackTrace()) {
+    for(final StackTraceElement trace: throwable.getStackTrace()) {
       Bukkit.getConsoleSender().sendMessage(trace.toString());
     }
   }

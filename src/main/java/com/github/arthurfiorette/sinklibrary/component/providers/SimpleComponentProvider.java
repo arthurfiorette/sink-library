@@ -10,10 +10,11 @@ import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
 import com.github.arthurfiorette.sinklibrary.exception.SimpleExceptionHandler;
 import com.github.arthurfiorette.sinklibrary.exception.sink.ComponentNotFoundException;
 import com.github.arthurfiorette.sinklibrary.exception.sink.GenericComponentException;
-import com.github.arthurfiorette.sinklibrary.logging.Level;
-import com.google.common.base.Preconditions;
+import com.github.arthurfiorette.sinklibrary.logging.BaseLogger;
+
 import java.util.HashMap;
 import java.util.Map;
+
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -40,11 +41,11 @@ public class SimpleComponentProvider implements ComponentProvider {
   @Override
   @SuppressWarnings("unchecked")
   public <C extends Component> C get(@NonNull final Class<C> clazz)
-    throws ComponentNotFoundException {
-    Preconditions.checkState(this.state.isEnabled());
+      throws ComponentNotFoundException {
+    checkState(this.state != State.DISABLED);
 
     // Check if it is a Service
-    if (clazz.isAssignableFrom(Service.class)) {
+    if (Service.class.isAssignableFrom(clazz)) {
       final Service service = this.services.get(clazz);
 
       if (service == null) {
@@ -66,29 +67,25 @@ public class SimpleComponentProvider implements ComponentProvider {
   @Override
   @Synchronized("state")
   public void enableAll() {
-    checkState(!state.isEnabled());
+    checkState(state == State.DISABLED);
+    final BaseLogger logger = plugin.getBaseLogger();
 
     this.state = State.ENABLING;
     this.reloadComponents();
 
-    this.plugin.log(Level.DEBUG, this, "Enabling services");
+    logger.debug("Enabling services");
 
-    for (final Service service : this.services.values()) {
+    for(final Service service: this.services.values()) {
       try {
         service.enable();
-        this.plugin.log(
-            Level.DEBUG,
-            this,
-            "Service §a%s§f enabled",
-            service.getClass().getSimpleName()
-          );
+        logger.debug("Service §a%s§f enabled", service.getClass().getSimpleName());
       } catch (final Throwable e) {
-        this.plugin.getExceptionHandler()
-          .handle(service.getClass(), e, "Could not enable this service.");
+        this.plugin.getExceptionHandler().handle(service.getClass(), e,
+            "Could not enable this service.");
       }
     }
 
-    this.plugin.log(Level.DEBUG, "Services enabled");
+    logger.debug("Services enabled");
     this.state = State.ENABLED;
   }
 
@@ -102,31 +99,27 @@ public class SimpleComponentProvider implements ComponentProvider {
   @Override
   @Synchronized("state")
   public void disableAll() {
-    checkState(state.isEnabled());
+    checkState(state == State.ENABLED);
+    final BaseLogger logger = plugin.getBaseLogger();
 
     this.state = State.DISABLING;
-    this.plugin.log(Level.DEBUG, this, "Disabling all services");
+    logger.debug("Disabling all services");
 
     final Service[] servicesArr = this.services.values().toArray(new Service[0]);
 
-    for (int i = servicesArr.length - 1; i >= 0; i--) {
+    for(int i = servicesArr.length - 1; i >= 0; i--) {
       final Service service = servicesArr[i];
 
       try {
         service.disable();
-        this.plugin.log(
-            Level.DEBUG,
-            this,
-            "Service §e%s§f disabled",
-            service.getClass().getSimpleName()
-          );
+        logger.debug("Service §e%s§f disabled", service.getClass().getSimpleName());
       } catch (final Throwable e) {
-        this.plugin.getExceptionHandler()
-          .handle(service.getClass(), new RuntimeException(e), "Could not disable this service");
+        this.plugin.getExceptionHandler().handle(service.getClass(), new RuntimeException(e),
+            "Could not disable this service");
       }
     }
 
-    this.plugin.log(Level.DEBUG, this, "Services disabled");
+    logger.debug("Services disabled");
     this.state = State.DISABLED;
   }
 
@@ -134,8 +127,8 @@ public class SimpleComponentProvider implements ComponentProvider {
     this.services.clear();
     this.components.clear();
 
-    for (final ComponentLoader supplier : this.plugin.components()) {
-      Component component = supplier.load();
+    for(final ComponentLoader loader: this.plugin.components()) {
+      Component component = loader.load();
       Class<?> clazz = component.getClass();
 
       // Load first to check if is a selector.

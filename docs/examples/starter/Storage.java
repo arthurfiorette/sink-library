@@ -15,7 +15,7 @@ public class Storage extends AbstractStorage<UUID, SimpleModel, String[]> {
 
   /**
    * Note that we only use the plugin as an argument, and get the database after
-   * it. with {@link BasePlugin#getComponent(Class)} or
+   * it. with {@link BasePlugin#get(Class)} or
    * {@link BasePlugin#getService(Class)}
    */
   public Storage(final BasePlugin basePlugin) {
