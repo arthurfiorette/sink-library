@@ -27,7 +27,7 @@ public class SimpleExceptionHandler implements ExceptionHandler {
     final Object... args
   ) {
     final BaseLogger logger = basePlugin.getBaseLogger();
-    
+
     if (exc instanceof RuntimeException) {
       logger.log(Level.ERROR, author, "Runtime exception caugth: " + message, exc);
       return;
@@ -35,18 +35,18 @@ public class SimpleExceptionHandler implements ExceptionHandler {
 
     // Disable this plugin if it isn't a runtime exception.
     logger.log(
-        Level.FATAL,
-        author,
-        "Throwable caugth: " + message + "\n Disabling this plugin.",
-        exc
-      );
+      Level.FATAL,
+      author,
+      "Throwable caugth: " + message + "\n Disabling this plugin.",
+      exc
+    );
     this.forceDisable();
   }
 
   @Override
   public void handle(final Class<?> author, final Throwable exc) {
     final BaseLogger logger = basePlugin.getBaseLogger();
-    
+
     if (exc instanceof RuntimeException) {
       logger.log(Level.ERROR, author, "Runtime exception caugth:", exc);
       return;

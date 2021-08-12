@@ -5,7 +5,6 @@ import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
 
 @FunctionalInterface
 public interface ComponentLoader {
-  
   Component load();
 
   /**

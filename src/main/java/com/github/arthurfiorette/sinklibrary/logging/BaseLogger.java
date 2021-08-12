@@ -3,10 +3,14 @@ package com.github.arthurfiorette.sinklibrary.logging;
 import com.github.arthurfiorette.sinklibrary.component.Component;
 
 public interface BaseLogger extends Component {
-
   void log(final Level level, final Class<?> author, final String message, final Object... args);
 
-  void log(final Level level, final Class<?> author, final String message, final Throwable throwable);
+  void log(
+    final Level level,
+    final Class<?> author,
+    final String message,
+    final Throwable throwable
+  );
 
   default void log(final Level level, final String message, final Object... args) {
     this.log(level, this.getBasePlugin().getClass(), message, args);

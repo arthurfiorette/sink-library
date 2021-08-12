@@ -2,7 +2,6 @@ package com.github.arthurfiorette.sinklibrary.component.providers;
 
 import com.github.arthurfiorette.sinklibrary.component.Component;
 import com.github.arthurfiorette.sinklibrary.exception.sink.ComponentNotFoundException;
-
 import lombok.NonNull;
 
 public interface ComponentProvider {
@@ -18,6 +17,6 @@ public interface ComponentProvider {
     ENABLING,
     ENABLED,
     DISABLING,
-    DISABLED;
+    DISABLED,
   }
 }

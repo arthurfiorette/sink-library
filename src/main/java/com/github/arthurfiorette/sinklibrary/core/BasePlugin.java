@@ -6,10 +6,8 @@ import com.github.arthurfiorette.sinklibrary.component.providers.ComponentProvid
 import com.github.arthurfiorette.sinklibrary.exception.ExceptionHandler;
 import com.github.arthurfiorette.sinklibrary.executor.v2.TaskContext;
 import com.github.arthurfiorette.sinklibrary.logging.BaseLogger;
-
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ScheduledExecutorService;
-
 import org.bukkit.plugin.Plugin;
 
 public interface BasePlugin extends Plugin {
