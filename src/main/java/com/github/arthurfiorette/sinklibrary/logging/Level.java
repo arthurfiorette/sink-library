@@ -3,6 +3,8 @@ package com.github.arthurfiorette.sinklibrary.logging;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NonNull;
+import lombok.experimental.Accessors;
+
 import org.bukkit.ChatColor;
 
 /**
@@ -78,6 +80,8 @@ public enum Level {
   @NonNull
   private String name;
 
+  @Getter
+  @Accessors(fluent = true)
   private int intLevel;
 
   /**
@@ -163,15 +167,6 @@ public enum Level {
    */
   public boolean lessOrEqual(final int level) {
     return this.intLevel <= level;
-  }
-
-  /**
-   * Returns the integer value of the Level.
-   *
-   * @return the integer value of the Level.
-   */
-  public int intValue() {
-    return this.intLevel;
   }
 
   public String toUpperCase() {

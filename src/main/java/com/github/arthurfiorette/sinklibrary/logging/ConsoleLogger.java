@@ -1,24 +1,19 @@
 package com.github.arthurfiorette.sinklibrary.logging;
 
 import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
+
+import org.bukkit.Bukkit;
+
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 
 @RequiredArgsConstructor
-public class BukkitLogger implements BaseLogger {
+public class ConsoleLogger implements BaseLogger {
 
   @Getter
   @NonNull
   private final BasePlugin basePlugin;
-
-  @Setter
-  @Getter
-  @NonNull
-  private Level maxLevel;
 
   @Override
   public void log(
@@ -29,19 +24,11 @@ public class BukkitLogger implements BaseLogger {
   ) {
     Bukkit
       .getConsoleSender()
-      .sendMessage(
-        "[" +
-        author.getClass().getSimpleName() +
-        "] (" +
-        this.format(level) +
-        ChatColor.RESET +
-        ") " +
-        String.format(message, args)
-      );
+      .sendMessage(BaseLogger.format(level, author, message, args));
   }
 
   @Override
-  public void log(Level level, Class<?> author, String message, Throwable throwable) {
+  public void log(final Level level, final Class<?> author, final String message, final Throwable throwable) {
     this.log(level, author, message);
     for (final StackTraceElement trace : throwable.getStackTrace()) {
       Bukkit.getConsoleSender().sendMessage(trace.toString());

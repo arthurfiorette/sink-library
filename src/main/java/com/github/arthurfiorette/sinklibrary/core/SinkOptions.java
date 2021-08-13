@@ -5,8 +5,7 @@ import com.github.arthurfiorette.sinklibrary.component.providers.SimpleComponent
 import com.github.arthurfiorette.sinklibrary.exception.ExceptionHandler;
 import com.github.arthurfiorette.sinklibrary.exception.SimpleExceptionHandler;
 import com.github.arthurfiorette.sinklibrary.logging.BaseLogger;
-import com.github.arthurfiorette.sinklibrary.logging.BukkitLogger;
-import com.github.arthurfiorette.sinklibrary.logging.Level;
+import com.github.arthurfiorette.sinklibrary.logging.ConsoleLogger;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import lombok.AllArgsConstructor;
@@ -54,7 +53,7 @@ public class SinkOptions {
 
     private SinkOptionsBuilder(final BasePlugin plugin) {
       this.componentProvider(new SimpleComponentProvider(plugin));
-      this.baseLogger(new BukkitLogger(plugin, Level.ALL));
+      this.baseLogger(new ConsoleLogger(plugin));
       this.executorService(new ScheduledThreadPoolExecutor(1));
       this.exceptionHandler(new SimpleExceptionHandler(plugin));
     }
