@@ -1,14 +1,17 @@
 package com.github.arthurfiorette.sinklibrary.logging;
 
 import com.github.arthurfiorette.sinklibrary.component.Component;
-
 import org.bukkit.ChatColor;
 
 public interface BaseLogger extends Component {
   void log(final Level level, final Class<?> author, final String message, final Object... args);
 
-  void log(final Level level, final Class<?> author, final String message,
-      final Throwable throwable);
+  void log(
+    final Level level,
+    final Class<?> author,
+    final String message,
+    final Throwable throwable
+  );
 
   default void log(final Level level, final String message, final Object... args) {
     this.log(level, this.getBasePlugin().getClass(), message, args);
@@ -128,9 +131,20 @@ public interface BaseLogger extends Component {
 
   // Default formatting
 
-  static String format(final Level level, final Class<?> author, final String message,
-      final Object... args) {
-    return "[" + author.getClass().getSimpleName() + "] (" + level.toColorUpperCase()
-        + ChatColor.RESET + ") " + String.format(message, args);
+  static String format(
+    final Level level,
+    final Class<?> author,
+    final String message,
+    final Object... args
+  ) {
+    return (
+      "[" +
+      author.getClass().getSimpleName() +
+      "] (" +
+      level.toColorUpperCase() +
+      ChatColor.RESET +
+      ") " +
+      String.format(message, args)
+    );
   }
 }
