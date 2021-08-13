@@ -85,6 +85,7 @@ class MyListener extends SinkListener {
     event.getPlayer().sendMessage("Hello World!");
   }
 }
+
 ```
 
 <br />
@@ -152,7 +153,8 @@ public class MyGenericClass<T> implements BaseComponent {
 Create a new class that extends the designed class with the correct type
 
 ```java
-public class MyStringClass extends MyGenericClass<String>  {}
+public class MyStringClass extends MyGenericClass<String> {}
+
 ```
 
 And then you can register the `MyStringClass` normally.
@@ -163,8 +165,8 @@ And then you can register the `MyStringClass` normally.
 
 If you are willing to contribute in any manner. Checking out this list can be helpful
 
-- **Documentation** *(Urgent haha)*
-- **English revision.** *(My english is really bad)*
+- **Documentation** _(Urgent haha)_
+- **English revision.** _(My english is really bad)_
 - **Testing this code under other spigot versions**
 
 <br />
