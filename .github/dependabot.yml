@@ -1,6 +1,15 @@
 version: 2
 updates:
-  - package-ecosystem: maven
+  - package-ecosystem: 'maven'
     directory: '/'
     schedule:
-      interval: 'weekly'
+      interval: 'daily'
+    reviewers:
+      - "arthurfiorette"
+
+  - package-ecosystem: 'github-actions'
+    directory: '/'
+    schedule:
+      interval: 'daily'
+    reviewers:
+      - "arthurfiorette"
