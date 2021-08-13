@@ -29,7 +29,7 @@ jobs:
         run: mvn --batch-mode package
 
       - name: Added built files to latest release
-        uses: Roang-zero1/github-upload-release-artifacts-action@master]
+        uses: Roang-zero1/github-upload-release-artifacts-action@master
         # If this is a tag push
         if: startsWith(github.ref, 'refs/tags/')
         with:

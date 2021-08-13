@@ -9,6 +9,10 @@ on:
 
 permissions:
   actions: write
+  checks: write
+  contents: write
+  pull-requests: write
+  statuses: write
 
 jobs:
   prettier:
