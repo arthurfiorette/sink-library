@@ -6,7 +6,7 @@ import com.github.arthurfiorette.sinklibrary.core.SinkOptions.SinkOptionsBuilder
 import com.github.arthurfiorette.sinklibrary.exception.ExceptionHandler;
 import com.github.arthurfiorette.sinklibrary.logging.BaseLogger;
 import java.util.concurrent.ExecutorService;
-import java.util.function.Consumer;
+import java.util.function.BiConsumer;
 import lombok.Getter;
 import lombok.NonNull;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -30,17 +30,20 @@ public abstract class SinkPlugin extends JavaPlugin implements BasePlugin {
   private final ExceptionHandler exceptionHandler;
 
   public SinkPlugin() {
-    this(
-      options -> {
-        /* Default Options */
-      }
-    );
+    this((self, builder) -> {
+      /* Default Options */
+    });
   }
 
-  public SinkPlugin(final Consumer<SinkOptionsBuilder> options) {
+  /**
+   * @param options a {@link BiConsumer} with itself as the first parameter so
+   * you can use this while calling super() and a {@link SinkOptionsBuilder} so
+   * you can change the default behavior of this plugin
+   */
+  public SinkPlugin(final BiConsumer<SinkPlugin, SinkOptionsBuilder> options) {
     // Create and build this plugin options.
     final SinkOptionsBuilder builder = SinkOptions.builder(this);
-    options.accept(builder);
+    options.accept(this, builder);
     final SinkOptions so = builder.build();
 
     // Apply his properties
