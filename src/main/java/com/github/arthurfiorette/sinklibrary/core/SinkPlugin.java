@@ -30,9 +30,11 @@ public abstract class SinkPlugin extends JavaPlugin implements BasePlugin {
   private final ExceptionHandler exceptionHandler;
 
   public SinkPlugin() {
-    this((self, builder) -> {
-      /* Default Options */
-    });
+    this(
+      (self, builder) -> {
+        /* Default Options */
+      }
+    );
   }
 
   /**
