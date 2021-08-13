@@ -11,6 +11,8 @@ import com.github.arthurfiorette.sinklibrary.exception.SimpleExceptionHandler;
 import com.github.arthurfiorette.sinklibrary.exception.sink.ComponentNotFoundException;
 import com.github.arthurfiorette.sinklibrary.exception.sink.GenericComponentException;
 import com.github.arthurfiorette.sinklibrary.logging.BaseLogger;
+import com.google.common.base.Preconditions;
+
 import java.util.HashMap;
 import java.util.Map;
 import lombok.Getter;
@@ -40,7 +42,7 @@ public class SimpleComponentProvider implements ComponentProvider {
   @SuppressWarnings("unchecked")
   public <C extends Component> C get(@NonNull final Class<C> clazz)
     throws ComponentNotFoundException {
-    checkState(this.state != State.DISABLED);
+    Preconditions.checkState(this.state != State.DISABLED);
 
     // Check if it is a Service
     if (Service.class.isAssignableFrom(clazz)) {

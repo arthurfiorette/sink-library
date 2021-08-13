@@ -26,7 +26,7 @@ public class SimpleExceptionHandler implements ExceptionHandler {
     final String message,
     final Object... args
   ) {
-    final BaseLogger logger = basePlugin.getBaseLogger();
+    final BaseLogger logger = this.basePlugin.getBaseLogger();
 
     if (exc instanceof RuntimeException) {
       logger.log(Level.ERROR, author, "Runtime exception caugth: " + message, exc);
@@ -45,7 +45,7 @@ public class SimpleExceptionHandler implements ExceptionHandler {
 
   @Override
   public void handle(final Class<?> author, final Throwable exc) {
-    final BaseLogger logger = basePlugin.getBaseLogger();
+    final BaseLogger logger = this.basePlugin.getBaseLogger();
 
     if (exc instanceof RuntimeException) {
       logger.log(Level.ERROR, author, "Runtime exception caugth:", exc);
