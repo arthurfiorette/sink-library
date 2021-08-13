@@ -29,6 +29,14 @@ jobs:
       - name: Build with Maven
         run: mvn --batch-mode package
 
+      - name: Bundle artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: target-build
+          path: ./target
+          retention-days: 1
+          if-no-files-found: error
+
   attach-release:
     name: Attach built code to release
     runs-on: ubuntu-latest
@@ -44,7 +52,6 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: target-build
-          if-no-files-found: error
           path: ./target/**
 
       - name: Added built files to latest release
@@ -67,7 +74,6 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: target-build
-          if-no-files-found: error
           path: ./target/**
 
       - name: Commit generated javadocs to gh-pages branch
@@ -100,7 +106,7 @@ jobs:
           if-no-files-found: error
           path: target/sink-library*.jar
 
-      - name: Delete jar
+      - name: Delete target-build
         uses: geekyeggo/delete-artifact@v1
         with:
           name: target-build
