@@ -127,13 +127,6 @@ dependencies {
 }
 ```
 
-```sbt
-// Sbt
-resolvers += "jitpack" at "https://jitpack.io"
-
-libraryDependencies += "com.github.ArthurFiorette" % "sink-library" % "VERSION"
-```
-
 <br />
 
 ### Documentation
@@ -144,7 +137,7 @@ While the documentation is not done, you can look at the [examples](/docs/exampl
 
 ### Commons problems
 
-#### `IllegalComponentException`
+#### `GenericComponentException`
 
 This exception is thrown when you try to register a component or service, in your class that extends SinkPlugin, which is generic. Since the ComponentManager manages its objects with the key being their classes, two classes with different generic types would be recognized as the same component.
 
@@ -163,6 +156,16 @@ public class MyStringClass extends MyGenericClass<String>  {}
 ```
 
 And then you can register the `MyStringClass` normally.
+
+<br />
+
+### Help needed.
+
+If you are willing to contribute in any manner. Checking out this list can be helpful
+
+- **Documentation** *(Urgent haha)*
+- **English revision.** *(My english is really bad)*
+- **Testing this code under other spigot versions**
 
 <br />
 
