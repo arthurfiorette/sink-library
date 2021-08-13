@@ -1,0 +1,32 @@
+name: Update javadocs
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '**.java'
+
+jobs:
+  javadocs:
+    name: Update javadocs
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Set up JDK 8
+        uses: actions/setup-java@v2.2.0
+        with:
+          java-version: '8'
+          distribution: 'adopt'
+
+      - name: Generate javadoc
+        run: mvn --batch-mode javadoc:javadoc-no-fork
+
+      - name: Commit generated javadoc to gh-pages branch
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./target/site/apidocs

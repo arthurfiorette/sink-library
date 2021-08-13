@@ -4,12 +4,8 @@ updates:
     directory: '/'
     schedule:
       interval: 'daily'
-    reviewers:
-      - "arthurfiorette"
 
   - package-ecosystem: 'github-actions'
     directory: '/'
     schedule:
       interval: 'daily'
-    reviewers:
-      - "arthurfiorette"

@@ -2,31 +2,31 @@ name: Prettify Code
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
+    paths: ['**.java', '**.xml', '**.json', '**.md', '**.yml']
   workflow_dispatch:
 
 permissions:
-    actions: write
-    checks: write
-    contents: write
-    pull-requests: write
-    statuses: write
+  actions: write
 
 jobs:
   prettier:
-    runs-on: ubuntu-20.04
     name: Prettify code
+    runs-on: ubuntu-20.04
+
     steps:
       - name: Checkout
         uses: actions/checkout@v2
         with:
           ref: ${{ github.head_ref }}
           fetch-depth: 0
+
       - name: Prettify code
         # Why i'm not using creyD version: https://github.com/creyD/prettier_action/pull/44
         uses: suda/prettier_action@v3.4-rc.1
         with:
-          prettier_options: --write **/*.{json,xml,java}
+          prettier_options: --write '**/*.{json,xml,java,md,yml}'
           same_commit: false
           only_changed: false
           prettier_plugins: 'prettier-plugin-java @prettier/plugin-xml'
