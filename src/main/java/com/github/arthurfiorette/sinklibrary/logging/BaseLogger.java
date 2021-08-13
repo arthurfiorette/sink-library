@@ -137,12 +137,14 @@ public interface BaseLogger extends Component {
     final String message,
     final Object... args
   ) {
-    return "[" +
-    author.getClass().getSimpleName() +
-    "] (" +
-    level.toColorUpperCase() +
-    ChatColor.RESET +
-    ") " +
-    String.format(message, args);
+    return (
+      "[" +
+      author.getClass().getSimpleName() +
+      "] (" +
+      level.toColorUpperCase() +
+      ChatColor.RESET +
+      ") " +
+      String.format(message, args)
+    );
   }
 }

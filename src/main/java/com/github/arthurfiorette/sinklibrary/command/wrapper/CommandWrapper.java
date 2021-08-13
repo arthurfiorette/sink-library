@@ -105,8 +105,10 @@ public class CommandWrapper extends Command {
   }
 
   private boolean canHandle(final String nameOrAlias) {
-    return this.info.getName().equalsIgnoreCase(nameOrAlias) ||
-    this.info.getAliases().stream().anyMatch(s -> s.equalsIgnoreCase(nameOrAlias));
+    return (
+      this.info.getName().equalsIgnoreCase(nameOrAlias) ||
+      this.info.getAliases().stream().anyMatch(s -> s.equalsIgnoreCase(nameOrAlias))
+    );
   }
 
   /**

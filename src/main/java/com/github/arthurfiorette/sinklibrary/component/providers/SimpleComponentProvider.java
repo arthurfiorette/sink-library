@@ -12,7 +12,6 @@ import com.github.arthurfiorette.sinklibrary.exception.sink.ComponentNotFoundExc
 import com.github.arthurfiorette.sinklibrary.exception.sink.GenericComponentException;
 import com.github.arthurfiorette.sinklibrary.logging.BaseLogger;
 import com.google.common.base.Preconditions;
-
 import java.util.HashMap;
 import java.util.Map;
 import lombok.Getter;
