@@ -29,13 +29,22 @@ public class ConstructorLoader implements ComponentLoader {
     if (constructor == null) {
       throw new IllegalConstructorException(clazz);
     }
-
+    
     constructor.setAccessible(true);
+    
+    if(constructor.getParameterCount() == 0) {
+      return (Component) constructor.newInstance();
+    }
+
     return (Component) constructor.newInstance(this.plugin);
   }
 
   @SneakyThrows
   private Constructor<?> findConstructor() {
+    if (clazz.getConstructor() != null) {
+      return clazz.getConstructor();
+    }
+    
     return Arrays
       .stream(clazz.getConstructors())
       .filter(
