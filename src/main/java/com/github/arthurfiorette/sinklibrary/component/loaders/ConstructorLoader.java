@@ -29,10 +29,10 @@ public class ConstructorLoader implements ComponentLoader {
     if (constructor == null) {
       throw new IllegalConstructorException(clazz);
     }
-    
+
     constructor.setAccessible(true);
-    
-    if(constructor.getParameterCount() == 0) {
+
+    if (constructor.getParameterCount() == 0) {
       return (Component) constructor.newInstance();
     }
 
@@ -44,7 +44,7 @@ public class ConstructorLoader implements ComponentLoader {
     if (clazz.getConstructor() != null) {
       return clazz.getConstructor();
     }
-    
+
     return Arrays
       .stream(clazz.getConstructors())
       .filter(
