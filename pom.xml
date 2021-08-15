@@ -1,118 +1,131 @@
-<project
-  xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd"
->
-  <modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.github.arthurfiorette</groupId>
-  <artifactId>sink-library</artifactId>
-  <packaging>jar</packaging>
-  <version>v4.7.0</version>
+	<groupId>com.github.arthurfiorette</groupId>
+	<artifactId>sink-library</artifactId>
+	<packaging>jar</packaging>
+	<version>v4.7.0</version>
 
-  <name>sink-library</name>
-  <description>A powerful and high-performance tool for building spigot plugins.</description>
-  <url>https://github.com/arthurfiorette/sink-library</url>
+	<name>sink-library</name>
+	<description>A powerful and high-performance tool for building spigot plugins.</description>
+	<url>https://github.com/arthurfiorette/sink-library</url>
 
-  <properties>
-    <maven.compiler.source>1.8</maven.compiler.source>
-    <maven.compiler.target>1.8</maven.compiler.target>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-  </properties>
+	<properties>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+	</properties>
 
-  <licenses>
-    <license>
-      <name>MIT License</name>
-      <url>http://www.opensource.org/licenses/mit-license</url>
-      <distribution>repo</distribution>
-    </license>
-  </licenses>
+	<licenses>
+		<license>
+			<name>MIT License</name>
+			<url>http://www.opensource.org/licenses/mit-license</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
 
-  <repositories>
+	<repositories>
 
-    <!-- Spigot Mc --><!-- Spigot Mc -->
-    <repository>
-      <id>spigot-repo</id>
-      <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
-    </repository>
+		<!-- Spigot Mc --><!-- Spigot Mc -->
+		<repository>
+			<id>spigot-repo</id>
+			<url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
+		</repository>
 
-    <!-- Placeholder API --><!-- Placeholder API -->
-    <repository>
-      <id>placeholderapi</id>
-      <url>https://repo.extendedclip.com/content/repositories/placeholderapi/</url>
-    </repository>
+		<!-- Placeholder API --><!-- Placeholder API -->
+		<repository>
+			<id>placeholderapi</id>
+			<url>https://repo.extendedclip.com/content/repositories/placeholderapi/</url>
+		</repository>
 
-    <!-- Mojang Authlib --><!-- Mojang Authlib -->
-    <repository>
-      <id>minecraft-repo</id>
-      <url>https://libraries.minecraft.net/</url>
-    </repository>
-  </repositories>
+		<!-- Mojang Authlib --><!-- Mojang Authlib -->
+		<repository>
+			<id>minecraft-repo</id>
+			<url>https://libraries.minecraft.net/</url>
+		</repository>
+	</repositories>
 
-  <dependencies>
-    <!-- Lombok --><!-- Lombok -->
-    <dependency>
-      <groupId>org.projectlombok</groupId>
-      <artifactId>lombok</artifactId>
-      <version>1.18.20</version>
-      <scope>provided</scope>
-    </dependency>
+	<dependencies>
+		<!-- Lombok --><!-- Lombok -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.20</version>
+			<scope>provided</scope>
+		</dependency>
 
-    <!-- Spigot Mc --><!-- Spigot Mc -->
-    <dependency>
-      <groupId>org.spigotmc</groupId>
-      <artifactId>spigot-api</artifactId>
-      <version>1.8.8-R0.1-SNAPSHOT</version>
-      <scope>provided</scope>
-    </dependency>
+		<!-- Spigot Mc --><!-- Spigot Mc -->
+		<dependency>
+			<groupId>org.spigotmc</groupId>
+			<artifactId>spigot-api</artifactId>
+			<version>1.8.8-R0.1-SNAPSHOT</version>
+			<scope>provided</scope>
+		</dependency>
 
-    <!-- Placeholder API --><!-- Placeholder API -->
-    <dependency>
-      <groupId>me.clip</groupId>
-      <artifactId>placeholderapi</artifactId>
-      <version>2.10.10</version>
-      <optional>true</optional>
-      <scope>provided</scope>
-    </dependency>
+		<!-- Placeholder API --><!-- Placeholder API -->
+		<dependency>
+			<groupId>me.clip</groupId>
+			<artifactId>placeholderapi</artifactId>
+			<version>2.10.10</version>
+			<optional>true</optional>
+			<scope>provided</scope>
+		</dependency>
 
-    <!-- Mojang Authlib --><!-- Mojang Authlib -->
-    <dependency>
-      <groupId>com.mojang</groupId>
-      <artifactId>authlib</artifactId>
-      <version>1.5.21</version>
-      <scope>provided</scope>
-    </dependency>
-  </dependencies>
+		<!-- Mojang Authlib --><!-- Mojang Authlib -->
+		<dependency>
+			<groupId>com.mojang</groupId>
+			<artifactId>authlib</artifactId>
+			<version>1.5.21</version>
+			<scope>provided</scope>
+		</dependency>
 
-  <build>
-    <plugins>
-      <!-- Sources --><!-- Sources -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-source-plugin</artifactId>
-        <version>3.2.1</version>
-        <executions>
-          <execution>
-            <id>attach-sources</id>
-            <goals>
-              <goal>jar</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
+		<!-- Testing -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.13.1</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
 
-      <!-- Javadoc --><!-- Javadoc -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-javadoc-plugin</artifactId>
-        <version>3.3.0</version>
-        <configuration>
-          <!-- Ignore javadoc errors -->
-          <doclint>none</doclint>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
+	<build>
+		<plugins>
+			<!-- Sources --><!-- Sources -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>3.2.1</version>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- Javadoc --><!-- Javadoc -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>3.3.0</version>
+				<configuration>
+					<!-- Ignore javadoc errors -->
+					<doclint>none</doclint>
+				</configuration>
+			</plugin>
+
+			<!-- Testing -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.18.1</version>
+			</plugin>
+		</plugins>
+	</build>
 
 </project>

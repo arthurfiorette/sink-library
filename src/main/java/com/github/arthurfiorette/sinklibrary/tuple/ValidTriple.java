@@ -12,8 +12,8 @@ public class ValidTriple<L, M, R> extends Triple<L, M, R> {
     super(left, middle, right);
   }
 
-  public static <L, M, R> Triple<L, M, R> validTriple(final L left, final M middle, final R right) {
-    return new Triple<>(left, middle, right);
+  public static <L, M, R> ValidTriple<L, M, R> validTriple(final L left, final M middle, final R right) {
+    return new ValidTriple<>(left, middle, right);
   }
 
   @Override

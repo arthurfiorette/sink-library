@@ -1,14 +1,15 @@
 package com.github.arthurfiorette.sinklibrary.services;
 
-import com.google.common.collect.ObjectArrays;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
-import java.util.Random;
 import java.util.Set;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+
+import lombok.NonNull;
 import lombok.experimental.UtilityClass;
 
 /**
@@ -17,7 +18,7 @@ import lombok.experimental.UtilityClass;
  * @author https://github.com/ArthurFiorette/sink-library/
  */
 @UtilityClass
-public final class JavaService {
+public final class SinkUtil {
 
   /**
    * Returns an array with the collection elements.
@@ -28,9 +29,9 @@ public final class JavaService {
    *
    * @return the array with the elements
    */
-  public static <T> T[] toArray(final Class<T> clazz, final Collection<T> coll) {
-    final T[] arr = ObjectArrays.newArray(clazz, coll.size());
-    return coll.toArray(arr);
+  @SuppressWarnings("unchecked")
+  public static <T> T[] array(@NonNull final Class<T> clazz, @NonNull final Collection<T> coll) {
+    return coll.toArray((T[]) new Object[coll.size()]);
   }
 
   /**
@@ -42,21 +43,9 @@ public final class JavaService {
    *
    * @return the array with the elements
    */
-  public static <T> T[] toArray(final Class<T> clazz, final Object... values) {
-    return JavaService.toArray(clazz, JavaService.toList(clazz, values));
-  }
-
-  /**
-   * Cast any vararg to a list of the same type
-   *
-   * @param <T> the list type
-   * @param clazz the class to identify the list type
-   * @param values the varargs values to fill in the list.
-   *
-   * @return the list with the elements
-   */
-  public static <T> List<T> toList(final Class<T> clazz, final Object... values) {
-    return Arrays.stream(values).map(clazz::cast).collect(Collectors.toList());
+  @SuppressWarnings("unchecked")
+  public static <T> T[] array(@NonNull final T... values) {
+    return values;
   }
 
   /**
@@ -67,11 +56,11 @@ public final class JavaService {
    *
    * @return the array without the first element
    */
-  public static <T> T[] removeFirst(final T[] arr) {
+  public static <T> T[] removeFirst(@NonNull final T[] arr) {
     return Arrays.copyOfRange(arr, 1, arr.length);
   }
 
-  public static <T, R> Set<R> setMapper(final Set<T> set, final Function<T, R> mapper) {
+  public static <T, R> Set<R> mapper(@NonNull final Set<T> set, @NonNull final Function<T, R> mapper) {
     return set.stream().map(mapper).collect(Collectors.toSet());
   }
 
@@ -85,7 +74,7 @@ public final class JavaService {
    *
    * @return the mapped list
    */
-  public static <T, R> List<R> listMapper(final List<T> list, final Function<T, R> mapper) {
+  public static <T, R> List<R> mapper(@NonNull final List<T> list, @NonNull final Function<T, R> mapper) {
     return list.stream().map(mapper).collect(Collectors.toList());
   }
 
@@ -97,18 +86,20 @@ public final class JavaService {
    *
    * @return the random element
    */
-  public static <T> T getRandomElement(final Collection<T> coll) {
-    return new ArrayList<>(coll).get(JavaService.getRandomInt(coll.size()));
+  public static <T> T randomElement(@NonNull final Collection<T> coll) {
+    final int random = randomInt(0, coll.size());
+    return new ArrayList<>(coll).get(random);
   }
 
-  /**
-   * Return a random integer with given range
-   *
-   * @param range the range, 0 to range.
-   *
-   * @return the random generated int
-   */
-  public static int getRandomInt(final int range) {
-    return new Random().nextInt(range);
+  public static long randomLong(final long min, final long max) {
+    return ThreadLocalRandom.current().nextLong(min, max + 1);
+  }
+  
+  public static int randomInt(final int min, final int max) {
+    return ThreadLocalRandom.current().nextInt(min, max + 1);
+  }
+  
+  public static double randomDouble(final double min, final double max) {
+    return ThreadLocalRandom.current().nextDouble(min, max + 1);
   }
 }
