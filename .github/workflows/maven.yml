@@ -1,6 +1,15 @@
 name: Github CI
 
-on: [push, pull_request]
+on:
+  push:
+    paths:
+      - '**.java'
+      - 'pom.xml'
+  pull_request:
+    paths:
+      - '**.java'
+      - 'pom.xml'
+  workflow_dispatch:
 
 jobs:
   build:
@@ -25,7 +34,10 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven-
 
-      - name: Build with Maven
+      - name: Test maven code
+        run: mvn --batch-mode test
+
+      - name: Build maven code
         run: mvn --batch-mode package
 
       - name: Added built files to latest release
