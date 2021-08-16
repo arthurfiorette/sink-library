@@ -66,7 +66,7 @@ public class SinkUtilTest {
     // Tests with same values
     final String[] generated = SinkUtil.removeFirst(input);
 
-    final boolean sameLength = generated.length - 1 == input.length;
+    final boolean sameLength = input.length - 1 == generated.length;
 
     assertArrayEquals(generated, inputShift);
     assertTrue(sameLength);
