@@ -34,6 +34,6 @@ public class BuilderStack implements MenuItem {
 
   @Override
   public ItemStack getItem() {
-    return this.builder.build();
+    return builder.build();
   }
 }

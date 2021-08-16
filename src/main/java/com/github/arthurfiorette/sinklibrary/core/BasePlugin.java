@@ -4,7 +4,7 @@ import com.github.arthurfiorette.sinklibrary.component.Component;
 import com.github.arthurfiorette.sinklibrary.component.loaders.ComponentLoader;
 import com.github.arthurfiorette.sinklibrary.component.providers.ComponentProvider;
 import com.github.arthurfiorette.sinklibrary.exception.ExceptionHandler;
-import com.github.arthurfiorette.sinklibrary.executor.v2.TaskContext;
+import com.github.arthurfiorette.sinklibrary.executor.TaskContext;
 import com.github.arthurfiorette.sinklibrary.logging.BaseLogger;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ScheduledExecutorService;
@@ -36,6 +36,6 @@ public interface BasePlugin extends Plugin {
   ComponentLoader[] components();
 
   default <T extends Component> T get(final Class<T> clazz) {
-    return this.getProvider().get(clazz);
+    return getProvider().get(clazz);
   }
 }

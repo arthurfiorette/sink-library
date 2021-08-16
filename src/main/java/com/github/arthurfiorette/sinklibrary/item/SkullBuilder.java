@@ -1,4 +1,4 @@
-package com.github.arthurfiorette.sinklibrary.item.v2;
+package com.github.arthurfiorette.sinklibrary.item;
 
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;

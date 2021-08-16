@@ -1,129 +1,149 @@
 package com.github.arthurfiorette.sinklibrary.executor;
 
 import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
+import com.github.arthurfiorette.sinklibrary.util.bukkit.TickUnit;
+
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
 import org.bukkit.Bukkit;
-import org.bukkit.plugin.Plugin;
-import org.bukkit.scheduler.BukkitScheduler;
-import org.bukkit.scheduler.BukkitTask;
 
-/**
- * A helper enum to run schedule task with {@link BukkitScheduler}
- *
- * @author https://github.com/ArthurFiorette/sink-library/
- *
- * @deprecated in flavor of
- * {@link com.github.arthurfiorette.sinklibrary.executor.v2.TaskContext} and
- * {@link BasePlugin#getExecutor()}
- */
-@Deprecated
-public enum TaskContext {
+public enum TaskContext implements TaskRunner {
+  
   /**
-   * This context means that his execution is the Bukkit main thread.
+   * Represents the synchronous context of the bukkit.
+   *
+   * @see Bukkit#getScheduler()
    */
-  SYNC {
+  BUKKIT {
     @Override
-    public BukkitTask run(final Plugin plugin, final Runnable runnable) {
-      return Bukkit.getScheduler().runTask(plugin, runnable);
+    public void run(final BasePlugin plugin, final Runnable runnable) {
+      Bukkit.getScheduler().runTask(plugin, runnable);
     }
 
     @Override
-    public BukkitTask runLater(final Plugin plugin, final Runnable runnable, final long delay) {
-      return Bukkit.getScheduler().runTaskLater(plugin, runnable, delay);
+    public void runLater(final BasePlugin plugin, final Runnable runnable, final long delay) {
+      Bukkit.getScheduler().runTaskLater(plugin, runnable, delay);
     }
 
     @Override
-    public BukkitTask runTimer(
-      final Plugin plugin,
+    public void runTimer(
+      final BasePlugin plugin,
       final Runnable runnable,
       final long delay,
       final long interval
     ) {
-      return Bukkit.getScheduler().runTaskTimer(plugin, runnable, delay, interval);
+      Bukkit.getScheduler().runTaskTimer(plugin, runnable, delay, interval);
     }
   },
+
   /**
-   * This context means that his execution is outside the Bukkit main thread.
+   * Representa o contexto de execução do plugin.
+   *
+   * @see BasePlugin#getExecutor()
+   */
+  PLUGIN {
+    @Override
+    public void run(final BasePlugin plugin, final Runnable runnable) {
+      plugin.getExecutor().execute(runnable);
+    }
+
+    @Override
+    public void runLater(final BasePlugin plugin, final Runnable runnable, final long delay) {
+      final ScheduledExecutorService service = TaskContext.getScheduledExecutor(plugin);
+      service.schedule(
+        runnable,
+        TickUnit.from(TimeUnit.MILLISECONDS, delay),
+        TimeUnit.SECONDS
+      );
+    }
+
+    @Override
+    public void runTimer(
+      final BasePlugin plugin,
+      final Runnable runnable,
+      final long delay,
+      final long interval
+    ) {
+      final ScheduledExecutorService service = TaskContext.getScheduledExecutor(plugin);
+      service.scheduleAtFixedRate(
+        runnable,
+        TickUnit.from(TimeUnit.MILLISECONDS, delay),
+        TickUnit.from(TimeUnit.SECONDS, interval),
+        TimeUnit.SECONDS
+      );
+    }
+  },
+
+  /**
+   * Represents an isolated and asynchronous external execution context.
    */
   ASYNC {
     /**
-     * <b>Asynchronous tasks should never access any API in Bukkit. Great care
-     * should be taken to assure the thread-safety of asynchronous tasks.</b>
-     * <p>
-     * {@inheritDoc}
+     * @param plugin <b>Not used. can be null</b>
+     * @param runnable the task to be run
+     *
+     * @throws NullPointerException if the task is null
      */
     @Override
-    public BukkitTask run(final Plugin plugin, final Runnable runnable) {
-      return Bukkit.getScheduler().runTaskAsynchronously(plugin, runnable);
+    public void run(final BasePlugin plugin, final Runnable runnable) {
+      new Thread(runnable, "TaskContext.ASYNC - " + plugin == null ? "Unknown" : plugin.getName())
+        .run();
     }
 
     /**
-     * <b>Asynchronous tasks should never access any API in Bukkit. Great care
-     * should be taken to assure the thread-safety of asynchronous tasks.</b>
-     * <p>
-     * {@inheritDoc}
+     * @param plugin <b>Not used. can be null</b>
+     * @param runnable the task to be run
+     * @param delay the delay in <b>TICKS</b>
+     *
+     * @throws NullPointerException if the task is null
      */
     @Override
-    public BukkitTask runLater(final Plugin plugin, final Runnable runnable, final long delay) {
-      return Bukkit.getScheduler().runTaskLaterAsynchronously(plugin, runnable, delay);
+    public void runLater(final BasePlugin plugin, final Runnable runnable, final long delay) {
+      new Timer()
+        .schedule(
+          new TimerTask() {
+            @Override
+            public void run() {
+              runnable.run();
+            }
+          },
+          TickUnit.from(TimeUnit.MILLISECONDS, delay)
+        );
     }
 
     /**
-     * <b>Asynchronous tasks should never access any API in Bukkit. Great care
-     * should be taken to assure the thread-safety of asynchronous tasks.</b>
-     * <p>
-     * {@inheritDoc}
+     * @param plugin <b>Not used. can be null</b>
+     * @param runnable the task to be run
+     * @param delay the delay in <b>TICKS</b>
+     * @param interval the ticks to wait between runs
      */
     @Override
-    public BukkitTask runTimer(
-      final Plugin plugin,
+    public void runTimer(
+      final BasePlugin plugin,
       final Runnable runnable,
       final long delay,
       final long interval
     ) {
-      return Bukkit.getScheduler().runTaskTimerAsynchronously(plugin, runnable, delay, interval);
+      new Timer()
+        .scheduleAtFixedRate(
+          new RunnableTimerTask(runnable),
+          TickUnit.from(TimeUnit.MILLISECONDS, delay),
+          TickUnit.from(TimeUnit.MILLISECONDS, interval)
+        );
     }
   };
 
-  /**
-   * Run a anything with BukkitScheduler.
-   *
-   * @param plugin the reference to the plugin scheduling task
-   * @param runnable the task to be run
-   *
-   * @return the BukkitTask associated with this run.
-   *
-   * @throws IllegalArgumentException if plugin is null
-   * @throws IllegalArgumentException if task is null
-   */
-  public abstract BukkitTask run(Plugin plugin, Runnable runnable);
-
-  /**
-   * Run a anything with BukkitScheduler and a delay to execute.
-   *
-   * @param plugin the reference to the plugin scheduling task
-   * @param runnable the task to be run
-   * @param delay the delay in ticks
-   *
-   * @return the BukkitTask associated with this run.
-   *
-   * @throws IllegalArgumentException if plugin is null
-   * @throws IllegalArgumentException if task is null
-   */
-  public abstract BukkitTask runLater(Plugin plugin, Runnable runnable, long delay);
-
-  /**
-   * Run a anything with BukkitScheduler and a delay to execute and a interval
-   * between runs.
-   *
-   * @param plugin the reference to the plugin scheduling task
-   * @param runnable the task to be run
-   * @param delay the delay in ticks
-   * @param interval the ticks to wait between runs
-   *
-   * @return the BukkitTask associated with this run.
-   *
-   * @throws IllegalArgumentException if plugin is null
-   * @throws IllegalArgumentException if task is null
-   */
-  public abstract BukkitTask runTimer(Plugin plugin, Runnable runnable, long delay, long interval);
+  private static ScheduledExecutorService getScheduledExecutor(final BasePlugin plugin) {
+    final ExecutorService executor = plugin.getExecutor();
+    if (!(executor instanceof ScheduledExecutorService)) {
+      throw new IllegalArgumentException(
+        "To ran scheduled tasks, your plugin must use a java.util.concurrent.ScheduledExecutorService"
+      );
+    }
+    return (ScheduledExecutorService) executor;
+  }
 }

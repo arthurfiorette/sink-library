@@ -30,7 +30,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * @throws IllegalArgumentException Thrown when path is null.
    */
   default boolean contains(final P path) {
-    return this.getConfig().contains(path.getPath());
+    return getConfig().contains(path.getPath());
   }
 
   /**
@@ -45,7 +45,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * @return Requested Object.
    */
   default Object get(final P path) {
-    return this.getConfig().get(path.getPath());
+    return getConfig().get(path.getPath());
   }
 
   /**
@@ -61,7 +61,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * @return Requested Object.
    */
   default Object get(final P path, final Object def) {
-    return this.getConfig().get(path.getPath(), def);
+    return getConfig().get(path.getPath(), def);
   }
 
   /**
@@ -79,7 +79,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * @param value New value to set the path to.
    */
   default void set(final P path, final Object value) {
-    this.getConfig().set(path.getPath(), value);
+    getConfig().set(path.getPath(), value);
   }
 
   /**
@@ -94,7 +94,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * @return Newly created section
    */
   default ConfigurationSection createSection(final P path) {
-    return this.getConfig().createSection(path.getPath());
+    return getConfig().createSection(path.getPath());
   }
 
   /**
@@ -111,7 +111,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * @return Newly created section
    */
   default ConfigurationSection createSection(final P path, final Map<?, ?> map) {
-    return this.getConfig().createSection(path.getPath(), map);
+    return getConfig().createSection(path.getPath(), map);
   }
 
   /**
@@ -126,7 +126,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * @return Requested String.
    */
   default String getString(final P path) {
-    return this.getConfig().getString(path.getPath());
+    return getConfig().getString(path.getPath());
   }
 
   /**
@@ -143,7 +143,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * @return Requested String.
    */
   default String getString(final P path, final String def) {
-    return this.getConfig().getString(path.getPath(), def);
+    return getConfig().getString(path.getPath(), def);
   }
 
   /**
@@ -193,7 +193,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * @return Whether or not the specified path is a String.
    */
   default boolean isString(final P path) {
-    return this.getConfig().isString(path.getPath());
+    return getConfig().isString(path.getPath());
   }
 
   /**
@@ -208,7 +208,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * @return Requested int.
    */
   default int getInt(final P path) {
-    return this.getConfig().getInt(path.getPath());
+    return getConfig().getInt(path.getPath());
   }
 
   /**
@@ -225,7 +225,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * @return Requested int.
    */
   default int getInt(final P path, final int def) {
-    return this.getConfig().getInt(path.getPath(), def);
+    return getConfig().getInt(path.getPath(), def);
   }
 
   /**
@@ -241,7 +241,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * @return Whether or not the specified path is an int.
    */
   default boolean isInt(final P path) {
-    return this.getConfig().isInt(path.getPath());
+    return getConfig().isInt(path.getPath());
   }
 
   /**
@@ -256,7 +256,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * @return Requested boolean.
    */
   default boolean getBoolean(final P path) {
-    return this.getConfig().getBoolean(path.getPath());
+    return getConfig().getBoolean(path.getPath());
   }
 
   /**
@@ -273,7 +273,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * @return Requested boolean.
    */
   default boolean getBoolean(final P path, final boolean def) {
-    return this.getConfig().getBoolean(path.getPath(), def);
+    return getConfig().getBoolean(path.getPath(), def);
   }
 
   /**
@@ -289,7 +289,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * @return Whether or not the specified path is a boolean.
    */
   default boolean isBoolean(final P path) {
-    return this.getConfig().isBoolean(path.getPath());
+    return getConfig().isBoolean(path.getPath());
   }
 
   /**
@@ -304,7 +304,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * @return Requested double.
    */
   default double getDouble(final P path) {
-    return this.getConfig().getDouble(path.getPath());
+    return getConfig().getDouble(path.getPath());
   }
 
   /**
@@ -321,7 +321,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * @return Requested double.
    */
   default double getDouble(final P path, final double def) {
-    return this.getConfig().getDouble(path.getPath(), def);
+    return getConfig().getDouble(path.getPath(), def);
   }
 
   /**
@@ -337,7 +337,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * @return Whether or not the specified path is a double.
    */
   default boolean isDouble(final P path) {
-    return this.getConfig().isDouble(path.getPath());
+    return getConfig().isDouble(path.getPath());
   }
 
   /**
@@ -353,7 +353,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * @return Whether or not the specified path is a double.
    */
   default long getLong(final P path) {
-    return this.getConfig().getLong(path.getPath());
+    return getConfig().getLong(path.getPath());
   }
 
   /**
@@ -370,7 +370,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * @return Requested long.
    */
   default long getLong(final P path, final long def) {
-    return this.getConfig().getLong(path.getPath(), def);
+    return getConfig().getLong(path.getPath(), def);
   }
 
   /**
@@ -386,7 +386,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * @return Whether or not the specified path is a long.
    */
   default boolean isLong(final P path) {
-    return this.getConfig().isLong(path.getPath());
+    return getConfig().isLong(path.getPath());
   }
 
   /**
@@ -401,7 +401,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * @return Requested List.
    */
   default List<?> getList(final P path) {
-    return this.getConfig().getList(path.getPath());
+    return getConfig().getList(path.getPath());
   }
 
   /**
@@ -418,7 +418,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * @return Requested List.
    */
   default List<?> getList(final P path, final List<?> def) {
-    return this.getConfig().getList(path.getPath(), def);
+    return getConfig().getList(path.getPath(), def);
   }
 
   /**
@@ -434,7 +434,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * @return Whether or not the specified path is a List.
    */
   default boolean isList(final P path) {
-    return this.getConfig().isList(path.getPath());
+    return getConfig().isList(path.getPath());
   }
 
   /**
@@ -452,7 +452,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * @return Requested List of String.
    */
   default List<String> getStringList(final P path) {
-    return this.getConfig().getStringList(path.getPath());
+    return getConfig().getStringList(path.getPath());
   }
 
   /**
@@ -492,7 +492,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * @return Requested List of Integer.
    */
   default List<Integer> getIntegerList(final P path) {
-    return this.getConfig().getIntegerList(path.getPath());
+    return getConfig().getIntegerList(path.getPath());
   }
 
   /**
@@ -510,7 +510,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * @return Requested List of Boolean.
    */
   default List<Boolean> getBooleanList(final P path) {
-    return this.getConfig().getBooleanList(path.getPath());
+    return getConfig().getBooleanList(path.getPath());
   }
 
   /**
@@ -528,7 +528,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * @return Requested List of Double.
    */
   default List<Double> getDoubleList(final P path) {
-    return this.getConfig().getDoubleList(path.getPath());
+    return getConfig().getDoubleList(path.getPath());
   }
 
   /**
@@ -546,7 +546,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * @return Requested List of Float.
    */
   default List<Float> getFloatList(final P path) {
-    return this.getConfig().getFloatList(path.getPath());
+    return getConfig().getFloatList(path.getPath());
   }
 
   /**
@@ -564,7 +564,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * @return Requested List of Long.
    */
   default List<Long> getLongList(final P path) {
-    return this.getConfig().getLongList(path.getPath());
+    return getConfig().getLongList(path.getPath());
   }
 
   /**
@@ -582,7 +582,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * @return Requested List of Byte.
    */
   default List<Byte> getByteList(final P path) {
-    return this.getConfig().getByteList(path.getPath());
+    return getConfig().getByteList(path.getPath());
   }
 
   /**
@@ -600,7 +600,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * @return Requested List of Character.
    */
   default List<Character> getCharacterList(final P path) {
-    return this.getConfig().getCharacterList(path.getPath());
+    return getConfig().getCharacterList(path.getPath());
   }
 
   /**
@@ -618,7 +618,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * @return Requested List of Short.
    */
   default List<Short> getShortList(final P path) {
-    return this.getConfig().getShortList(path.getPath());
+    return getConfig().getShortList(path.getPath());
   }
 
   /**
@@ -636,7 +636,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * @return Requested List of Maps.
    */
   default List<Map<?, ?>> getMapList(final P path) {
-    return this.getConfig().getMapList(path.getPath());
+    return getConfig().getMapList(path.getPath());
   }
 
   /**
@@ -651,7 +651,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * @return Requested Vector.
    */
   default Vector getVector(final P path) {
-    return this.getConfig().getVector(path.getPath());
+    return getConfig().getVector(path.getPath());
   }
 
   /**
@@ -669,7 +669,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * @return Requested Vector.
    */
   default Vector getVector(final P path, final Vector def) {
-    return this.getConfig().getVector(path.getPath(), def);
+    return getConfig().getVector(path.getPath(), def);
   }
 
   /**
@@ -685,7 +685,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * @return Whether or not the specified path is a Vector.
    */
   default boolean isVector(final P path) {
-    return this.getConfig().isVector(path.getPath());
+    return getConfig().isVector(path.getPath());
   }
 
   /**
@@ -700,7 +700,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * @return Requested OfflinePlayer.
    */
   default OfflinePlayer getOfflinePlayer(final P path) {
-    return this.getConfig().getOfflinePlayer(path.getPath());
+    return getConfig().getOfflinePlayer(path.getPath());
   }
 
   /**
@@ -718,7 +718,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * @return Requested OfflinePlayer.
    */
   default OfflinePlayer getOfflinePlayer(final P path, final OfflinePlayer def) {
-    return this.getConfig().getOfflinePlayer(path.getPath(), def);
+    return getConfig().getOfflinePlayer(path.getPath(), def);
   }
 
   /**
@@ -734,7 +734,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * @return Whether or not the specified path is an OfflinePlayer.
    */
   default boolean isOfflinePlayer(final P path) {
-    return this.getConfig().isOfflinePlayer(path.getPath());
+    return getConfig().isOfflinePlayer(path.getPath());
   }
 
   /**
@@ -749,7 +749,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * @return Requested ItemStack.
    */
   default ItemStack getItemStack(final P path) {
-    return this.getConfig().getItemStack(path.getPath());
+    return getConfig().getItemStack(path.getPath());
   }
 
   /**
@@ -767,7 +767,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * @return Requested ItemStack.
    */
   default ItemStack getItemStack(final P path, final ItemStack def) {
-    return this.getConfig().getItemStack(path.getPath(), def);
+    return getConfig().getItemStack(path.getPath(), def);
   }
 
   /**
@@ -783,7 +783,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * @return Whether or not the specified path is an ItemStack.
    */
   default boolean isItemStack(final P path) {
-    return this.getConfig().isItemStack(path.getPath());
+    return getConfig().isItemStack(path.getPath());
   }
 
   /**
@@ -798,7 +798,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * @return Requested Color.
    */
   default Color getColor(final P path) {
-    return this.getConfig().getColor(path.getPath());
+    return getConfig().getColor(path.getPath());
   }
 
   /**
@@ -816,7 +816,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * @return Requested Color.
    */
   default Color getColor(final P path, final Color def) {
-    return this.getConfig().getColor(path.getPath(), def);
+    return getConfig().getColor(path.getPath(), def);
   }
 
   /**
@@ -832,7 +832,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * @return Whether or not the specified path is a Color.
    */
   default boolean isColor(final P path) {
-    return this.getConfig().isColor(path.getPath());
+    return getConfig().isColor(path.getPath());
   }
 
   /**
@@ -847,7 +847,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * @return Requested ConfigurationSection.
    */
   default ConfigurationSection getConfigurationSection(final P path) {
-    return this.getConfig().getConfigurationSection(path.getPath());
+    return getConfig().getConfigurationSection(path.getPath());
   }
 
   /**
@@ -863,7 +863,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * @return Whether or not the specified path is a ConfigurationSection.
    */
   default boolean isConfigurationSection(final P path) {
-    return this.getConfig().isConfigurationSection(path.getPath());
+    return getConfig().isConfigurationSection(path.getPath());
   }
 
   /**
@@ -886,6 +886,6 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    * @throws IllegalArgumentException Thrown if path is null.
    */
   default void addDefault(final P path, final Object value) {
-    this.getConfig().addDefault(path.getPath(), value);
+    getConfig().addDefault(path.getPath(), value);
   }
 }

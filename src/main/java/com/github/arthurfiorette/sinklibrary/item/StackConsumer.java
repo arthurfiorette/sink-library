@@ -1,4 +1,4 @@
-package com.github.arthurfiorette.sinklibrary.item.v2;
+package com.github.arthurfiorette.sinklibrary.item;
 
 import lombok.NonNull;
 import org.bukkit.inventory.ItemStack;
@@ -19,7 +19,7 @@ public interface StackConsumer {
 
   default StackConsumer andThen(@NonNull final StackConsumer after) {
     return (is, meta) -> {
-      this.accept(is, meta);
+      accept(is, meta);
       after.accept(is, meta);
       is.setItemMeta(meta);
     };

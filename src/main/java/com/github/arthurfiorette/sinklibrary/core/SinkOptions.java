@@ -47,7 +47,7 @@ public class SinkOptions {
   }
 
   @FunctionalInterface
-  public static interface Consumer {
+  public interface Consumer {
     void customize(Builder builder);
   }
   
@@ -59,10 +59,10 @@ public class SinkOptions {
   public static class Builder {
 
     private Builder(final BasePlugin plugin) {
-      this.componentProvider(new SimpleComponentProvider(plugin));
-      this.baseLogger(new ConsoleLogger(plugin));
-      this.executorService(new ScheduledThreadPoolExecutor(1));
-      this.exceptionHandler(new SimpleExceptionHandler(plugin));
+      componentProvider(new SimpleComponentProvider(plugin));
+      baseLogger(new ConsoleLogger(plugin));
+      executorService(new ScheduledThreadPoolExecutor(1));
+      exceptionHandler(new SimpleExceptionHandler(plugin));
     }
   }
 }

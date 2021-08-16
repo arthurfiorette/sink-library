@@ -1,4 +1,4 @@
-package com.github.arthurfiorette.sinklibrary.item.v2;
+package com.github.arthurfiorette.sinklibrary.item;
 
 import java.util.EnumMap;
 import lombok.NonNull;
@@ -15,7 +15,7 @@ public final class PropertiesMap extends EnumMap<ItemProperty, StackConsumer> {
 
   @Override
   public StackConsumer put(@NonNull final ItemProperty key, @NonNull StackConsumer value) {
-    final StackConsumer consumer = this.get(key);
+    final StackConsumer consumer = get(key);
 
     // Merge these values if the key is cumulative and already has one stack
     // consumer
@@ -33,7 +33,7 @@ public final class PropertiesMap extends EnumMap<ItemProperty, StackConsumer> {
 
   public void apply(final ItemStack item) {
     final ItemMeta meta = item.getItemMeta();
-    for (final StackConsumer consumer : this.values()) {
+    for (final StackConsumer consumer : values()) {
       consumer.accept(item, meta);
     }
     item.setItemMeta(meta);

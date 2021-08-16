@@ -37,6 +37,6 @@ public abstract class PrivateMenu extends StaticMenu {
   }
 
   public void open(final boolean update) {
-    super.openFor(this.owner, update);
+    super.openFor(owner, update);
   }
 }

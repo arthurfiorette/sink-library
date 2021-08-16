@@ -43,10 +43,10 @@ public abstract class SinkPlugin extends JavaPlugin implements BasePlugin {
     final SinkOptions so = builder.build();
 
     // Apply his properties
-    this.provider = so.getComponentProvider();
-    this.baseLogger = so.getBaseLogger();
-    this.executor = so.getExecutorService();
-    this.exceptionHandler = so.getExceptionHandler();
+    provider = so.getComponentProvider();
+    baseLogger = so.getBaseLogger();
+    executor = so.getExecutorService();
+    exceptionHandler = so.getExceptionHandler();
   }
 
   /**
@@ -55,7 +55,7 @@ public abstract class SinkPlugin extends JavaPlugin implements BasePlugin {
    * @return the custom {@link SinkOptionsConsumer}.
    */
   public SinkOptions.Consumer options() {
-    return (builder) -> {};
+    return builder -> {};
   }
 
   /**
@@ -65,7 +65,7 @@ public abstract class SinkPlugin extends JavaPlugin implements BasePlugin {
    */
   @Override
   public final void onEnable() {
-    this.provider.enableAll();
+    provider.enableAll();
   }
 
   /**
@@ -75,6 +75,6 @@ public abstract class SinkPlugin extends JavaPlugin implements BasePlugin {
    */
   @Override
   public final void onDisable() {
-    this.provider.disableAll();
+    provider.disableAll();
   }
 }

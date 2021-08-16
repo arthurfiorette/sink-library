@@ -5,12 +5,23 @@ import static org.junit.Assert.assertEquals;
 import java.util.UUID;
 
 import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
 
 public class FastUuidTest {
 
-  private final UUID randomUuid = UUID.randomUUID();
-  private final String randomUuidString = randomUuid.toString();
-  private final String randomMojangId = randomUuidString.replaceAll("-", "");
+  private UUID randomUuid;
+  private String randomUuidString;
+  private String randomMojangId;
+
+  @BeforeEach
+  public void loadRandom() {
+    randomUuid = UUID.randomUUID();
+    randomUuidString = randomUuid.toString();
+    randomMojangId = randomUuidString.replaceAll("-", "");
+
+    System.out
+        .println("Testing " + getClass().getSimpleName() + " with the UUID: " + randomUuidString);
+  }
 
   @Test
   public void checkToString() {

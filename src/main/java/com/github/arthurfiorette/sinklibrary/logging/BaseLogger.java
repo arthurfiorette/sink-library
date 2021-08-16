@@ -14,11 +14,11 @@ public interface BaseLogger extends Component {
   );
 
   default void log(final Level level, final String message, final Object... args) {
-    this.log(level, this.getBasePlugin().getClass(), message, args);
+    this.log(level, getBasePlugin().getClass(), message, args);
   }
 
   default void log(final Level level, final String message, final Throwable throwable) {
-    this.log(level, this.getBasePlugin().getClass(), message, throwable);
+    this.log(level, getBasePlugin().getClass(), message, throwable);
   }
 
   //
@@ -32,11 +32,11 @@ public interface BaseLogger extends Component {
   }
 
   default void fatal(final String message, final Object... args) {
-    this.log(Level.FATAL, this.getBasePlugin().getClass(), message, args);
+    this.log(Level.FATAL, getBasePlugin().getClass(), message, args);
   }
 
   default void fatal(final String message, final Throwable throwable) {
-    this.log(Level.FATAL, this.getBasePlugin().getClass(), message, throwable);
+    this.log(Level.FATAL, getBasePlugin().getClass(), message, throwable);
   }
 
   //
@@ -50,11 +50,11 @@ public interface BaseLogger extends Component {
   }
 
   default void error(final String message, final Object... args) {
-    this.log(Level.ERROR, this.getBasePlugin().getClass(), message, args);
+    this.log(Level.ERROR, getBasePlugin().getClass(), message, args);
   }
 
   default void error(final String message, final Throwable throwable) {
-    this.log(Level.ERROR, this.getBasePlugin().getClass(), message, throwable);
+    this.log(Level.ERROR, getBasePlugin().getClass(), message, throwable);
   }
 
   //
@@ -68,11 +68,11 @@ public interface BaseLogger extends Component {
   }
 
   default void warn(final String message, final Object... args) {
-    this.log(Level.WARN, this.getBasePlugin().getClass(), message, args);
+    this.log(Level.WARN, getBasePlugin().getClass(), message, args);
   }
 
   default void warn(final String message, final Throwable throwable) {
-    this.log(Level.WARN, this.getBasePlugin().getClass(), message, throwable);
+    this.log(Level.WARN, getBasePlugin().getClass(), message, throwable);
   }
 
   //
@@ -86,11 +86,11 @@ public interface BaseLogger extends Component {
   }
 
   default void info(final String message, final Object... args) {
-    this.log(Level.INFO, this.getBasePlugin().getClass(), message, args);
+    this.log(Level.INFO, getBasePlugin().getClass(), message, args);
   }
 
   default void info(final String message, final Throwable throwable) {
-    this.log(Level.INFO, this.getBasePlugin().getClass(), message, throwable);
+    this.log(Level.INFO, getBasePlugin().getClass(), message, throwable);
   }
 
   //
@@ -104,11 +104,11 @@ public interface BaseLogger extends Component {
   }
 
   default void debug(final String message, final Object... args) {
-    this.log(Level.DEBUG, this.getBasePlugin().getClass(), message, args);
+    this.log(Level.DEBUG, getBasePlugin().getClass(), message, args);
   }
 
   default void debug(final String message, final Throwable throwable) {
-    this.log(Level.DEBUG, this.getBasePlugin().getClass(), message, throwable);
+    this.log(Level.DEBUG, getBasePlugin().getClass(), message, throwable);
   }
 
   //
@@ -122,11 +122,11 @@ public interface BaseLogger extends Component {
   }
 
   default void trace(final String message, final Object... args) {
-    this.log(Level.TRACE, this.getBasePlugin().getClass(), message, args);
+    this.log(Level.TRACE, getBasePlugin().getClass(), message, args);
   }
 
   default void trace(final String message, final Throwable throwable) {
-    this.log(Level.TRACE, this.getBasePlugin().getClass(), message, throwable);
+    this.log(Level.TRACE, getBasePlugin().getClass(), message, throwable);
   }
 
   // Default formatting
@@ -137,14 +137,12 @@ public interface BaseLogger extends Component {
     final String message,
     final Object... args
   ) {
-    return (
-      "[" +
-      author.getClass().getSimpleName() +
-      "] (" +
-      level.toColorUpperCase() +
-      ChatColor.RESET +
-      ") " +
-      String.format(message, args)
-    );
+    return "[" +
+    author.getClass().getSimpleName() +
+    "] (" +
+    level.toColorUpperCase() +
+    ChatColor.RESET +
+    ") " +
+    String.format(message, args);
   }
 }

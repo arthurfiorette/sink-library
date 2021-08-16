@@ -35,7 +35,7 @@ public abstract class AbstractStorage<K, V, R> implements Storage<K, V, R>, Comp
   public CompletableFuture<Void> save(final K key, final V value) {
     return CompletableFuture.runAsync(
       () -> {
-        this.database.save(key, this.serialize(value));
+        this.database.save(key, serialize(value));
       },
       this.getBasePlugin().getExecutor()
     );
@@ -49,7 +49,7 @@ public abstract class AbstractStorage<K, V, R> implements Storage<K, V, R>, Comp
         if (raw == null) {
           return this.create(key);
         }
-        return this.deserialize(raw);
+        return deserialize(raw);
       },
       this.getBasePlugin().getExecutor()
     );
@@ -77,7 +77,7 @@ public abstract class AbstractStorage<K, V, R> implements Storage<K, V, R>, Comp
   @Override
   public CompletableFuture<V> operate(final Function<Database<K, R>, R> func) {
     return CompletableFuture.supplyAsync(
-      () -> this.deserialize(func.apply(this.database)),
+      () -> deserialize(func.apply(this.database)),
       this.getBasePlugin().getExecutor()
     );
   }

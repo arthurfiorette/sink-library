@@ -27,14 +27,14 @@ public class CustomConfig implements BaseConfig {
    * @see org.bukkit.plugin.Plugin#saveResource(String, boolean)
    */
   public CustomConfig(final BasePlugin plugin, final String resourcePath, final boolean replace) {
-    this.basePlugin = plugin;
-    this.file = new File(plugin.getDataFolder(), resourcePath);
+    basePlugin = plugin;
+    file = new File(plugin.getDataFolder(), resourcePath);
     plugin.saveResource(resourcePath, replace);
-    this.reload();
+    reload();
   }
 
   @Override
   public void reload() {
-    this.config = YamlConfiguration.loadConfiguration(this.file);
+    config = YamlConfiguration.loadConfiguration(file);
   }
 }

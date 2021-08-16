@@ -102,7 +102,7 @@ public abstract class LoadingRepository<K, V>
       () -> {
         this.cache.put(key, value);
       },
-      this.getBasePlugin().getExecutor()
+      getBasePlugin().getExecutor()
     );
   }
 
@@ -110,7 +110,7 @@ public abstract class LoadingRepository<K, V>
   public CompletableFuture<V> get(final K key) {
     return CompletableFuture.supplyAsync(
       () -> this.cache.getUnchecked(key),
-      this.getBasePlugin().getExecutor()
+      getBasePlugin().getExecutor()
     );
   }
 
@@ -124,7 +124,7 @@ public abstract class LoadingRepository<K, V>
           throw new CompletionException(e);
         }
       },
-      this.getBasePlugin().getExecutor()
+      getBasePlugin().getExecutor()
     );
   }
 }

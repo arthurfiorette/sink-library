@@ -28,7 +28,7 @@ public class MultipleLogger implements BaseLogger {
     final String message,
     final Object... args
   ) {
-    this.senders.stream()
+    senders.stream()
       .forEach(
         sender -> {
           sender.sendMessage(BaseLogger.format(level, author, message, args));
@@ -43,7 +43,7 @@ public class MultipleLogger implements BaseLogger {
     final String message,
     final Throwable throwable
   ) {
-    this.senders.stream()
+    senders.stream()
       .forEach(
         sender -> {
           sender.sendMessage(BaseLogger.format(level, author, message));

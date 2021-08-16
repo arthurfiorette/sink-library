@@ -32,7 +32,7 @@ public class CommandWrapper extends Command {
     super.setPermissionMessage(info.getPermissionMessage());
     this.command = command;
     this.info = info;
-    this.subCommands = CommandUtils.wrapAll(command.subCommands());
+    subCommands = CommandUtils.wrapAll(command.subCommands());
   }
 
   /**
@@ -50,7 +50,7 @@ public class CommandWrapper extends Command {
     final String nameOrAliasUsed,
     final String[] argsArr
   ) {
-    final Pair<CommandWrapper, List<String>> pair = this.findHandlerRecursively(argsArr);
+    final Pair<CommandWrapper, List<String>> pair = findHandlerRecursively(argsArr);
 
     final CommandWrapper wrapper = pair.getLeft();
     final List<String> argsList = pair.getRight();
@@ -78,14 +78,14 @@ public class CommandWrapper extends Command {
     final String alias,
     final String[] args
   ) throws IllegalArgumentException {
-    final Pair<CommandWrapper, List<String>> pair = this.findHandlerRecursively(args);
+    final Pair<CommandWrapper, List<String>> pair = findHandlerRecursively(args);
     return pair.getLeft().command.onTabComplete(sender, pair.getRight());
   }
 
   @Override
   public boolean testPermission(final CommandSender target) {
-    if (this.testPermissionSilent(target)) {
-      if (this.command.test(target)) {
+    if (testPermissionSilent(target)) {
+      if (command.test(target)) {
         return true;
       } else {
         target.sendMessage("§cYou cannot execute this command.");
@@ -93,9 +93,9 @@ public class CommandWrapper extends Command {
       }
     }
 
-    if (this.getPermissionMessage().length() != 0) {
-      for (final String line : this.getPermissionMessage()
-        .replace("<permission>", this.getPermission())
+    if (getPermissionMessage().length() != 0) {
+      for (final String line : getPermissionMessage()
+        .replace("<permission>", getPermission())
         .split("\n")) {
         target.sendMessage(line);
       }
@@ -105,10 +105,8 @@ public class CommandWrapper extends Command {
   }
 
   private boolean canHandle(final String nameOrAlias) {
-    return (
-      this.info.getName().equalsIgnoreCase(nameOrAlias) ||
-      this.info.getAliases().stream().anyMatch(s -> s.equalsIgnoreCase(nameOrAlias))
-    );
+    return info.getName().equalsIgnoreCase(nameOrAlias) ||
+    info.getAliases().stream().anyMatch(s -> s.equalsIgnoreCase(nameOrAlias));
   }
 
   /**

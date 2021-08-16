@@ -16,19 +16,19 @@ public class PluginConfig implements BaseConfig {
   protected final BasePlugin basePlugin;
 
   public PluginConfig(final BasePlugin plugin) {
-    this.basePlugin = plugin;
-    this.file = new File(plugin.getDataFolder(), PluginConfig.FILENAME);
+    basePlugin = plugin;
+    file = new File(plugin.getDataFolder(), PluginConfig.FILENAME);
     plugin.saveDefaultConfig();
-    this.reload();
+    reload();
   }
 
   @Override
   public void reload() {
-    this.basePlugin.reloadConfig();
+    basePlugin.reloadConfig();
   }
 
   @Override
   public FileConfiguration getConfig() {
-    return this.basePlugin.getConfig();
+    return basePlugin.getConfig();
   }
 }

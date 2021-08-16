@@ -53,24 +53,24 @@ public abstract class PageableMenu extends PrivateMenu {
    */
   @Override
   public void update() {
-    this.updatePageable();
+    updatePageable();
     super.update();
   }
 
   public void updatePageable() {
-    final byte[] slots = this.pageableSlots();
+    final byte[] slots = pageableSlots();
 
-    this.lastPageableItems = this.pageableItems();
+    lastPageableItems = pageableItems();
 
     // List first index to this page
-    final int initial = slots.length * (this.page - 1);
+    final int initial = slots.length * (page - 1);
 
     byte slotIndex = 0;
     // for from initial to last element.
     for (int i = initial; i < initial + slots.length; i++) {
       MenuItem item;
       try {
-        item = this.lastPageableItems.get(i);
+        item = lastPageableItems.get(i);
         // When the pageable list ends without completing all
         // pageableSlots().length size.
       } catch (final IndexOutOfBoundsException ignore) {
@@ -78,27 +78,27 @@ public abstract class PageableMenu extends PrivateMenu {
       }
 
       // The MenuItem ItemStack or an empty value.
-      final ItemStack is = item != null ? item.getItem() : this.defaultItem;
+      final ItemStack is = item != null ? item.getItem() : defaultItem;
 
-      this.inventory.setItem(slots[slotIndex++], is);
+      inventory.setItem(slots[slotIndex++], is);
     }
   }
 
   public void nextPage(final boolean update) {
-    if (this.hasNextPage()) {
-      this.page += 1;
+    if (hasNextPage()) {
+      page += 1;
     }
     if (update) {
-      this.update();
+      update();
     }
   }
 
   public void previousPage(final boolean update) {
-    if (this.hasPreviousPage()) {
-      this.page -= 1;
+    if (hasPreviousPage()) {
+      page -= 1;
     }
     if (update) {
-      this.update();
+      update();
     }
   }
 
@@ -106,20 +106,20 @@ public abstract class PageableMenu extends PrivateMenu {
    * @return true if has a next page to be displayed
    */
   public boolean hasNextPage() {
-    return this.page + 1 < this.lastPageableItems.size() / this.pageableSlots().length;
+    return page + 1 < lastPageableItems.size() / pageableSlots().length;
   }
 
   /**
    * @return true has a previous page to be displayed
    */
   public boolean hasPreviousPage() {
-    return this.page > 0;
+    return page > 0;
   }
 
   @Override
   public MenuItem getItemAt(final byte slot) {
     final MenuItem item = super.getItemAt(slot);
-    final byte[] slots = this.pageableSlots();
+    final byte[] slots = pageableSlots();
 
     if (item != null) {
       return item;
@@ -138,8 +138,8 @@ public abstract class PageableMenu extends PrivateMenu {
     }
 
     // List first index to this page
-    final int initial = slots.length * (this.page - 1);
+    final int initial = slots.length * (page - 1);
 
-    return this.lastPageableItems.get(initial + slotIndex);
+    return lastPageableItems.get(initial + slotIndex);
   }
 }

@@ -22,18 +22,18 @@ public abstract class CommandStorage implements Service {
 
   public CommandStorage(final BasePlugin basePlugin) {
     this.basePlugin = basePlugin;
-    this.commandReflector = new SimpleCommandReflector(basePlugin);
+    commandReflector = new SimpleCommandReflector(basePlugin);
   }
 
   protected abstract BaseCommand[] commands();
 
   @Override
   public void enable() {
-    this.commandReflector.run();
-    final CommandMap commandMap = this.commandReflector.getCommandMap();
+    commandReflector.run();
+    final CommandMap commandMap = commandReflector.getCommandMap();
 
-    for (final BaseCommand command : this.commands()) {
-      final String prefix = this.getBasePlugin().getName();
+    for (final BaseCommand command : commands()) {
+      final String prefix = getBasePlugin().getName();
       commandMap.register(prefix, CommandUtils.wrap(command));
     }
   }

@@ -38,7 +38,7 @@ public interface BaseCommand extends Component, PluginIdentifiableCommand {
    */
   @Override
   default BasePlugin getPlugin() {
-    return this.getBasePlugin();
+    return getBasePlugin();
   }
 
   default BaseCommand[] subCommands() {
