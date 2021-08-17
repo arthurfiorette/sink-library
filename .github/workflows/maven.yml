@@ -53,7 +53,6 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: target-build
-          retention-days: 1
           if-no-files-found: error
           path: |
             ./target/sink-library*.jar
