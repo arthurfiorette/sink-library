@@ -67,15 +67,6 @@
 			<scope>provided</scope>
 		</dependency>
 
-		<!-- Placeholder API --><!-- Placeholder API -->
-		<dependency>
-			<groupId>me.clip</groupId>
-			<artifactId>placeholderapi</artifactId>
-			<version>2.10.10</version>
-			<optional>true</optional>
-			<scope>provided</scope>
-		</dependency>
-
 		<!-- Mojang Authlib --><!-- Mojang Authlib -->
 		<dependency>
 			<groupId>com.mojang</groupId>

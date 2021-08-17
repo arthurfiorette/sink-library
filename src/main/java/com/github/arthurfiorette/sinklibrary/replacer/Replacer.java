@@ -3,72 +3,62 @@ package com.github.arthurfiorette.sinklibrary.replacer;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.function.Supplier;
 import org.bukkit.ChatColor;
 
-/**
- * A better text replacer that supports PlaceholderAPI (if enabled)
- *
- * @author https://github.com/ArthurFiorette/sink-library/
- */
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+
+@NoArgsConstructor
 public class Replacer {
 
-  private final Map<String, Supplier<String>> placeholders = new HashMap<>();
+  @Getter
+  @NonNull
+  private final Map<String, Object> placeholders = new HashMap<>();
 
-  public Replacer merge(final Replacer other) {
+  public Replacer add(@NonNull final String key, @NonNull final Object value) {
+    placeholders.put(key, value);
+    return this;
+  }
+
+  public Replacer merge(@NonNull final Replacer other) {
     placeholders.putAll(other.placeholders);
     return this;
   }
 
-  /**
-   * Add a placeholder to replace when called.
-   *
-   * @param placeholder the placeholder to be replaced
-   * @param value the value to replace
-   *
-   * @return the instance
-   */
-  public Replacer add(final String placeholder, final String value) {
-    return this.add(placeholder, () -> value);
-  }
+  //
 
-  /**
-   * Add a placeholder to replace when called.
-   *
-   * @param placeholder the placeholder to be replaced
-   * @param supplier the value to replace and only generated when called
-   *
-   * @return the instance
-   */
-  public Replacer add(final String placeholder, final Supplier<String> supplier) {
-    placeholders.put(placeholder, supplier);
-    return this;
-  }
-
-  /**
-   * Replace the text with this atual set of placeholders.
-   *
-   * @param str the raw text
-   *
-   * @return the replaced text
-   */
-  public String replace(final String str) {
-    String replaced = str;
-    for (final Entry<String, Supplier<String>> entry : placeholders.entrySet()) {
-      replaced = replaced.replace(entry.getKey(), entry.getValue().get());
+  public String replace(@NonNull String text) {
+    for(final Entry<String, Object> entry: placeholders.entrySet()) {
+      text = text.replaceAll(entry.getKey(), entry.getValue().toString().toString());
     }
-    return ChatColor.translateAlternateColorCodes('&', replaced);
+    return text;
   }
 
-  /**
-   * A static and compacted method that add the placeholder and replace.
-   *
-   * @param str the raw text
-   * @param replacer a function to be added the placeholders in a other way
-   *
-   * @return the replaced text
-   */
-  public static String replace(final String str, final ReplacerFunction replacer) {
-    return replacer.apply(new Replacer()).replace(str);
+  public String replace(@NonNull String text, final boolean alternateColorCodes) {
+    text = this.replace(text);
+
+    if (alternateColorCodes) {
+      text = ChatColor.translateAlternateColorCodes('&', text);
+    }
+
+    return text;
+  }
+
+  //
+
+  public static String replace(final String text, @NonNull final Function fn) {
+    final Replacer replacer = fn.apply(new Replacer());
+    return replacer.replace(text);
+  }
+
+  @FunctionalInterface
+  public interface Function {
+
+    Replacer apply(Replacer replacer);
+
+    default Function add(final String placeholder, final Object value) {
+      return r -> r.add(placeholder, value);
+    }
   }
 }

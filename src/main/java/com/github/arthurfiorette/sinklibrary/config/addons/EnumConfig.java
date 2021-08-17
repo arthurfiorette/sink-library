@@ -2,10 +2,11 @@ package com.github.arthurfiorette.sinklibrary.config.addons;
 
 import com.github.arthurfiorette.sinklibrary.config.BaseConfig;
 import com.github.arthurfiorette.sinklibrary.replacer.Replacer;
-import com.github.arthurfiorette.sinklibrary.replacer.ReplacerFunction;
+
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+
 import org.bukkit.Color;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.Configuration;
@@ -158,7 +159,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    *
    * @return Requested String.
    */
-  default String getString(final P path, final ReplacerFunction replacer) {
+  default String getString(final P path, final Replacer.Function replacer) {
     return Replacer.replace(this.getString(path), replacer);
   }
 
@@ -176,7 +177,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    *
    * @return Requested String.
    */
-  default String getString(final P path, final String def, final ReplacerFunction replacer) {
+  default String getString(final P path, final String def, final Replacer.Function replacer) {
     return Replacer.replace(this.getString(path, def), replacer);
   }
 
@@ -470,7 +471,7 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    *
    * @return Requested List of String.
    */
-  default List<String> getStringList(final P path, final ReplacerFunction replacer) {
+  default List<String> getStringList(final P path, final Replacer.Function replacer) {
     return this.getStringList(path)
       .stream()
       .map(str -> Replacer.replace(str, replacer))
