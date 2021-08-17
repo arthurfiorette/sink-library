@@ -32,9 +32,8 @@ public class TextSeparator {
         continue;
       }
 
-      final String line = builder.toString();
-      lines.add(line);
-
+      // Add it to the list and clear the actual builder
+      lines.add(builder.toString());
       builder.setLength(0);
     }
 

@@ -25,7 +25,7 @@ public class BukkitColors {
    */
   public String forceColor(final String text, final Separator separator) {
     final StringBuilder builder = new StringBuilder();
-    final String colorSeparator = separator.code();
+    final String colorSeparator = separator.regex();
 
     // colorLine is a word group with the same color in sequence
     for(final String colorLine: text.split("(?=" + colorSeparator + ")")) {
@@ -82,11 +82,11 @@ public class BukkitColors {
     SILCROW('§'),
     AMPERSAND('&');
 
-    @Accessors(fluent = true)
     @Getter
+    @Accessors(fluent = true)
     private final char character;
 
-    public String code() {
+    public String regex() {
       return "//" + character;
     }
   }
