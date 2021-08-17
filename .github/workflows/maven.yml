@@ -1,4 +1,4 @@
-name: Github CI
+name: Maven CI
 
 on:
   push:
@@ -34,11 +34,11 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven-
 
-      - name: Test maven code
-        run: mvn --batch-mode test
-
       - name: Build maven code
         run: mvn --batch-mode package
+
+      - name: Test maven code
+        run: mvn --batch-mode test
 
       - name: Added built files to latest release
         uses: Roang-zero1/github-upload-release-artifacts-action@master
