@@ -46,11 +46,11 @@ public class ItemBuilder implements Builder<ItemStack> {
    */
   public ItemBuilder material(final Material material) {
     return addProperties(
-        ItemProperty.MATERIAL,
-        (is, meta) -> {
-          is.setType(material);
-        }
-      );
+      ItemProperty.MATERIAL,
+      (is, meta) -> {
+        is.setType(material);
+      }
+    );
   }
 
   /**
@@ -60,11 +60,11 @@ public class ItemBuilder implements Builder<ItemStack> {
    */
   public ItemBuilder durability(final short durability) {
     return addProperties(
-        ItemProperty.DAMAGE,
-        (is, meta) -> {
-          is.setDurability(durability);
-        }
-      );
+      ItemProperty.DAMAGE,
+      (is, meta) -> {
+        is.setDurability(durability);
+      }
+    );
   }
 
   /**
@@ -74,11 +74,11 @@ public class ItemBuilder implements Builder<ItemStack> {
    */
   public ItemBuilder amount(final int amount) {
     return addProperties(
-        ItemProperty.AMOUNT,
-        (is, meta) -> {
-          is.setAmount(amount);
-        }
-      );
+      ItemProperty.AMOUNT,
+      (is, meta) -> {
+        is.setAmount(amount);
+      }
+    );
   }
 
   /**
@@ -88,11 +88,11 @@ public class ItemBuilder implements Builder<ItemStack> {
    */
   public ItemBuilder data(final MaterialData data) {
     return addProperties(
-        ItemProperty.MATERIAL_DATA,
-        (is, meta) -> {
-          is.setData(data);
-        }
-      );
+      ItemProperty.MATERIAL_DATA,
+      (is, meta) -> {
+        is.setData(data);
+      }
+    );
   }
 
   /**
@@ -103,11 +103,11 @@ public class ItemBuilder implements Builder<ItemStack> {
    */
   public ItemBuilder enchantment(final Enchantment ench, final int level) {
     return addProperties(
-        ItemProperty.ENCHANTMENT,
-        (is, meta) -> {
-          is.addUnsafeEnchantment(ench, level);
-        }
-      );
+      ItemProperty.ENCHANTMENT,
+      (is, meta) -> {
+        is.addUnsafeEnchantment(ench, level);
+      }
+    );
   }
 
   /**
@@ -119,11 +119,11 @@ public class ItemBuilder implements Builder<ItemStack> {
    */
   public ItemBuilder enchantments(final Map<Enchantment, Integer> enchantments) {
     return addProperties(
-        ItemProperty.ENCHANTMENT,
-        (is, meta) -> {
-          is.addUnsafeEnchantments(enchantments);
-        }
-      );
+      ItemProperty.ENCHANTMENT,
+      (is, meta) -> {
+        is.addUnsafeEnchantments(enchantments);
+      }
+    );
   }
 
   /**
@@ -133,11 +133,11 @@ public class ItemBuilder implements Builder<ItemStack> {
    */
   public ItemBuilder name(final String name) {
     return addProperties(
-        ItemProperty.NAME,
-        (is, meta) -> {
-          meta.setDisplayName(name);
-        }
-      );
+      ItemProperty.NAME,
+      (is, meta) -> {
+        meta.setDisplayName(name);
+      }
+    );
   }
 
   /**
@@ -156,11 +156,11 @@ public class ItemBuilder implements Builder<ItemStack> {
    */
   public ItemBuilder itemFlags(final ItemFlag... itemFlags) {
     return addProperties(
-        ItemProperty.ITEM_FLAG,
-        (is, meta) -> {
-          meta.addItemFlags(itemFlags);
-        }
-      );
+      ItemProperty.ITEM_FLAG,
+      (is, meta) -> {
+        meta.addItemFlags(itemFlags);
+      }
+    );
   }
 
   public ItemBuilder lores(final String... lines) {
@@ -169,13 +169,13 @@ public class ItemBuilder implements Builder<ItemStack> {
 
   public ItemBuilder lores(final List<String> lines) {
     return addProperties(
-        ItemProperty.LORE,
-        (is, meta) -> {
-          final List<String> lore = meta.getLore() == null ? new ArrayList<>() : meta.getLore();
-          lore.addAll(lines);
-          meta.setLore(lore);
-        }
-      );
+      ItemProperty.LORE,
+      (is, meta) -> {
+        final List<String> lore = meta.getLore() == null ? new ArrayList<>() : meta.getLore();
+        lore.addAll(lines);
+        meta.setLore(lore);
+      }
+    );
   }
 
   /**
@@ -185,11 +185,11 @@ public class ItemBuilder implements Builder<ItemStack> {
    */
   public ItemBuilder unbreakable(final boolean unbreakable) {
     return addProperties(
-        ItemProperty.UNBREAKABLE,
-        (is, meta) -> {
-          meta.spigot().setUnbreakable(unbreakable);
-        }
-      );
+      ItemProperty.UNBREAKABLE,
+      (is, meta) -> {
+        meta.spigot().setUnbreakable(unbreakable);
+      }
+    );
   }
 
   /**

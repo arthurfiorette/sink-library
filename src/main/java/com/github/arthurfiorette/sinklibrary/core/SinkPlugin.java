@@ -4,14 +4,11 @@ import com.github.arthurfiorette.sinklibrary.component.Service;
 import com.github.arthurfiorette.sinklibrary.component.providers.ComponentProvider;
 import com.github.arthurfiorette.sinklibrary.exception.ExceptionHandler;
 import com.github.arthurfiorette.sinklibrary.logging.BaseLogger;
-
 import java.util.concurrent.ExecutorService;
 import java.util.function.BiConsumer;
-
-import org.bukkit.plugin.java.JavaPlugin;
-
 import lombok.Getter;
 import lombok.NonNull;
+import org.bukkit.plugin.java.JavaPlugin;
 
 public abstract class SinkPlugin extends JavaPlugin implements BasePlugin {
 
@@ -51,7 +48,7 @@ public abstract class SinkPlugin extends JavaPlugin implements BasePlugin {
 
   /**
    * Override this method if you want to change any behavior.
-   * 
+   *
    * @return the custom {@link SinkOptionsConsumer}.
    */
   public SinkOptions.Consumer options() {

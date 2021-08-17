@@ -1,14 +1,12 @@
 package com.github.arthurfiorette.sinklibrary.util.bukkit;
 
 import java.util.HashMap;
-
+import lombok.experimental.UtilityClass;
 import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-
-import lombok.experimental.UtilityClass;
 
 @UtilityClass
 public class WorldUtils {
@@ -23,9 +21,11 @@ public class WorldUtils {
   public void give(final Player player, final ItemStack... items) {
     final HashMap<Integer, ItemStack> remainders = player.getInventory().addItem(items);
 
-    remainders.forEach((index, item) -> {
-      drop(player.getLocation(), item);
-    });
+    remainders.forEach(
+      (index, item) -> {
+        drop(player.getLocation(), item);
+      }
+    );
   }
 
   /**
@@ -37,7 +37,7 @@ public class WorldUtils {
   public void drop(final Location location, final ItemStack... items) {
     final World world = location.getWorld();
 
-    for(final ItemStack item: items) {
+    for (final ItemStack item : items) {
       world.dropItem(location, item);
     }
   }
@@ -51,7 +51,7 @@ public class WorldUtils {
   public void dropNaturally(final Location location, final ItemStack... items) {
     final World world = location.getWorld();
 
-    for(final ItemStack item: items) {
+    for (final ItemStack item : items) {
       world.dropItemNaturally(location, item);
     }
   }
@@ -63,7 +63,7 @@ public class WorldUtils {
    * @param players the players to play the sound
    */
   public void play(final Sound sound, final Player... players) {
-    for(final Player player: players) {
+    for (final Player player : players) {
       player.playSound(player.getLocation(), sound, 3.0F, 0.5F);
     }
   }
@@ -75,9 +75,8 @@ public class WorldUtils {
    * @param players the players to play the sound
    */
   public void play(final String sound, final Player... players) {
-    for(final Player player: players) {
+    for (final Player player : players) {
       player.playSound(player.getLocation(), sound, 3.0F, 0.5F);
     }
   }
-
 }

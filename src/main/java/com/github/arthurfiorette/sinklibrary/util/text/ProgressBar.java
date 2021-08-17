@@ -23,28 +23,28 @@ public class ProgressBar {
    * @return the progress bar string
    */
   public String build(
-      final int width,
-      @NonNull final String incomplete,
-      @NonNull final String complete,
-      final double percent
+    final int width,
+    @NonNull final String incomplete,
+    @NonNull final String complete,
+    final double percent
   ) {
     checkArgument(percent > 1 || percent < 0);
 
     final StringBuilder sb = new StringBuilder();
-    
+
     int i = 0;
-    
-    for(; i < percent * width; i++) {
+
+    for (; i < percent * width; i++) {
       sb.append(complete);
     }
-    
-    for(; i < width; i++) {
+
+    for (; i < width; i++) {
       sb.append(incomplete);
     }
-    
+
     return sb.toString();
   }
-  
+
   /**
    * Returns a progress bar in String.
    * <p>
@@ -65,18 +65,12 @@ public class ProgressBar {
    * @see TextService#buildProgressBar(int, String, String, double)
    */
   public String build(
-      final int width,
-      final String incomplete,
-      final String complete,
-      final long currentValue,
-      final long maxValue
+    final int width,
+    final String incomplete,
+    final String complete,
+    final long currentValue,
+    final long maxValue
   ) {
-    return build(
-        width,
-        incomplete,
-        complete,
-        (double) currentValue / maxValue
-    );
+    return build(width, incomplete, complete, (double) currentValue / maxValue);
   }
-  
 }

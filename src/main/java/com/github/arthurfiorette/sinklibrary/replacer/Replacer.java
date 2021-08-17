@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.function.Supplier;
-
 import org.bukkit.ChatColor;
 
 /**
@@ -55,7 +54,7 @@ public class Replacer {
    */
   public String replace(final String str) {
     String replaced = str;
-    for(final Entry<String, Supplier<String>> entry: placeholders.entrySet()) {
+    for (final Entry<String, Supplier<String>> entry : placeholders.entrySet()) {
       replaced = replaced.replace(entry.getKey(), entry.getValue().get());
     }
     return ChatColor.translateAlternateColorCodes('&', replaced);
@@ -72,5 +71,4 @@ public class Replacer {
   public static String replace(final String str, final ReplacerFunction replacer) {
     return replacer.apply(new Replacer()).replace(str);
   }
-
 }

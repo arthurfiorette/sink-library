@@ -6,10 +6,8 @@ import com.github.arthurfiorette.sinklibrary.exception.ExceptionHandler;
 import com.github.arthurfiorette.sinklibrary.exception.SimpleExceptionHandler;
 import com.github.arthurfiorette.sinklibrary.logging.BaseLogger;
 import com.github.arthurfiorette.sinklibrary.logging.ConsoleLogger;
-
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -50,7 +48,7 @@ public class SinkOptions {
   public interface Consumer {
     void customize(Builder builder);
   }
-  
+
   /**
    * Class overrided to apply the default settings
    *

@@ -1,11 +1,9 @@
 package com.github.arthurfiorette.sinklibrary.executor;
 
 import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
-
 import lombok.NonNull;
 
 public interface TaskRunner {
-
   /**
    * @param plugin the reference to the plugin scheduling task
    * @param runnable the task to be run
@@ -26,5 +24,4 @@ public interface TaskRunner {
    * @param interval the ticks to wait between runs
    */
   void runTimer(BasePlugin plugin, Runnable runnable, long delay, long interval);
-
 }

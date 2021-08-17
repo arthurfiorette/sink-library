@@ -65,10 +65,10 @@ public abstract class StaticMenu implements BaseMenu {
   public void update() {
     lastStaticItems = staticItems();
     lastStaticItems.forEach(
-        (slot, item) -> {
-          inventory.setItem(slot, item == null ? null : item.getItem());
-        }
-      );
+      (slot, item) -> {
+        inventory.setItem(slot, item == null ? null : item.getItem());
+      }
+    );
   }
 
   @Override

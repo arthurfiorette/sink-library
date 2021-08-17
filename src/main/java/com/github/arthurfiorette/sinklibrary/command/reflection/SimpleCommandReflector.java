@@ -50,8 +50,9 @@ public class SimpleCommandReflector implements CommandReflector {
   }
 
   private Field getCommandMapField() throws NoSuchFieldException, SecurityException {
-    final Field field =
-      pluginManager.getClass().getDeclaredField(SimpleCommandReflector.COMMAND_MAP_FIELD);
+    final Field field = pluginManager
+      .getClass()
+      .getDeclaredField(SimpleCommandReflector.COMMAND_MAP_FIELD);
     field.setAccessible(true);
     return field;
   }

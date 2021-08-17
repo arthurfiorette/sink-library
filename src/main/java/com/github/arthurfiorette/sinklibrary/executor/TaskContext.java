@@ -2,17 +2,14 @@ package com.github.arthurfiorette.sinklibrary.executor;
 
 import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
 import com.github.arthurfiorette.sinklibrary.util.bukkit.TickUnit;
-
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-
 import org.bukkit.Bukkit;
 
 public enum TaskContext implements TaskRunner {
-  
   /**
    * Represents the synchronous context of the bukkit.
    *
@@ -54,11 +51,7 @@ public enum TaskContext implements TaskRunner {
     @Override
     public void runLater(final BasePlugin plugin, final Runnable runnable, final long delay) {
       final ScheduledExecutorService service = TaskContext.getScheduledExecutor(plugin);
-      service.schedule(
-        runnable,
-        TickUnit.from(TimeUnit.MILLISECONDS, delay),
-        TimeUnit.SECONDS
-      );
+      service.schedule(runnable, TickUnit.from(TimeUnit.MILLISECONDS, delay), TimeUnit.SECONDS);
     }
 
     @Override

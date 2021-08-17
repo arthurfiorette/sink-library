@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
 import java.util.UUID;
-
 import org.junit.Test;
 
 public class TripleTest {
@@ -39,5 +38,4 @@ public class TripleTest {
     assertEquals(id2, pair.getMiddle());
     assertEquals(id3, pair.getRight());
   }
-
 }

@@ -1,10 +1,8 @@
 package com.github.arthurfiorette.sinklibrary.util.text;
 
 import com.github.arthurfiorette.sinklibrary.util.text.BukkitColors.Separator;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import lombok.NonNull;
 import lombok.experimental.UtilityClass;
 
@@ -24,7 +22,7 @@ public class TextSeparator {
     final List<String> lines = new ArrayList<>();
 
     final StringBuilder builder = new StringBuilder();
-    for(final String word: text.split("(?=\\s+)")) {
+    for (final String word : text.split("(?=\\s+)")) {
       final int actualLength = builder.length();
 
       if (word.length() + actualLength <= maxWidth) {
@@ -39,7 +37,7 @@ public class TextSeparator {
 
     return lines;
   }
-  
+
   /**
    * Split any text into sized lines.
    *
@@ -49,8 +47,11 @@ public class TextSeparator {
    *
    * @return the list with splitted lines
    */
-  public List<String> separateColored(@NonNull final String text, final int maxWidth, final Separator separator) {
+  public List<String> separateColored(
+    @NonNull final String text,
+    final int maxWidth,
+    final Separator separator
+  ) {
     return separate(BukkitColors.forceColor(text, separator), maxWidth);
   }
-
 }

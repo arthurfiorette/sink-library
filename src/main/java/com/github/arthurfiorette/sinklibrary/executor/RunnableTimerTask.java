@@ -1,7 +1,6 @@
 package com.github.arthurfiorette.sinklibrary.executor;
 
 import java.util.TimerTask;
-
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
@@ -15,5 +14,4 @@ public class RunnableTimerTask extends TimerTask {
   public void run() {
     runnable.run();
   }
-
 }

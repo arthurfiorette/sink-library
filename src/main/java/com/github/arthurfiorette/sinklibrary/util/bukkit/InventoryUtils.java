@@ -1,8 +1,7 @@
 package com.github.arthurfiorette.sinklibrary.util.bukkit;
 
-import org.bukkit.entity.Player;
-
 import lombok.experimental.UtilityClass;
+import org.bukkit.entity.Player;
 
 @UtilityClass
 public class InventoryUtils {
@@ -29,7 +28,6 @@ public class InventoryUtils {
     return amount > 0 && amount <= 64;
   }
 
-
   /**
    * Convert any coordinate to minecraft chest slot value.
    *
@@ -43,8 +41,7 @@ public class InventoryUtils {
     row = row <= 0 ? 1 : row > 6 ? 6 : row;
     // Range 1-9
     column = column <= 0 ? 1 : column > 9 ? 9 : column;
-    
+
     return 9 * (row - 1) + column - 1;
   }
-  
 }

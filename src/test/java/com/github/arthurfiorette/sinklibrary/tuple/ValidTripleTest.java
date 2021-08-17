@@ -8,16 +8,21 @@ public class ValidTripleTest {
 
   @Test
   public void testConstructor() {
-    assertThrows(NullPointerException.class, () -> {
-      new ValidTriple<>(null, null, null);
-    });
+    assertThrows(
+      NullPointerException.class,
+      () -> {
+        new ValidTriple<>(null, null, null);
+      }
+    );
   }
 
   @Test
   public void testStatic() {
-    assertThrows(NullPointerException.class, () -> {
-      ValidTriple.validTriple(null, null, null);
-    });
+    assertThrows(
+      NullPointerException.class,
+      () -> {
+        ValidTriple.validTriple(null, null, null);
+      }
+    );
   }
-
 }

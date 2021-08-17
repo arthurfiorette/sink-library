@@ -1,13 +1,11 @@
 package com.github.arthurfiorette.sinklibrary.util.bukkit;
 
 import java.util.concurrent.TimeUnit;
-
 import lombok.experimental.UtilityClass;
 
 @UtilityClass
 public class TickUnit {
 
-  
   /**
    * Convert milliseconds to minecraft ticks.
    * <p>
@@ -20,7 +18,7 @@ public class TickUnit {
   public long from(final long milliseconds) {
     return milliseconds / 50;
   }
-  
+
   /**
    * Convert any time to minecraft ticks time.
    *
@@ -48,5 +46,4 @@ public class TickUnit {
   public long to(final TimeUnit unit, final long ticks) {
     return unit.convert(asMilliseconds(ticks), TimeUnit.MILLISECONDS);
   }
-
 }

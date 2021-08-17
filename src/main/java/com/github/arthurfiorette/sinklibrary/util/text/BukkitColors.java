@@ -8,9 +8,42 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class BukkitColors {
 
-  public final char[] COLORS_CHARS = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'a',
-      'B', 'b', 'C', 'c', 'D', 'd', 'E', 'e', 'F', 'f', 'K', 'k', 'L', 'l', 'M', 'm', 'N', 'n', 'O',
-      'o', 'R', 'r' };
+  public final char[] COLORS_CHARS = {
+    '0',
+    '1',
+    '2',
+    '3',
+    '4',
+    '5',
+    '6',
+    '7',
+    '8',
+    '9',
+    'A',
+    'a',
+    'B',
+    'b',
+    'C',
+    'c',
+    'D',
+    'd',
+    'E',
+    'e',
+    'F',
+    'f',
+    'K',
+    'k',
+    'L',
+    'l',
+    'M',
+    'm',
+    'N',
+    'n',
+    'O',
+    'o',
+    'R',
+    'r',
+  };
 
   /**
    * Force a text to be colored placing the color in every word..
@@ -28,7 +61,7 @@ public class BukkitColors {
     final String colorSeparator = separator.regex();
 
     // colorLine is a word group with the same color in sequence
-    for(final String colorLine: text.split("(?=" + colorSeparator + ")")) {
+    for (final String colorLine : text.split("(?=" + colorSeparator + ")")) {
       if (colorLine.length() == 0) {
         continue;
       }
@@ -61,15 +94,15 @@ public class BukkitColors {
 
   /**
    * Verify if this char is a bukkit color char.
-   * 
+   *
    * @param c the char to check
-   * 
+   *
    * @return true if it is
-   * 
+   *
    * @see BukkitColors#COLORS_CHARS
    */
   public boolean isColorChar(final char c) {
-    for(final char color: COLORS_CHARS) {
+    for (final char color : COLORS_CHARS) {
       if (c == color) {
         return true;
       }

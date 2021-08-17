@@ -3,14 +3,13 @@ package com.github.arthurfiorette.sinklibrary.uuid;
 import static org.junit.Assert.assertEquals;
 
 import java.util.UUID;
-
 import org.junit.Test;
 
 public class FastUuidTest {
 
-  private UUID randomUuid= UUID.randomUUID();
-  private String randomUuidString= randomUuid.toString();
-  private String randomMojangId= randomUuidString.replaceAll("-", "");
+  private UUID randomUuid = UUID.randomUUID();
+  private String randomUuidString = randomUuid.toString();
+  private String randomMojangId = randomUuidString.replaceAll("-", "");
 
   @Test
   public void checkToString() {
@@ -39,5 +38,4 @@ public class FastUuidTest {
 
     assertEquals(uuid, randomUuid);
   }
-
 }

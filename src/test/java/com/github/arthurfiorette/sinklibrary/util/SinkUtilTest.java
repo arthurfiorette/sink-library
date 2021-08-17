@@ -5,10 +5,8 @@ import static org.junit.Assert.assertTrue;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-
 import java.util.List;
 import java.util.Set;
-
 import org.junit.Test;
 
 public class SinkUtilTest {
@@ -71,5 +69,4 @@ public class SinkUtilTest {
     assertArrayEquals(generated, inputShift);
     assertTrue(sameLength);
   }
-
 }

@@ -8,7 +8,6 @@ import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-
 import lombok.NonNull;
 import lombok.experimental.UtilityClass;
 
@@ -47,8 +46,10 @@ public final class SinkUtil {
     return Arrays.copyOfRange(values, 1, values.length);
   }
 
-  public static <T, R> Set<R> mapper(@NonNull final Set<T> set,
-      @NonNull final Function<T, R> mapper) {
+  public static <T, R> Set<R> mapper(
+    @NonNull final Set<T> set,
+    @NonNull final Function<T, R> mapper
+  ) {
     return set.stream().map(mapper).collect(Collectors.toSet());
   }
 
@@ -62,8 +63,10 @@ public final class SinkUtil {
    *
    * @return the mapped list
    */
-  public static <T, R> List<R> mapper(@NonNull final List<T> list,
-      @NonNull final Function<T, R> mapper) {
+  public static <T, R> List<R> mapper(
+    @NonNull final List<T> list,
+    @NonNull final Function<T, R> mapper
+  ) {
     return list.stream().map(mapper).collect(Collectors.toList());
   }
 
@@ -91,13 +94,13 @@ public final class SinkUtil {
   @SuppressWarnings("unchecked")
   public static <T> boolean arrayContains(final T element, @NonNull final T... array) {
     if (element == null) {
-      for(final T t: array) {
+      for (final T t : array) {
         if (t == null) {
           return true;
         }
       }
     } else {
-      for(final T t: array) {
+      for (final T t : array) {
         if (element.equals(t)) {
           return true;
         }
@@ -106,5 +109,4 @@ public final class SinkUtil {
 
     return false;
   }
-
 }
