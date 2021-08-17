@@ -18,10 +18,8 @@ com.github.arthurfiorette.sinklibrary.data.storage.gson
 com.github.arthurfiorette.sinklibrary.exception
 com.github.arthurfiorette.sinklibrary.exception.sink
 com.github.arthurfiorette.sinklibrary.executor
-com.github.arthurfiorette.sinklibrary.executor.v2
 com.github.arthurfiorette.sinklibrary.interfaces
 com.github.arthurfiorette.sinklibrary.item
-com.github.arthurfiorette.sinklibrary.item.v2
 com.github.arthurfiorette.sinklibrary.listener
 com.github.arthurfiorette.sinklibrary.logging
 com.github.arthurfiorette.sinklibrary.menu
@@ -29,6 +27,8 @@ com.github.arthurfiorette.sinklibrary.menu.item
 com.github.arthurfiorette.sinklibrary.menu.listener
 com.github.arthurfiorette.sinklibrary.menu.management
 com.github.arthurfiorette.sinklibrary.replacer
-com.github.arthurfiorette.sinklibrary.services
 com.github.arthurfiorette.sinklibrary.tuple
+com.github.arthurfiorette.sinklibrary.util
+com.github.arthurfiorette.sinklibrary.util.bukkit
+com.github.arthurfiorette.sinklibrary.util.text
 com.github.arthurfiorette.sinklibrary.uuid
