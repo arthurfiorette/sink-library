@@ -3,11 +3,10 @@ package com.github.arthurfiorette.sinklibrary.replacer;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
-import org.bukkit.ChatColor;
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
+import org.bukkit.ChatColor;
 
 @NoArgsConstructor
 public class Replacer {
@@ -29,7 +28,7 @@ public class Replacer {
   //
 
   public String replace(@NonNull String text) {
-    for(final Entry<String, Object> entry: placeholders.entrySet()) {
+    for (final Entry<String, Object> entry : placeholders.entrySet()) {
       text = text.replaceAll(entry.getKey(), entry.getValue().toString().toString());
     }
     return text;
@@ -54,7 +53,6 @@ public class Replacer {
 
   @FunctionalInterface
   public interface Function {
-
     Replacer apply(Replacer replacer);
 
     default Function add(final String placeholder, final Object value) {

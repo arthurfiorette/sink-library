@@ -2,11 +2,9 @@ package com.github.arthurfiorette.sinklibrary.config.addons;
 
 import com.github.arthurfiorette.sinklibrary.config.BaseConfig;
 import com.github.arthurfiorette.sinklibrary.replacer.Replacer;
-
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-
 import org.bukkit.Color;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.Configuration;
