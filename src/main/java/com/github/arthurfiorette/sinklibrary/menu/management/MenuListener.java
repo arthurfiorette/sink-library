@@ -29,7 +29,7 @@ public final class MenuListener extends SinkListener {
     final BaseMenu menu = (BaseMenu) inv.getHolder();
     final BasePlugin menuPlugin = menu.getBasePlugin();
 
-    if (!menuPlugin.getClass().equals(this.basePlugin.getClass())) {
+    if (!menuPlugin.getClass().equals(basePlugin.getClass())) {
       return;
     }
 

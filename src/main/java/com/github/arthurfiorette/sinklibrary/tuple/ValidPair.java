@@ -12,8 +12,8 @@ public class ValidPair<L, R> extends Pair<L, R> {
     super(left, right);
   }
 
-  public static <L, R> Pair<L, R> validPair(final L left, final R right) {
-    return new Pair<>(left, right);
+  public static <L, R> ValidPair<L, R> validPair(final L left, final R right) {
+    return new ValidPair<>(left, right);
   }
 
   @Override

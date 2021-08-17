@@ -33,9 +33,9 @@ public class SimpleCommandReflector implements CommandReflector {
   @Override
   public void run() {
     try {
-      this.pluginManager = this.getBasePlugin().getServer().getPluginManager();
-      final Field field = this.getCommandMapField();
-      this.commandMap = (CommandMap) field.get(this.pluginManager);
+      pluginManager = getBasePlugin().getServer().getPluginManager();
+      final Field field = getCommandMapField();
+      commandMap = (CommandMap) field.get(pluginManager);
     } catch (final NoSuchFieldException | IllegalAccessException | IllegalArgumentException e) {
       throw new RuntimeException(
         SimpleCommandReflector.EXC_TITLE + " maybe you are using an incompatible version?",
@@ -51,7 +51,7 @@ public class SimpleCommandReflector implements CommandReflector {
 
   private Field getCommandMapField() throws NoSuchFieldException, SecurityException {
     final Field field =
-      this.pluginManager.getClass().getDeclaredField(SimpleCommandReflector.COMMAND_MAP_FIELD);
+      pluginManager.getClass().getDeclaredField(SimpleCommandReflector.COMMAND_MAP_FIELD);
     field.setAccessible(true);
     return field;
   }

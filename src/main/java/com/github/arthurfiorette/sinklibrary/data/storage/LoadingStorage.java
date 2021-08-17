@@ -104,7 +104,7 @@ public abstract class LoadingStorage<K, V, R>
       () -> {
         this.cache.put(key, value);
       },
-      this.getBasePlugin().getExecutor()
+      getBasePlugin().getExecutor()
     );
   }
 
@@ -112,7 +112,7 @@ public abstract class LoadingStorage<K, V, R>
   public CompletableFuture<V> get(final K key) {
     return CompletableFuture.supplyAsync(
       () -> this.cache.getUnchecked(key),
-      this.getBasePlugin().getExecutor()
+      getBasePlugin().getExecutor()
     );
   }
 
@@ -126,7 +126,7 @@ public abstract class LoadingStorage<K, V, R>
           throw new CompletionException(e);
         }
       },
-      this.getBasePlugin().getExecutor()
+      getBasePlugin().getExecutor()
     );
   }
 
@@ -141,7 +141,7 @@ public abstract class LoadingStorage<K, V, R>
   ) {
     return CompletableFuture.supplyAsync(
       () -> func.apply(this.database).stream().map(this::deserialize).collect(Collectors.toList()),
-      this.getBasePlugin().getExecutor()
+      getBasePlugin().getExecutor()
     );
   }
 
@@ -153,8 +153,8 @@ public abstract class LoadingStorage<K, V, R>
   @Override
   public CompletableFuture<V> operate(final Function<Database<K, R>, R> func) {
     return CompletableFuture.supplyAsync(
-      () -> this.deserialize(func.apply(this.database)),
-      this.getBasePlugin().getExecutor()
+      () -> deserialize(func.apply(this.database)),
+      getBasePlugin().getExecutor()
     );
   }
 }

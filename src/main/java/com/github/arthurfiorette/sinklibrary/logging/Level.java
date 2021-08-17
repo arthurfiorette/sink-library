@@ -128,7 +128,7 @@ public enum Level {
    * Level.
    */
   public boolean isAtLeastAsSpecificAs(@NonNull final Level level) {
-    return this.intLevel <= level.intLevel;
+    return intLevel <= level.intLevel;
   }
 
   /**
@@ -141,7 +141,7 @@ public enum Level {
    * Level.
    */
   public boolean isAtLeastAsSpecificAs(final int level) {
-    return this.intLevel <= level;
+    return intLevel <= level;
   }
 
   /**
@@ -153,7 +153,7 @@ public enum Level {
    * Level.
    */
   public boolean lessOrEqual(@NonNull final Level level) {
-    return this.intLevel <= level.intLevel;
+    return intLevel <= level.intLevel;
   }
 
   /**
@@ -165,26 +165,26 @@ public enum Level {
    * Level.
    */
   public boolean lessOrEqual(final int level) {
-    return this.intLevel <= level;
+    return intLevel <= level;
   }
 
   public String toUpperCase() {
-    return this.name.toUpperCase();
+    return name.toUpperCase();
   }
 
   public String toLowerCase() {
-    return this.name.toLowerCase();
+    return name.toLowerCase();
   }
 
   public String colorized() {
-    return this.color + this.name;
+    return color + name;
   }
 
   public String toColorUpperCase() {
-    return this.colorized().toUpperCase();
+    return colorized().toUpperCase();
   }
 
   public String toColorLowerCase() {
-    return this.colorized().toLowerCase();
+    return colorized().toLowerCase();
   }
 }

@@ -41,11 +41,11 @@ public class SimpleComponentProvider implements ComponentProvider {
   @SuppressWarnings("unchecked")
   public <C extends Component> C get(@NonNull final Class<C> clazz)
     throws ComponentNotFoundException {
-    Preconditions.checkState(this.state != State.DISABLED);
+    Preconditions.checkState(state != State.DISABLED);
 
     // Check if it is a Service
     if (Service.class.isAssignableFrom(clazz)) {
-      final Service service = this.services.get(clazz);
+      final Service service = services.get(clazz);
 
       if (service == null) {
         throw new ComponentNotFoundException(clazz);
@@ -54,7 +54,7 @@ public class SimpleComponentProvider implements ComponentProvider {
       return (C) service;
     }
 
-    final Component component = this.components.get(clazz);
+    final Component component = components.get(clazz);
 
     if (component == null) {
       throw new ComponentNotFoundException(clazz);
@@ -123,10 +123,10 @@ public class SimpleComponentProvider implements ComponentProvider {
   }
 
   private void reloadComponents() {
-    this.services.clear();
-    this.components.clear();
+    services.clear();
+    components.clear();
 
-    for (final ComponentLoader loader : this.plugin.components()) {
+    for (final ComponentLoader loader : plugin.components()) {
       Component component = loader.load();
       Class<?> clazz = component.getClass();
 
@@ -145,9 +145,9 @@ public class SimpleComponentProvider implements ComponentProvider {
 
       // Then register it
       if (component instanceof Service) {
-        this.services.put(clazz, (Service) component);
+        services.put(clazz, (Service) component);
       } else {
-        this.components.put(clazz, component);
+        components.put(clazz, component);
       }
     }
   }

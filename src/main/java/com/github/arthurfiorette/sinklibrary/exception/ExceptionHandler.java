@@ -28,10 +28,10 @@ public interface ExceptionHandler extends Component {
   }
 
   default void handle(final Throwable exc, final String message, final Object... args) {
-    this.handle(this.getBasePlugin().getClass(), exc, message, args);
+    this.handle(getBasePlugin().getClass(), exc, message, args);
   }
 
   default void handle(final Throwable exc) {
-    this.handle(this.getBasePlugin().getClass(), exc);
+    this.handle(getBasePlugin().getClass(), exc);
   }
 }

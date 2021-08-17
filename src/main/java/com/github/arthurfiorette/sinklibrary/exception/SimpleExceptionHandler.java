@@ -1,7 +1,7 @@
 package com.github.arthurfiorette.sinklibrary.exception;
 
 import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
-import com.github.arthurfiorette.sinklibrary.executor.v2.TaskContext;
+import com.github.arthurfiorette.sinklibrary.executor.TaskContext;
 import com.github.arthurfiorette.sinklibrary.logging.BaseLogger;
 import com.github.arthurfiorette.sinklibrary.logging.Level;
 import lombok.Getter;
@@ -26,7 +26,7 @@ public class SimpleExceptionHandler implements ExceptionHandler {
     final String message,
     final Object... args
   ) {
-    final BaseLogger logger = this.basePlugin.getBaseLogger();
+    final BaseLogger logger = basePlugin.getBaseLogger();
 
     if (exc instanceof RuntimeException) {
       logger.log(Level.ERROR, author, "Runtime exception caugth: " + message, exc);
@@ -40,12 +40,12 @@ public class SimpleExceptionHandler implements ExceptionHandler {
       "Throwable caugth: " + message + "\n Disabling this plugin.",
       exc
     );
-    this.forceDisable();
+    forceDisable();
   }
 
   @Override
   public void handle(final Class<?> author, final Throwable exc) {
-    final BaseLogger logger = this.basePlugin.getBaseLogger();
+    final BaseLogger logger = basePlugin.getBaseLogger();
 
     if (exc instanceof RuntimeException) {
       logger.log(Level.ERROR, author, "Runtime exception caugth:", exc);
@@ -54,13 +54,13 @@ public class SimpleExceptionHandler implements ExceptionHandler {
 
     // Disable this plugin if it isn't a runtime exception.
     logger.log(Level.FATAL, author, "Throwable caugth.\n Disabling this plugin.", exc);
-    this.forceDisable();
+    forceDisable();
   }
 
   private void forceDisable() {
     TaskContext.BUKKIT.runLater(
-      this.basePlugin,
-      () -> this.basePlugin.getPluginLoader().disablePlugin(this.basePlugin),
+      basePlugin,
+      () -> basePlugin.getPluginLoader().disablePlugin(basePlugin),
       1L
     );
   }

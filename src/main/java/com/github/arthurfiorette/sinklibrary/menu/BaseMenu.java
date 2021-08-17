@@ -10,10 +10,10 @@ public interface BaseMenu extends Component, InventoryHolder {
   MenuItem getItemAt(byte slot);
 
   default String getTitle() {
-    return this.getInventory().getTitle();
+    return getInventory().getTitle();
   }
 
   default int getRows() {
-    return this.getInventory().getSize() % 9;
+    return getInventory().getSize() % 9;
   }
 }

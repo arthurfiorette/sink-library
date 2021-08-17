@@ -1,27 +1,24 @@
 package com.github.arthurfiorette.sinklibrary.item;
 
-/**
- * @deprecated in flavor of
- * {@link com.github.arthurfiorette.sinklibrary.item.v2.ItemProperty}
- */
-@Deprecated
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@AllArgsConstructor
 public enum ItemProperty {
-  NAME(false),
-  LORE(false),
-  DAMAGE(false),
   AMOUNT(false),
-  MATERIAL_DATA(false),
+  CUSTOM_META(true),
+  DAMAGE(false),
   ENCHANTMENT(true),
   ITEM_FLAG(true),
-  CUSTOM_META(true);
+  LORE(false),
+  MATERIAL(false),
+  MATERIAL_DATA(false),
+  NAME(false),
+  UNBREAKABLE(false);
 
+  /**
+   * Return true if it can exists many of this properties in a single {@link ItemBuilder}
+   */
+  @Getter
   private boolean cumulative;
-
-  ItemProperty(final boolean cumulative) {
-    this.cumulative = cumulative;
-  }
-
-  public boolean isCumulative() {
-    return this.cumulative;
-  }
 }

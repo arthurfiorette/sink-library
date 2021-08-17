@@ -27,7 +27,7 @@ public class FilteredConsoleLogger extends ConsoleLogger {
     final String message,
     final Object... args
   ) {
-    if (this.maxLevel.isAtLeastAsSpecificAs(level)) {
+    if (maxLevel.isAtLeastAsSpecificAs(level)) {
       super.log(level, author, message, args);
     }
   }
@@ -39,7 +39,7 @@ public class FilteredConsoleLogger extends ConsoleLogger {
     final String message,
     final Throwable throwable
   ) {
-    if (this.maxLevel.isAtLeastAsSpecificAs(level)) {
+    if (maxLevel.isAtLeastAsSpecificAs(level)) {
       super.log(level, author, message, throwable);
     }
   }

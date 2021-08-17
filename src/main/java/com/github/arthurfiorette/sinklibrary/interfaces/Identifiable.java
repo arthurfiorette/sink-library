@@ -25,14 +25,14 @@ public interface Identifiable {
    * @return this uuid stringified.
    */
   default String toIdString() {
-    return FastUuid.toString(this.getUniqueId());
+    return FastUuid.toString(getUniqueId());
   }
 
   /**
    * @return the OfflinePlayer linked with this unique id.
    */
   default OfflinePlayer asOfflinePlayer() {
-    return Bukkit.getOfflinePlayer(this.getUniqueId());
+    return Bukkit.getOfflinePlayer(getUniqueId());
   }
 
   /**
@@ -40,20 +40,20 @@ public interface Identifiable {
    * online. This should be verified with isOnline() method.
    */
   default Optional<Player> asPlayer() {
-    return Optional.ofNullable(Bukkit.getPlayer(this.getUniqueId()));
+    return Optional.ofNullable(Bukkit.getPlayer(getUniqueId()));
   }
 
   /**
    * @return the name of this player.
    */
   default String getName() {
-    return this.asOfflinePlayer().getName();
+    return asOfflinePlayer().getName();
   }
 
   /**
    * @return {@code true} if this player is online.
    */
   default boolean isOnline() {
-    return this.asOfflinePlayer().isOnline();
+    return asOfflinePlayer().isOnline();
   }
 }
