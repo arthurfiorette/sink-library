@@ -16,4 +16,6 @@ hs_ err_pid*
 /.vscode
 
 # Eclipse
-/.settings 
+/.settings
+/.metadata
+/.factorypath
