@@ -6,7 +6,6 @@ import com.github.arthurfiorette.sinklibrary.component.loaders.ComponentLoader;
 import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
 import com.github.arthurfiorette.sinklibrary.core.SinkPlugin;
 import com.github.arthurfiorette.sinklibrary.events.SinkListener;
-
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerJoinEvent;
 
