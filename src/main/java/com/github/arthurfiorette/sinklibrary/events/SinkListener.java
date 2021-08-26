@@ -1,4 +1,4 @@
-package com.github.arthurfiorette.sinklibrary.listener;
+package com.github.arthurfiorette.sinklibrary.events;
 
 import com.github.arthurfiorette.sinklibrary.component.Service;
 import com.github.arthurfiorette.sinklibrary.core.BasePlugin;

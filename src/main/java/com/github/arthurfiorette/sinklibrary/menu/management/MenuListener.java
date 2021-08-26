@@ -1,10 +1,11 @@
 package com.github.arthurfiorette.sinklibrary.menu.management;
 
 import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
-import com.github.arthurfiorette.sinklibrary.listener.SinkListener;
+import com.github.arthurfiorette.sinklibrary.events.SinkListener;
 import com.github.arthurfiorette.sinklibrary.menu.BaseMenu;
 import com.github.arthurfiorette.sinklibrary.menu.item.MenuItem;
 import com.github.arthurfiorette.sinklibrary.menu.listener.ClickListener;
+
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.inventory.InventoryAction;
