@@ -21,7 +21,7 @@ import org.bukkit.plugin.EventExecutor;
 import org.bukkit.plugin.PluginManager;
 
 @RequiredArgsConstructor
-public class SingleEventWaiter<E extends Event> implements Listener, Service, EventExecutor {
+public abstract class SingleEventWaiter<E extends Event> implements Listener, Service, EventExecutor {
 
   @Getter
   @NonNull

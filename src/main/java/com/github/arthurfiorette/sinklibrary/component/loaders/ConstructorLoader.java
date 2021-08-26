@@ -4,6 +4,7 @@ import com.github.arthurfiorette.sinklibrary.component.Component;
 import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
 import com.github.arthurfiorette.sinklibrary.exception.sink.IllegalConstructorException;
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Modifier;
 import java.util.Arrays;
 import lombok.Getter;
 import lombok.NonNull;
@@ -24,6 +25,10 @@ public class ConstructorLoader implements ComponentLoader {
   @Override
   @SneakyThrows
   public Component load() {
+    if (isNotInstantiable()) {
+      throw new IllegalConstructorException(clazz);
+    }
+
     final Constructor<?> constructor = findConstructor();
 
     if (constructor == null) {
@@ -50,6 +55,7 @@ public class ConstructorLoader implements ComponentLoader {
       .filter(
         c -> {
           return (
+            c.getParameterCount() == 0 ||
             c.getParameterCount() == 1 &&
             BasePlugin.class.isAssignableFrom(c.getParameterTypes()[0])
           );
@@ -57,5 +63,15 @@ public class ConstructorLoader implements ComponentLoader {
       )
       .findFirst()
       .orElse(null);
+  }
+
+  private boolean isNotInstantiable() {
+    return (
+      clazz == null ||
+      clazz.isPrimitive() ||
+      Modifier.isAbstract(clazz.getModifiers()) ||
+      clazz.isInterface() ||
+      clazz.isArray()
+    );
   }
 }

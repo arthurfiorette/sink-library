@@ -23,7 +23,7 @@ import org.bukkit.plugin.EventExecutor;
 import org.bukkit.plugin.PluginManager;
 
 @RequiredArgsConstructor
-public class EventWaiter implements Listener, Service, EventExecutor {
+public abstract class EventWaiter implements Listener, Service, EventExecutor {
 
   @Getter
   @NonNull
