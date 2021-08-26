@@ -52,15 +52,21 @@ public abstract class EventWaiter implements Listener, Service, EventExecutor {
   public void disable() throws Exception {
     HandlerList.unregisterAll(this);
   }
+  
+  public <E extends Event> CompletableFuture<E> waitEvent(
+    final Class<E> event
+  ) {
+    return this.waitingEvent(event, (e) -> true).getFuture();
+  }
 
-  public <E extends Event> CompletableFuture<E> wait(
+  public <E extends Event> CompletableFuture<E> waitEvent(
     final Class<E> event,
     final Predicate<E> test
   ) {
     return this.waitingEvent(event, test).getFuture();
   }
 
-  public <E extends Event> CompletableFuture<E> wait(
+  public <E extends Event> CompletableFuture<E> waitEvent(
     final Class<E> event,
     final Predicate<E> test,
     final long delay,

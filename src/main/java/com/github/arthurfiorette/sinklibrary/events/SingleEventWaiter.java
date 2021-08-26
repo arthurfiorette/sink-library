@@ -50,11 +50,15 @@ public abstract class SingleEventWaiter<E extends Event>
     HandlerList.unregisterAll(this);
   }
 
-  public CompletableFuture<E> wait(final Predicate<E> test) {
+  public CompletableFuture<E> waitEvent() {
+    return this.waitingEvent((e) -> true).getFuture();
+  }
+
+  public CompletableFuture<E> waitEvent(final Predicate<E> test) {
     return this.waitingEvent(test).getFuture();
   }
 
-  public CompletableFuture<E> wait(final Predicate<E> test, final long delay, final TimeUnit unit) {
+  public CompletableFuture<E> waitEvent(final Predicate<E> test, final long delay, final TimeUnit unit) {
     final WaitingEvent<E> waitingEvent = this.waitingEvent(test);
     schedulerExecutor.schedule(waitingEvent::exceptionallyTooLong, delay, unit);
     return waitingEvent.getFuture();
