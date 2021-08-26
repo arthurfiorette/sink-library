@@ -15,12 +15,12 @@ com.github.arthurfiorette.sinklibrary.data.repository.addons
 com.github.arthurfiorette.sinklibrary.data.storage
 com.github.arthurfiorette.sinklibrary.data.storage.addons
 com.github.arthurfiorette.sinklibrary.data.storage.gson
+com.github.arthurfiorette.sinklibrary.events
 com.github.arthurfiorette.sinklibrary.exception
 com.github.arthurfiorette.sinklibrary.exception.sink
 com.github.arthurfiorette.sinklibrary.executor
 com.github.arthurfiorette.sinklibrary.interfaces
 com.github.arthurfiorette.sinklibrary.item
-com.github.arthurfiorette.sinklibrary.listener
 com.github.arthurfiorette.sinklibrary.logging
 com.github.arthurfiorette.sinklibrary.menu
 com.github.arthurfiorette.sinklibrary.menu.item
