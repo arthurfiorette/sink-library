@@ -52,15 +52,13 @@ public class ConstructorLoader implements ComponentLoader {
 
     return Arrays
       .stream(clazz.getConstructors())
-      .filter(
-        c -> {
-          return (
-            c.getParameterCount() == 0 ||
-            c.getParameterCount() == 1 &&
-            BasePlugin.class.isAssignableFrom(c.getParameterTypes()[0])
-          );
-        }
-      )
+      .filter(c -> {
+        return (
+          c.getParameterCount() == 0 ||
+          c.getParameterCount() == 1 &&
+          BasePlugin.class.isAssignableFrom(c.getParameterTypes()[0])
+        );
+      })
       .findFirst()
       .orElse(null);
   }

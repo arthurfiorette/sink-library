@@ -21,11 +21,9 @@ public class WorldUtils {
   public void give(final Player player, final ItemStack... items) {
     final HashMap<Integer, ItemStack> remainders = player.getInventory().addItem(items);
 
-    remainders.forEach(
-      (index, item) -> {
-        drop(player.getLocation(), item);
-      }
-    );
+    remainders.forEach((index, item) -> {
+      drop(player.getLocation(), item);
+    });
   }
 
   /**

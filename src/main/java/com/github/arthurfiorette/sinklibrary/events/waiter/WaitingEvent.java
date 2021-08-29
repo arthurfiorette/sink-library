@@ -1,7 +1,6 @@
 package com.github.arthurfiorette.sinklibrary.events.waiter;
 
 import com.github.arthurfiorette.sinklibrary.events.waiter.WaitingEventException.Type;
-
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Predicate;
 import lombok.Getter;

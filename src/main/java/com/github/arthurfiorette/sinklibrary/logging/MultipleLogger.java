@@ -30,11 +30,9 @@ public class MultipleLogger implements BaseLogger {
   ) {
     senders
       .stream()
-      .forEach(
-        sender -> {
-          sender.sendMessage(BaseLogger.format(level, author, message, args));
-        }
-      );
+      .forEach(sender -> {
+        sender.sendMessage(BaseLogger.format(level, author, message, args));
+      });
   }
 
   @Override
@@ -46,13 +44,11 @@ public class MultipleLogger implements BaseLogger {
   ) {
     senders
       .stream()
-      .forEach(
-        sender -> {
-          sender.sendMessage(BaseLogger.format(level, author, message));
-          for (final StackTraceElement trace : throwable.getStackTrace()) {
-            sender.sendMessage(trace.toString());
-          }
+      .forEach(sender -> {
+        sender.sendMessage(BaseLogger.format(level, author, message));
+        for (final StackTraceElement trace : throwable.getStackTrace()) {
+          sender.sendMessage(trace.toString());
         }
-      );
+      });
   }
 }

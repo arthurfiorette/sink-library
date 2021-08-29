@@ -34,12 +34,10 @@ public class SkullBuilder {
   public static ItemBuilder ofHeadName(final String playerName) {
     return new ItemBuilder(Material.SKULL_ITEM)
       .durability((short) 3)
-      .apply(
-        (item, meta) -> {
-          final SkullMeta sm = (SkullMeta) meta;
-          sm.setOwner(playerName);
-        }
-      );
+      .apply((item, meta) -> {
+        final SkullMeta sm = (SkullMeta) meta;
+        sm.setOwner(playerName);
+      });
   }
 
   /**
@@ -68,15 +66,13 @@ public class SkullBuilder {
   public static ItemBuilder ofGameProfile(final GameProfile gameProfile) {
     return new ItemBuilder(Material.SKULL_ITEM)
       .durability((short) 3)
-      .apply(
-        (item, meta) -> {
-          try {
-            final SkullMeta headMeta = (SkullMeta) meta;
-            final Field profileField = headMeta.getClass().getDeclaredField("profile");
-            profileField.setAccessible(true);
-            profileField.set(headMeta, gameProfile);
-          } catch (IllegalAccessException | NoSuchFieldException ignore) {}
-        }
-      );
+      .apply((item, meta) -> {
+        try {
+          final SkullMeta headMeta = (SkullMeta) meta;
+          final Field profileField = headMeta.getClass().getDeclaredField("profile");
+          profileField.setAccessible(true);
+          profileField.set(headMeta, gameProfile);
+        } catch (IllegalAccessException | NoSuchFieldException ignore) {}
+      });
   }
 }
