@@ -9,7 +9,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import org.bukkit.Bukkit;
 
-public enum TaskContext implements TaskRunner {
+public enum TaskRunners implements TaskRunner {
   /**
    * Represents the synchronous context of the bukkit.
    *
@@ -50,7 +50,7 @@ public enum TaskContext implements TaskRunner {
 
     @Override
     public void runLater(final BasePlugin plugin, final Runnable runnable, final long delay) {
-      final ScheduledExecutorService service = TaskContext.getScheduledExecutor(plugin);
+      final ScheduledExecutorService service = TaskRunners.getScheduledExecutor(plugin);
       service.schedule(runnable, TickUnit.from(TimeUnit.MILLISECONDS, delay), TimeUnit.SECONDS);
     }
 
@@ -61,7 +61,7 @@ public enum TaskContext implements TaskRunner {
       final long delay,
       final long interval
     ) {
-      final ScheduledExecutorService service = TaskContext.getScheduledExecutor(plugin);
+      final ScheduledExecutorService service = TaskRunners.getScheduledExecutor(plugin);
       service.scheduleAtFixedRate(
         runnable,
         TickUnit.from(TimeUnit.MILLISECONDS, delay),

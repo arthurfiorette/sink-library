@@ -1,7 +1,7 @@
 package com.github.arthurfiorette.sinklibrary.exception;
 
 import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
-import com.github.arthurfiorette.sinklibrary.executor.TaskContext;
+import com.github.arthurfiorette.sinklibrary.executor.TaskRunners;
 import com.github.arthurfiorette.sinklibrary.logging.BaseLogger;
 import com.github.arthurfiorette.sinklibrary.logging.Level;
 import lombok.Getter;
@@ -58,7 +58,7 @@ public class SimpleExceptionHandler implements ExceptionHandler {
   }
 
   private void forceDisable() {
-    TaskContext.BUKKIT.runLater(
+    TaskRunners.BUKKIT.runLater(
       basePlugin,
       () -> basePlugin.getPluginLoader().disablePlugin(basePlugin),
       1L

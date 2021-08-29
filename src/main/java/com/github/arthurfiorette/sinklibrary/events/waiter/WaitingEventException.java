@@ -1,4 +1,4 @@
-package com.github.arthurfiorette.sinklibrary.events;
+package com.github.arthurfiorette.sinklibrary.events.waiter;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
