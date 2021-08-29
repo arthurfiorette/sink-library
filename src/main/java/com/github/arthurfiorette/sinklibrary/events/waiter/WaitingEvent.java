@@ -4,6 +4,7 @@ import com.github.arthurfiorette.sinklibrary.events.waiter.WaitingEventException
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Predicate;
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.Synchronized;
 import org.bukkit.event.Event;
@@ -14,7 +15,9 @@ public class WaitingEvent<E extends Event> {
   @Getter
   private final CompletableFuture<E> future = new CompletableFuture<>();
 
+  @NonNull
   private final Predicate<E> test;
+  
   private final Class<E> eventType;
 
   @SuppressWarnings("unchecked")

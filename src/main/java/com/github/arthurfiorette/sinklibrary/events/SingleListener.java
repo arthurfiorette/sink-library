@@ -53,7 +53,7 @@ public abstract class SingleListener<E extends Event> implements Service, Listen
    */
   @Override
   @SuppressWarnings("unchecked")
-  public void execute(final Listener listener, @NonNull final Event event) throws EventException {
+  public final void execute(final Listener listener, @NonNull final Event event) throws EventException {
     if (!eventClass.isAssignableFrom(event.getClass())) {
       // By default bukkit execution, this never gets here.
       // Only executing a different event can cause this error.

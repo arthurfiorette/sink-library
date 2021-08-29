@@ -1,7 +1,9 @@
 package com.github.arthurfiorette.sinklibrary.events.waiter;
 
-import com.github.arthurfiorette.sinklibrary.component.Service;
 import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
+import com.github.arthurfiorette.sinklibrary.events.SingleListener;
+import com.github.arthurfiorette.sinklibrary.executor.TaskRunner;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -9,46 +11,26 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Predicate;
-import lombok.Getter;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
+
 import org.bukkit.event.Event;
-import org.bukkit.event.EventException;
 import org.bukkit.event.EventPriority;
-import org.bukkit.event.HandlerList;
-import org.bukkit.event.Listener;
-import org.bukkit.plugin.EventExecutor;
-import org.bukkit.plugin.PluginManager;
 
-@RequiredArgsConstructor
-public abstract class SingleEventWaiter<E extends Event>
-  implements Listener, Service, EventExecutor {
+import lombok.NonNull;
 
-  @Getter
-  @NonNull
-  private final BasePlugin basePlugin;
+public abstract class SingleEventWaiter<E extends Event> extends SingleListener<E> {
 
-  @Getter
-  @NonNull
-  private final Class<E> eventClass;
+  public SingleEventWaiter(@NonNull Class<E> eventClass, @NonNull BasePlugin basePlugin,
+      @NonNull EventPriority eventPriority) {
+    super(eventClass, basePlugin, eventPriority);
+  }
 
-  @Getter
-  @NonNull
-  private final EventPriority eventPriority;
+  public SingleEventWaiter(@NonNull Class<E> eventClass, @NonNull BasePlugin basePlugin,
+      @NonNull EventPriority eventPriority, TaskRunner runner) {
+    super(eventClass, basePlugin, eventPriority, runner);
+  }
 
   private final ScheduledExecutorService schedulerExecutor = new ScheduledThreadPoolExecutor(1);
   private final List<WaitingEvent<E>> pendingEvents = new ArrayList<>();
-
-  @Override
-  public void enable() throws Exception {
-    final PluginManager pluginManager = basePlugin.getServer().getPluginManager();
-    pluginManager.registerEvent(eventClass, this, eventPriority, this, basePlugin);
-  }
-
-  @Override
-  public void disable() throws Exception {
-    HandlerList.unregisterAll(this);
-  }
 
   public CompletableFuture<E> waitEvent() {
     return this.waitingEvent(e -> true).getFuture();
@@ -58,25 +40,22 @@ public abstract class SingleEventWaiter<E extends Event>
     return this.waitingEvent(test).getFuture();
   }
 
-  public CompletableFuture<E> waitEvent(
-    final Predicate<E> test,
-    final long delay,
-    final TimeUnit unit
-  ) {
+  public CompletableFuture<E> waitEvent(final Predicate<E> test, final long delay,
+      final TimeUnit unit) {
     final WaitingEvent<E> waitingEvent = this.waitingEvent(test);
     schedulerExecutor.schedule(waitingEvent::exceptionallyTooLong, delay, unit);
     return waitingEvent.getFuture();
   }
 
   private WaitingEvent<E> waitingEvent(final Predicate<E> test) {
-    final WaitingEvent<E> waitingEvent = new WaitingEvent<>(test, eventClass);
+    final WaitingEvent<E> waitingEvent = new WaitingEvent<>(test, null);
     pendingEvents.add(waitingEvent);
     return waitingEvent;
   }
 
   @Override
-  public void execute(final Listener listener, final Event event) throws EventException {
-    for (int i = 0; i < pendingEvents.size(); i++) {
+  protected void handle(E event) {
+    for(int i = 0; i < pendingEvents.size(); i++) {
       final WaitingEvent<? extends Event> waitingEvent = pendingEvents.get(i);
 
       final boolean approved = waitingEvent.test(event);
