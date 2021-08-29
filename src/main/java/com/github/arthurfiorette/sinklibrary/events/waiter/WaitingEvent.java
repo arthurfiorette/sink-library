@@ -17,7 +17,7 @@ public class WaitingEvent<E extends Event> {
 
   @NonNull
   private final Predicate<E> test;
-  
+
   private final Class<E> eventType;
 
   @SuppressWarnings("unchecked")
