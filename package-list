@@ -16,6 +16,7 @@ com.github.arthurfiorette.sinklibrary.data.storage
 com.github.arthurfiorette.sinklibrary.data.storage.addons
 com.github.arthurfiorette.sinklibrary.data.storage.gson
 com.github.arthurfiorette.sinklibrary.events
+com.github.arthurfiorette.sinklibrary.events.waiter
 com.github.arthurfiorette.sinklibrary.exception
 com.github.arthurfiorette.sinklibrary.exception.sink
 com.github.arthurfiorette.sinklibrary.executor
