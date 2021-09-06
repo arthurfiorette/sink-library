@@ -19,6 +19,6 @@ public class WaitingEventException extends RuntimeException {
 
   public enum Type {
     EVENT_NOT_POSSIBLE,
-    EVENT_WAITED_TOO_LONG,
+    EVENT_WAITED_TOO_LONG
   }
 }

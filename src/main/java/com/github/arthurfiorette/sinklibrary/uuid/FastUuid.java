@@ -50,7 +50,7 @@ public class FastUuid {
     'c',
     'd',
     'e',
-    'f',
+    'f'
   };
 
   public static final long[] HEX_VALUES = new long[128];

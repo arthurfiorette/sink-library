@@ -17,6 +17,6 @@ public interface ComponentProvider {
     ENABLING,
     ENABLED,
     DISABLING,
-    DISABLED,
+    DISABLED
   }
 }

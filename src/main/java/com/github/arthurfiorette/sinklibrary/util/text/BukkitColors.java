@@ -42,7 +42,7 @@ public class BukkitColors {
     'O',
     'o',
     'R',
-    'r',
+    'r'
   };
 
   /**

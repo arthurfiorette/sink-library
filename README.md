@@ -95,7 +95,8 @@ class MyListener extends SinkListener {
 
 This library is hosted by **[JitPack](https://jitpack.io/#ArthurFiorette/sink-library)**.
 
-> Replace `VERSION` with the latest [Github](https://github.com/ArthurFiorette/sink-library/releases) release.
+> Replace `VERSION` with the latest
+> [Github](https://github.com/ArthurFiorette/sink-library/releases) release.
 
 ```xml
 <!-- Maven -->
@@ -132,7 +133,8 @@ dependencies {
 
 ### Documentation
 
-While the documentation is not done, you can look at the [examples](/docs/examples) and the **inline documentation** present.
+While the documentation is not done, you can look at the [examples](/docs/examples) and the **inline
+documentation** present.
 
 <br />
 
@@ -140,7 +142,9 @@ While the documentation is not done, you can look at the [examples](/docs/exampl
 
 #### `GenericComponentException`
 
-This exception is thrown when you try to register a component or service, in your class that extends SinkPlugin, which is generic. Since the ComponentManager manages its objects with the key being their classes, two classes with different generic types would be recognized as the same component.
+This exception is thrown when you try to register a component or service, in your class that extends
+SinkPlugin, which is generic. Since the ComponentManager manages its objects with the key being
+their classes, two classes with different generic types would be recognized as the same component.
 
 Here is an example of how to solve this problem with this simple component
 
@@ -179,6 +183,7 @@ Licensed under the **MIT**. See [`LICENSE`](LICENSE) for more informations.
 
 ### Contact
 
-See my contact information on my [github profile](https://github.com/ArthurFiorette) or open a new issue.
+See my contact information on my [github profile](https://github.com/ArthurFiorette) or open a new
+issue.
 
 <br />
