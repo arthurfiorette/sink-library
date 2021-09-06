@@ -37,3 +37,5 @@ jobs:
           commit_message: 'style(prettier): prettified code'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Linux node_modules path to require() global modules
+          NODE_PATH: /usr/lib/node_modules
