@@ -30,10 +30,10 @@ jobs:
         # Why i'm not using creyD version: https://github.com/creyD/prettier_action/pull/44
         uses: suda/prettier_action@v3.4-rc.1
         with:
-          prettier_options: --write **/*.{json,xml,java,md,yml}
+          prettier_options: --write **/*.{json,xml,java,md,yml,js}
           same_commit: false
           only_changed: false
-          prettier_plugins: 'prettier-plugin-java @prettier/plugin-xml'
+          prettier_plugins: '@arthurfiorette/prettier-config prettier-plugin-java @prettier/plugin-xml'
           commit_message: 'style(prettier): prettified code'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
