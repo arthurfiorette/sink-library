@@ -33,7 +33,8 @@ jobs:
           prettier_options: --write **/*.{json,xml,java,md,yml,js}
           same_commit: false
           only_changed: false
-          prettier_plugins: '@arthurfiorette/prettier-config prettier-plugin-java @prettier/plugin-xml'
+          prettier_plugins:
+            '@arthurfiorette/prettier-config prettier-plugin-java @prettier/plugin-xml'
           commit_message: 'style(prettier): prettified code'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
