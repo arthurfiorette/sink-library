@@ -38,4 +38,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           # Linux node_modules path to require() global modules
-          NODE_PATH: /usr/lib/node_modules
+          NODE_PATH: /usr/local/lib/node_modules
