@@ -43,13 +43,13 @@ public abstract class EventWaiter implements Listener, Service, EventExecutor {
 
   @SafeVarargs
   public EventWaiter(
-    BasePlugin basePlugin,
-    EventPriority eventPriority,
-    Class<? extends Event>... events
+    final BasePlugin basePlugin,
+    final EventPriority eventPriority,
+    final Class<? extends Event>... events
   ) {
     this.basePlugin = basePlugin;
     this.eventPriority = eventPriority;
-    this.possibleEvents = events;
+    possibleEvents = events;
   }
 
   @Override

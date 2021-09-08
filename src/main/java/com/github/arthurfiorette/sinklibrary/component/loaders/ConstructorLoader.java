@@ -64,12 +64,10 @@ public class ConstructorLoader implements ComponentLoader {
   }
 
   private boolean isNotInstantiable() {
-    return (
-      clazz == null ||
-      clazz.isPrimitive() ||
-      Modifier.isAbstract(clazz.getModifiers()) ||
-      clazz.isInterface() ||
-      clazz.isArray()
-    );
+    return clazz == null ||
+    clazz.isPrimitive() ||
+    Modifier.isAbstract(clazz.getModifiers()) ||
+    clazz.isInterface() ||
+    clazz.isArray();
   }
 }

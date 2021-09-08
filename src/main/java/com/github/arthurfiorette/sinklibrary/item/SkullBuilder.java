@@ -32,12 +32,12 @@ public class SkullBuilder {
   private final String TEXTURES_JSON = "{textures:{SKIN:{url:\"%s\"}}}";
 
   static {
-    MethodHandles.Lookup lookup = MethodHandles.lookup();
+    final MethodHandles.Lookup lookup = MethodHandles.lookup();
     MethodHandle profileSetter = null;
 
     try {
-      Class<?> CraftMetaSkull = ReflectionUtils.getCraftClass("inventory.CraftMetaSkull");
-      Field profile = CraftMetaSkull.getDeclaredField("profile");
+      final Class<?> CraftMetaSkull = ReflectionUtils.getCraftClass("inventory.CraftMetaSkull");
+      final Field profile = CraftMetaSkull.getDeclaredField("profile");
       profile.setAccessible(true);
 
       profileSetter = lookup.unreflectSetter(profile);
@@ -56,7 +56,7 @@ public class SkullBuilder {
    * @return a ItemBuilder instance from this player head
    */
   public static ItemBuilder from(final OfflinePlayer player) {
-    return new ItemBuilder((XMaterial.PLAYER_HEAD.parseMaterial())).apply((item, meta) -> {
+    return new ItemBuilder(XMaterial.PLAYER_HEAD.parseMaterial()).apply((item, meta) -> {
       SkullUtils.applySkin(meta, player);
     });
   }
@@ -80,7 +80,7 @@ public class SkullBuilder {
    * @return a ItemBuilder instance from this player head
    */
   public static ItemBuilder from(final String name) {
-    return new ItemBuilder((XMaterial.PLAYER_HEAD.parseMaterial())).apply((item, meta) -> {
+    return new ItemBuilder(XMaterial.PLAYER_HEAD.parseMaterial()).apply((item, meta) -> {
       SkullUtils.applySkin(meta, name);
     });
   }
@@ -98,17 +98,17 @@ public class SkullBuilder {
 
     profile.getProperties().put("textures", new Property("textures", encodedData));
 
-    return new ItemBuilder((XMaterial.PLAYER_HEAD.parseMaterial())).apply((item, meta) -> {
+    return new ItemBuilder(XMaterial.PLAYER_HEAD.parseMaterial()).apply((item, meta) -> {
       setProfile(meta, profile);
     });
   }
 
   @SneakyThrows
-  private static void setProfile(ItemMeta meta, GameProfile profile) {
+  private static void setProfile(final ItemMeta meta, final GameProfile profile) {
     PROFILE_SETTER.invoke(meta, profile);
   }
 
-  private static String encodeBase64(@NonNull String str) {
+  private static String encodeBase64(@NonNull final String str) {
     return Base64.getEncoder().encodeToString(str.getBytes());
   }
 }

@@ -17,18 +17,18 @@ import org.bukkit.event.EventPriority;
 public abstract class SingleEventWaiter<E extends Event> extends SingleListener<E> {
 
   public SingleEventWaiter(
-    @NonNull Class<E> eventClass,
-    @NonNull BasePlugin basePlugin,
-    @NonNull EventPriority eventPriority
+    @NonNull final Class<E> eventClass,
+    @NonNull final BasePlugin basePlugin,
+    @NonNull final EventPriority eventPriority
   ) {
     super(eventClass, basePlugin, eventPriority);
   }
 
   public SingleEventWaiter(
-    @NonNull Class<E> eventClass,
-    @NonNull BasePlugin basePlugin,
-    @NonNull EventPriority eventPriority,
-    TaskRunner runner
+    @NonNull final Class<E> eventClass,
+    @NonNull final BasePlugin basePlugin,
+    @NonNull final EventPriority eventPriority,
+    final TaskRunner runner
   ) {
     super(eventClass, basePlugin, eventPriority, runner);
   }
@@ -61,7 +61,7 @@ public abstract class SingleEventWaiter<E extends Event> extends SingleListener<
   }
 
   @Override
-  protected void handle(E event) {
+  protected void handle(final E event) {
     for (int i = 0; i < pendingEvents.size(); i++) {
       final WaitingEvent<? extends Event> waitingEvent = pendingEvents.get(i);
 
