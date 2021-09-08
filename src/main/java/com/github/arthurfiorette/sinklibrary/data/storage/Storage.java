@@ -2,7 +2,6 @@ package com.github.arthurfiorette.sinklibrary.data.storage;
 
 import com.github.arthurfiorette.sinklibrary.data.database.Database;
 import com.github.arthurfiorette.sinklibrary.data.repository.Repository;
-
 import java.util.Collection;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Function;
@@ -15,9 +14,8 @@ import java.util.function.Function;
  * @author https://github.com/arthurfiorette/sink-library/
  */
 public interface Storage<K, V, R> extends Repository<K, V> {
-  
   R serialize(V object);
-  
+
   V deserialize(R raw);
 
   CompletableFuture<Collection<V>> operation(Function<Database<K, R>, Collection<R>> func);
