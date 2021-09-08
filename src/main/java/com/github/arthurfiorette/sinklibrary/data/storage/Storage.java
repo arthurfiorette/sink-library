@@ -1,8 +1,9 @@
 package com.github.arthurfiorette.sinklibrary.data.storage;
 
 import com.github.arthurfiorette.sinklibrary.data.database.Database;
+import com.github.arthurfiorette.sinklibrary.data.repository.Repository;
+
 import java.util.Collection;
-import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Function;
 
@@ -13,32 +14,15 @@ import java.util.function.Function;
  *
  * @author https://github.com/arthurfiorette/sink-library/
  */
-public interface Storage<K, V, R> {
-  CompletableFuture<Void> save(K key, V value);
-
-  CompletableFuture<V> get(K key);
-
-  CompletableFuture<Collection<V>> getMany(Set<K> keys);
+public interface Storage<K, V, R> extends Repository<K, V> {
+  
+  R serialize(V object);
+  
+  V deserialize(R raw);
 
   CompletableFuture<Collection<V>> operation(Function<Database<K, R>, Collection<R>> func);
 
   CompletableFuture<V> operate(Function<Database<K, R>, R> func);
-
-  R serialize(V object);
-
-  V deserialize(R raw);
-
-  default void saveSync(final K key, final V value) {
-    this.save(key, value).join();
-  }
-
-  default V getSync(final K key) {
-    return this.get(key).join();
-  }
-
-  default Collection<V> getManySync(final Set<K> keys) {
-    return this.getMany(keys).join();
-  }
 
   default Collection<V> operationSync(final Function<Database<K, R>, Collection<R>> func) {
     return this.operation(func).join();
