@@ -5,24 +5,21 @@ import com.cryptomorin.xseries.SkullUtils;
 import com.cryptomorin.xseries.XMaterial;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
-
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.lang.reflect.Field;
 import java.util.Base64;
 import java.util.UUID;
-
+import lombok.NonNull;
+import lombok.SneakyThrows;
+import lombok.experimental.UtilityClass;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import lombok.NonNull;
-import lombok.SneakyThrows;
-import lombok.experimental.UtilityClass;
-
 /**
  * An utility class to help with item builders with heads.
- * 
+ *
  * @see SkullUtils for more info
  */
 @UtilityClass
@@ -56,9 +53,10 @@ public class SkullBuilder {
    * @return a ItemBuilder instance from this player head
    */
   public static ItemBuilder from(final OfflinePlayer player) {
-    return new ItemBuilder(XMaterial.PLAYER_HEAD.parseMaterial()).apply((item, meta) -> {
-      SkullUtils.applySkin(meta, player);
-    });
+    return new ItemBuilder(XMaterial.PLAYER_HEAD.parseMaterial())
+      .apply((item, meta) -> {
+        SkullUtils.applySkin(meta, player);
+      });
   }
 
   /**
@@ -80,9 +78,10 @@ public class SkullBuilder {
    * @return a ItemBuilder instance from this player head
    */
   public static ItemBuilder from(final String name) {
-    return new ItemBuilder(XMaterial.PLAYER_HEAD.parseMaterial()).apply((item, meta) -> {
-      SkullUtils.applySkin(meta, name);
-    });
+    return new ItemBuilder(XMaterial.PLAYER_HEAD.parseMaterial())
+      .apply((item, meta) -> {
+        SkullUtils.applySkin(meta, name);
+      });
   }
 
   /**
@@ -98,9 +97,10 @@ public class SkullBuilder {
 
     profile.getProperties().put("textures", new Property("textures", encodedData));
 
-    return new ItemBuilder(XMaterial.PLAYER_HEAD.parseMaterial()).apply((item, meta) -> {
-      setProfile(meta, profile);
-    });
+    return new ItemBuilder(XMaterial.PLAYER_HEAD.parseMaterial())
+      .apply((item, meta) -> {
+        setProfile(meta, profile);
+      });
   }
 
   @SneakyThrows

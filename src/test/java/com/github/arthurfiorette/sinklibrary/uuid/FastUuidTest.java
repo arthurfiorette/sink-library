@@ -1,10 +1,8 @@
 package com.github.arthurfiorette.sinklibrary.uuid;
 
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.UUID;
-
 import org.junit.jupiter.api.Test;
 
 public class FastUuidTest {

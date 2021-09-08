@@ -1,8 +1,7 @@
 package com.github.arthurfiorette.sinklibrary.util.bukkit;
 
-import org.bukkit.entity.Player;
-
 import lombok.experimental.UtilityClass;
+import org.bukkit.entity.Player;
 
 @UtilityClass
 public class InventoryUtils {

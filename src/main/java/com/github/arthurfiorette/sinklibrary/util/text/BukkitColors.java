@@ -26,7 +26,7 @@ public class BukkitColors {
     final String colorSeparator = separator.regex();
 
     // colorLine is a word group with the same color in sequence
-    for(final String colorLine: text.split("(?=" + colorSeparator + ")")) {
+    for (final String colorLine : text.split("(?=" + colorSeparator + ")")) {
       if (colorLine.length() == 0) {
         continue;
       }
@@ -67,7 +67,7 @@ public class BukkitColors {
    * @see BukkitColors#COLORS_CHARS
    */
   public boolean isColorChar(final char c) {
-    for(final char color: COLORS_CHARS) {
+    for (final char color : COLORS_CHARS) {
       if (c == color) {
         return true;
       }

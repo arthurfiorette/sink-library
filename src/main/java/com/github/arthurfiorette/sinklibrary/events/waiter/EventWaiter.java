@@ -1,5 +1,7 @@
 package com.github.arthurfiorette.sinklibrary.events.waiter;
 
+import com.github.arthurfiorette.sinklibrary.component.Service;
+import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -9,10 +11,8 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Predicate;
-
-import com.github.arthurfiorette.sinklibrary.component.Service;
-import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
-
+import lombok.Getter;
+import lombok.NonNull;
 import org.bukkit.event.Event;
 import org.bukkit.event.EventException;
 import org.bukkit.event.EventPriority;
@@ -20,9 +20,6 @@ import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.EventExecutor;
 import org.bukkit.plugin.PluginManager;
-
-import lombok.Getter;
-import lombok.NonNull;
 
 public abstract class EventWaiter implements Listener, Service, EventExecutor {
 

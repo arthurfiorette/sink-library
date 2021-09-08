@@ -1,7 +1,6 @@
 package com.github.arthurfiorette.sinklibrary.events;
 
 import com.github.arthurfiorette.sinklibrary.component.Service;
-
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.HandlerList;

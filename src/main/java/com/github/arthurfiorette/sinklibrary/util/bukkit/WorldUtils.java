@@ -1,14 +1,12 @@
 package com.github.arthurfiorette.sinklibrary.util.bukkit;
 
 import com.cryptomorin.xseries.XItemStack;
-
+import lombok.experimental.UtilityClass;
 import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-
-import lombok.experimental.UtilityClass;
 
 @UtilityClass
 public class WorldUtils {
@@ -19,7 +17,7 @@ public class WorldUtils {
    *
    * @param player the player to receive the items
    * @param items the items to give
-   * 
+   *
    * @deprecated Use {@link XItemStack#giveOrDrop(Player, ItemStack...)}
    */
   @Deprecated

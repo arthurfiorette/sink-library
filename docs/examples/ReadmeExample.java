@@ -26,7 +26,7 @@ class MyListener implements SinkListener {
   public MyListener(BasePlugin plugin) {
     this.plugin = plugin;
   }
-  
+
   @EventHandler
   public void onPlayerJoin(final PlayerJoinEvent event) {
     // On every player join event, get the player and send a message

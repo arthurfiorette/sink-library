@@ -74,9 +74,9 @@ public class ReadmeExample extends SinkPlugin {
 
 // A simple class to be our listener
 class MyListener implements SinkListener {
-  
+
   // Getters and Setters...
-  
+
   @EventHandler
   public void onPlayerJoin(final PlayerJoinEvent event) {
     // On every player join event, get the player and send a message
