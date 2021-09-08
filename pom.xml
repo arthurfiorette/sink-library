@@ -1,8 +1,6 @@
-<project
-  xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd"
->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.github.arthurfiorette</groupId>
@@ -19,6 +17,9 @@
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+		<!-- Defaults to latest supported, but supports lower versions. Override this property to use with your spigot version  -->
+		<spigot.version>1.17.1-R0.1-SNAPSHOT</spigot.version>
 	</properties>
 
 	<licenses>
@@ -30,20 +31,19 @@
 	</licenses>
 
 	<repositories>
-
-		<!-- Spigot Mc --><!-- Spigot Mc -->
+		<!-- Spigot Mc -->
 		<repository>
 			<id>spigot-repo</id>
 			<url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
 		</repository>
 
-		<!-- Placeholder API --><!-- Placeholder API -->
+		<!-- Placeholder API -->
 		<repository>
 			<id>placeholderapi</id>
 			<url>https://repo.extendedclip.com/content/repositories/placeholderapi/</url>
 		</repository>
 
-		<!-- Mojang Authlib --><!-- Mojang Authlib -->
+		<!-- Mojang Authlib -->
 		<repository>
 			<id>minecraft-repo</id>
 			<url>https://libraries.minecraft.net/</url>
@@ -51,7 +51,7 @@
 	</repositories>
 
 	<dependencies>
-		<!-- Lombok --><!-- Lombok -->
+		<!-- Lombok -->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
@@ -59,20 +59,27 @@
 			<scope>provided</scope>
 		</dependency>
 
-		<!-- Spigot Mc --><!-- Spigot Mc -->
+		<!-- Spigot Mc -->
 		<dependency>
 			<groupId>org.spigotmc</groupId>
 			<artifactId>spigot-api</artifactId>
-			<version>1.8.8-R0.1-SNAPSHOT</version>
+			<version>${spigot.version}</version>
 			<scope>provided</scope>
 		</dependency>
 
-		<!-- Mojang Authlib --><!-- Mojang Authlib -->
+		<!-- Mojang Authlib -->
 		<dependency>
 			<groupId>com.mojang</groupId>
 			<artifactId>authlib</artifactId>
 			<version>1.5.21</version>
 			<scope>provided</scope>
+		</dependency>
+
+		<!-- Support multiple versions -->
+		<dependency>
+			<groupId>com.github.cryptomorin</groupId>
+			<artifactId>XSeries</artifactId>
+			<version>8.4.0</version>
 		</dependency>
 
 		<!-- Testing -->
@@ -97,7 +104,7 @@
 
 	<build>
 		<plugins>
-			<!-- Sources --><!-- Sources -->
+			<!-- Sources -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
@@ -112,7 +119,7 @@
 				</executions>
 			</plugin>
 
-			<!-- Javadoc --><!-- Javadoc -->
+			<!-- Javadoc -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
@@ -131,6 +138,30 @@
 				<configuration>
 					<skipTests>true</skipTests>
 				</configuration>
+			</plugin>
+
+			<!-- Relocate XSeries to .lib package -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-shade-plugin</artifactId>
+				<version>3.2.4</version>
+				<configuration>
+					<relocations>
+						<relocation>
+							<pattern>com.github.cryptomorin</pattern>
+							<shadedPattern>com.github.arthurfiorette.sinklibrary.libs.cryptomorin</shadedPattern>
+						</relocation>
+					</relocations>
+					<createDependencyReducedPom>false</createDependencyReducedPom>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>shade</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>

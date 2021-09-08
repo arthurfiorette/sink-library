@@ -13,8 +13,7 @@ public enum ItemProperty {
   LORE(false),
   MATERIAL(false),
   MATERIAL_DATA(false),
-  NAME(false),
-  UNBREAKABLE(false);
+  NAME(false);
 
   /**
    * Return true if it can exists many of this properties in a single {@link ItemBuilder}

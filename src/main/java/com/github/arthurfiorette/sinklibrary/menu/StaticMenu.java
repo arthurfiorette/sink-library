@@ -17,9 +17,6 @@ public abstract class StaticMenu implements BaseMenu {
   protected final BasePlugin basePlugin;
 
   @Getter
-  protected final String title;
-
-  @Getter
   protected final int rows;
 
   @Getter
@@ -40,7 +37,6 @@ public abstract class StaticMenu implements BaseMenu {
   public StaticMenu(final BasePlugin plugin, final String title, final int rows) {
     basePlugin = plugin;
     inventory = Bukkit.createInventory(this, rows * 9, title);
-    this.title = inventory.getTitle();
     this.rows = inventory.getSize() % 9;
   }
 
@@ -50,7 +46,6 @@ public abstract class StaticMenu implements BaseMenu {
     }
     basePlugin = plugin;
     this.inventory = inventory;
-    title = inventory.getTitle();
     rows = inventory.getSize() % 9;
   }
 

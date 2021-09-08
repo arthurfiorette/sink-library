@@ -1,13 +1,15 @@
 package com.github.arthurfiorette.sinklibrary.util;
 
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertTrue;
+
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import java.util.List;
 import java.util.Set;
-import org.junit.Test;
+
+import org.junit.jupiter.api.Test;
 
 public class SinkUtilTest {
 

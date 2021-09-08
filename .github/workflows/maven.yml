@@ -13,8 +13,20 @@ on:
 
 jobs:
   build:
-    name: Prepare and build code
+    name: Build and test with spigot ${{ matrix.spigot }}
     runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        # See versions: https://hub.spigotmc.org/nexus/#view-repositories;snapshots~browsestorage
+        # See most used versions https://minecraft-statistic.net/en/global_statistic.html
+        # This can change at any moment, if you want <3
+        spigot:
+          - 1.17.1-R0.1-SNAPSHOT
+          - 1.16.5-R0.1-SNAPSHOT
+          - 1.12.2-R0.1-SNAPSHOT
+          - 1.8.8-R0.1-SNAPSHOT
 
     steps:
       - name: Checkout
@@ -34,25 +46,16 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven-
 
-      - name: Build maven code
-        run: mvn --batch-mode package
+      - name: Test code with ${{ matrix.spigot }}
+        run: mvn --batch-mode test "-Dspigot.version=${{ matrix.spigot }}"
 
-      - name: Test maven code
-        run: mvn --batch-mode test
-
-      - name: Added built files to latest release
-        uses: Roang-zero1/github-upload-release-artifacts-action@master
-        # If this is a tag push
-        if: startsWith(github.ref, 'refs/tags/')
-        with:
-          args: ./target/sink-library*.jar
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build code with ${{ matrix.spigot }}
+        run: mvn --batch-mode package "-Dspigot.version=${{ matrix.spigot }}"
 
       - name: Upload built jar
         uses: actions/upload-artifact@v2
         with:
-          name: target-build
+          name: target=${{ matrix.spigot }}-build
           if-no-files-found: error
           path: |
             ./target/sink-library*.jar

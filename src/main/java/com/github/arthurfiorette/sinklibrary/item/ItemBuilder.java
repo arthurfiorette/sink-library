@@ -3,18 +3,20 @@ package com.github.arthurfiorette.sinklibrary.item;
 import com.github.arthurfiorette.sinklibrary.interfaces.Builder;
 import com.github.arthurfiorette.sinklibrary.menu.item.BuilderStack;
 import com.github.arthurfiorette.sinklibrary.menu.listener.ClickListener;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import lombok.Getter;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
+
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.material.MaterialData;
+
+import lombok.Getter;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public class ItemBuilder implements Builder<ItemStack> {
@@ -58,6 +60,7 @@ public class ItemBuilder implements Builder<ItemStack> {
    *
    * @return itself
    */
+  @SuppressWarnings("deprecation")
   public ItemBuilder durability(final short durability) {
     return addProperties(
       ItemProperty.DAMAGE,
@@ -77,20 +80,6 @@ public class ItemBuilder implements Builder<ItemStack> {
       ItemProperty.AMOUNT,
       (is, meta) -> {
         is.setAmount(amount);
-      }
-    );
-  }
-
-  /**
-   * @param data set the item data
-   *
-   * @return itself
-   */
-  public ItemBuilder data(final MaterialData data) {
-    return addProperties(
-      ItemProperty.MATERIAL_DATA,
-      (is, meta) -> {
-        is.setData(data);
       }
     );
   }
@@ -174,20 +163,6 @@ public class ItemBuilder implements Builder<ItemStack> {
         final List<String> lore = meta.getLore() == null ? new ArrayList<>() : meta.getLore();
         lore.addAll(lines);
         meta.setLore(lore);
-      }
-    );
-  }
-
-  /**
-   * @param unbreakable true if the items needs to be unbreakable
-   *
-   * @return itself
-   */
-  public ItemBuilder unbreakable(final boolean unbreakable) {
-    return addProperties(
-      ItemProperty.UNBREAKABLE,
-      (is, meta) -> {
-        meta.spigot().setUnbreakable(unbreakable);
       }
     );
   }

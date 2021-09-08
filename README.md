@@ -67,18 +67,16 @@ public class ReadmeExample extends SinkPlugin {
   @Override
   public ComponentLoader[] components() {
     // A helper method to create a component loader array based on reflection
+    // Can be written as `new ComponentLoader[] { () -> new MyListener(this) }`
     return reflect(this, MyListener.class);
   }
 }
 
 // A simple class to be our listener
-class MyListener extends SinkListener {
-
-  public MyListener(final BasePlugin owner) {
-    super(owner);
-  }
-
-  @Override
+class MyListener implements SinkListener {
+  
+  // Getters and Setters...
+  
   @EventHandler
   public void onPlayerJoin(final PlayerJoinEvent event) {
     // On every player join event, get the player and send a message

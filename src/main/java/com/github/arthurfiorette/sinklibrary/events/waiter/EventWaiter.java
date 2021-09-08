@@ -1,7 +1,5 @@
 package com.github.arthurfiorette.sinklibrary.events.waiter;
 
-import com.github.arthurfiorette.sinklibrary.component.Service;
-import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,9 +9,10 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Predicate;
-import lombok.Getter;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
+
+import com.github.arthurfiorette.sinklibrary.component.Service;
+import com.github.arthurfiorette.sinklibrary.core.BasePlugin;
+
 import org.bukkit.event.Event;
 import org.bukkit.event.EventException;
 import org.bukkit.event.EventPriority;
@@ -22,7 +21,9 @@ import org.bukkit.event.Listener;
 import org.bukkit.plugin.EventExecutor;
 import org.bukkit.plugin.PluginManager;
 
-@RequiredArgsConstructor
+import lombok.Getter;
+import lombok.NonNull;
+
 public abstract class EventWaiter implements Listener, Service, EventExecutor {
 
   @Getter
@@ -31,14 +32,25 @@ public abstract class EventWaiter implements Listener, Service, EventExecutor {
 
   @Getter
   @NonNull
-  private final Class<? extends Event>[] possibleEvents;
+  private final EventPriority eventPriority;
 
   @Getter
   @NonNull
-  private final EventPriority eventPriority;
+  private final Class<? extends Event>[] possibleEvents;
 
   private final ScheduledExecutorService schedulerExecutor = new ScheduledThreadPoolExecutor(1);
   private final Map<Class<? extends Event>, List<WaitingEvent<? extends Event>>> pendingEvents = new HashMap<>();
+
+  @SafeVarargs
+  public EventWaiter(
+    BasePlugin basePlugin,
+    EventPriority eventPriority,
+    Class<? extends Event>... events
+  ) {
+    this.basePlugin = basePlugin;
+    this.eventPriority = eventPriority;
+    this.possibleEvents = events;
+  }
 
   @Override
   public void enable() throws Exception {
@@ -86,16 +98,16 @@ public abstract class EventWaiter implements Listener, Service, EventExecutor {
     final WaitingEvent<E> waitingEvent = new WaitingEvent<>(test, event);
     pendingEvent.add(waitingEvent);
 
-    boolean isPossible = false;
+    boolean possible = false;
     for (final Class<? extends Event> possibleEvent : possibleEvents) {
       if (possibleEvent == event) {
-        isPossible = true;
+        possible = true;
         break;
       }
     }
 
     // Verify that the provided event are in the possible events list
-    if (!isPossible) {
+    if (!possible) {
       waitingEvent.exceptionallyImpossible();
     }
 

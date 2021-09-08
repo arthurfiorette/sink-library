@@ -1,0 +1,39 @@
+name: Attach built code to latest release
+
+on:
+  release:
+    types: [created]
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build code
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Set up JDK 8
+        uses: actions/setup-java@v2.3.0
+        with:
+          java-version: '8'
+          distribution: 'adopt'
+
+      - name: Cache local Maven repository
+        uses: actions/cache@v2
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+
+      - name: Build maven code
+        run: mvn --batch-mode package
+
+      - name: Added built files to latest release
+        uses: Roang-zero1/github-upload-release-artifacts-action@master
+        with:
+          args: ./target/sink-library*.jar
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

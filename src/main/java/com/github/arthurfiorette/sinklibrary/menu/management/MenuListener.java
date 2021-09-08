@@ -11,13 +11,15 @@ import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 
-public final class MenuListener extends SinkListener {
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
-  public MenuListener(final BasePlugin plugin) {
-    super(plugin);
-  }
+@RequiredArgsConstructor
+public final class MenuListener implements SinkListener {
 
-  @Override
+  @Getter
+  private final BasePlugin basePlugin;
+
   @EventHandler(ignoreCancelled = false, priority = EventPriority.LOWEST)
   public void onInventoryClick(final InventoryClickEvent event) {
     final Inventory inv = event.getInventory();
