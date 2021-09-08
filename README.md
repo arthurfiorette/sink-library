@@ -43,6 +43,13 @@ Sink Library</h1>
         target="_blank"
         alt="Jitpack" /></a
   ></code>
+    <code
+    ><a href="https://actions-badge.atrox.dev/ArthurFiorette/sink-library/goto?ref=main"
+      ><img
+        src="https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2FArthurFiorette%2Fsink-library%2Fbadge%3Fref%3Dmain&style=flat"
+        target="_blank"
+        alt="Github Actions" /></a
+  ></code>
 </div>
 
 #
