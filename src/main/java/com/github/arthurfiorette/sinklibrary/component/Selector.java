@@ -10,8 +10,10 @@ package com.github.arthurfiorette.sinklibrary.component;
  * @param <M> A common type that any possible registered component from this
  * class should implement.
  */
-public interface Selector<M extends Component> {
+public interface Selector<M extends Component> extends Component {
+  
   Class<M> getCommonClass();
 
   M select();
+  
 }
