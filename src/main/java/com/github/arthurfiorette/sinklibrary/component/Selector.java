@@ -11,9 +11,7 @@ package com.github.arthurfiorette.sinklibrary.component;
  * class should implement.
  */
 public interface Selector<M extends Component> extends Component {
-  
   Class<M> getCommonClass();
 
   M select();
-  
 }
