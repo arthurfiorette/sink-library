@@ -73,5 +73,6 @@ public abstract class SinkPlugin extends JavaPlugin implements BasePlugin {
   @Override
   public final void onDisable() {
     provider.disableAll();
+    executor.shutdown();
   }
 }
