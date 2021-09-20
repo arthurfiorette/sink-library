@@ -138,8 +138,8 @@ dependencies {
 
 ### Documentation
 
-While the documentation is not done, you can look at the [examples](/docs/examples) and the **inline
-documentation** present.
+While the documentation is not done, you can look at the [examples](/docs/examples), the **inline
+documentation** present or our generated [javadoc](https://arthurfiorette.github.io/sink-library/).
 
 <br />
 
