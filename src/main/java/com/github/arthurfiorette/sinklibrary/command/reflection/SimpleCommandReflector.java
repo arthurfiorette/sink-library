@@ -36,9 +36,12 @@ public class SimpleCommandReflector implements CommandReflector {
       pluginManager = getBasePlugin().getServer().getPluginManager();
       final Field field = getCommandMapField();
       commandMap = (CommandMap) field.get(pluginManager);
-    } catch (final NoSuchFieldException | IllegalAccessException | IllegalArgumentException e) {
+    } catch (
+      final NoSuchFieldException | IllegalAccessException | IllegalArgumentException e
+    ) {
       throw new RuntimeException(
-        SimpleCommandReflector.EXC_TITLE + " maybe you are using an incompatible version?",
+        SimpleCommandReflector.EXC_TITLE +
+        " maybe you are using an incompatible version?",
         e
       );
     } catch (final SecurityException e) {

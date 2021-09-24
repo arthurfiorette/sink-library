@@ -20,7 +20,9 @@ public class ConsoleLogger implements BaseLogger {
     final String message,
     final Object... args
   ) {
-    Bukkit.getConsoleSender().sendMessage(BaseLogger.format(level, author, message, args));
+    Bukkit
+      .getConsoleSender()
+      .sendMessage(BaseLogger.format(level, author, message, args));
   }
 
   @Override

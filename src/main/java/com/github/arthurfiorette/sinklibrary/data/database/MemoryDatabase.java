@@ -89,7 +89,9 @@ public class MemoryDatabase<K, T> implements Database<K, T> {
 
   private void ensureState(final boolean open) {
     if (this.open != open) {
-      throw new IllegalStateException("Attempt to access the database while it wasn't open.");
+      throw new IllegalStateException(
+        "Attempt to access the database while it wasn't open."
+      );
     }
   }
 }

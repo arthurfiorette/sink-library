@@ -8,7 +8,11 @@ public class ValidTriple<L, M, R> extends Triple<L, M, R> {
 
   private static final long serialVersionUID = -5117094581015545727L;
 
-  public ValidTriple(@NonNull final L left, @NonNull final M middle, @NonNull final R right) {
+  public ValidTriple(
+    @NonNull final L left,
+    @NonNull final M middle,
+    @NonNull final R right
+  ) {
     super(left, middle, right);
   }
 

@@ -59,7 +59,10 @@ public abstract class AbstractStorage<K, V, R> implements Storage<K, V, R>, Comp
   public CompletableFuture<Collection<V>> getMany(final Set<K> keys) {
     return CompletableFuture.supplyAsync(
       () ->
-        this.database.getMany(keys).stream().map(this::deserialize).collect(Collectors.toList()),
+        this.database.getMany(keys)
+          .stream()
+          .map(this::deserialize)
+          .collect(Collectors.toList()),
       this.getBasePlugin().getExecutor()
     );
   }
@@ -69,7 +72,12 @@ public abstract class AbstractStorage<K, V, R> implements Storage<K, V, R>, Comp
     final Function<Database<K, R>, Collection<R>> func
   ) {
     return CompletableFuture.supplyAsync(
-      () -> func.apply(this.database).stream().map(this::deserialize).collect(Collectors.toList()),
+      () ->
+        func
+          .apply(this.database)
+          .stream()
+          .map(this::deserialize)
+          .collect(Collectors.toList()),
       this.getBasePlugin().getExecutor()
     );
   }

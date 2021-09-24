@@ -52,7 +52,11 @@ public interface ComponentLoader {
     // that match all of these conditions and transform it in a component loader
     // array.
     for (final ClassInfo classInfo : ClassPath.from(currentLoader).getTopLevelClasses()) {
-      if (Arrays.stream(packages).noneMatch(pkg -> classInfo.getName().startsWith(pkg.getName()))) {
+      if (
+        Arrays
+          .stream(packages)
+          .noneMatch(pkg -> classInfo.getName().startsWith(pkg.getName()))
+      ) {
         continue;
       }
 

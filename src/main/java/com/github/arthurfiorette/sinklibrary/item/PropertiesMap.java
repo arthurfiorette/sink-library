@@ -14,7 +14,10 @@ public final class PropertiesMap extends EnumMap<ItemProperty, StackConsumer> {
   }
 
   @Override
-  public StackConsumer put(@NonNull final ItemProperty key, @NonNull StackConsumer value) {
+  public StackConsumer put(
+    @NonNull final ItemProperty key,
+    @NonNull StackConsumer value
+  ) {
     final StackConsumer consumer = get(key);
 
     // Merge these values if the key is cumulative and already has one stack

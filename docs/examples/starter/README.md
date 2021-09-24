@@ -4,5 +4,5 @@
 
 <br />
 
-Here you should be able to get the main idea of this library and start building your own plugin with
-it.
+Here you should be able to get the main idea of this library and start building your own
+plugin with it.

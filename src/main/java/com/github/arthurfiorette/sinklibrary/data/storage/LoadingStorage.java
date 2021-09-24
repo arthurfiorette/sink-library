@@ -40,10 +40,16 @@ public abstract class LoadingStorage<K, V, R>
    * @param builder a unary operator that will be applied when building the
    * cache.
    */
-  protected LoadingStorage(final Database<K, R> database, final CacheOperator<K, V> builder) {
+  protected LoadingStorage(
+    final Database<K, R> database,
+    final CacheOperator<K, V> builder
+  ) {
     this.database = database;
     this.cache =
-      builder.withNewBuilder().removalListener(this.removalListener()).build(this.cacheLoader());
+      builder
+        .withNewBuilder()
+        .removalListener(this.removalListener())
+        .build(this.cacheLoader());
   }
 
   @Override
@@ -140,7 +146,12 @@ public abstract class LoadingStorage<K, V, R>
     final Function<Database<K, R>, Collection<R>> func
   ) {
     return CompletableFuture.supplyAsync(
-      () -> func.apply(this.database).stream().map(this::deserialize).collect(Collectors.toList()),
+      () ->
+        func
+          .apply(this.database)
+          .stream()
+          .map(this::deserialize)
+          .collect(Collectors.toList()),
       getBasePlugin().getExecutor()
     );
   }

@@ -10,7 +10,8 @@ public abstract class SinkException extends RuntimeException {
 
   public SinkException(final String message) {
     super(
-      message + "\nSee more in https://github.com/arthurfiorette/sink-library#commons-problems"
+      message +
+      "\nSee more in https://github.com/arthurfiorette/sink-library#commons-problems"
     );
   }
 }

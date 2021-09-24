@@ -22,7 +22,11 @@ public enum TaskRunners implements TaskRunner {
     }
 
     @Override
-    public void runLater(final BasePlugin plugin, final Runnable runnable, final long delay) {
+    public void runLater(
+      final BasePlugin plugin,
+      final Runnable runnable,
+      final long delay
+    ) {
       Bukkit.getScheduler().runTaskLater(plugin, runnable, delay);
     }
 
@@ -49,9 +53,17 @@ public enum TaskRunners implements TaskRunner {
     }
 
     @Override
-    public void runLater(final BasePlugin plugin, final Runnable runnable, final long delay) {
+    public void runLater(
+      final BasePlugin plugin,
+      final Runnable runnable,
+      final long delay
+    ) {
       final ScheduledExecutorService service = TaskRunners.getScheduledExecutor(plugin);
-      service.schedule(runnable, TickUnit.from(TimeUnit.MILLISECONDS, delay), TimeUnit.SECONDS);
+      service.schedule(
+        runnable,
+        TickUnit.from(TimeUnit.MILLISECONDS, delay),
+        TimeUnit.SECONDS
+      );
     }
 
     @Override
@@ -83,7 +95,10 @@ public enum TaskRunners implements TaskRunner {
      */
     @Override
     public void run(final BasePlugin plugin, final Runnable runnable) {
-      new Thread(runnable, "TaskContext.ASYNC - " + plugin == null ? "Unknown" : plugin.getName())
+      new Thread(
+        runnable,
+        "TaskContext.ASYNC - " + plugin == null ? "Unknown" : plugin.getName()
+      )
         .run();
     }
 
@@ -95,7 +110,11 @@ public enum TaskRunners implements TaskRunner {
      * @throws NullPointerException if the task is null
      */
     @Override
-    public void runLater(final BasePlugin plugin, final Runnable runnable, final long delay) {
+    public void runLater(
+      final BasePlugin plugin,
+      final Runnable runnable,
+      final long delay
+    ) {
       new Timer()
         .schedule(
           new TimerTask() {

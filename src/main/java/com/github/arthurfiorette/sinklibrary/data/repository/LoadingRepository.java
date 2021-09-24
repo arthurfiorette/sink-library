@@ -39,17 +39,26 @@ public abstract class LoadingRepository<K, V>
    * @param builder a unary operator that will be applied when building the
    * cache.
    */
-  protected LoadingRepository(final Database<K, V> database, final CacheOperator<K, V> builder) {
+  protected LoadingRepository(
+    final Database<K, V> database,
+    final CacheOperator<K, V> builder
+  ) {
     this.database = database;
     this.cache =
-      builder.withNewBuilder().removalListener(this.removalListener()).build(this.cacheLoader());
+      builder
+        .withNewBuilder()
+        .removalListener(this.removalListener())
+        .build(this.cacheLoader());
   }
 
   @Override
   public RemovalListener<K, V> removalListener() {
     return notification -> {
       // Save synchronously
-      LoadingRepository.this.database.save(notification.getKey(), notification.getValue());
+      LoadingRepository.this.database.save(
+          notification.getKey(),
+          notification.getValue()
+        );
     };
   }
 

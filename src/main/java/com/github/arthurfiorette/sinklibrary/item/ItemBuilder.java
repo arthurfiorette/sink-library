@@ -157,7 +157,9 @@ public class ItemBuilder implements Builder<ItemStack> {
     return addProperties(
       ItemProperty.LORE,
       (is, meta) -> {
-        final List<String> lore = meta.getLore() == null ? new ArrayList<>() : meta.getLore();
+        final List<String> lore = meta.getLore() == null
+          ? new ArrayList<>()
+          : meta.getLore();
         lore.addAll(lines);
         meta.setLore(lore);
       }
@@ -224,7 +226,10 @@ public class ItemBuilder implements Builder<ItemStack> {
     return this;
   }
 
-  private ItemBuilder addProperties(final ItemProperty type, final StackConsumer consumer) {
+  private ItemBuilder addProperties(
+    final ItemProperty type,
+    final StackConsumer consumer
+  ) {
     propertiesMap.put(type, consumer);
     modified = true;
     return this;

@@ -7,7 +7,8 @@ import java.util.HashMap;
 import java.util.UUID;
 
 public class Database
-  implements com.github.arthurfiorette.sinklibrary.data.database.Database<UUID, String[]> {
+  implements
+    com.github.arthurfiorette.sinklibrary.data.database.Database<UUID, String[]> {
 
   private final BasePlugin plugin;
 

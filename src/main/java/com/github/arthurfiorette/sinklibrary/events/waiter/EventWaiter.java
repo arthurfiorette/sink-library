@@ -35,7 +35,9 @@ public abstract class EventWaiter implements Listener, Service, EventExecutor {
   @NonNull
   private final Class<? extends Event>[] possibleEvents;
 
-  private final ScheduledExecutorService schedulerExecutor = new ScheduledThreadPoolExecutor(1);
+  private final ScheduledExecutorService schedulerExecutor = new ScheduledThreadPoolExecutor(
+    1
+  );
   private final Map<Class<? extends Event>, List<WaitingEvent<? extends Event>>> pendingEvents = new HashMap<>();
 
   @SafeVarargs
@@ -113,7 +115,9 @@ public abstract class EventWaiter implements Listener, Service, EventExecutor {
 
   @Override
   public void execute(final Listener listener, final Event event) throws EventException {
-    final List<WaitingEvent<? extends Event>> waitingEvents = pendingEvents.get(event.getClass());
+    final List<WaitingEvent<? extends Event>> waitingEvents = pendingEvents.get(
+      event.getClass()
+    );
 
     // Does not have events waiting for this event
     if (waitingEvents == null || waitingEvents.isEmpty()) {

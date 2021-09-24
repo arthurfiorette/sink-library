@@ -18,11 +18,15 @@ public interface Storage<K, V, R> extends Repository<K, V> {
 
   V deserialize(R raw);
 
-  CompletableFuture<Collection<V>> operation(Function<Database<K, R>, Collection<R>> func);
+  CompletableFuture<Collection<V>> operation(
+    Function<Database<K, R>, Collection<R>> func
+  );
 
   CompletableFuture<V> operate(Function<Database<K, R>, R> func);
 
-  default Collection<V> operationSync(final Function<Database<K, R>, Collection<R>> func) {
+  default Collection<V> operationSync(
+    final Function<Database<K, R>, Collection<R>> func
+  ) {
     return this.operation(func).join();
   }
 

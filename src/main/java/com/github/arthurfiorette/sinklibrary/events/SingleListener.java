@@ -17,7 +17,8 @@ import org.bukkit.plugin.PluginManager;
 
 @AllArgsConstructor
 @RequiredArgsConstructor
-public abstract class SingleListener<E extends Event> implements Service, Listener, EventExecutor {
+public abstract class SingleListener<E extends Event>
+  implements Service, Listener, EventExecutor {
 
   @Getter
   @NonNull

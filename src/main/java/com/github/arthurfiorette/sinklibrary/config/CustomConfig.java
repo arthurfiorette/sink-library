@@ -26,7 +26,11 @@ public class CustomConfig implements BaseConfig {
    *
    * @see org.bukkit.plugin.Plugin#saveResource(String, boolean)
    */
-  public CustomConfig(final BasePlugin plugin, final String resourcePath, final boolean replace) {
+  public CustomConfig(
+    final BasePlugin plugin,
+    final String resourcePath,
+    final boolean replace
+  ) {
     basePlugin = plugin;
     file = new File(plugin.getDataFolder(), resourcePath);
     plugin.saveResource(resourcePath, replace);

@@ -27,12 +27,16 @@ public class WaitingEvent<E extends Event> {
 
   @Synchronized("future")
   public void exceptionallyTooLong() {
-    future.completeExceptionally(new WaitingEventException(Type.EVENT_WAITED_TOO_LONG, eventType));
+    future.completeExceptionally(
+      new WaitingEventException(Type.EVENT_WAITED_TOO_LONG, eventType)
+    );
   }
 
   @Synchronized("future")
   public void exceptionallyImpossible() {
-    future.completeExceptionally(new WaitingEventException(Type.EVENT_NOT_POSSIBLE, eventType));
+    future.completeExceptionally(
+      new WaitingEventException(Type.EVENT_NOT_POSSIBLE, eventType)
+    );
   }
 
   @Synchronized("future")

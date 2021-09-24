@@ -25,7 +25,11 @@ public abstract class PageableMenu extends PrivateMenu {
     super(plugin, owner, title, rows);
   }
 
-  public PageableMenu(final BasePlugin plugin, final Player owner, final Inventory inventory) {
+  public PageableMenu(
+    final BasePlugin plugin,
+    final Player owner,
+    final Inventory inventory
+  ) {
     super(plugin, owner, inventory);
   }
 

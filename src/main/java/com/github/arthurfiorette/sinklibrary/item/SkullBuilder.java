@@ -33,7 +33,9 @@ public class SkullBuilder {
     MethodHandle profileSetter = null;
 
     try {
-      final Class<?> CraftMetaSkull = ReflectionUtils.getCraftClass("inventory.CraftMetaSkull");
+      final Class<?> CraftMetaSkull = ReflectionUtils.getCraftClass(
+        "inventory.CraftMetaSkull"
+      );
       final Field profile = CraftMetaSkull.getDeclaredField("profile");
       profile.setAccessible(true);
 

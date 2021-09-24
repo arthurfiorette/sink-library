@@ -5,7 +5,8 @@ import com.github.arthurfiorette.sinklibrary.interfaces.Identifiable;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 
-public interface IdentifiableAdapter<V extends Identifiable, R> extends Repository<UUID, V> {
+public interface IdentifiableAdapter<V extends Identifiable, R>
+  extends Repository<UUID, V> {
   default CompletableFuture<Void> save(final V value) {
     return this.save(value.getUniqueId(), value);
   }

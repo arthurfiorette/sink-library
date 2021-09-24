@@ -20,7 +20,11 @@ public abstract class PrivateMenu extends StaticMenu {
     this.owner = owner;
   }
 
-  public PrivateMenu(final BasePlugin plugin, final Player owner, final Inventory inventory) {
+  public PrivateMenu(
+    final BasePlugin plugin,
+    final Player owner,
+    final Inventory inventory
+  ) {
     super(plugin, inventory);
     this.owner = owner;
   }

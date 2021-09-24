@@ -175,7 +175,11 @@ public interface EnumConfig<P extends Enum<P> & PathResolver> extends BaseConfig
    *
    * @return Requested String.
    */
-  default String getString(final P path, final String def, final Replacer.Function replacer) {
+  default String getString(
+    final P path,
+    final String def,
+    final Replacer.Function replacer
+  ) {
     return Replacer.replace(this.getString(path, def), replacer);
   }
 

@@ -138,8 +138,9 @@ dependencies {
 
 ### Documentation
 
-While the documentation is not done, you can look at the [examples](/docs/examples), the **inline
-documentation** present or our generated [javadoc](https://arthurfiorette.github.io/sink-library/).
+While the documentation is not done, you can look at the [examples](/docs/examples), the
+**inline documentation** present or our generated
+[javadoc](https://arthurfiorette.github.io/sink-library/).
 
 <br />
 
@@ -147,9 +148,10 @@ documentation** present or our generated [javadoc](https://arthurfiorette.github
 
 #### `GenericComponentException`
 
-This exception is thrown when you try to register a component or service, in your class that extends
-SinkPlugin, which is generic. Since the ComponentManager manages its objects with the key being
-their classes, two classes with different generic types would be recognized as the same component.
+This exception is thrown when you try to register a component or service, in your class
+that extends SinkPlugin, which is generic. Since the ComponentManager manages its objects
+with the key being their classes, two classes with different generic types would be
+recognized as the same component.
 
 Here is an example of how to solve this problem with this simple component
 
@@ -188,7 +190,7 @@ Licensed under the **MIT**. See [`LICENSE`](LICENSE) for more informations.
 
 ### Contact
 
-See my contact information on my [github profile](https://github.com/ArthurFiorette) or open a new
-issue.
+See my contact information on my [github profile](https://github.com/ArthurFiorette) or
+open a new issue.
 
 <br />

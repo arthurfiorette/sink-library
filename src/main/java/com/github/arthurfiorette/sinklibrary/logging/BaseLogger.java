@@ -4,7 +4,12 @@ import com.github.arthurfiorette.sinklibrary.component.Component;
 import org.bukkit.ChatColor;
 
 public interface BaseLogger extends Component {
-  void log(final Level level, final Class<?> author, final String message, final Object... args);
+  void log(
+    final Level level,
+    final Class<?> author,
+    final String message,
+    final Object... args
+  );
 
   void log(
     final Level level,
@@ -27,7 +32,11 @@ public interface BaseLogger extends Component {
     this.log(Level.FATAL, author, message, args);
   }
 
-  default void fatal(final Class<?> author, final String message, final Throwable throwable) {
+  default void fatal(
+    final Class<?> author,
+    final String message,
+    final Throwable throwable
+  ) {
     this.log(Level.FATAL, author, message, throwable);
   }
 
@@ -45,7 +54,11 @@ public interface BaseLogger extends Component {
     this.log(Level.ERROR, author, message, args);
   }
 
-  default void error(final Class<?> author, final String message, final Throwable throwable) {
+  default void error(
+    final Class<?> author,
+    final String message,
+    final Throwable throwable
+  ) {
     this.log(Level.ERROR, author, message, throwable);
   }
 
@@ -63,7 +76,11 @@ public interface BaseLogger extends Component {
     this.log(Level.WARN, author, message, args);
   }
 
-  default void warn(final Class<?> author, final String message, final Throwable throwable) {
+  default void warn(
+    final Class<?> author,
+    final String message,
+    final Throwable throwable
+  ) {
     this.log(Level.WARN, author, message, throwable);
   }
 
@@ -81,7 +98,11 @@ public interface BaseLogger extends Component {
     this.log(Level.INFO, author, message, args);
   }
 
-  default void info(final Class<?> author, final String message, final Throwable throwable) {
+  default void info(
+    final Class<?> author,
+    final String message,
+    final Throwable throwable
+  ) {
     this.log(Level.INFO, author, message, throwable);
   }
 
@@ -99,7 +120,11 @@ public interface BaseLogger extends Component {
     this.log(Level.DEBUG, author, message, args);
   }
 
-  default void debug(final Class<?> author, final String message, final Throwable throwable) {
+  default void debug(
+    final Class<?> author,
+    final String message,
+    final Throwable throwable
+  ) {
     this.log(Level.DEBUG, author, message, throwable);
   }
 
@@ -117,7 +142,11 @@ public interface BaseLogger extends Component {
     this.log(Level.TRACE, author, message, args);
   }
 
-  default void trace(final Class<?> author, final String message, final Throwable throwable) {
+  default void trace(
+    final Class<?> author,
+    final String message,
+    final Throwable throwable
+  ) {
     this.log(Level.TRACE, author, message, throwable);
   }
 

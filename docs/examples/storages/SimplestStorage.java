@@ -31,6 +31,7 @@ public class SimplestStorage extends GsonStorage<UUID, SimpleModel> {
     // As we are using UUID as keys, we can override the default gson instance
     // to use an faster UUID Adapter and pass any other preference
     // If you want use Mojang ids, use MojangIdAdapter instead.
-    this.gson = new GsonBuilder().registerTypeAdapter(UUID.class, new UuidAdapter()).create();
+    this.gson =
+      new GsonBuilder().registerTypeAdapter(UUID.class, new UuidAdapter()).create();
   }
 }

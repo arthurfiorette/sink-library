@@ -62,7 +62,9 @@ public class CommandWrapper extends Command {
     try {
       wrapper.command.handle(sender, argsList);
     } catch (final Throwable e) {
-      sender.sendMessage("§cThis command had some problems, we are sorry for the inconvenience...");
+      sender.sendMessage(
+        "§cThis command had some problems, we are sorry for the inconvenience..."
+      );
       wrapper.command
         .getBasePlugin()
         .getExceptionHandler()

@@ -114,7 +114,11 @@ public class SimpleComponentProvider implements ComponentProvider {
         logger.debug("Service §e%s§f disabled", service.getClass().getSimpleName());
       } catch (final Throwable e) {
         this.plugin.getExceptionHandler()
-          .handle(service.getClass(), new RuntimeException(e), "Could not disable this service");
+          .handle(
+            service.getClass(),
+            new RuntimeException(e),
+            "Could not disable this service"
+          );
       }
     }
 

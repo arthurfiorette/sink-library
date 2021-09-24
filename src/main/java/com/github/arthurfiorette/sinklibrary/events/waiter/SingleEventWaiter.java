@@ -33,7 +33,9 @@ public abstract class SingleEventWaiter<E extends Event> extends SingleListener<
     super(eventClass, basePlugin, eventPriority, runner);
   }
 
-  private final ScheduledExecutorService schedulerExecutor = new ScheduledThreadPoolExecutor(1);
+  private final ScheduledExecutorService schedulerExecutor = new ScheduledThreadPoolExecutor(
+    1
+  );
   private final List<WaitingEvent<E>> pendingEvents = new ArrayList<>();
 
   public CompletableFuture<E> waitEvent() {
