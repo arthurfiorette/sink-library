@@ -1,5 +1,5 @@
 {
-  "releaseSummary": true,
+  "releaseSummary": false,
   "unreleased": true,
   "commitLimit": false,
   "sortCommits": "subject",
