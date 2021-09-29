@@ -1,8 +1,4 @@
-<project
-  xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd"
->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.github.arthurfiorette</groupId>
@@ -11,8 +7,7 @@
 	<version>v4.9.0</version>
 
 	<name>sink-library</name>
-	<description
-  >A powerful and high-performance tool for building spigot plugins.</description>
+	<description>A powerful and high-performance tool for building spigot plugins.</description>
 	<url>https://github.com/arthurfiorette/sink-library</url>
 
 	<properties>
@@ -23,12 +18,16 @@
 
 		<!-- Defaults to latest supported, but supports lower versions. Override this property to use with your spigot version  -->
 		<spigot.version>1.17.1-R0.1-SNAPSHOT</spigot.version>
+
+		<!-- You can override these dependency versions by overriding this property in your pom.xml -->
+		<xseries.version>8.4.0</xseries.version>
+		<authlib.version>1.5.21</authlib.version>
 	</properties>
 
 	<licenses>
 		<license>
 			<name>MIT License</name>
-			<url>http://www.opensource.org/licenses/mit-license</url>
+			<url>https://github.com/ArthurFiorette/sink-library/blob/main/LICENSE</url>
 			<distribution>repo</distribution>
 		</license>
 	</licenses>
@@ -74,7 +73,7 @@
 		<dependency>
 			<groupId>com.mojang</groupId>
 			<artifactId>authlib</artifactId>
-			<version>1.5.21</version>
+			<version>${authlib.version}</version>
 			<scope>provided</scope>
 		</dependency>
 
@@ -82,7 +81,7 @@
 		<dependency>
 			<groupId>com.github.cryptomorin</groupId>
 			<artifactId>XSeries</artifactId>
-			<version>8.4.0</version>
+			<version>${xseries.version}</version>
 		</dependency>
 
 		<!-- Testing -->
@@ -104,6 +103,13 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
+
+	<distributionManagement>
+		<repository>
+			<id>jitpack.io</id>
+			<url>https://jitpack.io/</url>
+		</repository>
+	</distributionManagement>
 
 	<build>
 		<plugins>
@@ -168,5 +174,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
 </project>
