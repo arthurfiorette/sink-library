@@ -4,7 +4,7 @@
 	<groupId>com.github.arthurfiorette</groupId>
 	<artifactId>sink-library</artifactId>
 	<packaging>jar</packaging>
-	<version>v4.9.0</version>
+	<version>v4.9.1</version>
 
 	<name>sink-library</name>
 	<description>A powerful and high-performance tool for building spigot plugins.</description>
