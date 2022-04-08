@@ -53,7 +53,7 @@ jobs:
         run: mvn --batch-mode package "-Dspigot.version=${{ matrix.spigot }}"
 
       - name: Upload built jar
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: target=${{ matrix.spigot }}-build
           if-no-files-found: error
